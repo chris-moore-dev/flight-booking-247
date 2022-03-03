@@ -1,0 +1,14 @@
+[
+    {
+        "ticketID" : 123,
+        "flightID" : 131,
+        "seatID" : 141212,
+        "price" : 600,
+        "firstName" : "Evan",
+        "lastName" : "Scales",
+        "boardingGroup" : "1A",
+        "boardingTime" : "9:00 AM",
+        "checkedBags" : 0,
+        "gate" : "A12"
+    }
+]
