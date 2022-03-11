@@ -1,0 +1,7 @@
+/**
+ * Flight
+ */
+public class Flight {
+
+    
+}
