@@ -1,0 +1,12 @@
+[
+    {
+        "friendID" : 213222132131,
+        "firstName" : "Evan",
+        "lastName" : "Scales",
+        "age" : 20,
+        "medicalCondition" : false,
+        "gender" : "Male",
+        "email" : "escales@email.sc.edu",
+        "address" : "112 Loopy St, Charlotte, NC, 29708, USA"
+    }
+]

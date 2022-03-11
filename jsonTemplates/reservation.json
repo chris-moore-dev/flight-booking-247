@@ -1,0 +1,13 @@
+[
+    {
+        "reservationID" : 1231,
+        "hotelID" : 331,
+        "roomID" : 131231,
+        "price" : 412,
+        "firstName" : "Evan",
+        "lastName" : "Scales",
+        "checkInDate" : "08/08/2022",
+        "checkOutDate" : "08/15/2022",
+        "numGuests" : 2
+    }
+]

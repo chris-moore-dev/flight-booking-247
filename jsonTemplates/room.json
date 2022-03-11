@@ -1,0 +1,15 @@
+[
+    {
+        "roomID" : 12312312,
+        "roomNumber" : "400A",
+        "booked" : false,
+        "smoking" : true,
+        "price" : 300,
+        "roomType" : "Standard",
+        "numBeds" : 2,
+        "bookedDays" : [
+            {"bookedDay" : "08/08/2022"},
+            {"bookedDay" : "08/09/2022"}
+        ]
+    }
+]

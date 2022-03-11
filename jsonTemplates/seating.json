@@ -1,0 +1,10 @@
+[
+    {
+        "seatID" : 1231231,
+        "seatNumber" : "L11",
+        "booked" : false,
+        "medicalSeat" : false,
+        "price" : 330,
+        "cabin" : "First"
+    }
+]

@@ -1,0 +1,29 @@
+[
+    {
+        "flightID" : 1231,
+        "company" : "American Airlines",
+        "date" : "08/08/2022",
+        "departingAirport" : "CLT",
+        "destAirport" : "BOS",
+        "takeOffTime" : "6:00 AM",
+        "landingTime" : "12:00 PM:",
+        "totalFlightTime" : "7h 30m",
+        "pricing" : [
+            {
+                "First" : 430,
+                "Main Cabin" : 400,
+                "Economy" : 370
+            }
+        ],
+        "individualBookings" : [
+            {
+                "L11" : 430,
+                "L12" : 123,
+                "R11" : 1231,
+                "R12" : 786
+                // Continue for all seats, SeatNumber : SeatID
+                // In future add plane
+            }
+        ]
+    }
+]
