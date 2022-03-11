@@ -86,7 +86,7 @@ public class RegisteredUser extends User {
      */
     public void bookFlights(ArrayList<Flight> flights, ArrayList<Seating> seating,
     ArrayList<Friend> ticketHolders) {
-
+        
     }
 
     /**
@@ -99,7 +99,7 @@ public class RegisteredUser extends User {
      */
     public void bookHotel(Hotel hotel, Room room, int numGuests,
     Date checkInDate, Date checkOutDate) {
-
+        
     }
 
     /**

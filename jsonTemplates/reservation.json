@@ -6,8 +6,11 @@
         "price" : 412,
         "firstName" : "Evan",
         "lastName" : "Scales",
+        // Reservation Info ^^
+        /////////////////////////////////////////////////////
         "checkInDate" : "08/08/2022",
         "checkOutDate" : "08/15/2022",
         "numGuests" : 2
+        // Hotel Reservation Info ^^
     }
 ]
