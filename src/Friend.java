@@ -2,143 +2,182 @@
  * Friend
  * @author Lyn Cork
  */
+import java.util.*;
 public class Friend {
-  private String firstName = "John";
-  private String lastName = "Smith";
-  private int age = 25;
-  private boolean medicalCondition = false;
-  private String gender = "male";
-  private String email = "email@email.com";
-  private String address = "123 Street St";
-  private UUID id = randomUUID();
+  private String firstName;
+  private String lastName;
+  private int age;
+  private boolean medicalCondition;
+  private String gender;
+  private String email;
+  private String address;
+  private UUID id;
 
-/**
- * 
- * @param firstName
- * @param lastName
- * @param age
- * @param medicalCondition
- * @param gender
- * @param email
- * @param address
- * @param id
- */
-  public Friend(String firstName, String lastName, int age, boolean medicalCondition, String gender, String email, String address, UUID id) {
-  
+  /**
+   * 
+   * @param firstName
+   * @param lastName
+   * @param age
+   * @param medicalCondition
+   * @param gender
+   * @param email
+   * @param address
+   */
+  Friend(String firstName, String lastName, int age,
+  boolean medicalCondition, String gender, String email,
+  String address) {
+
   }
+
+  /**
+   * 
+   * @param firstName
+   * @param lastName
+   * @param age
+   * @param medicalCondition
+   * @param gender
+   * @param email
+   * @param address
+   * @param id
+   */
+  Friend(String firstName, String lastName, int age,
+  boolean medicalCondition, String gender, String email,
+  String address, UUID id) {
+
+  }
+
+  // Member functions
 
   // Getters
-/**
- * 
- * @return
- */
+
+  /**
+   * Get the first name
+   * @return The first name
+   */
   public String getFirstName() {
-    return this.firstName;
+    return firstName;
   }
-/**
- * 
- * @return
- */
+
+  /** 
+   * Get the last name
+   * @return The last name
+   */
   public String getLastName() {
-    return this.lastName;
+    return lastName;
   }
-/**
- * 
- * @return
- */
+
+  /**
+   * Get the age
+   * @return The age
+   */
   public int getAge() {
-    return this.age; 
+    return age;
   }
-/**
- * 
- * @return
- */
+
+  /**
+   * Get the medical condition
+   * @return The medical condition
+   */
   public boolean getMedicalCondition() {
-    return this.medicalCondition;
+    return medicalCondition;
   }
-/**
- * 
- * @return
- */
+
+  /**
+   * Get the gender
+   * @return The gender
+   */
   public String getGender() {
-    return this.gender;
+    return gender;
   }
-/**
- * 
- * @return
- */
+
+  /**
+   * Get the email
+   * @return The email
+   */
   public String getEmail() {
-    return this.email;
+    return email;
   }
-/**
- * 
- * @return
- */
+
+  /**
+   * Get the address
+   * @return The address
+   */
   public String getAddress() {
-    return this.address;
+    return address;
   }
-/**
- * 
- * @return
- */
-  public UUID getId() {
-    return this.id;
+
+  /**
+   * Get the id
+   * @return The id
+   */
+  public UUID getID() {
+    return id;
   }
-    //Setters
-/**
- * 
- * @param firstName
- */
-  public void setFirstName(string firstName) {
-    this.firstName = firstName;
+
+  // Setters
+
+  /**
+   * Set the first name
+   * @param firstName The first name
+   */
+  public void setFirstName(String firstName) {
+
   }
-/**
- * 
- * @param lastName
- */
-  public void setLastName(string lastName) {
-    this.lastName = lastName;
+
+  /**
+   * Set the last name
+   * @param lastName The last name
+   */
+  public void setLastName(String lastName) {
+
   }
-/**
- * 
- * @param age
- */
+
+  /**
+   * 
+   * @param age
+   */
   public void setAge(int age) {
-    this.age = age;
+
   }
-/**
- * 
- * @param medicalCondition
- */
+    
+  /**
+   * 
+   * @param medicalCondition
+   */
   public void setMedicalCondition(boolean medicalCondition) {
-    this.medicalCondition = medicalCondition;
+
   }
-/**
- * 
- * @param gender
- */
+
+  /**
+   * 
+   * @param gender
+   */
   public void setGender(String gender) {
-    this.gender = gender;
+
   }
-/**
- * 
- * @param email
- */
+
+  /**
+   * 
+   * @param email
+   */
   public void setEmail(String email) {
-    this.email = email;
+
   }
-/**
- * 
- * @param address
- */
+
+  /**
+   * 
+   * @param address
+   */
   public void setAddress(String address) {
-    this.address = address;
+
   }
-/**
- * 
- * @param id
- */
+
+  /**
+   * 
+   * @param id
+   */
   public void setId(UUID id) {
-    this.id = id;
+
   }
+
 }
