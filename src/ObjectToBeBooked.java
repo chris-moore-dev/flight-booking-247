@@ -10,7 +10,7 @@ public abstract class ObjectToBeBooked {
     private HashMap<String, Integer> pricing;
 
     /**
-     * Constructor to use when creating an ObjectToBeBooked
+     * Constructor to use when creating a new ObjectToBeBooked
      * Creates a new random UUID
      * @param company The company
      * @param individualBookings The individual bookings
@@ -38,6 +38,34 @@ public abstract class ObjectToBeBooked {
         setCompany(company);
         setIndividualBookingsMap(individualBookings);
         setPricingMap(pricing);
+    }
+
+    /**
+     * Super Constructor to use when creating a flight with layovers 
+     * New flight with layover
+     * @param company The company
+     * @param pricing The pricing hash map
+     */
+    ObjectToBeBooked(String company, HashMap<String, Integer> pricing) {
+        setID(null);
+        setCompany(company);
+        setPricingMap(pricing);
+        individualBookings = null;
+        
+    }
+
+    /**
+     * Super Constructor to use when creating a flight with layoves
+     * Flight with layover loading from database
+     * @param id The id
+     * @param company The company
+     * @param pricing The pricing hash map
+     */
+    ObjectToBeBooked(UUID id, String company, HashMap<String, Integer> pricing) {
+        setID(id);
+        setCompany(company);
+        setPricingMap(pricing);
+        individualBookings = null;
     }
 
     // Member functions
