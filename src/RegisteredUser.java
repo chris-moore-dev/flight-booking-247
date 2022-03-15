@@ -22,7 +22,8 @@ public class RegisteredUser extends User {
     private ArrayList<Friend> friends;
 
     /**
-     * 
+     * Constructor to use when first createing a registered user
+     * Will create a new random UUID for the user
      * @param firstName
      * @param lastName
      * @param email
@@ -45,11 +46,26 @@ public class RegisteredUser extends User {
     boolean medicalCondition, ArrayList<String> blackListedAirports, 
     ArrayList<Ticket> tickets, ArrayList<HotelReservation> hotelReservations,
     ArrayList<Friend> friends) {
-
+        setUserID(null);
+        setFirstName(firstName);
+        setLastName(lastName);
+        setEmail(email);
+        setAge(age);
+        setAddress(address);
+        setPassword(password);
+        setGender(gender);
+        setPreferredAirport(preferredAirport);
+        setFrequentFlyer(frequentFlyer);
+        setAdmin(admin);
+        setMedicalCondition(medicalCondition);
+        setBlackListedAirports(blackListedAirports);
+        setTickets(tickets);
+        setHotelReservations(hotelReservations);
+        setFriends(friends);
     }
 
     /**
-     * 
+     * Constructor to use when loading from json data base
      * @param userID
      * @param firstName
      * @param lastName
@@ -73,16 +89,33 @@ public class RegisteredUser extends User {
     boolean medicalCondition, ArrayList<String> blackListedAirports, 
     ArrayList<Ticket> tickets, ArrayList<HotelReservation> hotelReservations,
     ArrayList<Friend> friends) {
-        
+        setUserID(userID);
+        setFirstName(firstName);
+        setLastName(lastName);
+        setEmail(email);
+        setAge(age);
+        setAddress(address);
+        setPassword(password);
+        setGender(gender);
+        setPreferredAirport(preferredAirport);
+        setFrequentFlyer(frequentFlyer);
+        setAdmin(admin);
+        setMedicalCondition(medicalCondition);
+        setBlackListedAirports(blackListedAirports);
+        setTickets(tickets);
+        setHotelReservations(hotelReservations);
+        setFriends(friends);
     } 
 
     // Member functions
 
     /**
-     * 
-     * @param flights
-     * @param seating
-     * @param ticketHolders
+     * Creates tickets for the ticket holders for the flights provided 
+     * Will add the tickets to the users tickets list
+     * Books the seats for the flights
+     * @param flights The flights to be booked 
+     * @param seating The seating 
+     * @param ticketHolders The ticket holders
      */
     public void bookFlights(ArrayList<Flight> flights, ArrayList<Seating> seating,
     ArrayList<Friend> ticketHolders) {
@@ -90,12 +123,14 @@ public class RegisteredUser extends User {
     }
 
     /**
-     * 
-     * @param hotel
-     * @param room
-     * @param numGuests
-     * @param checkInDate
-     * @param checkOutDate
+     * Creates hotel reservations for the user
+     * Will add reservations to users hotel reservations list
+     * Books the room for the hotel
+     * @param hotel The hotel 
+     * @param room The room to be booked
+     * @param numGuests The number of guests
+     * @param checkInDate The check in date
+     * @param checkOutDate The check out date
      */
     public void bookHotel(Hotel hotel, Room room, int numGuests,
     Date checkInDate, Date checkOutDate) {
@@ -103,326 +138,350 @@ public class RegisteredUser extends User {
     }
 
     /**
-     * 
-     * @param blackListedAirport
+     * Add a black listed airport to blackListedAirports
+     * @param blackListedAirport The airport to be added
      */
     public void addBlackListedAirport(String blackListedAirport) {
-
+        blackListedAirports.add(blackListedAirport);
     }
 
     /**
-     * 
-     * @param ticket
+     * Add ticket to users tickets
+     * @param ticket The ticket to be added
      */
     public void addTicket(Ticket ticket) {
-
+        tickets.add(ticket);
     }
 
     /**
-     * 
-     * @param hotelReservation
+     * Add hotel reservation to users hotel reservations
+     * @param hotelReservation The hotel reservation to be added
      */
     public void addHotelReservation(HotelReservation hotelReservation) {
-
+        hotelReservations.add(hotelReservation);
     }
 
     /**
-     * 
-     * @param friend
+     * Add friend to users friends
+     * @param friend The friend to add
      */
     public void addFriend(Friend friend) {
-
+        friends.add(friend);
     }
 
     /**
-     * 
-     * @param blackListedAirport
+     * Remove a black listed airport to blackListedAirports
+     * @param blackListedAirport The airport to be removed
      */
     public void removeBlackListedAirport(String blackListedAirport) {
-        
+        blackListedAirports.remove(blackListedAirport)
     }
 
     /**
-     * 
-     * @param ticket
+     * Remove ticket from tickets
+     * @param ticket The ticket to be removed
      */
     public void removeTicket(Ticket ticket) {
-
+        tickets.remove(ticket);
     }
 
     /**
-     * 
-     * @param hotelReservation
+     * Remove hotel reservation from hotel reservations
+     * @param hotelReservation The reservation to be removed
      */
     public void removeHotelReservation(HotelReservation hotelReservation) {
-
+        hotelReservations.remove(hotelReservation);
     }
 
     /**
-     * 
-     * @param friend
+     * Remove friend from the friends
+     * @param friend Friend to be removed
      */
     public void removeFriend(Friend friend) {
-
+        friends.remove(friend);
     }
     
     // Getters
 
     /**
-     * 
-     * @return
+     * Get the UUID
+     * @return userID
      */
     public UUID getUUID() {
         return userID;
     }
     
     /**
-     * 
-     * @return
+     * Get the first name
+     * @return firstName
      */
     public String getFirstname() {
-
+        return firstName;
     }
 
     /**
-     * 
-     * @return
+     * Get the last name
+     * @return lastName
      */
     public String getLastName() {
-
+        return lastName;
     }
 
     /**
-     * 
-     * @return
+     * Get the email
+     * @return email
      */
     public String getEmail() {
-
+        return email;
     }
 
     /**
-     * 
-     * @return
+     * Get the age
+     * @return age
      */
     public int getAge() {
-
+        return age;
     }
 
     /**
-     * 
-     * @return
+     * Get the address
+     * @return address
      */
     public String getAddress() {
-
+        return address;
     }
 
     /**
-     * 
-     * @return
+     * Get the password
+     * @return password
      */
     public String getPassword() {
-
+        return password;
     }
 
     /**
-     * 
-     * @return
+     * Get the gender
+     * @return gender
      */
     public String getGender() {
-
+        return gender;
     }
 
     /**
-     * 
-     * @return
+     * Get the preferred airport
+     * @return preferredAirport
      */
     public String getPreferredAirport() {
-
+        return preferredAirport;
     }
 
     /**
-     * 
-     * @return
+     * Get the frequent flyer status
+     * @return frequentFlyer
      */
     public boolean getFrequentFlyer() {
-
+        return frequentFlyer;
     }
 
     /**
-     * 
-     * @return
-     */
+     * Get the admin status
+     * @return admin
+     */ 
     public boolean getAdmin() {
-
+        return admin;
     }
 
     /**
-     * 
-     * @return
+     * Get the medical condition status
+     * @return medicalCondition
      */
     public boolean getMedicalCondition() {
-
+        return medicalCondition;
     }
 
     /**
-     * 
-     * @return
+     * Get the black listed airports
+     * @return blackListedAirports
      */
     public ArrayList<String> getBlackListedAirports() {
-
+        return blackListedAirports;
     }
 
     /**
-     * 
-     * @return
+     * Get the tickets
+     * @return tickets
      */
     public ArrayList<Ticket> getTickets() {
-
+        return tickets;
     }
 
     /**
-     * 
-     * @return
+     * Get the hotel reservations
+     * @return hotelReservations
      */
     public ArrayList<HotelReservation> getHotelReservations() {
-
+        return hotelReservations;
     }
 
     /**
-     * 
-     * @return
+     * Get the friends
+     * @return friends
      */
     public ArrayList<Friend> getFriends() {
-
+        return friends;
     }
 
     // Setters
 
     /**
-     * 
-     * @param userID
+     * Set the UUID
+     * @param userID UUID to be set
      */
     public void setUserID(UUID userID) {
-
+        if (userID != null)
+            this.userID = userID;
+        else
+            this.userID = UUID.randomUUID();
     }
 
     /**
-     * 
-     * @param firstName
+     * Set the first name 
+     * @param firstName The first name
      */
     public void setFirstName(String firstName) {
-
+        if (firstName != null)
+            this.firstName = firstName;
+        else
+            this.firstName = "";
     }
 
     /**
-     * 
-     * @param lastName
+     * Set the last name
+     * @param lastName The last name 
      */
     public void setLastName(String lastName) {
-
+        if (lastName != null)
+            this.lastName = lastName;
+        else
+            this.lastName = "";
     }
 
     /**
-     * 
-     * @param email
+     * Set the email
+     * @param email The email
      */
     public void setEmail(String email) {
-
+        if (email != null)
+            this.email = email;
+        else
+            this.email = "";
     }
 
     /**
-     * 
-     * @param age
+     * Set the age 
+     * @param age The age
      */
     public void setAge(int age) {
-
+        this.age = age;
     }
 
     /**
-     * 
-     * @param address
+     * Set the address
+     * @param address The address
      */
     public void setAddress(String address) {
-
+        if (address != null)
+            this.address = address;
+        else
+            this.address = "";
     }
 
     /**
-     * 
-     * @param password
+     * Set the password
+     * @param password The password
      */
     public void setPassword(String password) {
-
+        if (password != null)
+            this.password = password;
+        else
+            this.password = "";
     }
 
     /**
-     * 
-     * @param gender
+     * Set the gender
+     * @param gender The gender
      */
     public void setGender(String gender) {
-
+        if (gender != null)
+            this.gender = gender;
+        else
+            this.gender = "";
     }
 
     /**
-     * 
-     * @param preferredAirport
+     * Set the preferred airport
+     * @param preferredAirport The preferred airport
      */
     public void setPreferredAirport(String preferredAirport) {
-
+        if (preferredAirport != null)
+            this.preferredAirport = preferredAirport;
+        else
+            this.preferredAirport = "";
     }
 
     /**
-     * 
-     * @param frequentFlyer
+     * Set the frequent flyer status
+     * @param frequentFlyer Frequent flyer status
      */
     public void setFrequentFlyer(boolean frequentFlyer) {
-
+        this.frequentFlyer = frequentFlyer;
     }
 
     /**
-     * 
-     * @param admin
+     * Set the admin status
+     * @param admin The admin status
      */
     public void setAdmin(boolean admin) {
-
+        this.admin = admin;
     }
 
     /**
-     * 
-     * @param medicalCondition
+     * Set the medical condition status
+     * @param medicalCondition The medical condition status
      */
     public void setMedicalCondition(boolean medicalCondition) {
-
+        this.medicalCondition = medicalCondition;
     }
 
     /**
-     * 
-     * @param blackListedAirports
+     * Set the black listed airports
+     * @param blackListedAirports The black listed airports
      */
     public void setBlackListedAirports(ArrayList<String> blackListedAirports) {
-
+        this.blackListedAirports = blackListedAirports;
     }
 
     /**
-     * 
-     * @param tickets
+     * Set the tickets
+     * @param tickets The tickets
      */
     public void setTickets(ArrayList<Ticket> tickets) {
-
+        this.tickets = tickets;
     }
 
     /**
-     * 
-     * @param hotelReservations
+     * Set the hotel reservations 
+     * @param hotelReservations The hotel reservations
      */
     public void setHotelReservations(ArrayList<HotelReservation> hotelReservations) {
-
+        this.hotelReservations = hotelReservations;
     }
 
     /**
-     * 
-     * @param friends
+     * Set the friends
+     * @param friends The friends
      */
     public void setFriends(ArrayList<Friend> friends) {
-
+        this.friends = friends;
     }
 }

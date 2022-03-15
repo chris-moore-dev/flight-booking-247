@@ -7,30 +7,37 @@ public abstract class ObjectToBeBooked {
     private UUID id;
     private String company;
     private HashMap<String, IndividualBooking> individualBookings;
-    protected HashMap<String, Integer> pricing;
+    private HashMap<String, Integer> pricing;
 
     /**
-     * 
-     * @param company
-     * @param individualBookings
-     * @param pricing
+     * Constructor to use when creating an ObjectToBeBooked
+     * Creates a new random UUID
+     * @param company The company
+     * @param individualBookings The individual bookings
+     * @param pricing The pricing
      */
     ObjectToBeBooked(String company, HashMap<String, IndividualBooking> individualBookings,
     HashMap<String, Integer> pricing) {
-
+        setID(null);
+        setCompany(company);
+        setIndividualBookingsMap(individualBookings);
+        setPricingMap(pricing);
     }
 
     /**
-     * 
-     * @param id
-     * @param company
-     * @param individualBookings
-     * @param pricing
+     * Constructor to use when creating an ObjectToBeBooked from database
+     * @param id The id
+     * @param company The company
+     * @param individualBookings The individual bookings
+     * @param pricing The pricing
      */
     ObjectToBeBooked(UUID id, String company,
     HashMap<String, IndividualBooking> individualBookings,
     HashMap<String, Integer> pricing) {
-
+        setID(id);
+        setCompany(company);
+        setIndividualBookingsMap(individualBookings);
+        setPricingMap(pricing);
     }
 
     // Member functions
@@ -39,8 +46,28 @@ public abstract class ObjectToBeBooked {
      * 
      * @param individualBookingNumber
      */
-    public void book(String individualBookingNumber) {
+    public void book(IndividualBooking individualBooking) {
 
+    }
+
+    /**
+     * Gets the indivudal booking at the hashamp
+     * @param individualBookingNum The number, Seat or room number
+     * @return The object of that indivual booking
+     */
+    public IndividualBooking getIndividualBooking(String individualBookingNum) {
+        return individualBookings.get(individualBookingNum);
+    }
+
+    /**
+     * Gets the pricing of the subsection
+     * Price for room type or
+     * Price for cabin type
+     * @param subsection The subsection, cabin or room type
+     * @return The price of that subsection
+     */
+    public int getPrice(String subsection) {
+        return pricing.get(subsection);
     }
 
     /**
@@ -51,68 +78,74 @@ public abstract class ObjectToBeBooked {
     // Getters
 
     /**
-     * 
-     * @return
+     * Get the ID
+     * @return The id
      */
     public UUID getID() {
-
+        return id;
     }
 
     /**
-     * 
-     * @return
+     * Get the company 
+     * @return The company
      */
     public String getCompany() {
-
+        return company;
     }
 
     /**
-     * 
-     * @return
+     * Get the individual bookings hashmap
+     * @return The individual bookings hash map
      */
     public HashMap<String, IndividualBooking> getIndividualBookings() {
-
+        return individualBookings;
     }
 
     /**
-     * 
-     * @return
+     * Get the pricing hashmap
+     * @return The pricing hashmap
      */
     public HashMap<String, Integer> getPricing() {
-
+        return pricing;
     }
 
     // Setters
 
     /**
-     * 
-     * @param id
+     * Set the ID
+     * @param id The id
      */
     public void setID(UUID id) {
-
+        if (id != null)
+            this.id = id;
+        else
+            this.id = UUID.randomUUID();
     }
 
     /**
-     * 
-     * @param company
+     * Set the company
+     * @param company The company
      */
     public void setCompany(String company) {
-
+        if (company != null)
+            this.company = company;
+        else
+            this.company = ";"
     }
 
     /**
-     * 
-     * @param individualBookings
+     * Set the individual bookings hashmap
+     * @param individualBookings The individual bookings hashmap
      */
-    public void setIndividualBookings(HashMap<String, IndividualBooking> individualBookings) {
-
+    public void setIndividualBookingsMap(HashMap<String, IndividualBooking> individualBookings) {
+        this.individualBookings = individualBookings;
     }
 
     /**
-     * 
-     * @param pricing
+     * Set the pricing hashmap
+     * @param pricing The pricing hashmap
      */
-    public void setPricing(HashMap<String, Integer> pricing) {
-
+    public void setPricingMap(HashMap<String, Integer> pricing) {
+        this.pricing = pricing;
     }
 }
