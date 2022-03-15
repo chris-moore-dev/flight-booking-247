@@ -2,12 +2,12 @@
  * Review
  * @author Lyn Cork
  */
+import java.util.*;
 public class Review {
-
-  public int rating = 10;
-  public String comment = "Review text";
-  public UserAccount user;
-  private UUID id = randomUUID();
+  private int rating;
+  private String comment;
+  private RegisteredUser user;
+  private UUID id;
 
 /**
  * Review
@@ -16,63 +16,88 @@ public class Review {
  * @param user
  * @param id
  */
-  public Review(int rating, String comment, RegisteredUser user, UUID id) {
+  Review(int rating, String comment, RegisteredUser user, UUID id) {
     
   }
 
+  /**
+   * 
+   * @param rating
+   * @param comment
+   * @param user
+   */
+  Review(int rating, String comment, RegisteredUser user) {
+
+  }
+
   // Getters
-/**
- * 
- * @return
- */
+
+  /**
+   * 
+   * @return
+   */
   public int getRating() {
     return this.rating;
   }
-/**
- * 
- * @return
- */
+
+  /**
+   * 
+   * @return
+   */
   public String getComment() {
     return this.comment;
   }
-/**
- * 
- * @return
- */
+
+  /**
+   * 
+   * @return
+   */
   public UserAccount getUser() {
     return this.user;
   }
-/**
- * 
- * @return
- */
+
+  /**
+   * 
+   * @return
+   */
   public UUID getId() {
     return this.id;
   }
 
   // Setters
-/**
- * 
- */
+
+  /**
+   * 
+   * @param rating
+   */
   public void setRating(int rating) {
     this.rating = rating;
   }
-/**
- * 
- */
-  public void setComment(string comment) {
+
+  /**
+   * 
+   * @param comment
+   */
+  public void setComment(String comment) {
     this.comment = comment;
   }
-/**
- * 
- */
-  public void setUser(UserAccount user) {
+
+  /**
+   * 
+   * @param user
+   */
+  public void setUser(RegisteredUser user) {
     this.user = user;
   }
-/**
- * 
- */
+
+  /**
+   * 
+   * @param id
+   */
   public void setId(UUID id) {
-    this.id = id;
+    if (id != null)
+      this.id = id;
+    else
+      this.id = UUID.randomUUID();
   }
 }
