@@ -8,6 +8,12 @@
         "takeOffTime" : "6:00 AM",
         "landingTime" : "12:00 PM:",
         "totalFlightTime" : "7h 30m",
+        "layover" : false,
+        "flights" : [
+    
+        ],
+        "numStops" : 0,
+        "discountPercent" : 0.8,
         "pricing" : [
             {
                 "First" : 430,
