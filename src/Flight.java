@@ -1,15 +1,10 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-
 /**
  * Flight
  * @author Chris Moore
  */
+import java.util.*;
 public class Flight extends ObjectToBeBooked {
-<<<<<<< HEAD
-    
-=======
-  private String date;
+  private Date date;
   private String departingAirport;
   private String destAirport;
   private String takeOffTime;
@@ -22,36 +17,113 @@ public class Flight extends ObjectToBeBooked {
 
 
   /**
-   * Default constructor for Flight object
+   * 
+   * @param date
+   * @param departingAirport
+   * @param destAirport
+   * @param takeOffTime
+   * @param landingTime
+   * @param totalFlightTime
+   * @param company
+   * @param seating
+   * @param pricing
    */
-  Flight(String date, String departingAirport, String destAirport, String takeOffTime,
-  String landingTime, String totalFlightTime) {
-    //TODO fix super constructor error
+  Flight(Date date, String departingAirport, String destAirport,
+  String takeOffTime, String landingTime, String totalFlightTime, 
+  String company, HashMap<String, Seating> seating,
+  HashMap<String, Integer> pricing) {
+    // super(company, seating, pricing); 
+    
   }
+
+  /**
+   * 
+   * @param date
+   * @param departingAirport
+   * @param destAirport
+   * @param takeOffTime
+   * @param landingTime
+   * @param totalFlightTime
+   * @param company
+   * @param seating
+   * @param pricing
+   * @param id
+   */
+  Flight(Date date, String departingAirport, String destAirport,
+  String takeOffTime, String landingTime, String totalFlightTime, 
+  String company, HashMap<String, Seating> seating,
+  HashMap<String, Integer> pricing, UUID id) {
+    // super(id, company, seating, pricing);
+    
+  }
+
+  /**
+   * 
+   * @param date
+   * @param departingAirport
+   * @param destAirport
+   * @param takeOffTime
+   * @param landingTime
+   * @param totalFlightTime
+   * @param layover
+   * @param flights
+   * @param numStops
+   * @param discountPercent
+   * @param company
+   * @param pricing
+   */
+  Flight(Date date, String departingAirport, String destAirport,
+  String takeOffTime, String landingTime, String totalFlightTime,
+  boolean layover, ArrayList<Flight> flights, int numStops,
+  double discountPercent, String company, HashMap<String, Integer> pricing) {
+    super(company, pricing);
+  }
+
+  /**
+   * 
+   * @param date
+   * @param departingAirport
+   * @param destAirport
+   * @param takeOffTime
+   * @param landingTime
+   * @param totalFlightTime
+   * @param layover
+   * @param flights
+   * @param numStops
+   * @param discountPercent
+   * @param id
+   * @param company
+   * @param pricing
+   */
+  Flight(Date date, String departingAirport, String destAirport,
+  String takeOffTime, String landingTime, String totalFlightTime,
+  boolean layover, ArrayList<Flight> flights, int numStops,
+  double discountPercent, UUID id, String company, HashMap<String, Integer> pricing) {
+    super(id, company, pricing);
+  }
+
 
 
   /**
    * 
-   * @param flight
    */
-  public void printSeats(Flight flight) {
+  public void printSeats() {
 
   }
 
   /**
    * 
-   * @param flight
    */
-  public void print(Flight flight) {
+  @Override
+  public void print() {
     System.out.println("Example");
   }
 
   /**
    * 
-   * @param flight
    * @return
    */
-  public String getDate(Flight flight) {
+  public Date getDate() {
     return this.date;
   }
 
@@ -59,86 +131,85 @@ public class Flight extends ObjectToBeBooked {
 
   /**
    * 
-   * @param flight
    * @return
    */
-  public String getDepartingAirport(Flight flight) {
+  public String getDepartingAirport() {
     return this.departingAirport;
   }
 
   /**
    * 
-   * @param flight
    * @return
    */
-  public String getDestAirport(Flight flight) {
+  public String getDestAirport() {
     return this.destAirport;
   }
 
   /**
-   * 
-   * @param flight
+   *
    * @return
    */
-  public String getTakeOffTime(Flight flight) {
+  public String getTakeOffTime() {
     return this.takeOffTime;
   }
 
   /**
    * 
-   * @param flight
    * @return
    */
-  public String getLandingTime(Flight flight) {
+  public String getLandingTime() {
     return this.landingTime;
   }
 
   /**
    * 
-   * @param flight
    * @return
    */
-  public String getTotalFlightTime(Flight flight) {
+  public String getTotalFlightTime() {
     return this.totalFlightTime;
   }
 
   /**
    * 
-   * @param flight
    * @return
    */
-  public boolean getIsLayover(Flight flight) {
+  public boolean getIsLayover() {
     return this.layover;
   }
 
   /**
    * 
-   * @param flight
    * @return
    */
-  public ArrayList<Flight> getFlights(Flight flight) {
+  public ArrayList<Flight> getFlights() {
     return this.flights;
   }
 
   /**
    * 
-   * @param flight
    * @return
    */
-  public int getNumStops(Flight flight) {
+  public int getNumStops() {
     return this.numStops;
   }
 
   /**
    * 
-   * @param flight
    * @return
    */
-  public double getDiscountPercent(Flight flight) {
+  public double getDiscountPercent() {
     return this.discountPercent;
   }
 
   // SETTERS
+
+  /**
+   * 
+   * @param date
+   */
+  public void setDate(Date date) {
+      this.date = date;
+  }
 
   /**
    * 
@@ -211,5 +282,4 @@ public class Flight extends ObjectToBeBooked {
   public void setDiscountPercent(double discountPercent) {
     this.discountPercent = discountPercent;
   }
->>>>>>> 1edf241277195ac68428cd7e7221bfcf0c398336
 }
