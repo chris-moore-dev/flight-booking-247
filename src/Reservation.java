@@ -9,7 +9,6 @@ public abstract class Reservation {
   private UUID id;
   private String reservationHolderFirstName;
   private String reservationHolderLastName;
-  private IndividualBooking individualBooking;
   private int price;
   protected DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 
@@ -19,10 +18,9 @@ public abstract class Reservation {
    * 
    * @param reservationHolderFirstName
    * @param reservationHolderLastName
-   * @param individualBooking
    */
   Reservation(String reservationHolderFirstName,
-  String reservationHolderLastName, IndividualBooking individualBooking) {
+  String reservationHolderLastName) {
     
   }
 
@@ -34,14 +32,14 @@ public abstract class Reservation {
    * @param id
    */
   Reservation(String reservationHolderFirstName,
-  String reservationHolderLastName, IndividualBooking individualBooking,
-  UUID id) {
+  String reservationHolderLastName, UUID id) {
     
   }
 
   /**
    * 
    */
+  @Override
   public abstract String toString();
 
   // Getters
@@ -64,13 +62,6 @@ public abstract class Reservation {
  * 
  * @return
  */
-  public IndividualBooking getIndividualBooking() {
-    return individualBooking;
-  }
-/**
- * 
- * @return
- */
   public int getPrice() {
     return price;
   }
@@ -83,13 +74,6 @@ public abstract class Reservation {
     return id;
   }
   // Setters
-/**
- * 
- * @param reservationHolderFirstName
- */
-  public void setReservationHolderFirstName(String reservationHolderFirstName) {
-    this.reservationHolderFirstName = reservationHolderFirstName;
-  }
 /**
  * 
  * @param reservationHolderLastName

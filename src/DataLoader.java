@@ -9,7 +9,7 @@ import org.json.simple.parser.JSONParser;
 
 /**
  * A class to load user, flight and hotel data
- * @author Mario Misencik
+ * @author Mario Misencik, Evan Scales
  */
 public class DataLoader extends DataConstants {
     
@@ -53,11 +53,27 @@ public class DataLoader extends DataConstants {
     }
 
     /**
-     * Loads the list of users
+     * Loads the list of users from the json database
      * @return The list of users
      */
-    public static ArrayList<User> getUsers() {
-        return new ArrayList<User>();
+    public static ArrayList<RegisteredUser> getUsers() {
+        ArrayList<RegisteredUser> users;
+
+        try {
+            FileReader reader = new FileReader(USERS_FILE_NAME);
+            JSONParser parser = new JSONParser();
+            JSONArray usersJSON = (JSONArray)new JSONParser().parse(reader);
+
+            for (int i = 0; i < usersJSON.size(); i++) {
+                JSONObject userJSON = (JSONObject)usersJSON.get(i);
+
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return users;
     }
 
     /**
@@ -68,4 +84,17 @@ public class DataLoader extends DataConstants {
         return new ArrayList<Hotel>();
     }
 
+    private Ticket getTicket(UUID id) {
+        
+    }
+
+    private HotelReservation getHotelReservation(UUID id) {
+
+    }
+
+    private Friend getFriend(UUID id) {
+
+    }
+
+    private 
 }

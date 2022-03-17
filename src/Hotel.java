@@ -11,89 +11,128 @@ public class Hotel extends ObjectToBeBooked {
   private ArrayList<String> amenities;
   private String closestAirport;
   private String city;
+  private HashMap<String, Room> rooms;
 
   /**
-   * Default constructor
+   * 
    * @param address
    * @param reviews
    * @param amenities
    * @param closestAirport
    * @param city
+   * @param company
+   * @param pricing
+   * @param rooms
    */
-  Hotel(String address, ArrayList<Review> reviews, ArrayList<String> amenities, String closestAirport, String city) {
+  Hotel(String address, ArrayList<Review> reviews, ArrayList<String> amenities,
+  String closestAirport, String city, String company, HashMap<String, Integer> pricing,
+  HashMap<String, Room> rooms) {
     //super()
   }
 
   /**
    * 
+   * @param address
+   * @param reviews
+   * @param amenities
+   * @param closestAirport
+   * @param city
+   * @param company
+   * @param pricing
+   * @param rooms
+   * @param id
    */
-  public void printIndividualBookings() {
+  Hotel(String address, ArrayList<Review> reviews, ArrayList<String> amenities,
+  String closestAirport, String city, String company, HashMap<String, Integer> pricing,
+  HashMap<String, Room> rooms, UUID id) {
+    // super()
+  }
+
+  // Member Functions
+
+  /**
+   * 
+   * @return
+   */
+  @Override
+  public String toString() {
 
   }
 
   /**
    * 
+   * @param roomNum
    */
-  public void printPrices() {
-    
+  public void book(String roomNum) {
+
+  }
+
+  /**
+   * 
+   * @param roomNum
+   */
+  public void unBook(String roomNum) {
+
   }
 
   // GETTERS
 
   /**
    * 
-   * @param hotel
    * @return
    */
-  public String getAddress(Hotel hotel) {
+  public String getAddress() {
     return this.address;
   }
 
   /**
-   * 
-   * @param hotel
+   *
    * @return
    */
-  public ArrayList<Review> getReviews(Hotel hotel) {
+  public ArrayList<Review> getReviews() {
     return this.reviews;
   }
 
   /**
    * 
-   * @param hotel
    * @return
    */
-  public ArrayList<String> getAmenities(Hotel hotel) {
+  public ArrayList<String> getAmenities() {
     return this.amenities;
   }
 
   /**
    * 
-   * @param hotel
    * @return
    */
-  public String getClosestAirport(Hotel hotel) {
+  public String getClosestAirport() {
     return this.closestAirport;
   }
 
   /**
    * 
-   * @param hotel
    * @return
    */
-  public String getCity(Hotel hotel) {
+  public String getCity() {
     return this.city;
+  }
+
+  /**
+   * 
+   * @return
+   */
+  public HashMap<String, Room> getRooms() {
+    return this.rooms;
   }
 
   // SETTERS
 
   /**
    * 
-   * @param hotel
-   * @return
+   * @param address
    */
-  public String setAddress(Hotel hotel) {
-    return this.address;
+  public void setAddress(String address) {
+    this.address = address;
   }
 
   /**
@@ -126,5 +165,9 @@ public class Hotel extends ObjectToBeBooked {
    */
   public void setCity(String city) {
     this.city = city;
+  }
+
+  public void setRooms(HashMap<String, Room> rooms) {
+    this.rooms = rooms;
   }
 }

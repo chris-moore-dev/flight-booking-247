@@ -8,6 +8,7 @@ public class HotelReservation extends Reservation {
     private Date checkOutDate;
     private int numGuests;
     private Hotel hotel;
+    private Room room;
 
     /**
      * Constructor to use when first creating a hotel reservation
@@ -75,9 +76,7 @@ public class HotelReservation extends Reservation {
 
     // Getters
 
-    String stringDate = "08/08/2022";
-    Date date = new Date();
-    
+   
 
     /**
      * Get the hotel
@@ -109,6 +108,14 @@ public class HotelReservation extends Reservation {
      */
     public int getNumGuests() {
         return numGuests;
+    }
+
+    /**
+     * 
+     * @return
+     */
+    public Room getRoom() {
+        return this.room;
     }
 
     // Setters
@@ -143,5 +150,13 @@ public class HotelReservation extends Reservation {
      */
     public void setHotel(Hotel hotel) {
         this.hotel = hotel;
+    }
+
+    /**
+     * 
+     * @param room
+     */
+    public void setRoom(Room room) {
+        this.room = room;
     }
 }

@@ -9,52 +9,55 @@ public class Ticket extends Reservation {
   private String gate;
   private String name;
   private int numOfCheckedBags;
+  private Flight flight;
+  private Seating seat;
 
   /**
    * 
-   * @param object
-   * @param reservationHolderFirstName
-   * @param reservationHolderLastName
-   * @param individualBooking
    * @param boardingGroup
    * @param boardingTime
    * @param gate
    * @param name
    * @param numOfCheckedBags
+   * @param flight
+   * @param seat
+   * @param firstName
+   * @param lastName
+   * @param price
    */
-  Ticket(ObjectToBeBooked object, String reservationHolderFirstName,
-  String reservationHolderLastName, IndividualBooking individualBooking,
-  String boardingGroup, String boardingTime, String gate,
-  String name, int numOfCheckedBags) {
-    super(object, reservationHolderFirstName, reservationHolderLastName, individualBooking);
+  Ticket(String boardingGroup, String boardingTime, String gate,
+  String name, int numOfCheckedBags, Flight flight, Seating seat, 
+  String firstName, String lastName, int price) {
+
   }
 
   /**
    * 
-   * @param object
-   * @param reservationHolderFirstName
-   * @param reservationHolderLastName
-   * @param individualBooking
    * @param boardingGroup
    * @param boardingTime
    * @param gate
    * @param name
    * @param numOfCheckedBags
+   * @param flight
+   * @param seat
+   * @param firstName
+   * @param lastName
+   * @param price
    * @param id
    */
-  Ticket(ObjectToBeBooked object, String reservationHolderFirstName,
-  String reservationHolderLastName, IndividualBooking individualBooking,
-  String boardingGroup, String boardingTime, String gate,
-  String name, int numOfCheckedBags, UUID id) {
-    super(object, reservationHolderFirstName, reservationHolderLastName, individualBooking, id);
+  Ticket(String boardingGroup, String boardingTime, String gate,
+  String name, int numOfCheckedBags, Flight flight, Seating seat, 
+  String firstName, String lastName, int price, UUID id) {
+
   }
+
 
 
 /**
  * 
  */
   @Override
-  public void printReservation() {
+  public String toString() {
     
   }
   // Getters
@@ -93,6 +96,20 @@ public class Ticket extends Reservation {
   public int getNumOfCheckedBags() {
     return numOfCheckedBags;
   }
+  /**
+   * 
+   * @return
+   */
+  public Flight getFlight() {
+    return this.flight;
+  }
+  /**
+   * 
+   * @return
+   */
+  public Seating getSeat() {
+    return this.seat;
+  }
   // Setters
 /**
  * 
@@ -128,5 +145,15 @@ public class Ticket extends Reservation {
  */
   public void setNumOfCheckedBags(int numOfCheckedBags) {
     this.numOfCheckedBags = numOfCheckedBags;
+  }
+  public void setFlight(Flight flight) {
+    this.flight = flight;
+  }
+  /**
+   * 
+   * @param seat
+   */
+  public void setSeat(Seating seat) {
+    this.seat = seat;
   }
 }

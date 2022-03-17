@@ -14,5 +14,11 @@ public class test {
         LocalDate date1 = LocalDate.of(2022, 8, 8);
         LocalDate date2 = LocalDate.of(2022, 8, 10);
 
+        ArrayList<Flight> flights;
+        ArrayList<Room> rooms;
+
+        Reservation res = new Ticket(flights.get(0), "Evan", "Scales",
+        rooms.get(0), "1A", "7:00 AM", "37B", "Evan Scales",
+        0);
     }
 }
