@@ -1,6 +1,6 @@
 [
     {
-        "seatID" : 1231231,
+        "seatID" : "2w1221312312-123123123123-12312312",
         "seatNumber" : "L11",
         "booked" : false,
         "medicalSeat" : false,

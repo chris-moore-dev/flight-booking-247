@@ -1,6 +1,6 @@
 [
     {
-        "userID" : 1,
+        "userID" : "2w1221312312-123123123123-12312312",
         "firstName" : "Evan",
         "lastName" : "Scales",
         "emal" : "escales@email.sc.edu",
@@ -13,20 +13,20 @@
         "admin" : true,
         "medocalCondition" : false,
         "blackListedAirports" : [
-            {"airportcode" : "BOS"},
-            {"airportcode" : "ORD"}
+            "BOS",
+            "ORD"
         ],
         "tickets" : [
-            {"ticketID" : 31},
-            {"ticketID" : 12}
+            "2w1221312312-123123123123-12312312",
+            "2w1221312312-123123123123-12312312"
         ],
         "hotelReservations" : [
-            {"reservationID" : 413},
-            {"reservationID" : 341}
+            "2w1221312312-123123123123-12312312",
+            "2w1221312312-123123123123-12312312"
         ],
         "friends" : [
-            {"friendID" : 124},
-            {"friendID" : 23}
+            "2w1221312312-123123123123-12312312",
+            "2w1221312312-123123123123-12312312"
         ]
     }
 ]

@@ -1,8 +1,8 @@
 [
     {
-        "reservationID" : 1231,
-        "hotelID" : 331,
-        "roomID" : 131231,
+        "reservationID" : "2w1221312312-123123123123-12312312",
+        "hotelID" : "2w1221312312-123123123123-12312312",
+        "roomID" : "2w1221312312-123123123123-12312312",
         "price" : 412,
         "firstName" : "Evan",
         "lastName" : "Scales",

@@ -1,7 +1,7 @@
 [
     {
-        "reviewID" : 123123213,
-        "userID" : 331123,
+        "reviewID" : "2w1221312312-123123123123-12312312",
+        "userID" : "2w1221312312-123123123123-12312312",
         "comment" : "Really nice hotel!",
         "rating" : 4.0
     }
