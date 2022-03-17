@@ -4,9 +4,9 @@
  */
 import java.util.*;
 public abstract class ObjectToBeBooked {
-    private UUID id;
-    private String company;
-    private HashMap<String, Integer> pricing;
+    protected UUID id;
+    protected String company;
+    protected HashMap<String, Integer> pricing;
 
     /**
      * Construtor to use when creating a new ObjectToBeBooked

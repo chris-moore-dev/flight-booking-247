@@ -6,10 +6,10 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 public abstract class Reservation { 
-  private UUID id;
-  private String reservationHolderFirstName;
-  private String reservationHolderLastName;
-  private int price;
+  protected UUID id;
+  protected String reservationHolderFirstName;
+  protected String reservationHolderLastName;
+  protected int price;
   protected DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 
 
