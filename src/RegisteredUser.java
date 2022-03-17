@@ -119,7 +119,35 @@ public class RegisteredUser extends User {
      */
     public void bookFlights(ArrayList<Flight> flights, ArrayList<Seating> seating,
     ArrayList<Friend> ticketHolders) {
-        
+        int arraySize = flights.size();
+        for (int i = 0; i < arraySize; i++) {
+            Flight flight = flights.get(i);
+            Seating seat = seating.get(i);
+            Friend friend = ticketHolders.get(i);
+            String roomNumber = seating.get(i).getNumber();
+
+
+            flight.book(roomNumber);
+            addTicket(makeTicket(flight, friend, seat));
+        }
+    }
+
+    /**
+     * Make a ticket to be added to the users account
+     * @param flight The flight to be booked on
+     * @param friend The person the seats for
+     * @param seat The seat
+     * @return The ticket to be added to the users account
+     */
+    private Ticket makeTicket(Flight flight, Friend friend, Seating seat) {
+        String firstName = friend.getFirstName();
+        String lastName = friend.getLastName();
+        // TODO Get the boarding group
+        // TODO Get the boarding time
+        // TODO Get the gate
+        String name = firstName + " " + lastName;
+        int numOfCheckedBags = 0;
+        // return new Ticket(flight, firstName, lastName, seat, boardingGroup, boardingTime, gate, name, numOfCheckedBags)
     }
 
     /**
@@ -127,14 +155,39 @@ public class RegisteredUser extends User {
      * Will add reservations to users hotel reservations list
      * Books the room for the hotel
      * @param hotel The hotel 
-     * @param room The room to be booked
+     * @param roomNumber The room to be booked
      * @param numGuests The number of guests
      * @param checkInDate The check in date
      * @param checkOutDate The check out date
      */
     public void bookHotel(Hotel hotel, Room room, int numGuests,
     Date checkInDate, Date checkOutDate) {
-        
+        String roomNumber = room.getNumber();
+        hotel.book(roomNumber);
+        addHotelReservation(new HotelReservation(hotel, this.firstName,
+        this.lastName, room, room.getPrice(), checkInDate, checkOutDate,
+        numGuests));
+    }
+
+    /**
+     * Unbook a hotel room
+     * Unbooks the room from the hotel
+     * @param reservation
+     */
+    public void unBookHotel(HotelReservation reservation) {
+        Hotel hotel = reservation.getHotel();
+        String roomNumber = reservation.getIndividualBooking().getNumber();
+        hotel.unBook(roomNumber);
+        removeHotelReservation(reservation);
+    }
+
+    /**
+     * Unbooks a flight
+     * Unbooks the seat from the flight
+     * @param ticket The ticket to unbook
+     */
+    public void unBookFlight(Ticket ticket) {
+
     }
 
     /**
@@ -458,7 +511,10 @@ public class RegisteredUser extends User {
      * @param blackListedAirports The black listed airports
      */
     public void setBlackListedAirports(ArrayList<String> blackListedAirports) {
-        this.blackListedAirports = blackListedAirports;
+        if (blackListedAirports != null)
+            this.blackListedAirports = blackListedAirports;
+        else
+            this.blackListedAirports = new ArrayList<String>();
     }
 
     /**
@@ -466,7 +522,10 @@ public class RegisteredUser extends User {
      * @param tickets The tickets
      */
     public void setTickets(ArrayList<Ticket> tickets) {
-        this.tickets = tickets;
+        if (tickets != null)
+            this.tickets = tickets;
+        else
+            this.tickets = new ArrayList<Ticket>();
     }
 
     /**
@@ -474,7 +533,10 @@ public class RegisteredUser extends User {
      * @param hotelReservations The hotel reservations
      */
     public void setHotelReservations(ArrayList<HotelReservation> hotelReservations) {
-        this.hotelReservations = hotelReservations;
+        if (hotelReservations != null)
+            this.hotelReservations = hotelReservations;
+        else
+            this.hotelReservations = new ArrayList<HotelReservation>();
     }
 
     /**
@@ -482,6 +544,9 @@ public class RegisteredUser extends User {
      * @param friends The friends
      */
     public void setFriends(ArrayList<Friend> friends) {
-        this.friends = friends;
+        if (friends != null)
+            this.friends = friends;
+        else
+            this.friends = new ArrayList<Friend>();
     }
 }

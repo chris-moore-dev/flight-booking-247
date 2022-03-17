@@ -115,8 +115,8 @@ public class Flight extends ObjectToBeBooked {
    * 
    */
   @Override
-  public void print() {
-    System.out.println("Example");
+  public String toString() {
+    return "Example";
   }
 
   /**

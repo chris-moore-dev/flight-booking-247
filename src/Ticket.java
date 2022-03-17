@@ -2,24 +2,59 @@
  * Ticket
  * @author Lyn Cork
  */
+import java.util.*;
 public class Ticket extends Reservation {
   private String boardingGroup;
   private String boardingTime;
   private String gate;
   private String name;
   private int numOfCheckedBags;
-/**
- * 
- * @param boardingGroup
- * @param boardingTime
- */
-  public Ticket(String boardingGroup, String boardingTime) {
-    
+
+  /**
+   * 
+   * @param object
+   * @param reservationHolderFirstName
+   * @param reservationHolderLastName
+   * @param individualBooking
+   * @param boardingGroup
+   * @param boardingTime
+   * @param gate
+   * @param name
+   * @param numOfCheckedBags
+   */
+  Ticket(ObjectToBeBooked object, String reservationHolderFirstName,
+  String reservationHolderLastName, IndividualBooking individualBooking,
+  String boardingGroup, String boardingTime, String gate,
+  String name, int numOfCheckedBags) {
+    super(object, reservationHolderFirstName, reservationHolderLastName, individualBooking);
   }
+
+  /**
+   * 
+   * @param object
+   * @param reservationHolderFirstName
+   * @param reservationHolderLastName
+   * @param individualBooking
+   * @param boardingGroup
+   * @param boardingTime
+   * @param gate
+   * @param name
+   * @param numOfCheckedBags
+   * @param id
+   */
+  Ticket(ObjectToBeBooked object, String reservationHolderFirstName,
+  String reservationHolderLastName, IndividualBooking individualBooking,
+  String boardingGroup, String boardingTime, String gate,
+  String name, int numOfCheckedBags, UUID id) {
+    super(object, reservationHolderFirstName, reservationHolderLastName, individualBooking, id);
+  }
+
+
 /**
  * 
  */
-  public void printReservations() {
+  @Override
+  public void printReservation() {
     
   }
   // Getters

@@ -7,21 +7,21 @@ public class DataWriter extends DataConstants {
     /**
      * Saves flights to the list
      */
-    public void saveFlights() {
+    public static void saveFlights() {
 
     }
 
     /**
      * Saves users to the list
      */
-    public void saveUsers() {
+    public static void saveUsers() {
 
     }
 
     /**
      * Saves hotels to the list
      */
-    public void saveHotels() {
+    public static void saveHotels() {
 
     }
 

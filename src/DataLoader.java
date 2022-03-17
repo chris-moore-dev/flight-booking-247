@@ -10,7 +10,7 @@ public class DataLoader extends DataConstants {
      * Loads the list of flights
      * @return The list of flights
      */
-    public ArrayList<Flight> getFlights() {
+    public static ArrayList<Flight> getFlights() {
         return new ArrayList<Flight>();
     }
 
@@ -18,7 +18,7 @@ public class DataLoader extends DataConstants {
      * Loads the list of users
      * @return The list of users
      */
-    public ArrayList<User> getUsers() {
+    public static ArrayList<User> getUsers() {
         return new ArrayList<User>();
     }
 
@@ -26,7 +26,7 @@ public class DataLoader extends DataConstants {
      * Loads the list of hotels
      * @return The list of hotels
      */
-    public ArrayList<Hotel> getHotels() {
+    public static ArrayList<Hotel> getHotels() {
         return new ArrayList<Hotel>();
     }
 

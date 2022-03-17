@@ -71,11 +71,25 @@ public abstract class ObjectToBeBooked {
     // Member functions
 
     /**
-     * 
-     * @param individualBookingNumber
+     * Sets the booked value of individual booking to true
+     * Updates the hashmap holding all the individual bookings
+     * @param individualBookingNumber The individual booking
      */
-    public void book(IndividualBooking individualBooking) {
+    public void book(String individualBookingNumber) {
+        IndividualBooking individualBooking = individualBookings.get(individualBookingNumber);
+        individualBooking.setBooked(true);
+        individualBookings.put(individualBookingNumber, individualBooking);
+    }
 
+    /**
+     * Sets the booked value of the indivudal booking to false
+     * Updates the hash map holding all the individual bookings
+     * @param individualBookingNumber The individual booking
+     */
+    public void unBook(String individualBookingNumber) {
+        IndividualBooking individualBooking = individualBookings.get(individualBookingNumber);
+        individualBooking.setBooked(false);
+        individualBookings.put(individualBookingNumber, individualBooking);
     }
 
     /**
@@ -101,7 +115,8 @@ public abstract class ObjectToBeBooked {
     /**
      * 
      */
-    protected abstract void print();
+    @Override
+    protected abstract String toString();
 
     // Getters
 
@@ -158,7 +173,7 @@ public abstract class ObjectToBeBooked {
         if (company != null)
             this.company = company;
         else
-            this.company = ";"
+            this.company = "";
     }
 
     /**

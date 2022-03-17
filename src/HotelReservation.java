@@ -7,100 +7,137 @@ public class HotelReservation extends Reservation {
     private Date checkInDate;
     private Date checkOutDate;
     private int numGuests;
+    private Hotel hotel;
 
     /**
-     * 
-     * @param hotelID
-     * @param roomID
-     * @param price
-     * @param firstName
-     * @param lastName
-     * @param checkInDate
-     * @param checkOutDate
-     * @param numGuests
+     * Constructor to use when first creating a hotel reservation
+     * @param hotel The hotel
+     * @param firstName The first name of the reservation holder
+     * @param lastName The last name of the reservation holder
+     * @param room The room on the reservation
+     * @param price The price of the hotel reservation
+     * @param checkInDate The check in date
+     * @param checkOutDate The check out date
+     * @param numGuests The number of guests
      */
-    HotelReservation(UUID hotelID, UUID roomID, int price, 
-    String firstName, String lastName, Date checkInDate, 
-    Date checkOutDate, int numGuests) {
-
+    HotelReservation(Hotel hotel, String firstName, String lastName,
+    Room room, int price, Date checkInDate, Date checkOutDate,
+    int numGuests) {
+        super(firstName, lastName, room);
+        setHotel(hotel);
+        setCheckInDate(checkInDate);
+        setCheckOutDate(checkOutDate);
+        setNumGuests(numGuests);
     }
 
     /**
-     * 
-     * @param reservationID
-     * @param hotelID
-     * @param roomID
-     * @param price
-     * @param firstName
-     * @param lastName
-     * @param checkInDate
-     * @param checkOutDate
-     * @param numGuests
+     * Constructor to use when loading hotel reservation from database
+     * @param hotel The hotel
+     * @param firstName The first name of the reservation holder
+     * @param lastName The last name of the reservation holder
+     * @param room The room on the reservation
+     * @param price The price of the hotel reservation
+     * @param checkInDate The check in date
+     * @param checkOutDate The check out date
+     * @param numGuests The number of guests
+     * @param id The id
      */
-    HotelReservation(UUID reservationID, UUID hotelID, UUID roomID,
-    int price, String firstName, String lastName, Date checkInDate, 
-    Date checkOutDate, int numGuests) {
-
+    HotelReservation(Hotel hotel, String firstName, String lastName,
+    Room room, int price, Date checkInDate, Date checkOutDate,
+    int numGuests, UUID id) {
+        super(firstName, lastName, room, id);
+        setHotel(hotel);
+        setCheckInDate(checkInDate);
+        setCheckOutDate(checkOutDate);
+        setNumGuests(numGuests);
     }
 
     // Member functions
 
     /**
-     * 
+     * Used to print the hotel reservation
      */
-    public void printReservation() {
+    @Override
+    public String toString() {
+        String ret = "";
 
+        ret += "\n- - - - - ";
+        ret += hotel.getCompany();
+        ret += " Hotel Reservation - - - - -\n\n";
+        ret += "Total Price: $" + getPrice() + "\n";
+        ret += "Room Type: " + getIndividualBooking().getType() + "\n"; 
+        ret += "Check-In Date: " + dateFormat.format(checkInDate) + "\n";
+        ret += "Check-Out Date: " + dateFormat.format(checkOutDate) + "\n";
+        // ret += "Address: " + hotel.getAddress() + "\n\n";
+
+        return ret;
     }
 
     // Getters
 
     /**
-     * 
-     * @return
+     * Get the hotel
+     * @return The hotel
+     */
+    public Hotel getHotel() {
+        return hotel;
+    }
+
+    /**
+     * Get the check in date
+     * @return The check in date
      */
     public Date getCheckInDate() {
-
+        return checkInDate;
     }
 
     /**
-     * 
-     * @return
+     * Get the checkout date
+     * @return The checkout date
      */
     public Date getChecOutDate() {
-
+        return checkOutDate;
     }
 
     /**
-     * 
-     * @return
+     * Get the num guests
+     * @return The num guests
      */
     public int getNumGuests() {
-
+        return numGuests;
     }
 
     // Setters
 
     /**
-     * 
-     * @param checkInDate
+     * Set the check in date
+     * @param checkInDate The check in date
      */
     public void setCheckInDate(Date checkInDate) {
-
+        this.checkInDate = checkInDate;
     }
 
     /**
-     * 
-     * @param checkOutDate
+     * Set the check out date
+     * @param checkOutDate The check out date
      */
     public void setCheckOutDate(Date checkOutDate) {
-
+        this.checkOutDate = checkOutDate;
     }
 
     /**
-     * 
-     * @param numGuests
+     * Set the num guests
+     * @param numGuests The num guests
      */
     public void setNumGuests(int numGuests) {
+        this.numGuests = numGuests;
+    }
 
+    /**
+     * Set the hotel
+     * @param hotel The hotel
+     */
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
     }
 }
