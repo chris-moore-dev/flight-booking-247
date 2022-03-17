@@ -38,7 +38,7 @@ public class FlightList {
      * @return
      */
     public static Flight getFlight(UUID id) {
-        Flight flight = FlightList.getFlight(id);
+        return Flight;
     }
 
 }

@@ -3,10 +3,11 @@
  * @author Chris Moore
  */
 import java.util.HashMap;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 public class Flight extends ObjectToBeBooked {
-  private Date date;
+  private LocalDate date;
   private String departingAirport;
   private String destAirport;
   private String takeOffTime;
@@ -16,6 +17,7 @@ public class Flight extends ObjectToBeBooked {
   private ArrayList<Flight> flights;
   private int numStops;
   private double discountPercent;
+  private HashMap<String, Seating> seats;
 
 
   /**
@@ -26,16 +28,16 @@ public class Flight extends ObjectToBeBooked {
    * @param takeOffTime
    * @param landingTime
    * @param totalFlightTime
+   * @param layover
    * @param company
-   * @param seating
    * @param pricing
+   * @param seats
    */
-  Flight(Date date, String departingAirport, String destAirport,
-  String takeOffTime, String landingTime, String totalFlightTime, 
-  String company, HashMap<String, Seating> seating,
-  HashMap<String, Integer> pricing) {
-    // super(company, seating, pricing); 
-    
+  Flight(LocalDate date, String departingAirport, String destAirport,
+  String takeOffTime, String landingTime, String totalFlightTime,
+  boolean layover, String company, HashMap<String, Integer> pricing,
+  HashMap<String, Seating> seats) {
+    //super
   }
 
   /**
@@ -46,17 +48,17 @@ public class Flight extends ObjectToBeBooked {
    * @param takeOffTime
    * @param landingTime
    * @param totalFlightTime
+   * @param layover
    * @param company
-   * @param seating
    * @param pricing
+   * @param seats
    * @param id
    */
-  Flight(Date date, String departingAirport, String destAirport,
-  String takeOffTime, String landingTime, String totalFlightTime, 
-  String company, HashMap<String, Seating> seating,
-  HashMap<String, Integer> pricing, UUID id) {
-    // super(id, company, seating, pricing);
-    
+  Flight(LocalDate date, String departingAirport, String destAirport,
+  String takeOffTime, String landingTime, String totalFlightTime,
+  boolean layover, String company, HashMap<String, Integer> pricing,
+  HashMap<String, Seating> seats, UUID id) {
+    //super
   }
 
   /**
@@ -71,14 +73,11 @@ public class Flight extends ObjectToBeBooked {
    * @param flights
    * @param numStops
    * @param discountPercent
-   * @param company
-   * @param pricing
    */
-  Flight(Date date, String departingAirport, String destAirport,
-  String takeOffTime, String landingTime, String totalFlightTime,
-  boolean layover, ArrayList<Flight> flights, int numStops,
-  double discountPercent, String company, HashMap<String, Integer> pricing) {
-    super(company, pricing);
+  Flight(LocalDate date, String departingAirport, String destAirport, String takeOffTime,
+  String landingTime, String totalFlightTime, boolan layover, ArrayList<Flight> flights,
+  int numStops, double discountPercent) {
+    //super
   }
 
   /**
@@ -94,17 +93,30 @@ public class Flight extends ObjectToBeBooked {
    * @param numStops
    * @param discountPercent
    * @param id
-   * @param company
-   * @param pricing
    */
-  Flight(Date date, String departingAirport, String destAirport,
-  String takeOffTime, String landingTime, String totalFlightTime,
-  boolean layover, ArrayList<Flight> flights, int numStops,
-  double discountPercent, UUID id, String company, HashMap<String, Integer> pricing) {
-    super(id, company, pricing);
+  Flight(LocalDate date, String departingAirport, String destAirport, String takeOffTime,
+  String landingTime, String totalFlightTime, boolan layover, ArrayList<Flight> flights,
+  int numStops, double discountPercent, UUID id) {
+    //super
   }
 
+  // Member functions
 
+  /**
+   * 
+   * @param seatNum
+   */
+  public void book(String seatNum) {
+
+  }
+
+  /**
+   * 
+   * @param seatNum
+   */
+  public void unBook(String seatNum) {
+
+  }
 
   /**
    * 
@@ -121,15 +133,16 @@ public class Flight extends ObjectToBeBooked {
     return "Example";
   }
 
+
+  // GETTERS
+
   /**
    * 
    * @return
    */
-  public Date getDate() {
+  public LocalDate getDate() {
     return this.date;
   }
-
-  // GETTERS
 
   /**
    * 
@@ -203,13 +216,21 @@ public class Flight extends ObjectToBeBooked {
     return this.discountPercent;
   }
 
+  /**
+   * 
+   * @return
+   */
+  public HashMap<String, Seating> getSeating() {
+    return this.seats;
+  }
+
   // SETTERS
 
   /**
    * 
    * @param date
    */
-  public void setDate(Date date) {
+  public void setDate(LocalDate date) {
       this.date = date;
   }
 
@@ -283,5 +304,13 @@ public class Flight extends ObjectToBeBooked {
    */
   public void setDiscountPercent(double discountPercent) {
     this.discountPercent = discountPercent;
+  }
+
+  /**
+   * 
+   * @param seats
+   */
+  public void setSeats(HashMap<String, Seating> seats) {
+    this.seats = seats;
   }
 }

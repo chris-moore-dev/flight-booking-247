@@ -6,7 +6,7 @@ import java.util.ArrayList;
  */
 public class UserList {
     private static UserList userList;
-    private ArrayList<User> users;
+    private ArrayList<RegisteredUser> users;
 
     /**
      * The list of users
@@ -32,8 +32,8 @@ public class UserList {
      * @param password The user's password
      * @return The user
      */
-    public User getUser(String email, String password) {
-        return new User();
+    public RegisteredUser getUser(String email, String password) {
+        return new RegisteredUser();
     }
 
 }

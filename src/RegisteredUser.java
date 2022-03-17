@@ -126,7 +126,7 @@ public class RegisteredUser extends User {
             Friend friend = ticketHolders.get(i);
             String seatNumber = seating.get(i).getNumber();
 
-            flight.book(seatNumber);
+            // flight.book(seatNumber);
             addTicket(makeTicket(flight, friend, seat));
 
             // TODO Make these changes reflect in the database
@@ -148,7 +148,7 @@ public class RegisteredUser extends User {
         // TODO Get the gate
         String name = firstName + " " + lastName;
         int numOfCheckedBags = 0;
-        // return new Ticket(flight, firstName, lastName, seat, boardingGroup, boardingTime, gate, name, numOfCheckedBags)
+        // return new Ticket
     }
 
     /**
@@ -178,9 +178,10 @@ public class RegisteredUser extends User {
      */
     public void unBookHotel(HotelReservation reservation) {
         Hotel hotel = reservation.getHotel();
-        String roomNumber = reservation.getIndividualBooking().getNumber();
+        String roomNumber = reservation.getRoom().getNumber();
         hotel.unBook(roomNumber);
         removeHotelReservation(reservation);
+        // TODO Make changes reflect in database
     }
 
     /**
@@ -189,7 +190,11 @@ public class RegisteredUser extends User {
      * @param ticket The ticket to unbook
      */
     public void unBookFlight(Ticket ticket) {
-
+        Flight flight = ticket.getFlight();
+        String seatNum = ticket.getSeat().getNumber();
+        flight.unBook(seatNum);
+        removeTicket(ticket);
+        // TODO Make changes reflect in database
     }
 
     /**

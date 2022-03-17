@@ -4,102 +4,35 @@
  */
 import java.util.*;
 public abstract class ObjectToBeBooked {
-    private UUID id;
-    private String company;
-    private HashMap<String, IndividualBooking> individualBookings;
-    private HashMap<String, Integer> pricing;
+    protected UUID id;
+    protected String company;
+    protected HashMap<String, Integer> pricing;
 
     /**
-     * Constructor to use when creating a new ObjectToBeBooked
-     * Creates a new random UUID
+     * Construtor to use when creating a new ObjectToBeBooked
      * @param company The company
-     * @param individualBookings The individual bookings
      * @param pricing The pricing
-     */
-    ObjectToBeBooked(String company, HashMap<String, IndividualBooking> individualBookings,
-    HashMap<String, Integer> pricing) {
-        setID(null);
-        setCompany(company);
-        setIndividualBookingsMap(individualBookings);
-        setPricingMap(pricing);
-    }
-
-    /**
-     * Constructor to use when creating an ObjectToBeBooked from database
-     * @param id The id
-     * @param company The company
-     * @param individualBookings The individual bookings
-     * @param pricing The pricing
-     */
-    ObjectToBeBooked(UUID id, String company,
-    HashMap<String, IndividualBooking> individualBookings,
-    HashMap<String, Integer> pricing) {
-        setID(id);
-        setCompany(company);
-        setIndividualBookingsMap(individualBookings);
-        setPricingMap(pricing);
-    }
-
-    /**
-     * Super Constructor to use when creating a flight with layovers 
-     * New flight with layover
-     * @param company The company
-     * @param pricing The pricing hash map
      */
     ObjectToBeBooked(String company, HashMap<String, Integer> pricing) {
         setID(null);
         setCompany(company);
         setPricingMap(pricing);
-        individualBookings = null;
-        
     }
 
     /**
-     * Super Constructor to use when creating a flight with layoves
-     * Flight with layover loading from database
-     * @param id The id
+     * Constructor to use when loading object from database
      * @param company The company
-     * @param pricing The pricing hash map
+     * @param pricingMap The pricing map
+     * @param id The id
      */
-    ObjectToBeBooked(UUID id, String company, HashMap<String, Integer> pricing) {
+    ObjectToBeBooked(String company, HashMap<String, Integer> pricingMap,
+    UUID id) {
         setID(id);
         setCompany(company);
         setPricingMap(pricing);
-        individualBookings = null;
     }
 
     // Member functions
-
-    /**
-     * Sets the booked value of individual booking to true
-     * Updates the hashmap holding all the individual bookings
-     * @param individualBookingNumber The individual booking
-     */
-    public void book(String individualBookingNumber) {
-        IndividualBooking individualBooking = individualBookings.get(individualBookingNumber);
-        individualBooking.setBooked(true);
-        individualBookings.put(individualBookingNumber, individualBooking);
-    }
-
-    /**
-     * Sets the booked value of the indivudal booking to false
-     * Updates the hash map holding all the individual bookings
-     * @param individualBookingNumber The individual booking
-     */
-    public void unBook(String individualBookingNumber) {
-        IndividualBooking individualBooking = individualBookings.get(individualBookingNumber);
-        individualBooking.setBooked(false);
-        individualBookings.put(individualBookingNumber, individualBooking);
-    }
-
-    /**
-     * Gets the indivudal booking at the hashamp
-     * @param individualBookingNum The number, Seat or room number
-     * @return The object of that indivual booking
-     */
-    public IndividualBooking getIndividualBooking(String individualBookingNum) {
-        return individualBookings.get(individualBookingNum);
-    }
 
     /**
      * Gets the pricing of the subsection
@@ -113,10 +46,10 @@ public abstract class ObjectToBeBooked {
     }
 
     /**
-     * 
+     * Overrided toString method
      */
     @Override
-    protected abstract String toString();
+    public abstract String toString();
 
     // Getters
 
@@ -134,14 +67,6 @@ public abstract class ObjectToBeBooked {
      */
     public String getCompany() {
         return company;
-    }
-
-    /**
-     * Get the individual bookings hashmap
-     * @return The individual bookings hash map
-     */
-    public HashMap<String, IndividualBooking> getIndividualBookings() {
-        return individualBookings;
     }
 
     /**
@@ -174,17 +99,6 @@ public abstract class ObjectToBeBooked {
             this.company = company;
         else
             this.company = "";
-    }
-
-    /**
-     * Set the individual bookings hashmap
-     * @param individualBookings The individual bookings hashmap
-     */
-    public void setIndividualBookingsMap(HashMap<String, IndividualBooking> individualBookings) {
-        if (individualBookings != null)
-            this.individualBookings = individualBookings;
-        else
-            this.individualBookings = new HashMap<String, IndividualBooking>();
     }
 
     /**
