@@ -181,7 +181,10 @@ public abstract class ObjectToBeBooked {
      * @param individualBookings The individual bookings hashmap
      */
     public void setIndividualBookingsMap(HashMap<String, IndividualBooking> individualBookings) {
-        this.individualBookings = individualBookings;
+        if (individualBookings != null)
+            this.individualBookings = individualBookings;
+        else
+            this.individualBookings = new HashMap<String, IndividualBooking>();
     }
 
     /**
@@ -189,6 +192,9 @@ public abstract class ObjectToBeBooked {
      * @param pricing The pricing hashmap
      */
     public void setPricingMap(HashMap<String, Integer> pricing) {
-        this.pricing = pricing;
+        if (pricing != null)
+            this.pricing = pricing;
+        else
+            this.pricing = new HashMap<String, Integer>();
     }
 }

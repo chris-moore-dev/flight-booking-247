@@ -75,6 +75,10 @@ public class HotelReservation extends Reservation {
 
     // Getters
 
+    String stringDate = "08/08/2022";
+    Date date = new Date();
+    
+
     /**
      * Get the hotel
      * @return The hotel

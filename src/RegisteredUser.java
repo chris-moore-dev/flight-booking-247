@@ -124,11 +124,12 @@ public class RegisteredUser extends User {
             Flight flight = flights.get(i);
             Seating seat = seating.get(i);
             Friend friend = ticketHolders.get(i);
-            String roomNumber = seating.get(i).getNumber();
+            String seatNumber = seating.get(i).getNumber();
 
-
-            flight.book(roomNumber);
+            flight.book(seatNumber);
             addTicket(makeTicket(flight, friend, seat));
+
+            // TODO Make these changes reflect in the database
         }
     }
 
@@ -167,6 +168,7 @@ public class RegisteredUser extends User {
         addHotelReservation(new HotelReservation(hotel, this.firstName,
         this.lastName, room, room.getPrice(), checkInDate, checkOutDate,
         numGuests));
+        // TODO Make these changes reflect in the database
     }
 
     /**

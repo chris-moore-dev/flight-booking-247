@@ -4,6 +4,7 @@ import java.util.ArrayList;
  * The list of flights
  * @author Mario Misencik
  */
+import java.util.*;
 public class FlightList {
     private static FlightList flightList;
     private ArrayList<Flight> flights;
@@ -29,6 +30,15 @@ public class FlightList {
      */
     public ArrayList<Flight> getFlights() {
         return flights;
+    }
+
+    /**
+     * 
+     * @param id
+     * @return
+     */
+    public static Flight getFlight(UUID id) {
+        Flight flight = FlightList.getFlight(id);
     }
 
 }
