@@ -16,7 +16,7 @@ public class Room extends IndividualBooking {
    * @param smokingAllowed
    * @param availability
    */
-  Room(Boolean smokingAllowed, HashMap<Date, Boolean> availability) {
+  Room(boolean smokingAllowed, HashMap<Date, boolean> availability) {
     // super()
   }
 
