@@ -12,7 +12,7 @@ public class UserList {
      * The list of users
      */
     private UserList() {
-        
+        users = DataLoader.getUsers();
     }
 
     /**
@@ -20,6 +20,9 @@ public class UserList {
      * @return The user list
      */
     public static UserList getInstance() {
+        if (userList == null) {
+            userList = new UserList();
+        }
         return userList;
     }
 
