@@ -17,10 +17,11 @@ public abstract class Reservation {
   /**
    * 
    * @param reservationHolderFirstName
+   * @param price
    * @param reservationHolderLastName
    */
   Reservation(String reservationHolderFirstName,
-  String reservationHolderLastName) {
+  String reservationHolderLastName, int price) {
     
   }
 
@@ -29,10 +30,11 @@ public abstract class Reservation {
    * @param reservationHolderFirstName
    * @param reservationHolderLastName
    * @param individualBooking
+   * @param price
    * @param id
    */
   Reservation(String reservationHolderFirstName,
-  String reservationHolderLastName, UUID id) {
+  String reservationHolderLastName, int price, UUID id) {
     
   }
 

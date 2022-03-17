@@ -2,10 +2,11 @@
  * HotelReservation
  * @author Evan Scales
  */
+import java.time.LocalDate;
 import java.util.*;
 public class HotelReservation extends Reservation {
-    private Date checkInDate;
-    private Date checkOutDate;
+    private LocalDate checkInDate;
+    private LocalDate checkOutDate;
     private int numGuests;
     private Hotel hotel;
     private Room room;
@@ -22,10 +23,11 @@ public class HotelReservation extends Reservation {
      * @param numGuests The number of guests
      */
     HotelReservation(Hotel hotel, String firstName, String lastName,
-    Room room, int price, Date checkInDate, Date checkOutDate,
+    Room room, int price, LocalDate checkInDate, LocalDate checkOutDate,
     int numGuests) {
-        super(firstName, lastName, room);
+        super(firstName, lastName, price);
         setHotel(hotel);
+        setRoom(room);
         setCheckInDate(checkInDate);
         setCheckOutDate(checkOutDate);
         setNumGuests(numGuests);
@@ -44,10 +46,11 @@ public class HotelReservation extends Reservation {
      * @param id The id
      */
     HotelReservation(Hotel hotel, String firstName, String lastName,
-    Room room, int price, Date checkInDate, Date checkOutDate,
+    Room room, int price, LocalDate checkInDate, LocalDate checkOutDate,
     int numGuests, UUID id) {
-        super(firstName, lastName, room, id);
+        super(firstName, lastName, price, id);
         setHotel(hotel);
+        setRoom(room);
         setCheckInDate(checkInDate);
         setCheckOutDate(checkOutDate);
         setNumGuests(numGuests);
@@ -66,17 +69,15 @@ public class HotelReservation extends Reservation {
         ret += hotel.getCompany();
         ret += " Hotel Reservation - - - - -\n\n";
         ret += "Total Price: $" + getPrice() + "\n";
-        ret += "Room Type: " + getIndividualBooking().getType() + "\n"; 
+        ret += "Room Type: " + room.getType() + "\n"; 
         ret += "Check-In Date: " + dateFormat.format(checkInDate) + "\n";
         ret += "Check-Out Date: " + dateFormat.format(checkOutDate) + "\n";
-        // ret += "Address: " + hotel.getAddress() + "\n\n";
+        ret += "Address: " + hotel.getAddress() + "\n\n";
 
         return ret;
     }
 
     // Getters
-
-   
 
     /**
      * Get the hotel
@@ -90,7 +91,7 @@ public class HotelReservation extends Reservation {
      * Get the check in date
      * @return The check in date
      */
-    public Date getCheckInDate() {
+    public LocalDate getCheckInDate() {
         return checkInDate;
     }
 
@@ -98,7 +99,7 @@ public class HotelReservation extends Reservation {
      * Get the checkout date
      * @return The checkout date
      */
-    public Date getChecOutDate() {
+    public LocalDate getChecOutDate() {
         return checkOutDate;
     }
 
@@ -124,7 +125,7 @@ public class HotelReservation extends Reservation {
      * Set the check in date
      * @param checkInDate The check in date
      */
-    public void setCheckInDate(Date checkInDate) {
+    public void setCheckInDate(LocalDate checkInDate) {
         this.checkInDate = checkInDate;
     }
 
@@ -132,7 +133,7 @@ public class HotelReservation extends Reservation {
      * Set the check out date
      * @param checkOutDate The check out date
      */
-    public void setCheckOutDate(Date checkOutDate) {
+    public void setCheckOutDate(LocalDate checkOutDate) {
         this.checkOutDate = checkOutDate;
     }
 
