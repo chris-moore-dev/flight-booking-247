@@ -2,7 +2,9 @@
  * Flight
  * @author Chris Moore
  */
-import java.util.*;
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Date;
 public class Flight extends ObjectToBeBooked {
   private Date date;
   private String departingAirport;
