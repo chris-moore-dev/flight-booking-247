@@ -1,15 +1,16 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
  * User class
  * @author Chris Moore
  */
-public class User extends FlightWithLayover {
+public class User {
   /**
    * Default constructor
    */
   User() {
-    // super()
+    
   }
 
   /**
@@ -19,20 +20,10 @@ public class User extends FlightWithLayover {
    * @param departDate
    * @return
    */
-  public ArrayList<Flight> getFlights(String departingAirport, String destAirport, String departDate) {
+  public ArrayList<Flight> getFlights(String departingAirport, String destAirport, LocalDate departDate) {
 
   }
 
-  /**
-   * 
-   * @param departingAirport
-   * @param destAirport
-   * @param departDate
-   * @return
-   */
-  public ArrayList<FlightWithLayover> getFlightsWithLayovers(String departingAirport, String destAirport, String departDate) {
-
-  }
 
   /**
    * 

@@ -54,6 +54,14 @@ public class Hotel extends ObjectToBeBooked {
    * 
    * @return
    */
+  public String printRooms() {
+
+  }
+
+  /**
+   * 
+   * @return
+   */
   @Override
   public String toString() {
 

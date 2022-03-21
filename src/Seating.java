@@ -1,3 +1,5 @@
+import java.util.UUID;
+
 /**
  * Seating class
  * @author Chris Moore
@@ -5,8 +7,31 @@
 public class Seating extends IndividualBooking {
   private boolean medicalSeat;
 
-  Seating(boolean medicalSeat) {
-    //super()
+  /**
+   * 
+   * @param medicalSeat
+   * @param booked
+   * @param price
+   * @param type
+   * @param number
+   */
+  Seating(boolean medicalSeat, boolean booked, int price,
+  String type, String number) {
+    super(booked, price, type, number);
+  }
+
+  /**
+   * 
+   * @param medicalSeat
+   * @param id
+   * @param booked
+   * @param price
+   * @param type
+   * @param number
+   */
+  Seating(boolean medicalSeat, UUID id, boolean booked, int price,
+  String type, String number) {
+    super(id, booked, price, type, number)
   }
 
   // GETTERS

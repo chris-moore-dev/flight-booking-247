@@ -1,5 +1,7 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.UUID;
 import java.util.Date;
 
 /**
@@ -8,44 +10,63 @@ import java.util.Date;
  */
 public class Room extends IndividualBooking {
   private boolean smokingAllowed;
-  private ArrayList<String> bookedDays;
+  private ArrayList<LocalDate> bookedDays;
   private int numBeds;
 
   /**
-   * Default constructor
+   * 
    * @param smokingAllowed
-   * @param availability
+   * @param bookedDays
+   * @param numBeds
+   * @param booked
+   * @param price
+   * @param type
+   * @param number
    */
-  Room(boolean smokingAllowed, HashMap<Date, boolean> availability) {
-    // super()
+  Room(boolean smokingAllowed, ArrayList<LocalDate> bookedDays, int numBeds,
+  boolean booked, int price, String type, String number) {
+    super(booked, price, type, number);
+  }
+
+  /**
+   * 
+   * @param smokingAllowed
+   * @param bookedDays
+   * @param numBeds
+   * @param id
+   * @param booked
+   * @param price
+   * @param type
+   * @param number
+   */
+  Room(boolean smokingAllowed, ArrayList<LocalDate> bookedDays, int numBeds,
+  UUID id, boolean booked, int price, String type, String number) {
+    super(id, booked, price, type, number);
   }
 
   // GETTERS
 
   /**
    * 
-   * @param room
    * @return
    */
-  public boolean getIsSmokingAllowed(Room room) {
+  public boolean getIsSmokingAllowed() {
     return this.smokingAllowed;
   }
 
   /**
    * 
-   * @param room
    * @return
    */
-  public ArrayList<String> getBookedDays(Room room) {
+  public ArrayList<LocalDate> getBookedDays() {
     return this.bookedDays;
   }
 
   /**
    * 
-   * @param room
    * @return
    */
-  public int getNumBeds(Room room) {
+  public int getNumBeds() {
     return this.numBeds;
   }
 
@@ -63,7 +84,7 @@ public class Room extends IndividualBooking {
    * 
    * @param bookedDays
    */
-  public void setBookedDays(ArrayList<String> bookedDays) {
+  public void setBookedDays(ArrayList<LocalDate> bookedDays) {
     this.bookedDays = bookedDays;
   }
 

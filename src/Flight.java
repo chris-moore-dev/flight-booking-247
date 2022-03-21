@@ -19,6 +19,8 @@ public class Flight extends ObjectToBeBooked {
   private double discountPercent;
   private HashMap<String, Seating> seats;
 
+  // WHEN USING THE FIRST CONSTRUTOR MAKE IT SO SEATS ARE AUTIMATICLLY GENERATED
+
 
   /**
    * 
@@ -121,7 +123,7 @@ public class Flight extends ObjectToBeBooked {
   /**
    * 
    */
-  public void printSeats() {
+  public String printSeats() {
 
   }
 

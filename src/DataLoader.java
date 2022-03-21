@@ -43,6 +43,8 @@ public class DataLoader extends DataConstants {
                         Flight flight = FlightList.getFlight(flightID);
                         flightList.add(flight);
                     }
+                    // GET NUM STOPS
+                    // GET DISCOUNT PERCENT
                 }
                 // To-do: rest of the variables
             }
