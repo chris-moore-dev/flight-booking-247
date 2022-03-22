@@ -85,13 +85,6 @@ public abstract class Reservation {
   }
 /**
  * 
- * @param individualBooking
- */
-  public void setIndividualBooking(IndividualBooking individualBooking) {
-    this.individualBooking = individualBooking;
-  }
-/**
- * 
  * @param price
  */
   public void setPrice(int price) {
