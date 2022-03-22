@@ -1,5 +1,5 @@
 /**
- * Friend
+ * Friend Class. 
  * @author Lyn Cork
  */
 import java.util.*;
@@ -26,7 +26,13 @@ public class Friend {
   Friend(String firstName, String lastName, int age,
   boolean medicalCondition, String gender, String email,
   String address) {
-
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.age = age;
+    this.medicalCondition = medicalCondition;
+    this.gender = gender;
+    this.email = email;
+    this.address = address;
   }
 
   /**
@@ -43,7 +49,14 @@ public class Friend {
   Friend(String firstName, String lastName, int age,
   boolean medicalCondition, String gender, String email,
   String address, UUID id) {
-
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.age = age;
+    this.medicalCondition = medicalCondition;
+    this.gender = gender;
+    this.email = email;
+    this.address = address;
+    this.id = id;
   }
 
   // Member functions
@@ -121,7 +134,7 @@ public class Friend {
    * @param firstName The first name
    */
   public void setFirstName(String firstName) {
-
+    this.firstName = firstName;
   }
 
   /**
@@ -129,55 +142,55 @@ public class Friend {
    * @param lastName The last name
    */
   public void setLastName(String lastName) {
-
+    this.lastName = lastName;
   }
 
   /**
-   * 
+   * Set the age
    * @param age
    */
   public void setAge(int age) {
-
+    this.age = age;
   }
     
   /**
-   * 
+   * Set the medical condition to true or false
    * @param medicalCondition
    */
   public void setMedicalCondition(boolean medicalCondition) {
-
+    this.medicalCondition = medicalCondition;
   }
 
   /**
-   * 
+   * Set the gender
    * @param gender
    */
   public void setGender(String gender) {
-
+    this.gender = gender;
   }
 
   /**
-   * 
+   * Set the email
    * @param email
    */
   public void setEmail(String email) {
-
+    this.email = email;
   }
 
   /**
-   * 
+   * Set the address
    * @param address
    */
   public void setAddress(String address) {
-
+    this.address = address;
   }
 
   /**
-   * 
+   * Set the UUID
    * @param id
    */
   public void setId(UUID id) {
-
+    this.id = id;
   }
 
 }
