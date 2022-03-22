@@ -33,7 +33,20 @@ public class UserList {
      * @return The user
      */
     public RegisteredUser getUser(String email, String password) {
-        return new RegisteredUser();
+        for (RegisteredUser user : users) {
+            if (user.getEmail().equals(email) && user.getPassword().equals(password)) {
+                return user;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Returns the user list in the form of an ArrayList
+     * @return The user list
+     */
+    public ArrayList<RegisteredUser> getUsers() {
+        return users;
     }
 
 }

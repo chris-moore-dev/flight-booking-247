@@ -12,7 +12,7 @@ public class HotelList {
      * The list of hotels
      */
     private HotelList() {
-
+        hotels = DataLoader.getHotels();
     }
 
     /**
@@ -20,12 +20,15 @@ public class HotelList {
      * @return The hotel list
      */
     public static HotelList getInstance() {
+        if (hotelList == null) {
+            hotelList = new HotelList();
+        }
         return hotelList;
     }
 
     /**
-     * Returns hotels based on the user's inputs
-     * @return Hotels
+     * Returns the hotel list in the form of an ArrayList of hotels
+     * @return The hotel list
      */
     public ArrayList<Hotel> getHotels() {
         return hotels;

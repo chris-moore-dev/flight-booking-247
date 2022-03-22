@@ -13,7 +13,7 @@ public class FlightList {
      * The list of flights
      */
     private FlightList() {
-
+        flights = DataLoader.getFlights();
     }
 
     /**
@@ -21,12 +21,15 @@ public class FlightList {
      * @return The flight list
      */
     public static FlightList getInstance() {
+        if (flightList == null) {
+            flightList = new FlightList();
+        }
         return flightList;
     }
 
     /**
-     * Returns the flights based on the user's inputs
-     * @return Flights
+     * Returns the flight list in the form of an ArrayList of flights
+     * @return The flight list
      */
     public ArrayList<Flight> getFlights() {
         return flights;
