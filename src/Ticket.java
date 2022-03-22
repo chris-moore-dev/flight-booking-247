@@ -14,16 +14,16 @@ public class Ticket extends Reservation {
 
   /**
    * Ticket constructor
-   * @param boardingGroup
-   * @param boardingTime
-   * @param gate
-   * @param name
-   * @param numOfCheckedBags
-   * @param flight
-   * @param seat
-   * @param firstName
-   * @param lastName
-   * @param price
+   * @param boardingGroup boarding group
+   * @param boardingTime boarding time
+   * @param gate gate
+   * @param name name
+   * @param numOfCheckedBags number of checked bags
+   * @param flight flight object
+   * @param seat seat object
+   * @param firstName first name of ticket holder
+   * @param lastName last name of ticket holder
+   * @param price price of ticket
    */
   Ticket(String boardingGroup, String boardingTime, String gate,
   String name, int numOfCheckedBags, Flight flight, Seating seat, 
@@ -42,17 +42,17 @@ public class Ticket extends Reservation {
 
   /**
    * Ticket constructor with UUID
-   * @param boardingGroup
-   * @param boardingTime
-   * @param gate
-   * @param name
-   * @param numOfCheckedBags
-   * @param flight
-   * @param seat
-   * @param firstName
-   * @param lastName
-   * @param price
-   * @param id
+   * @param boardingGroup boarding group
+   * @param boardingTime boarding time
+   * @param gate gate
+   * @param name name 
+   * @param numOfCheckedBags number of checked bags
+   * @param flight flight object
+   * @param seat seat object 
+   * @param firstName ticket holder's first name
+   * @param lastName ticket holder's last name
+   * @param price price
+   * @param id UUID
    */
   Ticket(String boardingGroup, String boardingTime, String gate,
   String name, int numOfCheckedBags, Flight flight, Seating seat, 
@@ -69,8 +69,6 @@ public class Ticket extends Reservation {
     this.price = price;
     this.id = id;
   }
-
-
 
 /**
  * 
@@ -168,6 +166,10 @@ public class Ticket extends Reservation {
   public void setNumOfCheckedBags(int numOfCheckedBags) {
     this.numOfCheckedBags = numOfCheckedBags;
   }
+/**
+ * Sets flight object
+ * @param flight flight object
+ */
   public void setFlight(Flight flight) {
     this.flight = flight;
   }
@@ -177,6 +179,22 @@ public class Ticket extends Reservation {
    */
   public void setSeat(Seating seat) {
     this.seat = seat;
+  }
+  /**
+   * Sets first name of ticket holder
+   * @param firstName ticket holder's first name
+   */
+  public void setFirstName(Reservation reservation) {
+    String firstName;
+    reservation.getReservationHolderFirstName = firstName;
+  }
+  /**
+   * Sets last name of ticket holder
+   * @param lastName ticket holder's last name
+   */
+  public void setLastName(Reservation reservation) {
+    String lastName;
+    reservation.getReservationHolderLastName = lastName;
   }
   /**
    * Sets UUID
