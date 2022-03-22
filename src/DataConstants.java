@@ -57,6 +57,10 @@ public abstract class DataConstants {
 
     // Reviews
     protected static final String REVIEWS_FILE_NAME = "json/reviews.json";
+    protected static final String REVIEWS_ID = "reviewID";
+    protected static final String REVIEWS_USER_ID = "userID";
+    protected static final String REVIEWS_COMMENT = "comment";
+    protected static final String REVIEWS_RATING = "rating";
 
 
     // Rooms
@@ -72,9 +76,25 @@ public abstract class DataConstants {
 
     // Seatings
     protected static final String SEATINGS_FILE_NAME = "json/seatings.json";
+    protected static final String SEATINGS_ID = "seatID";
+    protected static final String SEATINGS_SEAT_NUMBER = "seatNumber";
+    protected static final String SEATINGS_BOOKED = "booked";
+    protected static final String SEATINGS_MEDICAL_SEAT = "medicalSeat";
+    protected static final String SEATINGS_PRICE = "price";
+    protected static final String SEATINGS_CABIN = "cabin";
 
     // Tickets
     protected static final String TICKETS_FILE_NAME = "json/tickets.json";
+    protected static final String TICKETS_ID = "ticketID";
+    protected static final String TICKETS_FLIGHT_ID = "flightID";
+    protected static final String TICKETS_SEAT_ID = "seatID";
+    protected static final String TICKETS_PRICE = "price";
+    protected static final String TICKETS_FIRST_NAME = "firstName";
+    protected static final String TICKETS_LAST_NAME = "lastName";
+    protected static final String TICKETS_BOARDING_GROUP = "boardingGroup";
+    protected static final String TICKETS_BOARDTING_TME = "boardingTime";
+    protected static final String TICKETS_CHECKED_BAGS = "checkedBags";
+    protected static final String TICKETS_GATE = "gate";
 
     // Users
     protected static final String USERS_FILE_NAME = "json/users.json";

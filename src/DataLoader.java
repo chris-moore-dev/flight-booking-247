@@ -206,12 +206,38 @@ public class DataLoader extends DataConstants {
     }
 
     private static HashMap<UUID, Review> getReviewList() {
+        HashMap<UUID, Review> reviewList = new HashMap<UUID, Review>();
 
+        try {
+            FileReader reader = new FileReader(REVIEWS_FILE_NAME);
+            JSONParser parser = new JSONParser();
+            JSONArray reviewsArray = (JSONArray)new JSONParser().parse(reader);
+
+            for (int i = 0; i < reviewsArray.size(); i++) {
+                JSONObject reviewJSON = (JSONObject) reviewsArray.get(i);
+
+                int rating = Integer.parseInt((String) reviewJSON.get(REVIEWS_RATING));
+                String comment = (String) reviewJSON.get(REVIEWS_COMMENT);
+                UUID userID = UUID.fromString((String) reviewJSON.get(REVIEWS_USER_ID));
+                RegisteredUser user = UserList.getUser(userID);
+                UUID id = UUID.fromString((String) reviewJSON.get(REVIEWS_ID));
+
+
+                Review review = new Review(rating, comment, user, id);
+                reviewList.put(id, review);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        return reviewList;
     }
 
     /**
-     * 
-     * @return
+     * Get all the rooms from rooms.json
+     * Puts all the rooms and their id into a hashmap
+     * @return The hashmap of the rooms
      */
     private static HashMap<UUID, Room> getRoomList() {
         HashMap<UUID, Room> roomList = new HashMap<UUID, Room>();
@@ -236,7 +262,11 @@ public class DataLoader extends DataConstants {
                 ArrayList<LocalDate> bookedDays = new ArrayList<LocalDate>();
                 JSONArray bookedDaysArray = (JSONArray)roomJSON.get(ROOMS_BOOKED_DAYS_LIST);
                 if (bookedDaysArray != null) {
-                    
+                    for (int j = 0; j < bookedDaysArray.size(); j++) {
+                        String sDate = (String) bookedDaysArray.get(j);
+                        LocalDate date = LocalDate.parse(sDate, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+                        bookedDays.add(date);
+                    }
                 }
 
 
@@ -253,14 +283,112 @@ public class DataLoader extends DataConstants {
     }
 
     private static HashMap<UUID, Seating> getSeatingList() {
+        HashMap<UUID, Seating> seatingList = new HashMap<UUID, Seating>();
 
+        try {
+            FileReader reader = new FileReader(SEATINGS_FILE_NAME);
+            JSONParser parser = new JSONParser();
+            JSONArray seatingsArray = (JSONArray)new JSONParser().parse(reader);
+
+            for (int i = 0; i < seatingsArray.size(); i++) {
+                JSONObject seatingJSON = (JSONObject) seatingsArray.get(i);
+
+                Boolean medicalSeat = (Boolean) seatingJSON.get(SEATINGS_MEDICAL_SEAT);
+                UUID id = UUID.fromString((String) seatingJSON.get(SEATINGS_ID));
+                Boolean booked = (Boolean) seatingJSON.get(SEATINGS_BOOKED);
+                int price = Integer.parseInt((String) seatingJSON.get(SEATINGS_PRICE));
+                String type = (String) seatingJSON.get(SEATINGS_CABIN);
+                String number = (String) seatingJSON.get(SEATINGS_SEAT_NUMBER);
+
+                Seating seat = new Seating(medicalSeat, id, booked, price, type, number);
+                seatingList.put(id, seat);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+
+        return seatingList;
     }
 
     private static HashMap<UUID, Ticket> getTicketList() {
+        HashMap<UUID, Ticket> ticketList = new HashMap<UUID, Ticket>();
+        HashMap<UUID, Seating> seatingList = getSeatingList();
 
+        try {
+            FileReader reader = new FileReader(TICKETS_FILE_NAME);
+            JSONParser parser = new JSONParser();
+            JSONArray ticketsArray = (JSONArray)new JSONParser().parse(reader);
+
+            for (int i = 0; i < ticketsArray.size(); i++) {
+                JSONObject ticketJSON = (JSONObject) ticketsArray.get(i);
+
+                String boardingGroup = (String) ticketJSON.get(TICKETS_BOARDING_GROUP);
+                String boardingTime = (String) ticketJSON.get(TICKETS_BOARDTING_TME);
+                String gate = (String) ticketJSON.get(TICKETS_GATE);
+                int numOfCheckedBags = Integer.parseInt((String) ticketJSON.get(TICKETS_CHECKED_BAGS));
+                UUID flightID = UUID.fromString((String) ticketJSON.get(TICKETS_FLIGHT_ID));
+                Flight flight = FlightList.getFlight(flightID);
+                UUID seatID = UUID.fromString((String) ticketJSON.get(TICKETS_SEAT_ID));
+                Seating seat = seatingList.get(seatID);
+                String firstName = (String) ticketJSON.get(TICKETS_FIRST_NAME);
+                String lastName = (String) ticketJSON.get(TICKETS_LAST_NAME);
+                int price = Integer.parseInt((String) ticketJSON.get(TICKETS_PRICE));
+                UUID id = UUID.fromString((String) ticketJSON.get(TICKETS_ID));
+                String name = firstName + " " + lastName;
+
+
+                Ticket ticket = new Ticket(boardingGroup, boardingTime, gate,
+                name, numOfCheckedBags, flight, seat, firstName, lastName,
+                price, id);
+
+                ticketList.put(id, ticket);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return ticketList;
     }
 
+    /**
+     * Get the friends from friends.json
+     * Put all the friends and their uuid into a hashmap
+     * @return The hashmap of friends
+     */
     private static HashMap<UUID, Friend> getFriendsList() {
+        HashMap<UUID, Friend> friendList = new HashMap<UUID, Friend>();
 
+        try {
+            FileReader reader = new FileReader(FRIENDS_FILE_NAME);
+            JSONParser parser = new JSONParser();
+            JSONArray friendsArray = (JSONArray)new JSONParser().parse(reader);
+
+            for (int i = 0; i < friendsArray.size(); i++) {
+                JSONObject friendJSON = (JSONObject) friendsArray.get(i);
+
+                String firstName = (String) friendJSON.get(FRIENDS_FIRST_NAME);
+                String lastName = (String) friendJSON.get(FRIENDS_LAST_NAME);
+                int age = Integer.parseInt((String) friendJSON.get(FRIENDS_AGE));
+                Boolean medicalCondition = (Boolean) friendJSON.get(FRIENDS_MEDICAL_CONDITION);
+                String gender = (String) friendJSON.get(FRIENDS_GENDER);
+                String email = (String) friendJSON.get(FRIENDS_EMAIL);
+                String address = (String) friendJSON.get(FRIENDS_ADDRESS);
+                UUID id = UUID.fromString((String) friendJSON.get(FRIENDS_ID));
+
+
+                Friend friend = new Friend(firstName, lastName, age,
+                medicalCondition, gender, email, address, id);
+                friendList.put(id, friend);
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return friendList;
     }
 }

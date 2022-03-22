@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * The list of users
@@ -39,6 +40,15 @@ public class UserList {
             }
         }
         return null;
+    }
+
+    /**
+     * 
+     * @param id
+     * @return
+     */
+    public static RegisteredUser getUser(UUID id) {
+
     }
 
     /**
