@@ -61,6 +61,14 @@ public abstract class DataConstants {
 
     // Rooms
     protected static final String ROOMS_FILE_NAME = "json/rooms.json";
+    protected static final String ROOMS_ID = "roomID";
+    protected static final String ROOMS_ROOM_NUMBER = "roomNumber";
+    protected static final String ROOMS_BOOKED = "booked";
+    protected static final String ROOMS_SMOKING = "smoking";
+    protected static final String ROOMS_PRICE = "price";
+    protected static final String ROOMS_ROOM_TYPE = "roomType";
+    protected static final String ROOMS_NUM_BEDS = "numBeds";
+    protected static final String ROOMS_BOOKED_DAYS_LIST = "bookedDays";
 
     // Seatings
     protected static final String SEATINGS_FILE_NAME = "json/seatings.json";
@@ -70,4 +78,21 @@ public abstract class DataConstants {
 
     // Users
     protected static final String USERS_FILE_NAME = "json/users.json";
+    protected static final String USERS_ID = "userID";
+    protected static final String USERS_FIRST_NAME = "firstName";
+    protected static final String USERS_LAST_NAME = "lastName";
+    protected static final String USERS_EMAIL = "email";
+    protected static final String USERS_AGE = "age";
+    protected static final String USERS_ADDRESS = "address";
+    protected static final String USERS_PASSWORD = "password";
+    protected static final String USERS_GENDER = "gender";
+    protected static final String USERS_PREFFERRED_AIRPORT = "preferredAirport";
+    protected static final String USERS_FREQUENT_FLYER = "frequentFlyer";
+    protected static final String USERS_ADMIN_STATUS = "admin";
+    protected static final String USERS_MEDICAL_CONDITION = "medicalCondition";
+    protected static final String USERS_BLACKLISTED_AIRPORTS = "blackListedAirports";
+    protected static final String USERS_TICKETS_LIST = "tickets";
+    protected static final String USERS_HOTEL_RESERVATIONS_LIST = "hotelReservations";
+    protected static final String USERS_FRIENDS_LIST = "friends";
+
 }

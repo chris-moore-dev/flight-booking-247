@@ -21,7 +21,7 @@ public class User {
    * @return
    */
   public ArrayList<Flight> getFlights(String departingAirport, String destAirport, LocalDate departDate) {
-
+    
   }
 
 

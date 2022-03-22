@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * The list of hotels
@@ -27,8 +28,19 @@ public class HotelList {
      * Returns hotels based on the user's inputs
      * @return Hotels
      */
-    public ArrayList<Hotel> getHotels() {
+    public static ArrayList<Hotel> getHotels() {
         return hotels;
     }
+
+    /**
+     * 
+     * @param id
+     * @return
+     */
+    public static Hotel getHotel(UUID id) {
+
+    }
+
+
 
 }
