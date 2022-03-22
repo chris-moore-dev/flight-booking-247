@@ -1,5 +1,5 @@
 /**
- * Friend
+ * Friend Class. 
  * @author Lyn Cork
  */
 import java.util.*;
@@ -14,36 +14,49 @@ public class Friend {
   private UUID id;
 
   /**
-   * 
-   * @param firstName
-   * @param lastName
-   * @param age
-   * @param medicalCondition
-   * @param gender
-   * @param email
-   * @param address
+   * Friend constructor
+   * @param firstName First name
+   * @param lastName Last name
+   * @param age age
+   * @param medicalCondition true/false, if friend has a medical condition
+   * @param gender gender
+   * @param email email
+   * @param address living address
    */
   Friend(String firstName, String lastName, int age,
   boolean medicalCondition, String gender, String email,
   String address) {
-
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.age = age;
+    this.medicalCondition = medicalCondition;
+    this.gender = gender;
+    this.email = email;
+    this.address = address;
   }
 
   /**
-   * 
-   * @param firstName
-   * @param lastName
-   * @param age
-   * @param medicalCondition
-   * @param gender
-   * @param email
-   * @param address
-   * @param id
+   * Friend constructor with UUID
+   * @param firstName First name
+   * @param lastName Last name
+   * @param age age 
+   * @param medicalCondition True/False, if friend has a medical condition
+   * @param gender gender
+   * @param email email
+   * @param address living address 
+   * @param id UUID
    */
   Friend(String firstName, String lastName, int age,
   boolean medicalCondition, String gender, String email,
   String address, UUID id) {
-
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.age = age;
+    this.medicalCondition = medicalCondition;
+    this.gender = gender;
+    this.email = email;
+    this.address = address;
+    this.id = id;
   }
 
   // Member functions
@@ -121,7 +134,7 @@ public class Friend {
    * @param firstName The first name
    */
   public void setFirstName(String firstName) {
-
+    this.firstName = firstName;
   }
 
   /**
@@ -129,55 +142,55 @@ public class Friend {
    * @param lastName The last name
    */
   public void setLastName(String lastName) {
-
+    this.lastName = lastName;
   }
 
   /**
-   * 
-   * @param age
+   * Set the age
+   * @param age age
    */
   public void setAge(int age) {
-
+    this.age = age;
   }
     
   /**
-   * 
-   * @param medicalCondition
+   * Set the medical condition to true or false
+   * @param medicalCondition medical condition true/false
    */
   public void setMedicalCondition(boolean medicalCondition) {
-
+    this.medicalCondition = medicalCondition;
   }
 
   /**
-   * 
-   * @param gender
+   * Set the gender
+   * @param gender gender
    */
   public void setGender(String gender) {
-
+    this.gender = gender;
   }
 
   /**
-   * 
-   * @param email
+   * Set the email
+   * @param email email
    */
   public void setEmail(String email) {
-
+    this.email = email;
   }
 
   /**
-   * 
-   * @param address
+   * Set the address
+   * @param address living address
    */
   public void setAddress(String address) {
-
+    this.address = address;
   }
 
   /**
-   * 
-   * @param id
+   * Set the UUID
+   * @param id UUID
    */
   public void setId(UUID id) {
-
+    this.id = id;
   }
 
 }

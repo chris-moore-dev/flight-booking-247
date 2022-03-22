@@ -2,7 +2,6 @@
  * RegisteredUser
  * @author Evan Scales
  */
-import java.time.LocalDate;
 import java.util.*;
 public class RegisteredUser extends User {
     private UUID userID;
@@ -163,7 +162,7 @@ public class RegisteredUser extends User {
      * @param checkOutDate The check out date
      */
     public void bookHotel(Hotel hotel, Room room, int numGuests,
-    LocalDate checkInDate, LocalDate checkOutDate) {
+    Date checkInDate, Date checkOutDate) {
         String roomNumber = room.getNumber();
         hotel.book(roomNumber);
         addHotelReservation(new HotelReservation(hotel, this.firstName,
