@@ -15,13 +15,13 @@ public class Friend {
 
   /**
    * Friend constructor
-   * @param firstName
-   * @param lastName
-   * @param age
-   * @param medicalCondition
-   * @param gender
-   * @param email
-   * @param address
+   * @param firstName First name
+   * @param lastName Last name
+   * @param age age
+   * @param medicalCondition true/false, if friend has a medical condition
+   * @param gender gender
+   * @param email email
+   * @param address living address
    */
   Friend(String firstName, String lastName, int age,
   boolean medicalCondition, String gender, String email,
@@ -36,15 +36,15 @@ public class Friend {
   }
 
   /**
-   * Friend constructor without UUID
-   * @param firstName
-   * @param lastName
-   * @param age
-   * @param medicalCondition
-   * @param gender
-   * @param email
-   * @param address
-   * @param id
+   * Friend constructor with UUID
+   * @param firstName First name
+   * @param lastName Last name
+   * @param age age 
+   * @param medicalCondition True/False, if friend has a medical condition
+   * @param gender gender
+   * @param email email
+   * @param address living address 
+   * @param id UUID
    */
   Friend(String firstName, String lastName, int age,
   boolean medicalCondition, String gender, String email,
@@ -147,7 +147,7 @@ public class Friend {
 
   /**
    * Set the age
-   * @param age
+   * @param age age
    */
   public void setAge(int age) {
     this.age = age;
@@ -155,7 +155,7 @@ public class Friend {
     
   /**
    * Set the medical condition to true or false
-   * @param medicalCondition
+   * @param medicalCondition medical condition true/false
    */
   public void setMedicalCondition(boolean medicalCondition) {
     this.medicalCondition = medicalCondition;
@@ -163,7 +163,7 @@ public class Friend {
 
   /**
    * Set the gender
-   * @param gender
+   * @param gender gender
    */
   public void setGender(String gender) {
     this.gender = gender;
@@ -171,7 +171,7 @@ public class Friend {
 
   /**
    * Set the email
-   * @param email
+   * @param email email
    */
   public void setEmail(String email) {
     this.email = email;
@@ -179,7 +179,7 @@ public class Friend {
 
   /**
    * Set the address
-   * @param address
+   * @param address living address
    */
   public void setAddress(String address) {
     this.address = address;
@@ -187,7 +187,7 @@ public class Friend {
 
   /**
    * Set the UUID
-   * @param id
+   * @param id UUID
    */
   public void setId(UUID id) {
     this.id = id;
