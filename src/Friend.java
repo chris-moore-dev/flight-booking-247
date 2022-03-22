@@ -14,7 +14,7 @@ public class Friend {
   private UUID id;
 
   /**
-   * 
+   * Friend constructor
    * @param firstName
    * @param lastName
    * @param age
@@ -36,7 +36,7 @@ public class Friend {
   }
 
   /**
-   * 
+   * Friend constructor without UUID
    * @param firstName
    * @param lastName
    * @param age
