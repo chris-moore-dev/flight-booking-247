@@ -18,6 +18,8 @@ public class Flight extends ObjectToBeBooked {
   private int numStops;
   private double discountPercent;
   private HashMap<String, Seating> seats;
+  private String departingGate;
+  private String destGate;
 
   // WHEN USING THE FIRST CONSTRUTOR MAKE IT SO SEATS ARE AUTIMATICLLY GENERATED
 
@@ -34,11 +36,13 @@ public class Flight extends ObjectToBeBooked {
    * @param company
    * @param pricing
    * @param seats
+   * @param departingGate
+   * @param destGate
    */
   Flight(LocalDate date, String departingAirport, String destAirport,
   String takeOffTime, String landingTime, String totalFlightTime,
   boolean layover, String company, HashMap<String, Integer> pricing,
-  HashMap<String, Seating> seats) {
+  HashMap<String, Seating> seats, String departingGate, String destGate) {
     //super
   }
 
@@ -55,11 +59,13 @@ public class Flight extends ObjectToBeBooked {
    * @param pricing
    * @param seats
    * @param id
+   * @param departingGate
+   * @param destGate
    */
   Flight(LocalDate date, String departingAirport, String destAirport,
   String takeOffTime, String landingTime, String totalFlightTime,
   boolean layover, String company, HashMap<String, Integer> pricing,
-  HashMap<String, Seating> seats, UUID id) {
+  HashMap<String, Seating> seats, UUID id, String departingGate, String destGate) {
     //super
   }
 
@@ -226,6 +232,22 @@ public class Flight extends ObjectToBeBooked {
     return this.seats;
   }
 
+  /**
+   * 
+   * @return
+   */
+  public String getDepartingGate() {
+    return this.departingAirport;
+  }
+
+  /**
+   * 
+   * @return
+   */
+  public String setDestGate() {
+    return this.destGate;
+  }
+
   // SETTERS
 
   /**
@@ -314,5 +336,21 @@ public class Flight extends ObjectToBeBooked {
    */
   public void setSeats(HashMap<String, Seating> seats) {
     this.seats = seats;
+  }
+
+  /**
+   * 
+   * @param departingGate
+   */
+  public void setDapartingGate(String departingGate) {
+    this.departingGate = departingGate;
+  }
+
+  /**
+   * 
+   * @param destGate
+   */
+  public void setDestGate(String destGate) {
+    this.departingGate = destGate;
   }
 }

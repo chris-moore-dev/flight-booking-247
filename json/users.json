@@ -1,3 +1,28 @@
 [
-    
+    {
+        "userID" : "87e7876e-d348-4033-996f-52af9a304850",
+        "firstName" : "Evan",
+        "lastName" : "Scales",
+        "emal" : "escales@email.sc.edu",
+        "age": 20,
+        "address" : "123 Fake St, Columbia, SC, 29702",
+        "password" : "123password",
+        "gender" : "Male",
+        "preferredAirport" : "CLT",
+        "frequentFlyer" : false,
+        "admin" : true,
+        "medicalCondition" : false,
+        "blackListedAirports" : [
+            "BOS",
+            "ORD"
+        ],
+        "tickets" : [
+            
+        ],
+        "hotelReservations" : [
+        ],
+        "friends" : [
+            "1150923c-d57f-412d-8cce-420340ecffb2"
+        ]
+    }
 ]

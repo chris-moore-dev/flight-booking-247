@@ -4,7 +4,7 @@
  */
 public abstract class DataConstants {
     // Flights
-    protected static final String FLIGHTS_FILE_NAME = "json/flights.json";
+    protected static final String FLIGHTS_FILE_NAME = "flight-booking/json/flights.json";
     protected static final String FLIGHTS_ID = "flightID";
     protected static final String FLIGHTS_COMPANY = "company";
     protected static final String FLIGHTS_DATE = "date";
@@ -21,7 +21,7 @@ public abstract class DataConstants {
 
 
     // Friends
-    protected static final String FRIENDS_FILE_NAME = "json/friends.json";
+    protected static final String FRIENDS_FILE_NAME = "flight-booking/json/friends.json";
     protected static final String FRIENDS_ID = "friendID";
     protected static final String FRIENDS_FIRST_NAME = "firstName";
     protected static final String FRIENDS_LAST_NAME = "lastName";
@@ -33,7 +33,7 @@ public abstract class DataConstants {
 
 
     // Hotels
-    protected static final String HOTELS_FILE_NAME = "json/hotels.json";
+    protected static final String HOTELS_FILE_NAME = "flight-booking/json/hotels.json";
     protected static final String HOTELS_ID = "hotelID";
     protected static final String HOTELS_COMPANY = "company";
     protected static final String HOTELS_CLOSEST_AIRPORT = "closestAirport";
@@ -44,7 +44,7 @@ public abstract class DataConstants {
     protected static final String HOTELS_REVIEWS_LIST = "reviews";
 
     // Reservations
-    protected static final String RESERVATIONS_FILE_NAME = "json/reservations.json";
+    protected static final String RESERVATIONS_FILE_NAME = "flight-booking/json/reservations.json";
     protected static final String RESERVATIONS_ID = "reservationID";
     protected static final String RESERVATIONS_HOTEL_ID = "hotelID";
     protected static final String RESERVATIONS_ROOM_ID = "roomID";
@@ -56,7 +56,7 @@ public abstract class DataConstants {
     protected static final String RESERVATIONS_NUM_GUESTS = " numGuests";
 
     // Reviews
-    protected static final String REVIEWS_FILE_NAME = "json/reviews.json";
+    protected static final String REVIEWS_FILE_NAME = "flight-booking/json/reviews.json";
     protected static final String REVIEWS_ID = "reviewID";
     protected static final String REVIEWS_USER_ID = "userID";
     protected static final String REVIEWS_COMMENT = "comment";
@@ -64,7 +64,7 @@ public abstract class DataConstants {
 
 
     // Rooms
-    protected static final String ROOMS_FILE_NAME = "json/rooms.json";
+    protected static final String ROOMS_FILE_NAME = "flight-booking/json/rooms.json";
     protected static final String ROOMS_ID = "roomID";
     protected static final String ROOMS_ROOM_NUMBER = "roomNumber";
     protected static final String ROOMS_BOOKED = "booked";
@@ -75,7 +75,7 @@ public abstract class DataConstants {
     protected static final String ROOMS_BOOKED_DAYS_LIST = "bookedDays";
 
     // Seatings
-    protected static final String SEATINGS_FILE_NAME = "json/seatings.json";
+    protected static final String SEATINGS_FILE_NAME = "flight-booking/json/seatings.json";
     protected static final String SEATINGS_ID = "seatID";
     protected static final String SEATINGS_SEAT_NUMBER = "seatNumber";
     protected static final String SEATINGS_BOOKED = "booked";
@@ -84,7 +84,7 @@ public abstract class DataConstants {
     protected static final String SEATINGS_CABIN = "cabin";
 
     // Tickets
-    protected static final String TICKETS_FILE_NAME = "json/tickets.json";
+    protected static final String TICKETS_FILE_NAME = "flight-booking/json/tickets.json";
     protected static final String TICKETS_ID = "ticketID";
     protected static final String TICKETS_FLIGHT_ID = "flightID";
     protected static final String TICKETS_SEAT_ID = "seatID";
@@ -97,7 +97,7 @@ public abstract class DataConstants {
     protected static final String TICKETS_GATE = "gate";
 
     // Users
-    protected static final String USERS_FILE_NAME = "json/users.json";
+    protected static final String USERS_FILE_NAME = "flight-booking/json/users.json";
     protected static final String USERS_ID = "userID";
     protected static final String USERS_FIRST_NAME = "firstName";
     protected static final String USERS_LAST_NAME = "lastName";

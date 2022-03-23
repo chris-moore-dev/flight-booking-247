@@ -1,3 +1,12 @@
 [
-  
+  {
+    "friendID" : "1150923c-d57f-412d-8cce-420340ecffb2",
+    "firstName" : "Mario",
+    "lastName" : "Misensik",
+    "age" : 20,
+    "medicalCondition" : false,
+    "gender" : "Male",
+    "email" : "fakeemail@gmail.com",
+    "address" : "112 Loopy St, Charlotte, NC, 29708, USA"
+  }
 ]

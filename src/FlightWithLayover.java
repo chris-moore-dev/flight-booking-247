@@ -32,6 +32,10 @@ public class FlightWithLayover extends Flight {
         
     }
 
+    FlightWithLayover(String gay) {
+        
+    }
+
     // Member functions
 
     /**

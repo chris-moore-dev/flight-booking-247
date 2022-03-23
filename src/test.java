@@ -9,18 +9,38 @@ import java.time.LocalDate;
 public class test {
 
     public static void main(String[] args) {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        String stringDate = "8/8/2022";
-        LocalDate date1 = LocalDate.of(2022, 8, 8);
-        LocalDate date2 = LocalDate.of(2022, 8, 10);
+        UserList userList = UserList.getInstance();
 
-        ArrayList<Flight> flights;
-        ArrayList<Room> rooms;
+        ArrayList<RegisteredUser> users = userList.getUsers();
 
-        Reservation res = new Ticket(flights.get(0), "Evan", "Scales",
-        rooms.get(0), "1A", "7:00 AM", "37B", "Evan Scales",
-        0);
-
-        RegisteredUser user;
+        
+        testUserList(users.get(0));
     }
+
+    /**
+     * Testing UserList
+     * Loading user by its self: PASS
+     * Loading user with blackListed airports: PASS
+     * Loading users with friends: PASS
+     * Loading users tickets:
+     * Loading users with reservations: 
+     * @pram user The users being tested
+     */
+    public static void testUserList(RegisteredUser user) {
+        // Loading users by itself
+        System.out.println(user.getFirstname());
+
+        // Loading user with blackListed airports
+        ArrayList<String> blackListedAirports = user.getBlackListedAirports();
+        for (String blackListedAirport : blackListedAirports) {
+            System.out.println(blackListedAirport);
+        }
+
+        // Loading user with friends
+        ArrayList<Friend> friends = user.getFriends();
+        for (Friend friend : friends) {
+            System.out.println(friend.getFirstName());
+        }
+    }
+    
 }

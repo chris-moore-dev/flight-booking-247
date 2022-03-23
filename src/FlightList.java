@@ -16,6 +16,7 @@ public class FlightList {
         flights = DataLoader.getFlights();
     }
 
+
     /**
      * Returns the flight list
      * @return The flight list

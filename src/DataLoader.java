@@ -63,14 +63,13 @@ public class DataLoader extends DataConstants {
      */
     public static ArrayList<RegisteredUser> getUsers() {
         ArrayList<RegisteredUser> users = new ArrayList<RegisteredUser>();
-        HashMap<UUID, Ticket> ticketList = getTicketList();
-        HashMap<UUID, HotelReservation> hotelReservationList = getReservationList();
-        HashMap<UUID, Friend> friendsList = getFriendsList();
 
         try {
             FileReader reader = new FileReader(USERS_FILE_NAME);
             JSONParser parser = new JSONParser();
             JSONArray usersJSON = (JSONArray)new JSONParser().parse(reader);
+
+            if (usersJSON == null) return users;
 
             for (int i = 0; i < usersJSON.size(); i++) {
                 JSONObject userJSON = (JSONObject)usersJSON.get(i);
@@ -78,7 +77,7 @@ public class DataLoader extends DataConstants {
                 String firstName = (String)userJSON.get(USERS_FIRST_NAME);
                 String lastName = (String)userJSON.get(USERS_LAST_NAME);
                 String email = (String)userJSON.get(USERS_EMAIL);
-                int age = Integer.parseInt((String)userJSON.get(USERS_AGE));
+                int age = ((Long) userJSON.get(USERS_AGE)).intValue();
                 String address = (String)userJSON.get(USERS_ADDRESS);
                 String password = (String)userJSON.get(USERS_PASSWORD);
                 String gender = (String)userJSON.get(USERS_GENDER);
@@ -101,8 +100,9 @@ public class DataLoader extends DataConstants {
                 // Search the ticket list for those tickets
                 // Add those tickets to tickets
                 ArrayList<Ticket> tickets = new ArrayList<Ticket>();
-                JSONArray ticketsArray = (JSONArray)userJSON.get(USERS_BLACKLISTED_AIRPORTS);
+                JSONArray ticketsArray = (JSONArray)userJSON.get(USERS_TICKETS_LIST);
                 if (ticketsArray != null) {
+                    HashMap<UUID, Ticket> ticketList = getTicketList();
                     for (int j = 0; j < ticketsArray.size(); j++) {
                         UUID ticketID = UUID.fromString((String)ticketsArray.get(j));
                         Ticket ticket = ticketList.get(ticketID);
@@ -116,7 +116,8 @@ public class DataLoader extends DataConstants {
                 ArrayList<HotelReservation> hotelReservations = new ArrayList<HotelReservation>();
                 JSONArray reservationsArray = (JSONArray)userJSON.get(USERS_HOTEL_RESERVATIONS_LIST);
                 if (reservationsArray != null) {
-                    for (int j = 0; j < ticketsArray.size(); j++) {
+                    HashMap<UUID, HotelReservation> hotelReservationList = getReservationList();
+                    for (int j = 0; j < reservationsArray.size(); j++) {
                         UUID reservationID = UUID.fromString((String)reservationsArray.get(j));
                         HotelReservation reservation = hotelReservationList.get(reservationID);
                         hotelReservations.add(reservation);
@@ -129,7 +130,8 @@ public class DataLoader extends DataConstants {
                 ArrayList<Friend> friends = new ArrayList<Friend>();
                 JSONArray friendsArray = (JSONArray)userJSON.get(USERS_FRIENDS_LIST);
                 if (friendsArray != null) {
-                    for (int j = 0; j < ticketsArray.size(); j++) {
+                    HashMap<UUID, Friend> friendsList = getFriendsList();
+                    for (int j = 0; j < friendsArray.size(); j++) {
                         UUID friendID = UUID.fromString((String)friendsArray.get(j));
                         Friend friend = friendsList.get(friendID);
                         friends.add(friend);
@@ -180,7 +182,7 @@ public class DataLoader extends DataConstants {
                 String lastName = (String) reservationJSON.get(RESERVATIONS_LAST_NAME);
                 UUID roomID = UUID.fromString((String)reservationJSON.get(RESERVATIONS_ROOM_ID));
                 Room room = roomList.get(roomID);
-                int price = Integer.parseInt((String)reservationJSON.get(RESERVATIONS_PRICE));
+                int price = ((Long) reservationJSON.get(RESERVATIONS_PRICE)).intValue();
                 LocalDate checkInDate = LocalDate.parse((String)reservationJSON.get(RESERVATIONS_CHECK_IN_DATE), DateTimeFormatter.ofPattern("MM/dd/yyyy"));
                 LocalDate checkOutDate = LocalDate.parse((String)reservationJSON.get(RESERVATIONS_CHECK_OUT_DATE), DateTimeFormatter.ofPattern("MM/dd/yyyy"));
                 int numGuests = Integer.parseInt((String) reservationJSON.get(RESERVATIONS_NUM_GUESTS));
@@ -205,6 +207,11 @@ public class DataLoader extends DataConstants {
         return hotelReservationsList;
     }
 
+    /**
+     * Gets all the reviews from reviewss.json
+     * Puts all the reviews and their id in a hashmap
+     * @return The hashmap with the reviews
+     */
     private static HashMap<UUID, Review> getReviewList() {
         HashMap<UUID, Review> reviewList = new HashMap<UUID, Review>();
 
@@ -216,7 +223,7 @@ public class DataLoader extends DataConstants {
             for (int i = 0; i < reviewsArray.size(); i++) {
                 JSONObject reviewJSON = (JSONObject) reviewsArray.get(i);
 
-                int rating = Integer.parseInt((String) reviewJSON.get(REVIEWS_RATING));
+                int rating = ((Long) reviewJSON.get(REVIEWS_RATING)).intValue();
                 String comment = (String) reviewJSON.get(REVIEWS_COMMENT);
                 UUID userID = UUID.fromString((String) reviewJSON.get(REVIEWS_USER_ID));
                 RegisteredUser user = UserList.getUser(userID);
@@ -251,10 +258,10 @@ public class DataLoader extends DataConstants {
                 JSONObject roomJSON = (JSONObject)roomsArray.get(i);
 
                 Boolean smokingAllowed = (Boolean) roomJSON.get(ROOMS_SMOKING);
-                int numBeds = Integer.parseInt((String) roomJSON.get(ROOMS_NUM_BEDS));
+                int numBeds = ((Long) roomJSON.get(ROOMS_NUM_BEDS)).intValue();
                 UUID id = UUID.fromString((String) roomJSON.get(ROOMS_ID));
                 Boolean booked = (Boolean) roomJSON.get(ROOMS_BOOKED);
-                int price = Integer.parseInt((String) roomJSON.get(ROOMS_PRICE));
+                int price = ((Long) roomJSON.get(ROOMS_PRICE)).intValue();
                 String type = (String) roomJSON.get(ROOMS_ROOM_TYPE);
                 String number = (String) roomJSON.get(ROOMS_ROOM_NUMBER);
 
@@ -282,6 +289,11 @@ public class DataLoader extends DataConstants {
         return roomList;
     }
 
+    /**
+     * Gets all the seats from seatings,json
+     * Puts all the seatins and their id in a hashmap
+     * @return The hashmap with all the seatings
+     */
     private static HashMap<UUID, Seating> getSeatingList() {
         HashMap<UUID, Seating> seatingList = new HashMap<UUID, Seating>();
 
@@ -296,7 +308,7 @@ public class DataLoader extends DataConstants {
                 Boolean medicalSeat = (Boolean) seatingJSON.get(SEATINGS_MEDICAL_SEAT);
                 UUID id = UUID.fromString((String) seatingJSON.get(SEATINGS_ID));
                 Boolean booked = (Boolean) seatingJSON.get(SEATINGS_BOOKED);
-                int price = Integer.parseInt((String) seatingJSON.get(SEATINGS_PRICE));
+                int price = ((Long) seatingJSON.get(SEATINGS_PRICE)).intValue();
                 String type = (String) seatingJSON.get(SEATINGS_CABIN);
                 String number = (String) seatingJSON.get(SEATINGS_SEAT_NUMBER);
 
@@ -313,6 +325,11 @@ public class DataLoader extends DataConstants {
         return seatingList;
     }
 
+    /**
+     * Gets all the tickets from tickets.json
+     * Puts the ticket and their id in a hashmap
+     * @return The hashmap with the tickets and ids
+     */
     private static HashMap<UUID, Ticket> getTicketList() {
         HashMap<UUID, Ticket> ticketList = new HashMap<UUID, Ticket>();
         HashMap<UUID, Seating> seatingList = getSeatingList();
@@ -328,14 +345,14 @@ public class DataLoader extends DataConstants {
                 String boardingGroup = (String) ticketJSON.get(TICKETS_BOARDING_GROUP);
                 String boardingTime = (String) ticketJSON.get(TICKETS_BOARDTING_TME);
                 String gate = (String) ticketJSON.get(TICKETS_GATE);
-                int numOfCheckedBags = Integer.parseInt((String) ticketJSON.get(TICKETS_CHECKED_BAGS));
+                int numOfCheckedBags = ((Long) ticketJSON.get(TICKETS_CHECKED_BAGS)).intValue();
                 UUID flightID = UUID.fromString((String) ticketJSON.get(TICKETS_FLIGHT_ID));
                 Flight flight = FlightList.getFlight(flightID);
                 UUID seatID = UUID.fromString((String) ticketJSON.get(TICKETS_SEAT_ID));
                 Seating seat = seatingList.get(seatID);
                 String firstName = (String) ticketJSON.get(TICKETS_FIRST_NAME);
                 String lastName = (String) ticketJSON.get(TICKETS_LAST_NAME);
-                int price = Integer.parseInt((String) ticketJSON.get(TICKETS_PRICE));
+                int price = ((Long) ticketJSON.get(TICKETS_PRICE)).intValue();
                 UUID id = UUID.fromString((String) ticketJSON.get(TICKETS_ID));
                 String name = firstName + " " + lastName;
 
@@ -371,7 +388,7 @@ public class DataLoader extends DataConstants {
 
                 String firstName = (String) friendJSON.get(FRIENDS_FIRST_NAME);
                 String lastName = (String) friendJSON.get(FRIENDS_LAST_NAME);
-                int age = Integer.parseInt((String) friendJSON.get(FRIENDS_AGE));
+                int age = ((Long) friendJSON.get(FRIENDS_AGE)).intValue();
                 Boolean medicalCondition = (Boolean) friendJSON.get(FRIENDS_MEDICAL_CONDITION);
                 String gender = (String) friendJSON.get(FRIENDS_GENDER);
                 String email = (String) friendJSON.get(FRIENDS_EMAIL);

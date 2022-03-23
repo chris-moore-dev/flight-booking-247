@@ -63,6 +63,13 @@ public class RegisteredUser extends User {
         setTickets(tickets);
         setHotelReservations(hotelReservations);
         setFriends(friends);
+
+        /**
+         * All users have themselves as their first friend to make
+         * booking tickets easier by being able to fill in passenger info using the 
+         * users friend list, which the user is a part of
+         */
+        friends.add(new Friend(firstName, lastName, age, medicalCondition, gender, email, address));
     }
 
     /**
@@ -127,7 +134,7 @@ public class RegisteredUser extends User {
             Friend friend = ticketHolders.get(i);
             String seatNumber = seating.get(i).getNumber();
 
-            // flight.book(seatNumber);
+            flight.book(seatNumber);
             addTicket(makeTicket(flight, friend, seat));
 
             // TODO Make these changes reflect in the database
@@ -142,14 +149,24 @@ public class RegisteredUser extends User {
      * @return The ticket to be added to the users account
      */
     private Ticket makeTicket(Flight flight, Friend friend, Seating seat) {
-        String firstName = friend.getFirstName();
-        String lastName = friend.getLastName();
-        // TODO Get the boarding group
-        // TODO Get the boarding time
-        // TODO Get the gate
-        String name = firstName + " " + lastName;
+        String boardingGroup;
+        if (friend.getMedicalCondition() || seat.getType().equalsIgnoreCase("First")) {
+            boardingGroup = "1A";
+        } else {
+            boardingGroup = "6";
+        }
+        String[] splitArray = flight.getTakeOffTime().split(":");
+        String boardingTime = "7:35";
+        // Do Make getting boarding time work
+        String gate = flight.getDepartingGate();
         int numOfCheckedBags = 0;
-        // return new Ticket
+        String fName = friend.getFirstName();
+        String lName = friend.getLastName();
+        String name = fName + " " + lName;
+        int price = seat.getPrice();
+        Ticket ticket = new Ticket(boardingGroup, boardingTime, gate,
+        name, numOfCheckedBags, flight, seat, fName, lName, price);
+        return ticket;
     }
 
     /**
@@ -235,7 +252,7 @@ public class RegisteredUser extends User {
      * @param blackListedAirport The airport to be removed
      */
     public void removeBlackListedAirport(String blackListedAirport) {
-        blackListedAirports.remove(blackListedAirport)
+        blackListedAirports.remove(blackListedAirport);
     }
 
     /**

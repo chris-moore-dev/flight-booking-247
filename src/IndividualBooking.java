@@ -18,8 +18,11 @@ public abstract class IndividualBooking {
      * @param number The room or seat number
      */
     IndividualBooking(boolean booked, int price, String type, String number) {
+        setID(null);
         setBooked(booked);
         setPrice(price);
+        setType(type);
+        setNumber(number);
     }
 
     /**
@@ -34,6 +37,8 @@ public abstract class IndividualBooking {
         setID(id);
         setBooked(booked);
         setPrice(price);
+        setType(type);
+        setNumber(number);
     }
 
     // Member Functions
