@@ -61,6 +61,20 @@ public class Friend {
 
   // Member functions
 
+  /**
+   * 
+   * @return String
+   */
+  @Override
+  public String toString() {
+    String ret = "\n";
+
+    ret += firstName + " " + lastName + "\n";
+    ret += email + "\n\n";
+
+    return ret;
+  }
+
   // Getters
 
   /**

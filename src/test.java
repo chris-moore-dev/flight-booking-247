@@ -37,6 +37,8 @@ public class test {
         // Loading users by itself
         System.out.println(user.getFirstname());
 
+        System.out.println(user.getAdmin());
+
         // Loading user with blackListed airports
         ArrayList<String> blackListedAirports = user.getBlackListedAirports();
         for (String blackListedAirport : blackListedAirports) {
@@ -46,8 +48,10 @@ public class test {
         // Loading user with friends
         ArrayList<Friend> friends = user.getFriends();
         for (Friend friend : friends) {
-            System.out.println(friend.getFirstName());
+            System.out.println(friend);
         }
     }
+
+    
     
 }
