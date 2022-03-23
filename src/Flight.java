@@ -237,7 +237,7 @@ public class Flight extends ObjectToBeBooked {
    * @return
    */
   public String getDepartingGate() {
-    return this.departingAirport;
+    return this.departingGate;
   }
 
   /**
@@ -351,6 +351,6 @@ public class Flight extends ObjectToBeBooked {
    * @param destGate
    */
   public void setDestGate(String destGate) {
-    this.departingGate = destGate;
+    this.destGate = destGate;
   }
 }

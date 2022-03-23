@@ -63,6 +63,9 @@ public class DataLoader extends DataConstants {
      */
     public static ArrayList<RegisteredUser> getUsers() {
         ArrayList<RegisteredUser> users = new ArrayList<RegisteredUser>();
+        HashMap<UUID, Friend> friendsList = getFriendsList();
+        // HashMap<UUID, Ticket> ticketList = getTicketList();
+        // HashMap<UUID, HotelReservation> hotelReservationList = getReservationList();
 
         try {
             FileReader reader = new FileReader(USERS_FILE_NAME);
@@ -130,7 +133,6 @@ public class DataLoader extends DataConstants {
                 ArrayList<Friend> friends = new ArrayList<Friend>();
                 JSONArray friendsArray = (JSONArray)userJSON.get(USERS_FRIENDS_LIST);
                 if (friendsArray != null) {
-                    HashMap<UUID, Friend> friendsList = getFriendsList();
                     for (int j = 0; j < friendsArray.size(); j++) {
                         UUID friendID = UUID.fromString((String)friendsArray.get(j));
                         Friend friend = friendsList.get(friendID);
