@@ -31,7 +31,7 @@ public class HotelList {
      * Returns the hotel list in the form of an ArrayList of hotels
      * @return The hotel list
      */
-    public static ArrayList<Hotel> getHotels() {
+    public ArrayList<Hotel> getHotels() {
         return hotels;
     }
 

@@ -9,6 +9,8 @@
         "landingTime" : "12:00 PM:",
         "totalFlightTime" : "7h 30m",
         "layover" : false,
+        "departingGate" : "36",
+        "destGate" : "17A",
         "flights" : [
             "2w1221312312-123123123123-12312312"
         ],

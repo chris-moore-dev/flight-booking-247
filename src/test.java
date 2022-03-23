@@ -9,11 +9,18 @@ import java.time.LocalDate;
 public class test {
 
     public static void main(String[] args) {
+        FlightList flightList = FlightList.getInstance();
+        HotelList hotelList = HotelList.getInstance();
         UserList userList = UserList.getInstance();
 
+        ArrayList<Flight> flights = flightList.getFlights();
+        ArrayList<Hotel> hotels = hotelList.getHotels();
         ArrayList<RegisteredUser> users = userList.getUsers();
 
-        
+        // String toSplit = "Standard:45";
+        // String[] split = toSplit.split(":");
+        // System.out.println(split[0]);
+        // System.out.println(split[1]);
         testUserList(users.get(0));
     }
 

@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.UUID;
 
 /**
  * Hotel class
@@ -45,7 +46,8 @@ public class Hotel extends ObjectToBeBooked {
   Hotel(String address, ArrayList<Review> reviews, ArrayList<String> amenities,
   String closestAirport, String city, String company, HashMap<String, Integer> pricing,
   HashMap<String, Room> rooms, UUID id) {
-    // super()
+    // super(company, pricing, id);
+
   }
 
   // Member Functions

@@ -3,6 +3,7 @@
  * @author Chris Moore
  */
 import java.util.HashMap;
+import java.util.UUID;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -81,11 +82,12 @@ public class Flight extends ObjectToBeBooked {
    * @param flights
    * @param numStops
    * @param discountPercent
+   * @param company
    */
   Flight(LocalDate date, String departingAirport, String destAirport, String takeOffTime,
   String landingTime, String totalFlightTime, boolan layover, ArrayList<Flight> flights,
-  int numStops, double discountPercent) {
-    //super
+  int numStops, double discountPercent, String company) {
+    super(company, null);
   }
 
   /**
@@ -101,11 +103,12 @@ public class Flight extends ObjectToBeBooked {
    * @param numStops
    * @param discountPercent
    * @param id
+   * @param company
    */
   Flight(LocalDate date, String departingAirport, String destAirport, String takeOffTime,
-  String landingTime, String totalFlightTime, boolan layover, ArrayList<Flight> flights,
-  int numStops, double discountPercent, UUID id) {
-    //super
+  String landingTime, String totalFlightTime, Boolean layover, ArrayList<Flight> flights,
+  int numStops, double discountPercent, UUID id, String company) {
+    super(company, null, id);
   }
 
   // Member functions

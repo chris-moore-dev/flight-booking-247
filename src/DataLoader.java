@@ -20,6 +20,7 @@ public class DataLoader extends DataConstants {
      */
     public static ArrayList<Flight> getFlights() {
         ArrayList<Flight> flights = new ArrayList<Flight>();
+        HashMap<UUID, Seating> seatingList = getSeatingList();
 
 
         try {
@@ -27,8 +28,12 @@ public class DataLoader extends DataConstants {
             JSONParser parser = new JSONParser();
             JSONArray flightsJSON = (JSONArray)new JSONParser().parse(reader);
 
+            if (flightsJSON == null) return flights;
+
             for (int i = 0; i < flightsJSON.size(); i++) {
                 JSONObject flightJSON = (JSONObject)flightsJSON.get(i);
+                Flight flightToAdd;
+
                 UUID id = UUID.fromString((String)flightJSON.get(FLIGHTS_ID));
                 String company = (String)flightJSON.get(FLIGHTS_COMPANY);
                 LocalDate date = LocalDate.parse((String)flightJSON.get(FLIGHTS_DATE), DateTimeFormatter.ofPattern("MM/dd/yyyy"));
@@ -38,6 +43,8 @@ public class DataLoader extends DataConstants {
                 String landingTime = (String)flightJSON.get(FLIGHTS_LANDING_TIME);
                 String totalFlightTime = (String)flightJSON.get(FLIGHTS_TOTAL_TIME);
                 boolean layover = (Boolean)flightJSON.get(FLIGHTS_LAYOVER);
+                
+                // If the flight has layovers
                 if (layover) {
                     ArrayList<Flight> flightList = new ArrayList<Flight>();
                     JSONArray flightArray = (JSONArray)flightJSON.get(FLIGHTS_FLIGHT_LIST);
@@ -46,15 +53,55 @@ public class DataLoader extends DataConstants {
                         Flight flight = FlightList.getFlight(flightID);
                         flightList.add(flight);
                     }
-                    // GET NUM STOPS
-                    // GET DISCOUNT PERCENT
+                    int numStops = ((Long) flightJSON.get(FLIGHTS_NUM_STOPS)).intValue();
+                    Double discountPercent = 0.8; // All are 0.8 for simplicity
+
+                    flightToAdd = new Flight(date, departingAirport, destAirport,
+                    takeOffTime, landingTime, totalFlightTime, layover, flightList,
+                    numStops, discountPercent, id, company);
+                } else {
+                    // otherwise normal flight
+                    String departingGate = (String) flightJSON.get(FLIGHTS_DEPARTING_GATE);
+                    String destGate = (String) flightJSON.get(FLIGHTS_DEST_GATE);
+
+                    // Get all the UUIDS of the seats
+                    // Search the seatings list for those seats
+                    // Add those seats to seats
+                    HashMap<String, Seating> seats = new HashMap<>();
+                    JSONArray seatsArray = (JSONArray) flightJSON.get(FLIGHTS_INDIVIDUALBOOKINGS_LIST);
+                    if (seatsArray != null) {
+                        for (int j = 0; j < seatsArray.size(); j++) {
+                            UUID seatID = UUID.fromString((String) seatsArray.get(j));
+                            Seating seat = seatingList.get(seatID);
+                            String seatNum = seat.getNumber();
+                            seats.put(seatNum, seat);
+                        }
+                    }
+
+                    // Get the pricing hashmap
+                    HashMap<String, Integer> pricing = new HashMap<>();
+                    JSONArray pricingArray = (JSONArray) flightJSON.get(FLIGHTS_PRICING_LIST);
+                    if (pricingArray != null) {
+                        for (int j = 0; j < pricingArray.size(); j++) {
+                            String toSplit = (String) pricingArray.get(j);
+                            String[] split = toSplit.split(":");
+                            String cabin = split[0];
+                            int price = Integer.parseInt(split[1]);
+                            pricing.put(cabin, price);
+                        }
+                    }
+
+                    flightToAdd = new Flight(date, departingAirport, destAirport,
+                    takeOffTime, landingTime, totalFlightTime, layover, company,
+                    pricing, seats, id, departingGate, destGate);
                 }
-                // To-do: rest of the variables
+
+                flights.add(flightToAdd);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new ArrayList<Flight>();
+        return flights;
     }
 
     /**
@@ -64,8 +111,8 @@ public class DataLoader extends DataConstants {
     public static ArrayList<RegisteredUser> getUsers() {
         ArrayList<RegisteredUser> users = new ArrayList<RegisteredUser>();
         HashMap<UUID, Friend> friendsList = getFriendsList();
-        // HashMap<UUID, Ticket> ticketList = getTicketList();
-        // HashMap<UUID, HotelReservation> hotelReservationList = getReservationList();
+        HashMap<UUID, Ticket> ticketList = getTicketList();
+        HashMap<UUID, HotelReservation> hotelReservationList = getReservationList();
 
         try {
             FileReader reader = new FileReader(USERS_FILE_NAME);
@@ -105,7 +152,7 @@ public class DataLoader extends DataConstants {
                 ArrayList<Ticket> tickets = new ArrayList<Ticket>();
                 JSONArray ticketsArray = (JSONArray)userJSON.get(USERS_TICKETS_LIST);
                 if (ticketsArray != null) {
-                    HashMap<UUID, Ticket> ticketList = getTicketList();
+                    // HashMap<UUID, Ticket> ticketList = getTicketList();
                     for (int j = 0; j < ticketsArray.size(); j++) {
                         UUID ticketID = UUID.fromString((String)ticketsArray.get(j));
                         Ticket ticket = ticketList.get(ticketID);
@@ -119,7 +166,7 @@ public class DataLoader extends DataConstants {
                 ArrayList<HotelReservation> hotelReservations = new ArrayList<HotelReservation>();
                 JSONArray reservationsArray = (JSONArray)userJSON.get(USERS_HOTEL_RESERVATIONS_LIST);
                 if (reservationsArray != null) {
-                    HashMap<UUID, HotelReservation> hotelReservationList = getReservationList();
+                    // HashMap<UUID, HotelReservation> hotelReservationList = getReservationList();
                     for (int j = 0; j < reservationsArray.size(); j++) {
                         UUID reservationID = UUID.fromString((String)reservationsArray.get(j));
                         HotelReservation reservation = hotelReservationList.get(reservationID);
@@ -159,7 +206,88 @@ public class DataLoader extends DataConstants {
      * @return The list of hotels
      */
     public static ArrayList<Hotel> getHotels() {
-        return new ArrayList<Hotel>();
+        ArrayList<Hotel> hotels = new ArrayList<>();
+        HashMap<UUID, Room> roomList = getRoomList();
+        HashMap<UUID, Review> reviewList = getReviewList();
+
+
+        try {
+            FileReader reader = new FileReader(HOTELS_FILE_NAME);
+            JSONParser parser = new JSONParser();
+            JSONArray hotelsArray = (JSONArray)new JSONParser().parse(reader);
+
+            if (hotelsArray == null) return hotels;
+
+            for (int i = 0; i < hotelsArray.size(); i++) {
+                JSONObject hotelJSON = (JSONObject) hotelsArray.get(i);
+
+                String address = (String) hotelJSON.get(HOTELS_ADDRESS);
+                UUID id = UUID.fromString((String) hotelJSON.get(HOTELS_ID));
+                String closestAirport = (String) hotelJSON.get(HOTELS_CLOSEST_AIRPORT);
+                String city = (String) hotelJSON.get(HOTELS_CITY);
+                String company = (String) hotelJSON.get(HOTELS_COMPANY);
+
+                // Get all the UUIDS of the reviews
+                // Search the review list for those reviews
+                // Add those reviews to reviews
+                ArrayList<Review> reviews = new ArrayList<>();
+                JSONArray reviewsArray = (JSONArray) hotelJSON.get(HOTELS_REVIEWS_LIST);
+                if (reviewsArray != null) {
+                    for (int j = 0; j < reviewsArray.size(); j++) {
+                        UUID reviewID = UUID.fromString((String) reviewsArray.get(j));
+                        Review review = reviewList.get(reviewID);
+                        reviews.add(review);
+                    }
+                }
+
+                // Get the amenities array list
+                ArrayList<String> amenities = new ArrayList<>();
+                JSONArray amenitiesArray = (JSONArray) hotelJSON.get(HOTELS_AMMENITIES_LIST);
+                if (amenitiesArray != null) {
+                    for (int j = 0; j < amenitiesArray.size(); j++) {
+                        String amenity = (String) amenitiesArray.get(j);
+                        amenities.add(amenity);
+                    }
+                }
+
+                // Get the pricing hashmap
+                HashMap<String, Integer> pricing = new HashMap<>();
+                JSONArray pricingArray = (JSONArray) hotelJSON.get(HOTELS_PRICING_LIST);
+                if (pricingArray != null) {
+                    for (int j = 0; j < pricingArray.size(); j++) {
+                        String toSplit = (String) pricingArray.get(j);
+                        String[] split = toSplit.split(":");
+                        String roomType = split[0];
+                        int price = Integer.parseInt(split[1]);
+                        pricing.put(roomType, price);
+
+                    }
+                }
+
+                // Get all the UUIDS of the rooms
+                // Search the rooms list for those rooms
+                // Add those rooms to rooms
+                HashMap<String, Room> rooms = new HashMap<>();
+                JSONArray roomsArray = (JSONArray) hotelJSON.get(HOTELS_INDIVIDUALBOOKINGS_LIST);
+                if (roomsArray != null) {
+                    for (int j = 0; j < roomsArray.size(); j++) {
+                        UUID roomID = UUID.fromString((String) roomsArray.get(j));
+                        Room room = roomList.get(roomID);
+                        rooms.put(room.getNumber(), room);
+                    }
+                }
+
+                Hotel hotel = new Hotel(address, reviews,
+                amenities, closestAirport, city, company, pricing, rooms, id);
+
+                hotels.add(hotel);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return hotels;
     }
 
     /**
