@@ -85,7 +85,10 @@ public class Room extends IndividualBooking {
    * @param bookedDays
    */
   public void setBookedDays(ArrayList<LocalDate> bookedDays) {
-    this.bookedDays = bookedDays;
+    if (bookedDays != null)
+      this.bookedDays = bookedDays;
+    else
+      this.bookedDays = new ArrayList<>();
   }
 
   /**

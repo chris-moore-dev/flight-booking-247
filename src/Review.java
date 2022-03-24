@@ -10,23 +10,34 @@ public class Review {
   private UUID id;
 
 /**
- * Review
+ * Review constructor with id
  * @param rating
  * @param comment
  * @param user
  * @param id
  */
   Review(int rating, String comment, RegisteredUser user, UUID id) {
-    
+    setRating(rating);
+    setComment(comment);
+    setUser(user);
+    setId(id);
   }
 
   /**
-   * 
+   * Review constructor without id
    * @param rating
    * @param comment
    * @param user
    */
   Review(int rating, String comment, RegisteredUser user) {
+    setRating(rating);
+    setComment(comment);
+    setUser(user);
+    setId(null);
+  }
+  // Member functions
+  public String toString() {
+    String ret;
 
   }
 
@@ -52,7 +63,7 @@ public class Review {
    * 
    * @return
    */
-  public UserAccount getUser() {
+  public RegisteredUser getUser() {
     return this.user;
   }
 

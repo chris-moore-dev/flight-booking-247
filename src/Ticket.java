@@ -28,6 +28,8 @@ public class Ticket extends Reservation {
   Ticket(String boardingGroup, String boardingTime, String gate,
   String name, int numOfCheckedBags, Flight flight, Seating seat, 
   String firstName, String lastName, int price) {
+<<<<<<< HEAD
+    super(firstName, lastName, price);
     this.boardingGroup = boardingGroup;
     this.boardingTime = boardingTime;
     this.gate = gate;
@@ -35,9 +37,18 @@ public class Ticket extends Reservation {
     this.numOfCheckedBags = numOfCheckedBags;
     this.flight = flight;
     this.seat = seat;
-    this.firstName = firstName;
-    this.lastName = lastName;
+=======
+    setBoardingGroup(boardingGroup);
+    setBoardingTime(boardingTime);
+    setGate(gate);
+    setName(name);
+    setNumOfCheckedBags(numOfCheckedBags);
+    setFlight(flight);
+    setSeat(seat);
+    setFirstName(firstName);
+    setLastName(lastName);
     this.price = price;
+>>>>>>> c747c858b5fb48da25b878593f312f6688bf5c17
   }
 
   /**
@@ -57,6 +68,8 @@ public class Ticket extends Reservation {
   Ticket(String boardingGroup, String boardingTime, String gate,
   String name, int numOfCheckedBags, Flight flight, Seating seat, 
   String firstName, String lastName, int price, UUID id) {
+<<<<<<< HEAD
+    super(firstName, lastName, price, id);
     this.boardingGroup = boardingGroup;
     this.boardingTime = boardingTime;
     this.gate = gate;
@@ -64,10 +77,19 @@ public class Ticket extends Reservation {
     this.numOfCheckedBags = numOfCheckedBags;
     this.flight = flight;
     this.seat = seat;
-    this.firstName = firstName;
-    this.lastName = lastName;
+=======
+    setBoardingGroup(boardingGroup);
+    setBoardingTime(boardingTime);
+    setGate(gate);
+    setName(name);
+    setNumOfCheckedBags(numOfCheckedBags);
+    setFlight(flight);
+    setSeat(seat);
+    setFirstName(firstName);
+    setLastName(lastName);
     this.price = price;
-    this.id = id;
+    setId(id);
+>>>>>>> c747c858b5fb48da25b878593f312f6688bf5c17
   }
 
 /**
@@ -75,7 +97,11 @@ public class Ticket extends Reservation {
  */
   @Override
   public String toString() {
-    
+    String ret = "\n";
+    ret += name + ": \n" + "gate: " + gate + "\nBoarding Group: " +
+           boardingGroup + "\nBoarding Time: " + boardingTime + "\nBags: " +
+           numOfCheckedBags + "\nSeat: " + seat.getNumber();
+    return ret;
   }
   // Getters
 /**
@@ -127,9 +153,6 @@ public class Ticket extends Reservation {
   public Seating getSeat() {
     return this.seat;
   }
-  public UUID getId() {
-    return this.id;
-  }
   // Setters
 /**
  * Sets boarding group
@@ -179,28 +202,5 @@ public class Ticket extends Reservation {
    */
   public void setSeat(Seating seat) {
     this.seat = seat;
-  }
-  /**
-   * Sets first name of ticket holder
-   * @param firstName ticket holder's first name
-   */
-  public void setFirstName(Reservation reservation) {
-    String firstName;
-    reservation.getReservationHolderFirstName = firstName;
-  }
-  /**
-   * Sets last name of ticket holder
-   * @param lastName ticket holder's last name
-   */
-  public void setLastName(Reservation reservation) {
-    String lastName;
-    reservation.getReservationHolderLastName = lastName;
-  }
-  /**
-   * Sets UUID
-   * @param id UUID
-   */
-  public void setId(UUID id) {
-    this.id = id;
   }
 }
