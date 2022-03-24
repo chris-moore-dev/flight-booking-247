@@ -75,7 +75,11 @@ public class Ticket extends Reservation {
  */
   @Override
   public String toString() {
-    
+    String ret = "\n";
+    ret += name + ": \n" + "gate: " + gate + "\nBoarding Group: " +
+           boardingGroup + "\nBoarding Time: " + boardingTime + "\nBags: " +
+           String.valueOf(numOfCheckedBags) + "\nSeat: " + String.valueOf(seat.getNumber);
+    return ret;
   }
   // Getters
 /**
@@ -184,17 +188,15 @@ public class Ticket extends Reservation {
    * Sets first name of ticket holder
    * @param firstName ticket holder's first name
    */
-  public void setFirstName(Reservation reservation) {
-    String firstName;
-    reservation.getReservationHolderFirstName = firstName;
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
   }
   /**
    * Sets last name of ticket holder
    * @param lastName ticket holder's last name
    */
-  public void setLastName(Reservation reservation) {
-    String lastName;
-    reservation.getReservationHolderLastName = lastName;
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
   }
   /**
    * Sets UUID

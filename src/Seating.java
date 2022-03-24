@@ -39,6 +39,9 @@ public class Seating extends IndividualBooking {
   public boolean getIsMedicalSeat(Seating seating) {
     return this.medicalSeat;
   }
+  public String getNumber() {
+    return this.number;
+  }
 
   // SETTERS
 
