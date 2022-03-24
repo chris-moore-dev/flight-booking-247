@@ -28,15 +28,15 @@ public class Ticket extends Reservation {
   Ticket(String boardingGroup, String boardingTime, String gate,
   String name, int numOfCheckedBags, Flight flight, Seating seat, 
   String firstName, String lastName, int price) {
-    this.boardingGroup = boardingGroup;
-    this.boardingTime = boardingTime;
-    this.gate = gate;
-    this.name = name;
-    this.numOfCheckedBags = numOfCheckedBags;
-    this.flight = flight;
-    this.seat = seat;
-    this.firstName = firstName;
-    this.lastName = lastName;
+    setBoardingGroup(boardingGroup);
+    setBoardingTime(boardingTime);
+    setGate(gate);
+    setName(name);
+    setNumOfCheckedBags(numOfCheckedBags);
+    setFlight(flight);
+    setSeat(seat);
+    setFirstName(firstName);
+    setLastName(lastName);
     this.price = price;
   }
 
@@ -57,17 +57,17 @@ public class Ticket extends Reservation {
   Ticket(String boardingGroup, String boardingTime, String gate,
   String name, int numOfCheckedBags, Flight flight, Seating seat, 
   String firstName, String lastName, int price, UUID id) {
-    this.boardingGroup = boardingGroup;
-    this.boardingTime = boardingTime;
-    this.gate = gate;
-    this.name = name;
-    this.numOfCheckedBags = numOfCheckedBags;
-    this.flight = flight;
-    this.seat = seat;
-    this.firstName = firstName;
-    this.lastName = lastName;
+    setBoardingGroup(boardingGroup);
+    setBoardingTime(boardingTime);
+    setGate(gate);
+    setName(name);
+    setNumOfCheckedBags(numOfCheckedBags);
+    setFlight(flight);
+    setSeat(seat);
+    setFirstName(firstName);
+    setLastName(lastName);
     this.price = price;
-    this.id = id;
+    setId(id);
   }
 
 /**
