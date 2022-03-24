@@ -28,6 +28,7 @@ public class Ticket extends Reservation {
   Ticket(String boardingGroup, String boardingTime, String gate,
   String name, int numOfCheckedBags, Flight flight, Seating seat, 
   String firstName, String lastName, int price) {
+    super(firstName, lastName, price);
     this.boardingGroup = boardingGroup;
     this.boardingTime = boardingTime;
     this.gate = gate;
@@ -35,9 +36,6 @@ public class Ticket extends Reservation {
     this.numOfCheckedBags = numOfCheckedBags;
     this.flight = flight;
     this.seat = seat;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.price = price;
   }
 
   /**
@@ -57,6 +55,7 @@ public class Ticket extends Reservation {
   Ticket(String boardingGroup, String boardingTime, String gate,
   String name, int numOfCheckedBags, Flight flight, Seating seat, 
   String firstName, String lastName, int price, UUID id) {
+    super(firstName, lastName, price, id);
     this.boardingGroup = boardingGroup;
     this.boardingTime = boardingTime;
     this.gate = gate;
@@ -64,10 +63,6 @@ public class Ticket extends Reservation {
     this.numOfCheckedBags = numOfCheckedBags;
     this.flight = flight;
     this.seat = seat;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.price = price;
-    this.id = id;
   }
 
 /**
@@ -78,7 +73,7 @@ public class Ticket extends Reservation {
     String ret = "\n";
     ret += name + ": \n" + "gate: " + gate + "\nBoarding Group: " +
            boardingGroup + "\nBoarding Time: " + boardingTime + "\nBags: " +
-           String.valueOf(numOfCheckedBags) + "\nSeat: " + String.valueOf(seat.getNumber);
+           numOfCheckedBags + "\nSeat: " + seat.getNumber();
     return ret;
   }
   // Getters
@@ -131,9 +126,6 @@ public class Ticket extends Reservation {
   public Seating getSeat() {
     return this.seat;
   }
-  public UUID getId() {
-    return this.id;
-  }
   // Setters
 /**
  * Sets boarding group
@@ -183,26 +175,5 @@ public class Ticket extends Reservation {
    */
   public void setSeat(Seating seat) {
     this.seat = seat;
-  }
-  /**
-   * Sets first name of ticket holder
-   * @param firstName ticket holder's first name
-   */
-  public void setFirstName(String firstName) {
-    this.firstName = firstName;
-  }
-  /**
-   * Sets last name of ticket holder
-   * @param lastName ticket holder's last name
-   */
-  public void setLastName(String lastName) {
-    this.lastName = lastName;
-  }
-  /**
-   * Sets UUID
-   * @param id UUID
-   */
-  public void setId(UUID id) {
-    this.id = id;
   }
 }

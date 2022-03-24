@@ -1,5 +1,7 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.UUID;
 
 /**
@@ -178,6 +180,53 @@ public class Hotel extends ObjectToBeBooked {
   }
 
   public void setRooms(HashMap<String, Room> rooms) {
-    this.rooms = rooms;
+    if (rooms != null) 
+      this.rooms = rooms;
+    else
+      this.rooms = makeRooms();
+  }
+
+
+  /**
+   * Make random rooms to be added to the rooms hashmap.
+   * Call this when first constrcuting a hotel, otherwise room
+   * Hashmap will come from database
+   * @return The hashmap with the rooms
+   */
+  private HashMap<String, Room> makeRooms() {
+    HashMap<String, Room> ret = new HashMap<>();
+
+
+    // Make standard rooms
+    for (int i = 0; i < 45; i++) {
+      Random r = new Random();
+
+      Boolean smokingAllowed = r.nextBoolean();
+      int numBeds = 2;
+      Boolean booked = false;
+      String type = "Standard";
+      int price = pricing.get(type);
+      String number = "S" + i;
+
+      Room room = new Room(smokingAllowed, null, numBeds, booked, price, type, number);
+      ret.put(number, room);
+    }
+
+    // Make upgraded rooms
+    for (int i = 0; i < 45; i++) {
+      Random r = new Random();
+
+      Boolean smokingAllowed = r.nextBoolean();
+      int numBeds = 3;
+      Boolean booked = false;
+      String type = "Upgraded";
+      int price = pricing.get(type);
+      String number = "U" + i;
+
+      Room room = new Room(smokingAllowed, null, numBeds, booked, price, type, number);
+      ret.put(number, room);
+    }
+
+    return ret;
   }
 }
