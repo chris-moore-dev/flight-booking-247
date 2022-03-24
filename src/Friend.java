@@ -33,6 +33,7 @@ public class Friend {
     setGender(gender);
     setEmail(email);
     setAddress(address);
+    setId(null);
   }
 
   /**
@@ -204,7 +205,10 @@ public class Friend {
    * @param id UUID
    */
   public void setId(UUID id) {
-    this.id = id;
+    if (id != null)
+      this.id = id;
+    else
+      this.id = UUID.randomUUID();
   }
 
 }

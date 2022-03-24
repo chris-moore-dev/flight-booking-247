@@ -248,7 +248,7 @@ public class Flight extends ObjectToBeBooked {
    * 
    * @return
    */
-  public String setDestGate() {
+  public String getDestGate() {
     return this.destGate;
   }
 

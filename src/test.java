@@ -22,6 +22,7 @@ public class test {
         // System.out.println(split[0]);
         // System.out.println(split[1]);
         testUserList(users.get(0));
+        System.out.println(UUID.randomUUID());
     }
 
     /**
