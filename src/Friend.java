@@ -26,13 +26,13 @@ public class Friend {
   Friend(String firstName, String lastName, int age,
   boolean medicalCondition, String gender, String email,
   String address) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.age = age;
-    this.medicalCondition = medicalCondition;
-    this.gender = gender;
-    this.email = email;
-    this.address = address;
+    setFirstName(firstName);
+    setLastName(lastName);
+    setAge(age);
+    setMedicalCondition(medicalCondition);
+    setGender(gender);
+    setEmail(email);
+    setAddress(address);
   }
 
   /**
@@ -49,14 +49,14 @@ public class Friend {
   Friend(String firstName, String lastName, int age,
   boolean medicalCondition, String gender, String email,
   String address, UUID id) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.age = age;
-    this.medicalCondition = medicalCondition;
-    this.gender = gender;
-    this.email = email;
-    this.address = address;
-    this.id = id;
+    setFirstName(firstName);
+    setLastName(lastName);
+    setAge(age);
+    setMedicalCondition(medicalCondition);
+    setGender(gender);
+    setEmail(email);
+    setAddress(address);
+    setId(id);
   }
 
   // Member functions
