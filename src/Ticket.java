@@ -31,9 +31,9 @@ public class Ticket extends Reservation {
     super(firstName, lastName, price);
     setID(null);
     setBoardingGroup(boardingGroup);
-    setBoardingTime(boardingTime)
+    setBoardingTime(boardingTime);
     setGate(gate);
-    setName(name)
+    setName(name);
     setNumOfCheckedBags(numOfCheckedBags);
     setFlight(flight);
     setSeat(seat);

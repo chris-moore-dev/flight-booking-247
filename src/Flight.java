@@ -339,7 +339,12 @@ public class Flight extends ObjectToBeBooked {
    * @param seats
    */
   public void setSeats(HashMap<String, Seating> seats) {
-    this.seats = seats;
+    if (seats != null)
+      this.seats = seats;
+    else if (!layover)
+      this.seats = makeSeats();
+    else
+      this.seats = null;
 
   }
 

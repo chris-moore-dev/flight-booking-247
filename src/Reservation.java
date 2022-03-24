@@ -22,7 +22,10 @@ public abstract class Reservation {
    */
   Reservation(String reservationHolderFirstName,
   String reservationHolderLastName, int price) {
-    
+    setID(null);
+    setReservationHolderLastName(reservationHolderLastName);
+    setPrice(price);
+    setReservationHolderLastName(reservationHolderLastName);
   }
 
   /**
@@ -35,7 +38,10 @@ public abstract class Reservation {
    */
   Reservation(String reservationHolderFirstName,
   String reservationHolderLastName, int price, UUID id) {
-    
+    setID(id);
+    setReservationHolderLastName(reservationHolderLastName);
+    setPrice(price);
+    setReservationHolderLastName(reservationHolderLastName);
   }
 
   /**
