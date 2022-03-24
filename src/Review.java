@@ -10,7 +10,7 @@ public class Review {
   private UUID id;
 
 /**
- * Review constructor with comment
+ * Review constructor with id
  * @param rating
  * @param comment
  * @param user
@@ -24,7 +24,7 @@ public class Review {
   }
 
   /**
-   * Review constructor without comment
+   * Review constructor without id
    * @param rating
    * @param comment
    * @param user
@@ -33,6 +33,7 @@ public class Review {
     setRating(rating);
     setComment(comment);
     setUser(user);
+    setId(null);
   }
   // Member functions
   public String toString() {
@@ -62,7 +63,7 @@ public class Review {
    * 
    * @return
    */
-  public UserAccount getUser() {
+  public RegisteredUser getUser() {
     return this.user;
   }
 

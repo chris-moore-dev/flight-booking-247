@@ -36,14 +36,17 @@ public class HotelList {
     }
 
     /**
-     * 
-     * @param id
-     * @return
+     * Returns the hotel in the list that corresponds with the ID passed in
+     * @param id The ID to be compared
+     * @return The hotel that corresponds with the ID
      */
     public static Hotel getHotel(UUID id) {
-
+        for (Hotel hotel : hotelList.hotels) {
+            if (hotel.getID().equals(id)) {
+                return hotel;
+            }
+        }
+        return null;
     }
-
-
 
 }

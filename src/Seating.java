@@ -18,6 +18,7 @@ public class Seating extends IndividualBooking {
   Seating(boolean medicalSeat, boolean booked, int price,
   String type, String number) {
     super(booked, price, type, number);
+    setIsMedicalSeat(medicalSeat);
   }
 
   /**
@@ -31,16 +32,14 @@ public class Seating extends IndividualBooking {
    */
   Seating(boolean medicalSeat, UUID id, boolean booked, int price,
   String type, String number) {
-    super(id, booked, price, type, number)
+    super(id, booked, price, type, number);
+    setIsMedicalSeat(medicalSeat);
   }
 
   // GETTERS
 
   public boolean getIsMedicalSeat(Seating seating) {
     return this.medicalSeat;
-  }
-  public String getNumber() {
-    return this.number;
   }
 
   // SETTERS

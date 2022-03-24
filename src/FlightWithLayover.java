@@ -77,7 +77,7 @@ public class FlightWithLayover extends Flight {
      * @param flights
      */
     public void setFlights(ArrayList<Flight> flights) {
-
+        this.flights = flights;
     }
 
     /**
@@ -85,7 +85,7 @@ public class FlightWithLayover extends Flight {
      * @param numStops
      */
     public void setNumStops(int numStops) {
-
+        this.numStops = numStops;
     }
 
     /**
@@ -93,7 +93,7 @@ public class FlightWithLayover extends Flight {
      * @param discountPercent
      */
     public void setDiscountPercent(double discountPercent) {
-
+        this.discountPercent = discountPercent;
     }
 
     // Getters
@@ -103,7 +103,7 @@ public class FlightWithLayover extends Flight {
      * @return
      */
     public ArrayList<Flight> getFlights() {
-
+        return this.flights;
     }
 
     /**
@@ -111,7 +111,7 @@ public class FlightWithLayover extends Flight {
      * @return
      */
     public int getNumStops() {
-
+        return this.numStops;
     }
 
     /**
@@ -119,6 +119,6 @@ public class FlightWithLayover extends Flight {
      * @return
      */
     public double getDiscountPercent() {
-
+        return this.discountPercent;
     }
 }

@@ -53,7 +53,7 @@ public class User {
    * 
    * @param flights
    */
-  public void  filterFlightsByArrivalTimeLateEarly(ArrayList<Flight> flights) {
+  public void filterFlightsByArrivalTimeLateEarly(ArrayList<Flight> flights) {
 
   }
 
@@ -61,7 +61,7 @@ public class User {
    * 
    * @param flights
    */
-  public void  filterFlightsByDepartingTimeEarlyLate(ArrayList<Flight> flights) {
+  public void filterFlightsByDepartingTimeEarlyLate(ArrayList<Flight> flights) {
 
   }
 
