@@ -54,6 +54,7 @@ public class HotelReservation extends Reservation {
         setCheckInDate(checkInDate);
         setCheckOutDate(checkOutDate);
         setNumGuests(numGuests);
+        this.id = id;
     }
 
     // Member functions
