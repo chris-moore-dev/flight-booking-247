@@ -10,7 +10,6 @@ public class Admin extends RegisteredUser {
    * Default constructor
    */
   Admin() {
-    // super()
   }
 
   /**
@@ -27,7 +26,7 @@ public class Admin extends RegisteredUser {
    * @param numSeats
    * @param flightID
    */
-  public void addFlight(String date, String departingAirport, String destAirport, ArrayList<Cabin> cabins, HashMap<Integer, Seating> seats, String takeOffTime, String landingTime, String totalFlightTime, String airline, int numSeats, int flightID) {
+  public void addFlight(String date, String departingAirport, String destAirport, HashMap<Integer, Seating> seats, String takeOffTime, String landingTime, String totalFlightTime, String airline, int numSeats, int flightID) {
 
   }
 

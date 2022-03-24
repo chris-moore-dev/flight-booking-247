@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.*;
 public class RegisteredUser extends User {
     private UUID userID;
-    private String firstName;
+    protected String firstName;
     private String lastName;
     private String email;
     private int age;
@@ -22,6 +22,11 @@ public class RegisteredUser extends User {
     private ArrayList<HotelReservation> hotelReservations;
     private ArrayList<Friend> friends;
 
+    /**
+     * default constructor
+     */
+    RegisteredUser(){
+    }
     /**
      * Constructor to use when first createing a registered user
      * Will create a new random UUID for the user
