@@ -45,7 +45,6 @@ public class Flight extends ObjectToBeBooked {
   boolean layover, String company, HashMap<String, Integer> pricing,
   HashMap<String, Seating> seats, String departingGate, String destGate) {
     //super
-    this.seats = makeSeats();
   }
 
   /**
