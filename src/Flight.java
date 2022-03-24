@@ -1,12 +1,11 @@
 /**
  * Flight
- * @author Chris Moore
+ * @author Chris Moore, Evan Scales
  */
 import java.util.HashMap;
 import java.util.UUID;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 public class Flight extends ObjectToBeBooked {
   private LocalDate date;
   private String departingAirport;
@@ -44,8 +43,17 @@ public class Flight extends ObjectToBeBooked {
   String takeOffTime, String landingTime, String totalFlightTime,
   boolean layover, String company, HashMap<String, Integer> pricing,
   HashMap<String, Seating> seats, String departingGate, String destGate) {
-    //super
-    this.seats = makeSeats();
+    super(company, pricing);
+    setIsLayover(layover);
+    setDate(date);
+    setDepartingAirport(departingAirport);
+    setDestAirport(destAirport);
+    setTakeOffTime(takeOffTime);
+    setLandingTime(landingTime);
+    setTotalFlightTime(totalFlightTime);
+    setSeats(seats);
+    setDapartingGate(departingGate);
+    setDestGate(destGate);
   }
 
   /**
@@ -68,7 +76,17 @@ public class Flight extends ObjectToBeBooked {
   String takeOffTime, String landingTime, String totalFlightTime,
   boolean layover, String company, HashMap<String, Integer> pricing,
   HashMap<String, Seating> seats, UUID id, String departingGate, String destGate) {
-    //super
+    super(company, pricing, id);
+    setIsLayover(layover);
+    setDate(date);
+    setDepartingAirport(departingAirport);
+    setDestAirport(destAirport);
+    setTakeOffTime(takeOffTime);
+    setLandingTime(landingTime);
+    setTotalFlightTime(totalFlightTime);
+    setSeats(seats);
+    setDapartingGate(departingGate);
+    setDestGate(destGate);
   }
 
   /**
@@ -86,7 +104,7 @@ public class Flight extends ObjectToBeBooked {
    * @param company
    */
   Flight(LocalDate date, String departingAirport, String destAirport, String takeOffTime,
-  String landingTime, String totalFlightTime, boolan layover, ArrayList<Flight> flights,
+  String landingTime, String totalFlightTime, Boolean layover, ArrayList<Flight> flights,
   int numStops, double discountPercent, String company) {
     super(company, null);
   }
@@ -339,8 +357,12 @@ public class Flight extends ObjectToBeBooked {
    * @param seats
    */
   public void setSeats(HashMap<String, Seating> seats) {
-    this.seats = seats;
-
+    if (seats == null)
+      this.seats = null;
+    else if(seats.isEmpty())
+      this.seats = makeSeats();
+    else
+      this.seats = seats;
   }
 
   /**

@@ -25,7 +25,7 @@ public abstract class ObjectToBeBooked {
      * @param pricingMap The pricing map
      * @param id The id
      */
-    ObjectToBeBooked(String company, HashMap<String, Integer> pricingMap,
+    ObjectToBeBooked(String company, HashMap<String, Integer> pricing,
     UUID id) {
         setID(id);
         setCompany(company);

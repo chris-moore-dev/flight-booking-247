@@ -30,7 +30,12 @@ public class Hotel extends ObjectToBeBooked {
   Hotel(String address, ArrayList<Review> reviews, ArrayList<String> amenities,
   String closestAirport, String city, String company, HashMap<String, Integer> pricing,
   HashMap<String, Room> rooms) {
-    //super()
+    super(company, pricing);
+    setAddress(address);
+    setReviews(reviews);
+    setAmenities(amenities);
+    setCity(city);
+    setRooms(rooms);
   }
 
   /**
@@ -48,8 +53,12 @@ public class Hotel extends ObjectToBeBooked {
   Hotel(String address, ArrayList<Review> reviews, ArrayList<String> amenities,
   String closestAirport, String city, String company, HashMap<String, Integer> pricing,
   HashMap<String, Room> rooms, UUID id) {
-    // super(company, pricing, id);
-
+    super(company, pricing, id);
+    setAddress(address);
+    setReviews(reviews);
+    setAmenities(amenities);
+    setCity(city);
+    setRooms(rooms);
   }
 
   // Member Functions
