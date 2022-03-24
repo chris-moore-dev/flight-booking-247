@@ -43,12 +43,17 @@ public class UserList {
     }
 
     /**
-     * 
-     * @param id
-     * @return
+     * Returns the user in the list that corresponds with the ID passed in
+     * @param id The ID to be compared
+     * @return The user that corresponds with the ID
      */
     public static RegisteredUser getUser(UUID id) {
-
+        for (RegisteredUser user : userList.users) {
+            if (user.getUUID().equals(id)) {
+                return user;
+            }
+        }
+        return null;
     }
 
     /**
