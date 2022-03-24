@@ -293,7 +293,7 @@ public class RegisteredUser extends User {
      * Get the first name
      * @return firstName
      */
-    public String getFirstname() {
+    public String getFirstName() {
         return firstName;
     }
 
