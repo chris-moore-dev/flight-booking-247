@@ -17,10 +17,10 @@ public class Review {
  * @param id
  */
   Review(int rating, String comment, RegisteredUser user, UUID id) {
-    this.rating = rating;
-    this.comment = comment;
-    this.user = user;
-    this.id = id;
+    setRating(rating);
+    setComment(comment);
+    setUser(user);
+    setId(id);
   }
 
   /**
@@ -30,9 +30,15 @@ public class Review {
    * @param user
    */
   Review(int rating, String comment, RegisteredUser user) {
-    this.rating = rating;
-    this.comment = comment;
-    this.user = user;
+    setRating(rating);
+    setComment(comment);
+    setUser(user);
+    setId(null);
+  }
+  // Member functions
+  public String toString() {
+    String ret;
+
   }
 
   // Getters

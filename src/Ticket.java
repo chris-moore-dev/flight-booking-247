@@ -28,6 +28,7 @@ public class Ticket extends Reservation {
   Ticket(String boardingGroup, String boardingTime, String gate,
   String name, int numOfCheckedBags, Flight flight, Seating seat, 
   String firstName, String lastName, int price) {
+<<<<<<< HEAD
     super(firstName, lastName, price);
     this.boardingGroup = boardingGroup;
     this.boardingTime = boardingTime;
@@ -36,6 +37,18 @@ public class Ticket extends Reservation {
     this.numOfCheckedBags = numOfCheckedBags;
     this.flight = flight;
     this.seat = seat;
+=======
+    setBoardingGroup(boardingGroup);
+    setBoardingTime(boardingTime);
+    setGate(gate);
+    setName(name);
+    setNumOfCheckedBags(numOfCheckedBags);
+    setFlight(flight);
+    setSeat(seat);
+    setFirstName(firstName);
+    setLastName(lastName);
+    this.price = price;
+>>>>>>> c747c858b5fb48da25b878593f312f6688bf5c17
   }
 
   /**
@@ -55,6 +68,7 @@ public class Ticket extends Reservation {
   Ticket(String boardingGroup, String boardingTime, String gate,
   String name, int numOfCheckedBags, Flight flight, Seating seat, 
   String firstName, String lastName, int price, UUID id) {
+<<<<<<< HEAD
     super(firstName, lastName, price, id);
     this.boardingGroup = boardingGroup;
     this.boardingTime = boardingTime;
@@ -63,6 +77,19 @@ public class Ticket extends Reservation {
     this.numOfCheckedBags = numOfCheckedBags;
     this.flight = flight;
     this.seat = seat;
+=======
+    setBoardingGroup(boardingGroup);
+    setBoardingTime(boardingTime);
+    setGate(gate);
+    setName(name);
+    setNumOfCheckedBags(numOfCheckedBags);
+    setFlight(flight);
+    setSeat(seat);
+    setFirstName(firstName);
+    setLastName(lastName);
+    this.price = price;
+    setId(id);
+>>>>>>> c747c858b5fb48da25b878593f312f6688bf5c17
   }
 
 /**
