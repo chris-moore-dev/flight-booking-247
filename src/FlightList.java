@@ -42,7 +42,9 @@ public class FlightList {
      * @return
      */
     public static Flight getFlight(UUID id) {
-        
+        int temp = flightList.indexOf(id);
+        temp = flightList.get(temp);
+        return temp;
     }
 
 }
