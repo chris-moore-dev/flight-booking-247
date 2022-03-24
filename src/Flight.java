@@ -45,6 +45,7 @@ public class Flight extends ObjectToBeBooked {
   boolean layover, String company, HashMap<String, Integer> pricing,
   HashMap<String, Seating> seats, String departingGate, String destGate) {
     //super
+    this.seats = makeSeats();
   }
 
   /**
@@ -339,6 +340,7 @@ public class Flight extends ObjectToBeBooked {
    */
   public void setSeats(HashMap<String, Seating> seats) {
     this.seats = seats;
+
   }
 
   /**
@@ -355,5 +357,151 @@ public class Flight extends ObjectToBeBooked {
    */
   public void setDestGate(String destGate) {
     this.destGate = destGate;
+  }
+
+  private HashMap<String, Seating> makeSeats() {
+    HashMap<String, Seating> ret = new HashMap<>();
+
+    /**
+     * Make 10 rows of First class seating
+     * Make 13 Rows of Main Cabin Seating
+     * Make 7 rows of Economy cabin seating 
+     * First 2 columns are medical seats
+     */
+
+    // Make A row seating
+    for (int i = 1; i < 31; i++) {
+      String seatNum = "";
+
+      Boolean medicalSeat;
+      Boolean booked = false;
+      int price;
+      String type;
+      seatNum = "A" + i;
+
+      // First class seats
+      if (i <= 10) {
+        if (i <= 2) {
+          medicalSeat = true;
+        } else {
+          medicalSeat = false;
+        }
+
+        type = "First";
+
+      } else if (i >= 24) { // Economy seating
+        medicalSeat = false;
+        type = "Economy";
+      } else { // Main cabin
+        medicalSeat = false;
+        type = "Main Cabin";
+      }
+
+      price = pricing.get(type);
+      Seating seat = new Seating(medicalSeat, booked, price, type, seatNum);
+      ret.put(seatNum, seat);
+
+    }
+
+    // Make B row seating
+    for (int i = 1; i < 31; i++) {
+      String seatNum = "";
+
+      Boolean medicalSeat;
+      Boolean booked = false;
+      int price;
+      String type;
+      seatNum = "B" + i;
+
+      // First class seats
+      if (i <= 10) {
+        if (i <= 2) {
+          medicalSeat = true;
+        } else {
+          medicalSeat = false;
+        }
+
+        type = "First";
+
+      } else if (i >= 24) { // Economy seating
+        medicalSeat = false;
+        type = "Economy";
+      } else { // Main cabin
+        medicalSeat = false;
+        type = "Main Cabin";
+      }
+
+      price = pricing.get(type);
+      Seating seat = new Seating(medicalSeat, booked, price, type, seatNum);
+      ret.put(seatNum, seat);
+    }
+
+    // Make C row seating
+    for (int i = 1; i < 31; i++) {
+      String seatNum = "";
+
+      Boolean medicalSeat;
+      Boolean booked = false;
+      int price;
+      String type;
+      seatNum = "C" + i;
+
+      // First class seats
+      if (i <= 10) {
+        if (i <= 2) {
+          medicalSeat = true;
+        } else {
+          medicalSeat = false;
+        }
+
+        type = "First";
+
+      } else if (i >= 24) { // Economy seating
+        medicalSeat = false;
+        type = "Economy";
+      } else { // Main cabin
+        medicalSeat = false;
+        type = "Main Cabin";
+      }
+
+      price = pricing.get(type);
+      Seating seat = new Seating(medicalSeat, booked, price, type, seatNum);
+      ret.put(seatNum, seat);
+    }
+
+    // Make D row seating
+    for (int i = 1; i < 31; i++) {
+      String seatNum = "";
+
+      Boolean medicalSeat;
+      Boolean booked = false;
+      int price;
+      String type;
+      seatNum = "D" + i;
+
+      // First class seats
+      if (i <= 10) {
+        if (i <= 2) {
+          medicalSeat = true;
+        } else {
+          medicalSeat = false;
+        }
+
+        type = "First";
+
+      } else if (i >= 24) { // Economy seating
+        medicalSeat = false;
+        type = "Economy";
+      } else { // Main cabin
+        medicalSeat = false;
+        type = "Main Cabin";
+      }
+
+      price = pricing.get(type);
+      Seating seat = new Seating(medicalSeat, booked, price, type, seatNum);
+      ret.put(seatNum, seat);
+    }
+
+    return ret;
   }
 }
