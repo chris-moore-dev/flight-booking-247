@@ -91,7 +91,11 @@ public class DataWriter extends DataConstants {
         userDetails.put(USERS_FREQUENT_FLYER, user.getFrequentFlyer());
         userDetails.put(USERS_ADMIN_STATUS, user.getAdmin());
         userDetails.put(USERS_MEDICAL_CONDITION, user.getMedicalCondition());
-        userDetails.put(USERS_BLACKLISTED_AIRPORTS, user.getBlackListedAirports());
+        JSONArray blackListedAirportsArray = new JSONArray();
+        for (String bla : user.getBlackListedAirports()) {
+            blackListedAirportsArray.add(bla);
+        }
+        userDetails.put(USERS_BLACKLISTED_AIRPORTS, blackListedAirportsArray);
         userDetails.put(USERS_TICKETS_LIST, user.getTickets());
         userDetails.put(USERS_HOTEL_RESERVATIONS_LIST, user.getHotelReservations());
         userDetails.put(USERS_FRIENDS_LIST, user.getFriends());

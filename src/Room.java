@@ -6,7 +6,7 @@ import java.util.Date;
 
 /**
  * Room class
- * @author
+ * @author Evan Scales
  */
 public class Room extends IndividualBooking {
   private boolean smokingAllowed;
@@ -14,57 +14,63 @@ public class Room extends IndividualBooking {
   private int numBeds;
 
   /**
-   * 
-   * @param smokingAllowed
-   * @param bookedDays
-   * @param numBeds
-   * @param booked
-   * @param price
-   * @param type
-   * @param number
+   * Constructor to use when creating room for the first time
+   * @param smokingAllowed Smoking allwoed status
+   * @param bookedDays The booked days
+   * @param numBeds The number of beds
+   * @param booked The booked status
+   * @param price The price
+   * @param type The room type
+   * @param number The room number
    */
   Room(boolean smokingAllowed, ArrayList<LocalDate> bookedDays, int numBeds,
   boolean booked, int price, String type, String number) {
     super(booked, price, type, number);
+    setIsSmokingAllowed(smokingAllowed);
+    setBookedDays(bookedDays);
+    setNumBeds(numBeds);
   }
 
   /**
-   * 
-   * @param smokingAllowed
-   * @param bookedDays
-   * @param numBeds
-   * @param id
-   * @param booked
-   * @param price
-   * @param type
-   * @param number
+   * Constructor to use when loading rooms from database
+   * @param smokingAllowed Smoking allowed status
+   * @param bookedDays The booked days
+   * @param numBeds The number of beds
+   * @param id The id
+   * @param booked the booked status
+   * @param price The price
+   * @param type The room type
+   * @param number The room number
    */
   Room(boolean smokingAllowed, ArrayList<LocalDate> bookedDays, int numBeds,
   UUID id, boolean booked, int price, String type, String number) {
     super(id, booked, price, type, number);
+    setIsSmokingAllowed(smokingAllowed);
+    setBookedDays(bookedDays);
+    setNumBeds(numBeds);
   }
 
   // GETTERS
 
   /**
-   * 
-   * @return
+   * Get the smoking allowed status
+   * @return If smoking is allowed
    */
   public boolean getIsSmokingAllowed() {
     return this.smokingAllowed;
   }
 
   /**
-   * 
-   * @return
+   * Get the booked days
+   * @return The booked days array list
    */
   public ArrayList<LocalDate> getBookedDays() {
     return this.bookedDays;
   }
 
   /**
-   * 
-   * @return
+   * Get the number of beds
+   * @return The number of beds
    */
   public int getNumBeds() {
     return this.numBeds;
@@ -73,16 +79,16 @@ public class Room extends IndividualBooking {
   // SETTERS
 
   /**
-   * 
-   * @param smokingAllowed
+   * Set the smoking allowed status
+   * @param smokingAllowed The smoking allowed status
    */
   public void setIsSmokingAllowed(boolean smokingAllowed) {
     this.smokingAllowed = smokingAllowed;
   }
 
   /**
-   * 
-   * @param bookedDays
+   * Set the booked days
+   * @param bookedDays The booked days array list
    */
   public void setBookedDays(ArrayList<LocalDate> bookedDays) {
     if (bookedDays != null)
@@ -92,8 +98,8 @@ public class Room extends IndividualBooking {
   }
 
   /**
-   * 
-   * @param numBeds
+   * Set the number of beds
+   * @param numBeds The number of beds
    */
   public void setNumBeds(int numBeds) {
     this.numBeds = numBeds;
