@@ -10,24 +10,29 @@ public class Review {
   private UUID id;
 
 /**
- * Review
+ * Review constructor with comment
  * @param rating
  * @param comment
  * @param user
  * @param id
  */
   Review(int rating, String comment, RegisteredUser user, UUID id) {
-    
+    this.rating = rating;
+    this.comment = comment;
+    this.user = user;
+    this.id = id;
   }
 
   /**
-   * 
+   * Review constructor without comment
    * @param rating
    * @param comment
    * @param user
    */
   Review(int rating, String comment, RegisteredUser user) {
-
+    this.rating = rating;
+    this.comment = comment;
+    this.user = user;
   }
 
   // Getters
