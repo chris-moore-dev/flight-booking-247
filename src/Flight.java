@@ -85,7 +85,7 @@ public class Flight extends ObjectToBeBooked {
    * @param company
    */
   Flight(LocalDate date, String departingAirport, String destAirport, String takeOffTime,
-  String landingTime, String totalFlightTime, boolan layover, ArrayList<Flight> flights,
+  String landingTime, String totalFlightTime, Boolean layover, ArrayList<Flight> flights,
   int numStops, double discountPercent, String company) {
     super(company, null);
   }
