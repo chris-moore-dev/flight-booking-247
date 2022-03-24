@@ -38,7 +38,9 @@ public class Review {
   // Member functions
   public String toString() {
     String ret;
-
+    ret = "\nUser: " + user.getFirstName() + " " + user.getLastName() +
+          "\nRating: " + rating + "\n" + comment;
+    return ret;
   }
 
   // Getters
