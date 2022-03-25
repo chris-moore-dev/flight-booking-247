@@ -34,8 +34,9 @@ public class test {
         // String[] split = toSplit.split(":");
         // System.out.println(split[0]);
         // System.out.println(split[1]);
-        testUserList(users.get(0));
-        testFlightList(flights.get(0));
+        // testUserList(users.get(0));
+        // testFlightList(flights.get(0));
+        testHotelList(hotels.get(0));
         System.out.println(UUID.randomUUID());
     }
 
@@ -51,7 +52,7 @@ public class test {
      */
     public static void testUserList(RegisteredUser user) {
         // Loading users by itself
-        System.out.println(user.getFirstname());
+        System.out.println(user.getFirstName());
 
         System.out.println(user.getAdmin());
 
@@ -101,6 +102,37 @@ public class test {
         System.out.println(flight.getDate());
 
         // testFlightList(FlightList.getFlight(flight.getID()));
+    }
+
+    /**
+     * Basic loading of hotel (name, id, etc): PASS
+     * Loading of rooms and prcing hashmap: PASS
+     * Loading of ammenities array list: PASS
+     * Loading of reviews array list: PASS
+     * @param hotel
+     * @TEST
+     */
+    public static void testHotelList(Hotel hotel) {
+        System.out.println("-----TESTING HOTEL-----");
+        System.out.println(hotel.getID());
+        System.out.println(hotel.getCompany());
+        System.out.println(hotel.getCity());
+        System.out.println(hotel.getClosestAirport());
+        System.out.println(hotel.getAddress());
+
+        for (String s : hotel.getAmenities()) {
+            System.out.println(s);
+        }
+
+        HashMap<String, Room> rooms = hotel.getRooms();
+        System.out.println(rooms.get("U1").getNumber());
+
+        ArrayList<Review> reviews = hotel.getReviews();
+        Review review = reviews.get(0);
+        // if (review == null) System.out.println("fuck");
+        System.out.println(review.getComment());
+        System.out.println(review.getRating());
+        System.out.println(review.getUser().getFirstName());
     }
 
     

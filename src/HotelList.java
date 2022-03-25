@@ -40,7 +40,7 @@ public class HotelList {
      * @param id The ID to be compared
      * @return The hotel that corresponds with the ID
      */
-    public static Hotel getHotel(UUID id) {
+    public Hotel getHotel(UUID id) {
         for (Hotel hotel : hotelList.hotels) {
             if (hotel.getID().equals(id)) {
                 return hotel;

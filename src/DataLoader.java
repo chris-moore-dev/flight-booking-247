@@ -236,6 +236,7 @@ public class DataLoader extends DataConstants {
                     for (int j = 0; j < reviewsArray.size(); j++) {
                         UUID reviewID = UUID.fromString((String) reviewsArray.get(j));
                         Review review = reviewList.get(reviewID);
+                        // System.out.println(review.getComment());
                         reviews.add(review);
                     }
                 }
@@ -307,7 +308,8 @@ public class DataLoader extends DataConstants {
             for (int i = 0; i < reservationsJSON.size(); i++) {
                 JSONObject reservationJSON = (JSONObject)reservationsJSON.get(i);
                 UUID hotelID = UUID.fromString((String)reservationJSON.get(RESERVATIONS_HOTEL_ID));
-                Hotel hotel = HotelList.getHotel(hotelID);
+                HotelList list = HotelList.getInstance();
+                Hotel hotel = list.getHotel(hotelID);
                 String firstName = (String) reservationJSON.get(RESERVATIONS_FIRST_NAME);
                 String lastName = (String) reservationJSON.get(RESERVATIONS_LAST_NAME);
                 UUID roomID = UUID.fromString((String)reservationJSON.get(RESERVATIONS_ROOM_ID));
@@ -352,11 +354,11 @@ public class DataLoader extends DataConstants {
 
             for (int i = 0; i < reviewsArray.size(); i++) {
                 JSONObject reviewJSON = (JSONObject) reviewsArray.get(i);
-
                 int rating = ((Long) reviewJSON.get(REVIEWS_RATING)).intValue();
                 String comment = (String) reviewJSON.get(REVIEWS_COMMENT);
                 UUID userID = UUID.fromString((String) reviewJSON.get(REVIEWS_USER_ID));
-                RegisteredUser user = UserList.getUser(userID);
+                UserList list = UserList.getInstance();
+                RegisteredUser user = list.getUser(userID);
                 UUID id = UUID.fromString((String) reviewJSON.get(REVIEWS_ID));
 
 
