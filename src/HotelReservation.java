@@ -158,6 +158,9 @@ public class HotelReservation extends Reservation {
      * @param room
      */
     public void setRoom(Room room) {
-        this.room = room;
+        if (room != null)
+            this.room = room;
+        else
+            this.room = null;
     }
 }

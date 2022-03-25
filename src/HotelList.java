@@ -41,7 +41,7 @@ public class HotelList {
      * @return The hotel that corresponds with the ID
      */
     public Hotel getHotel(UUID id) {
-        for (Hotel hotel : hotelList.hotels) {
+        for (Hotel hotel : hotels) {
             if (hotel.getID().equals(id)) {
                 return hotel;
             }

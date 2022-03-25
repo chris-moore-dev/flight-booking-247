@@ -20,6 +20,7 @@ public class test {
         ArrayList<Flight> flights = flightList.getFlights();
         ArrayList<Hotel> hotels = hotelList.getHotels();
         ArrayList<RegisteredUser> users = userList.getUsers();
+        System.out.println("@&!@&#");
 
         // RegisteredUser user = users.get(0);
         // Flight flight = flights.get(0);
@@ -39,8 +40,12 @@ public class test {
         // String[] split = toSplit.split(":");
         // System.out.println(split[0]);
         // System.out.println(split[1]);
-        // testUserList(users.get(0));
-        testFlightList(flights.get(3));
+        testUserList(users.get(0));
+        // testFlightList(flights.get(3));
+
+
+
+
         // testHotelList(hotels.get(0));
         System.out.println(UUID.randomUUID());
     }
@@ -72,6 +77,10 @@ public class test {
         for (Friend friend : friends) {
             System.out.println(friend);
         }
+
+        // Loding with reservations
+        ArrayList<HotelReservation> reservations = user.getHotelReservations();
+        System.out.println(reservations.get(0).getHotel().getCompany());
     }
 
     /**
@@ -145,7 +154,7 @@ public class test {
         // if (review == null) System.out.println("fuck");
         System.out.println(review.getComment());
         System.out.println(review.getRating());
-        System.out.println(review.getUser().getFirstName());
+        System.out.println(review.getUser());
     }
 
     

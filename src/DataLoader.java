@@ -12,9 +12,16 @@ import org.json.simple.parser.JSONParser;
  * @author Mario Misencik, Evan Scales
  */
 public class DataLoader extends DataConstants {
-    private static JSONArray layoverFlightsArray = new JSONArray();
 
-    public static ArrayList<Flight> getFlightsWithLayovers(ArrayList<Flight> searchFlights) {
+
+    /**
+     * Makes flight with layovers from JSON objects
+     * @param searchFlights The array list of already loaded flights
+     * @param layoverFlightsArray The JSONArray with all the layover flights
+     * @return An Arraylist of flights to be added with the rest of the flight
+     * database
+     */
+    public static ArrayList<Flight> getFlightsWithLayovers(ArrayList<Flight> searchFlights, JSONArray layoverFlightsArray) {
         ArrayList<Flight> flights = new ArrayList<>();
 
         try {
@@ -53,8 +60,6 @@ public class DataLoader extends DataConstants {
                 numStops, discountPercent, id, company);
                 flights.add(flight);
             }
-
-            if (layoverFlightsArray == null) return flights;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -70,6 +75,7 @@ public class DataLoader extends DataConstants {
     public static ArrayList<Flight> getFlights() {
         ArrayList<Flight> flights = new ArrayList<Flight>();
         HashMap<UUID, Seating> seatingList = getSeatingList();
+        JSONArray layoverFlightsArray = new JSONArray();
 
 
         try {
@@ -146,7 +152,7 @@ public class DataLoader extends DataConstants {
         }
 
         // Add layover flights after creating all other flights
-        ArrayList<Flight> layoverFlights = getFlightsWithLayovers(flights);
+        ArrayList<Flight> layoverFlights = getFlightsWithLayovers(flights, layoverFlightsArray);
         for (Flight flight : layoverFlights) {
             flights.add(flight);
         }
@@ -163,7 +169,6 @@ public class DataLoader extends DataConstants {
         HashMap<UUID, Friend> friendsList = getFriendsList();
         HashMap<UUID, Ticket> ticketList = getTicketList();
         HashMap<UUID, HotelReservation> hotelReservationList = getReservationList();
-
         try {
             FileReader reader = new FileReader(USERS_FILE_NAME);
             JSONParser parser = new JSONParser();
@@ -362,18 +367,18 @@ public class DataLoader extends DataConstants {
                 Hotel hotel = list.getHotel(hotelID);
                 String firstName = (String) reservationJSON.get(RESERVATIONS_FIRST_NAME);
                 String lastName = (String) reservationJSON.get(RESERVATIONS_LAST_NAME);
-                UUID roomID = UUID.fromString((String)reservationJSON.get(RESERVATIONS_ROOM_ID));
-                Room room = roomList.get(roomID);
+                // UUID roomID = UUID.fromString((String)reservationJSON.get(RESERVATIONS_ROOM_ID));
+                // Room room = roomList.get(roomID);
                 int price = ((Long) reservationJSON.get(RESERVATIONS_PRICE)).intValue();
                 LocalDate checkInDate = LocalDate.parse((String)reservationJSON.get(RESERVATIONS_CHECK_IN_DATE), DateTimeFormatter.ofPattern("MM/dd/yyyy"));
                 LocalDate checkOutDate = LocalDate.parse((String)reservationJSON.get(RESERVATIONS_CHECK_OUT_DATE), DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-                int numGuests = Integer.parseInt((String) reservationJSON.get(RESERVATIONS_NUM_GUESTS));
+                int numGuests = ((Long) reservationJSON.get(RESERVATIONS_NUM_GUESTS)).intValue();
                 UUID id = UUID.fromString((String) reservationJSON.get(RESERVATIONS_ID));
 
 
 
                 HotelReservation reservation = new HotelReservation(hotel,
-                firstName, lastName, room, price, checkInDate, checkOutDate,
+                firstName, lastName, null, price, checkInDate, checkOutDate,
                 numGuests, id);
 
                 hotelReservationsList.put(id, reservation);
@@ -406,9 +411,7 @@ public class DataLoader extends DataConstants {
                 JSONObject reviewJSON = (JSONObject) reviewsArray.get(i);
                 int rating = ((Long) reviewJSON.get(REVIEWS_RATING)).intValue();
                 String comment = (String) reviewJSON.get(REVIEWS_COMMENT);
-                UUID userID = UUID.fromString((String) reviewJSON.get(REVIEWS_USER_ID));
-                UserList list = UserList.getInstance();
-                RegisteredUser user = list.getUser(userID);
+                String user = (String) reviewJSON.get(REVIEWS_USER);
                 UUID id = UUID.fromString((String) reviewJSON.get(REVIEWS_ID));
 
 

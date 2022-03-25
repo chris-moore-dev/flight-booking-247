@@ -50,6 +50,26 @@ public class Room extends IndividualBooking {
     setNumBeds(numBeds);
   }
 
+  /**
+   * Adds the booked days to the booked days list
+   * @param dates The booked days
+   */
+  public void book(ArrayList<LocalDate> dates) {
+    for (LocalDate localDate : dates) {
+      this.bookedDays.add(localDate);
+    }
+  }
+
+  /**
+   * Removes the dates from booked days
+   * @param dates The dates
+   */
+  public void unBook(ArrayList<LocalDate> dates) {
+    for (LocalDate localDate : dates) {
+        this.bookedDays.remove(localDate);
+    }
+  }
+
   // GETTERS
 
   /**
