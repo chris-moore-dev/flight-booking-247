@@ -107,6 +107,18 @@ public class Flight extends ObjectToBeBooked {
   String landingTime, String totalFlightTime, Boolean layover, ArrayList<Flight> flights,
   int numStops, double discountPercent, String company) {
     super(company, null);
+    HashMap<String, Integer> pricing = discountLayoverPrice(flights, discountPercent);
+    setPricingMap(pricing);
+    setDate(date);
+    setDepartingAirport(departingAirport);
+    setDestAirport(destAirport);
+    setTakeOffTime(takeOffTime);
+    setLandingTime(landingTime);
+    setTotalFlightTime(totalFlightTime);
+    setIsLayover(layover);
+    setFlights(flights);
+    setNumStops(numStops);
+    setDiscountPercent(discountPercent);
   }
 
   /**
@@ -128,9 +140,52 @@ public class Flight extends ObjectToBeBooked {
   String landingTime, String totalFlightTime, Boolean layover, ArrayList<Flight> flights,
   int numStops, double discountPercent, UUID id, String company) {
     super(company, null, id);
+    HashMap<String, Integer> pricing = discountLayoverPrice(flights, discountPercent);
+    setPricingMap(pricing);
+    setDate(date);
+    setDepartingAirport(departingAirport);
+    setDestAirport(destAirport);
+    setTakeOffTime(takeOffTime);
+    setLandingTime(landingTime);
+    setTotalFlightTime(totalFlightTime);
+    setIsLayover(layover);
+    setFlights(flights);
+    setNumStops(numStops);
+    setDiscountPercent(discountPercent);
   }
 
   // Member functions
+
+  /**
+   * Sets the new pricing hashmap for flights with layovers
+   * To find the pricing of a flight with layover add up each corresponding cabin price
+   * for each connecting flight. Then discount that by 20% to get the new pricing map
+   * @param flights The connecitng flights
+   * @param discountPercent The discount number (0.8)
+   * @return The new pricing map
+   */
+  private HashMap<String, Integer> discountLayoverPrice(ArrayList<Flight> flights, double discountPercent) {
+    HashMap<String, Integer> ret = new HashMap<>();
+
+    for (Flight flight : flights) {
+      HashMap<String, Integer> pricingMap = flight.getPricing();
+      for (String key : pricingMap.keySet()) {
+        int value = pricingMap.get(key);
+        if (ret.containsKey(key)) {
+          ret.put(key, ret.get(key) + value);
+        } else {
+          ret.put(key, value);
+        }
+      }
+    }
+
+    for (String key : ret.keySet()) {
+      int value = (int) Math.round(ret.get(key) * discountPercent);
+      ret.put(key, value);
+    }
+
+    return ret;
+  }
 
   /**
    * 

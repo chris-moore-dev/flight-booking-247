@@ -23,5 +23,81 @@
         ],
         "individualBookings" : [
         ]
+    },
+    {
+        "flightID" : "7f477601-f1ff-4ee0-85aa-81cf2fbff205",
+        "company" : "American Airlines",
+        "date" : "04/01/2022",
+        "departingAirport" : "CAE",
+        "destAirport" : "ATL",
+        "takeOffTime" : "7:29 AM",
+        "landingTime" : "9:32 AM",
+        "totalFlightTime" : "3h 30m",
+        "layover" : false,
+        "departingGate" : "211",
+        "destGate" : "75",
+        "flights" : [
+            
+        ],
+        "numStops" : 0,
+        "discountPercent" : 0,
+        "pricing" : [
+            "First:667",
+            "Main Cabin:433",
+            "Economy:400"
+        ],
+        "individualBookings" : [
+        ]
+    },
+    {
+        "flightID" : "67317898-8744-493f-86ba-995d3ae72502",
+        "company" : "American Airlines",
+        "date" : "04/01/2022",
+        "departingAirport" : "ATL",
+        "destAirport" : "SEA",
+        "takeOffTime" : "10:23 AM",
+        "landingTime" : "12:48 PM",
+        "totalFlightTime" : "4h 25m",
+        "layover" : false,
+        "departingGate" : "211",
+        "destGate" : "75",
+        "flights" : [
+            
+        ],
+        "numStops" : 0,
+        "discountPercent" : 0,
+        "pricing" : [
+            "First:783",
+            "Main Cabin:459",
+            "Economy:400"
+        ],
+        "individualBookings" : [
+        ]
+    },
+    {
+        "flightID" : "40000587-3d90-4a68-b824-a89c3f360e44",
+        "company" : "American Airlines",
+        "date" : "04/01/2022",
+        "departingAirport" : "CAE",
+        "destAirport" : "SEA",
+        "takeOffTime" : "7:29 AM",
+        "landingTime" : "12:48 PM",
+        "totalFlightTime" : "8h 19m",
+        "layover" : true,
+        "departingGate" : "12",
+        "destGate" : "16",
+        "flights" : [
+            "7f477601-f1ff-4ee0-85aa-81cf2fbff205",
+            "67317898-8744-493f-86ba-995d3ae72502"
+        ],
+        "numStops" : 1,
+        "discountPercent" : 0.8,
+        "pricing" : [
+            "First:783",
+            "Main Cabin:459",
+            "Economy:400"
+        ],
+        "individualBookings" : [
+        ]
     }
 ]

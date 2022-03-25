@@ -12,7 +12,56 @@ import org.json.simple.parser.JSONParser;
  * @author Mario Misencik, Evan Scales
  */
 public class DataLoader extends DataConstants {
+    private static JSONArray layoverFlightsArray = new JSONArray();
 
+    public static ArrayList<Flight> getFlightsWithLayovers(ArrayList<Flight> searchFlights) {
+        ArrayList<Flight> flights = new ArrayList<>();
+
+        try {
+            
+            for (int i = 0; i < layoverFlightsArray.size(); i++) {
+                JSONObject flightJSON = (JSONObject) layoverFlightsArray.get(i);
+
+                LocalDate date = LocalDate.parse((String)flightJSON.get(FLIGHTS_DATE), DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+                String departingAirport = (String) flightJSON.get(FLIGHTS_DEPARTING_AIRPORT);
+                String destAirport = (String) flightJSON.get(FLIGHTS_DEST_AIRPORT);
+                String takeOffTime = (String) flightJSON.get(FLIGHTS_TAKE_OFF_TIME);
+                String landingTime = (String) flightJSON.get(FLIGHTS_LANDING_TIME);
+                String totalFlightTime = (String) flightJSON.get(FLIGHTS_TOTAL_TIME);
+                Boolean layover = true;
+                int numStops = ((Long) flightJSON.get(FLIGHTS_NUM_STOPS)).intValue();
+                Double discountPercent = 0.8;
+                UUID id = UUID.fromString((String) flightJSON.get(FLIGHTS_ID));
+                String company = (String) flightJSON.get(FLIGHTS_COMPANY);
+
+                // Get all the UUIDS of the connecting flights
+                // Search the flight list for those flights
+                // Add those flights to the connecting flights
+                ArrayList<Flight> connectingFlights = new ArrayList<>();
+                JSONArray connectingFlightsArray = (JSONArray) flightJSON.get(FLIGHTS_FLIGHT_LIST);
+                if (connectingFlightsArray != null) {
+                    for (int j = 0; j < connectingFlightsArray.size(); j++) {
+                        UUID flightID = UUID.fromString((String) connectingFlightsArray.get(j));
+                        for (Flight flight : searchFlights) {
+                            if (flight.getID().equals(flightID)) connectingFlights.add(flight);
+                        }
+                    }
+                }
+
+                Flight flight = new Flight(date, departingAirport, destAirport,
+                takeOffTime, landingTime, totalFlightTime, layover, connectingFlights,
+                numStops, discountPercent, id, company);
+                flights.add(flight);
+            }
+
+            if (layoverFlightsArray == null) return flights;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        return flights;
+    }
     
     /**
      * Loads the list of flights
@@ -34,6 +83,19 @@ public class DataLoader extends DataConstants {
                 JSONObject flightJSON = (JSONObject)flightsJSON.get(i);
                 Flight flightToAdd;
 
+
+                boolean layover = (Boolean)flightJSON.get(FLIGHTS_LAYOVER);
+
+                // If the flight is a layover flight add it to this list to be loaded 
+                // At a different time since it will have an array list of flights if
+                // It has a layover
+                int k = 0;
+                if (layover) {
+                    layoverFlightsArray.add(k, flightJSON);
+                    k++;
+                    continue;
+                }
+
                 UUID id = UUID.fromString((String)flightJSON.get(FLIGHTS_ID));
                 String company = (String)flightJSON.get(FLIGHTS_COMPANY);
                 LocalDate date = LocalDate.parse((String)flightJSON.get(FLIGHTS_DATE), DateTimeFormatter.ofPattern("MM/dd/yyyy"));
@@ -42,65 +104,53 @@ public class DataLoader extends DataConstants {
                 String takeOffTime = (String)flightJSON.get(FLIGHTS_TAKE_OFF_TIME);
                 String landingTime = (String)flightJSON.get(FLIGHTS_LANDING_TIME);
                 String totalFlightTime = (String)flightJSON.get(FLIGHTS_TOTAL_TIME);
-                boolean layover = (Boolean)flightJSON.get(FLIGHTS_LAYOVER);
-                
-                // If the flight has layovers
-                if (layover) {
-                    ArrayList<Flight> flightList = new ArrayList<Flight>();
-                    JSONArray flightArray = (JSONArray)flightJSON.get(FLIGHTS_FLIGHT_LIST);
-                    for (int j = 0; j < flightArray.size(); j++) {
-                        UUID flightID = UUID.fromString((String)flightArray.get(j));
-                        Flight flight = FlightList.getFlight(flightID);
-                        flightList.add(flight);
+                String departingGate = (String) flightJSON.get(FLIGHTS_DEPARTING_GATE);
+                String destGate = (String) flightJSON.get(FLIGHTS_DEST_GATE);
+
+                // Get all the UUIDS of the seats
+                // Search the seatings list for those seats
+                // Add those seats to seats
+                HashMap<String, Seating> seats = new HashMap<>();
+                JSONArray seatsArray = (JSONArray) flightJSON.get(FLIGHTS_INDIVIDUALBOOKINGS_LIST);
+                if (seatsArray != null) {
+                    for (int j = 0; j < seatsArray.size(); j++) {
+                        UUID seatID = UUID.fromString((String) seatsArray.get(j));
+                        Seating seat = seatingList.get(seatID);
+                        String seatNum = seat.getNumber();
+                        seats.put(seatNum, seat);
                     }
-                    int numStops = ((Long) flightJSON.get(FLIGHTS_NUM_STOPS)).intValue();
-                    Double discountPercent = 0.8; // All are 0.8 for simplicity
-
-                    flightToAdd = new Flight(date, departingAirport, destAirport,
-                    takeOffTime, landingTime, totalFlightTime, layover, flightList,
-                    numStops, discountPercent, id, company);
-                } else {
-                    // otherwise normal flight
-                    String departingGate = (String) flightJSON.get(FLIGHTS_DEPARTING_GATE);
-                    String destGate = (String) flightJSON.get(FLIGHTS_DEST_GATE);
-
-                    // Get all the UUIDS of the seats
-                    // Search the seatings list for those seats
-                    // Add those seats to seats
-                    HashMap<String, Seating> seats = new HashMap<>();
-                    JSONArray seatsArray = (JSONArray) flightJSON.get(FLIGHTS_INDIVIDUALBOOKINGS_LIST);
-                    if (seatsArray != null) {
-                        for (int j = 0; j < seatsArray.size(); j++) {
-                            UUID seatID = UUID.fromString((String) seatsArray.get(j));
-                            Seating seat = seatingList.get(seatID);
-                            String seatNum = seat.getNumber();
-                            seats.put(seatNum, seat);
-                        }
-                    }
-
-                    // Get the pricing hashmap
-                    HashMap<String, Integer> pricing = new HashMap<>();
-                    JSONArray pricingArray = (JSONArray) flightJSON.get(FLIGHTS_PRICING_LIST);
-                    if (pricingArray != null) {
-                        for (int j = 0; j < pricingArray.size(); j++) {
-                            String toSplit = (String) pricingArray.get(j);
-                            String[] split = toSplit.split(":");
-                            String cabin = split[0];
-                            int price = Integer.parseInt(split[1]);
-                            pricing.put(cabin, price);
-                        }
-                    }
-
-                    flightToAdd = new Flight(date, departingAirport, destAirport,
-                    takeOffTime, landingTime, totalFlightTime, layover, company,
-                    pricing, seats, id, departingGate, destGate);
                 }
 
+                // Get the pricing hashmap
+                HashMap<String, Integer> pricing = new HashMap<>();
+                JSONArray pricingArray = (JSONArray) flightJSON.get(FLIGHTS_PRICING_LIST);
+                if (pricingArray != null) {
+                    for (int j = 0; j < pricingArray.size(); j++) {
+                        String toSplit = (String) pricingArray.get(j);
+                        String[] split = toSplit.split(":");
+                        String cabin = split[0];
+                        int price = Integer.parseInt(split[1]);
+                        pricing.put(cabin, price);
+                    }
+                }
+
+                flightToAdd = new Flight(date, departingAirport, destAirport,
+                takeOffTime, landingTime, totalFlightTime, layover, company,
+                pricing, seats, id, departingGate, destGate);
+
                 flights.add(flightToAdd);
+
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        // Add layover flights after creating all other flights
+        ArrayList<Flight> layoverFlights = getFlightsWithLayovers(flights);
+        for (Flight flight : layoverFlights) {
+            flights.add(flight);
+        }
+
         return flights;
     }
 

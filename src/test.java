@@ -28,6 +28,11 @@ public class test {
         // LocalDate date2 = LocalDate.parse(date, formatter);
         // System.out.println(date2);
 
+
+        // System.out.println(flights.size());
+        // for (Flight flight : flights) {
+        //     System.out.println(flight.getIsLayover());
+        // }
         
 
         // String toSplit = "Standard:45";
@@ -35,8 +40,8 @@ public class test {
         // System.out.println(split[0]);
         // System.out.println(split[1]);
         // testUserList(users.get(0));
-        // testFlightList(flights.get(0));
-        testHotelList(hotels.get(0));
+        testFlightList(flights.get(3));
+        // testHotelList(hotels.get(0));
         System.out.println(UUID.randomUUID());
     }
 
@@ -72,7 +77,8 @@ public class test {
     /**
      * Basic loading of the flight (name, date, etc): PASS
      * Loading of pricing hashmap: PASS
-     * Loading of seating hashmap: Pass
+     * Loading of seating hashmap: PASS
+     * Loading of flights with layovers: PASS
      * @param flight The flight being tested
      * @TEST
      */
@@ -94,12 +100,19 @@ public class test {
         System.out.println(flight.getPrice("Main Cabin"));
         System.out.println(flight.getPrice("Economy"));
 
-        HashMap<String, Seating> seats = flight.getSeating();
+        // HashMap<String, Seating> seats = flight.getSeating();
 
 
-        System.out.println(seats.get("D1").getIsMedicalSeat());
+        // System.out.println(seats.get("D1").getIsMedicalSeat());
 
         System.out.println(flight.getDate());
+
+        if (flight.getIsLayover()) {
+            for (Flight flight2 : flight.getFlights()) {
+                System.out.println("TESTING LAYOVER FLIGHTS");
+                testFlightList(flight2);
+            }
+        }
 
         // testFlightList(FlightList.getFlight(flight.getID()));
     }
