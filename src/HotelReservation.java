@@ -65,13 +65,14 @@ public class HotelReservation extends Reservation {
     public String toString() {
         String ret = "";
 
-        ret += "\n- - - - - ";
+        ret += "\n----- ";
         ret += hotel.getCompany();
-        ret += " Hotel Reservation - - - - -\n\n";
+        ret += " Hotel Reservation -----\n\n";
         ret += "Total Price: $" + getPrice() + "\n";
-        ret += "Room Type: " + room.getType() + "\n"; 
-        ret += "Check-In Date: " + dateFormat.format(checkInDate) + "\n";
-        ret += "Check-Out Date: " + dateFormat.format(checkOutDate) + "\n";
+        ret += "Room Type: " + room.getType() + "\n";
+        ret += "Room Number: " + room.getNumber() + "\n"; 
+        ret += "Check-In Date: " + checkInDate + "\n";
+        ret += "Check-Out Date: " + checkOutDate + "\n";
         ret += "Address: " + hotel.getAddress() + "\n\n";
 
         return ret;

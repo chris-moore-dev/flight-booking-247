@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.*;
 public class RegisteredUser extends User {
     private UUID userID;
-    protected String firstName;
+    private String firstName;
     private String lastName;
     private String email;
     private int age;
@@ -30,21 +30,21 @@ public class RegisteredUser extends User {
     /**
      * Constructor to use when first createing a registered user
      * Will create a new random UUID for the user
-     * @param firstName
-     * @param lastName
-     * @param email
-     * @param age
-     * @param address
-     * @param password
-     * @param gender
-     * @param preferredAirport
-     * @param frequentFlyer
-     * @param admin
-     * @param medicalCondition
-     * @param blackListedAirports
-     * @param tickets
-     * @param hotelReservations
-     * @param friends
+     * @param firstName The first name
+     * @param lastName The last name
+     * @param email The email
+     * @param age The age
+     * @param address The address
+     * @param password The password
+     * @param gender The gender
+     * @param preferredAirport The preferred airport
+     * @param frequentFlyer The frequent flyer status
+     * @param admin The admin status
+     * @param medicalCondition The medical condition status
+     * @param blackListedAirports The black listed airports
+     * @param tickets The tickets
+     * @param hotelReservations The hotel reservations
+     * @param friends The friends
      */
     RegisteredUser(String firstName, String lastName, String email,
     int age, String address, String password, String gender, 
@@ -79,22 +79,22 @@ public class RegisteredUser extends User {
 
     /**
      * Constructor to use when loading from json data base
-     * @param userID
-     * @param firstName
-     * @param lastName
-     * @param email
-     * @param age
-     * @param address
-     * @param password
-     * @param gender
-     * @param preferredAirport
-     * @param frequentFlyer
-     * @param admin
-     * @param medicalCondition
-     * @param blackListedAirports
-     * @param tickets
-     * @param hotelReservations
-     * @param friends
+     * @param userID The users ID
+     * @param firstName The first name
+     * @param lastName The last name
+     * @param email The email
+     * @param age The age
+     * @param address The address
+     * @param password The password
+     * @param gender The gender
+     * @param preferredAirport The preferred airport
+     * @param frequentFlyer The frequent flyer status
+     * @param admin The admin status
+     * @param medicalCondition The medical condition status
+     * @param blackListedAirports The blacklisted airports
+     * @param tickets The tickets
+     * @param hotelReservations The hotel reservaitons
+     * @param friends The friends
      */
     RegisteredUser(UUID userID, String firstName, String lastName, String email,
     int age, String address, String password, String gender, 

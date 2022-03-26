@@ -41,7 +41,7 @@ public class FlightList {
      * @param id The ID to be compared
      * @return The flight that corresponds with the ID
      */
-    public static Flight getFlight(UUID id) {
+    public Flight getFlight(UUID id) {
         for (Flight flight : flightList.flights) {
             if (flight.getID().equals(id)) {
                 return flight;

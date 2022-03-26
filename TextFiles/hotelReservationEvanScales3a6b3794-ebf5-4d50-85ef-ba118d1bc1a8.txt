@@ -1,0 +1,10 @@
+
+----- Motel 6 Hotel Reservation -----
+
+Total Price: $412
+Room Type: Upgraded
+Room Number: U1
+Check-In Date: 2022-08-08
+Check-Out Date: 2022-08-15
+Address: 123 Fake st, Charlotte, NC, 29708, USA
+

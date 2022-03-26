@@ -532,9 +532,10 @@ public class DataLoader extends DataConstants {
                 String gate = (String) ticketJSON.get(TICKETS_GATE);
                 int numOfCheckedBags = ((Long) ticketJSON.get(TICKETS_CHECKED_BAGS)).intValue();
                 UUID flightID = UUID.fromString((String) ticketJSON.get(TICKETS_FLIGHT_ID));
-                Flight flight = FlightList.getFlight(flightID);
-                UUID seatID = UUID.fromString((String) ticketJSON.get(TICKETS_SEAT_ID));
-                Seating seat = seatingList.get(seatID);
+                FlightList list = FlightList.getInstance();
+                Flight flight = list.getFlight(flightID);
+                // UUID seatID = UUID.fromString((String) ticketJSON.get(TICKETS_SEAT_ID));
+                // Seating seat = seatingList.get(seatID);
                 String firstName = (String) ticketJSON.get(TICKETS_FIRST_NAME);
                 String lastName = (String) ticketJSON.get(TICKETS_LAST_NAME);
                 int price = ((Long) ticketJSON.get(TICKETS_PRICE)).intValue();
@@ -543,7 +544,7 @@ public class DataLoader extends DataConstants {
 
 
                 Ticket ticket = new Ticket(boardingGroup, boardingTime, gate,
-                name, numOfCheckedBags, flight, seat, firstName, lastName,
+                name, numOfCheckedBags, flight, null, firstName, lastName,
                 price, id);
 
                 ticketList.put(id, ticket);

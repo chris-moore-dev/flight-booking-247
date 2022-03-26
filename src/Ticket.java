@@ -72,9 +72,14 @@ public class Ticket extends Reservation {
   @Override
   public String toString() {
     String ret = "\n";
-    ret += name + ": \n" + "gate: " + gate + "\nBoarding Group: " +
-           boardingGroup + "\nBoarding Time: " + boardingTime + "\nBags: " +
-           numOfCheckedBags + "\nSeat: " + seat.getNumber();
+    ret += "----- " + flight.getDepartingAirport() + " -> ";
+    ret += flight.getDestAirport() + " " + flight.getDate() + " -----\n\n";
+    ret += "Boarding Group: " + boardingGroup + "\n";
+    ret += "Gate: " + gate + "\n";
+    ret += "Boarding Time: " + boardingTime + "\n";
+    ret += "Seat: " + seat.getNumber() + "\n";
+    ret += "Name: " + name + "\n";
+    ret += "Number of Checked Bags: " + numOfCheckedBags + "\n\n";
     return ret;
   }
   // Getters

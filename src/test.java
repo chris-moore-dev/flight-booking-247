@@ -40,13 +40,13 @@ public class test {
         // String[] split = toSplit.split(":");
         // System.out.println(split[0]);
         // System.out.println(split[1]);
-        testUserList(users.get(0));
+
+
+        // testUserList(users.get(0));
         // testFlightList(flights.get(3));
+        testHotelList(hotels.get(0));
 
 
-
-
-        // testHotelList(hotels.get(0));
         System.out.println(UUID.randomUUID());
     }
 
@@ -55,12 +55,13 @@ public class test {
      * Loading user by its self: PASS
      * Loading user with blackListed airports: PASS
      * Loading users with friends: PASS
-     * Loading users tickets:
+     * Loading users tickets: PASS
      * Loading users with reservations: 
      * @param user The users being tested
      * @TEST
      */
     public static void testUserList(RegisteredUser user) {
+        FlightSystem system = new FlightSystem();
         // Loading users by itself
         System.out.println(user.getFirstName());
 
@@ -80,7 +81,24 @@ public class test {
 
         // Loding with reservations
         ArrayList<HotelReservation> reservations = user.getHotelReservations();
-        System.out.println(reservations.get(0).getHotel().getCompany());
+        HotelReservation res = reservations.get(0);
+        HashMap<String, Room> rooms = res.getHotel().getRooms();
+        Room room = rooms.get("U1");
+        res.setRoom(room);
+        System.out.println(res);
+        system.printHotelReservationToFile(res);
+
+        // Loading with tickets
+        ArrayList<Ticket> tickets = user.getTickets();
+        Ticket ticket = tickets.get(0);
+        // System.out.println(ticket.getFlight().getCompany());
+        HashMap<String, Seating> seats = ticket.getFlight().getSeating();
+        Seating seat = seats.get("A1");
+        ticket.setSeat(seat);
+
+        system.printTicketToFile(ticket);
+
+        System.out.println(ticket);
     }
 
     /**
@@ -152,9 +170,7 @@ public class test {
         ArrayList<Review> reviews = hotel.getReviews();
         Review review = reviews.get(0);
         // if (review == null) System.out.println("fuck");
-        System.out.println(review.getComment());
-        System.out.println(review.getRating());
-        System.out.println(review.getUser());
+        System.out.println(review);
     }
 
     

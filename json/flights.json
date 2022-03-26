@@ -17,7 +17,7 @@
         "numStops" : 0,
         "discountPercent" : 0,
         "pricing" : [
-            "First:200",
+            "First:600",
             "Main Cabin:400",
             "Economy:370"
         ],

@@ -23,7 +23,7 @@ public abstract class Reservation {
   Reservation(String reservationHolderFirstName,
   String reservationHolderLastName, int price) {
     setID(null);
-    setReservationHolderLastName(reservationHolderLastName);
+    setReservationHolderFirstName(reservationHolderFirstName);
     setPrice(price);
     setReservationHolderLastName(reservationHolderLastName);
   }
@@ -39,7 +39,7 @@ public abstract class Reservation {
   Reservation(String reservationHolderFirstName,
   String reservationHolderLastName, int price, UUID id) {
     setID(id);
-    setReservationHolderLastName(reservationHolderLastName);
+    setReservationHolderFirstName(reservationHolderFirstName);
     setPrice(price);
     setReservationHolderLastName(reservationHolderLastName);
   }
@@ -88,6 +88,9 @@ public abstract class Reservation {
  */
   public void setReservationHolderLastName(String reservationHolderLastName) {
     this.reservationHolderLastName = reservationHolderLastName;
+  }
+  public void setReservationHolderFirstName(String reservationHolderFirstName) {
+    this.reservationHolderFirstName = reservationHolderFirstName;
   }
 /**
  * 
