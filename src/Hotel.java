@@ -70,7 +70,9 @@ public class Hotel extends ObjectToBeBooked {
    * @return
    */
   public String printRooms() {
-
+    String ret;
+  
+    return ret;
   }
 
   /**
@@ -111,7 +113,7 @@ public class Hotel extends ObjectToBeBooked {
    * @param review
    */
   public void removeReview(Review review) {
-    reviews.remove(review)
+    reviews.remove(review);
   }
 
   // GETTERS
