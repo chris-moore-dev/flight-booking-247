@@ -1,17 +1,17 @@
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 /**
- * A class to write data to the flight, user and hotel lists
+ * A class to write data to the flight, user and hotel JSON files
  * @author Mario Misencik
  */
 public class DataWriter extends DataConstants {
     
     /**
-     * Saves flights to the list
+     * Saves flights to the flight JSON file
      */
     public static void saveFlights() {
         FlightList flightList = FlightList.getInstance();
@@ -45,17 +45,29 @@ public class DataWriter extends DataConstants {
         flightDetails.put(FLIGHTS_TOTAL_TIME, flight.getTotalFlightTime());
         flightDetails.put(FLIGHTS_LAYOVER, flight.getIsLayover());
         flightDetails.put(FLIGHTS_DEPARTING_GATE, flight.getDepartingGate());
-        // To-do: destination gate (no getter)
-        flightDetails.put(FLIGHTS_FLIGHT_LIST, flight.getFlights());
+        flightDetails.put(FLIGHTS_DEST_GATE, flight.getDestGate());
+        JSONArray flightsArray = new JSONArray();
+        for (Flight flt : flight.getFlights()) {
+            flightsArray.add(flt);
+        }
+        flightDetails.put(FLIGHTS_FLIGHT_LIST, flightsArray);
         flightDetails.put(FLIGHTS_NUM_STOPS, flight.getNumStops());
-        // To-do: discount percentage (no data constant)
-        flightDetails.put(FLIGHTS_PRICING_LIST, flight.getPricing());
-        // To-do: individual bookings (no getter)
+        flightDetails.put("discountPercent", flight.getDiscountPercent());
+        JSONArray priceArray = new JSONArray();
+        for (Map.Entry price : flight.getPricing().entrySet()) {
+            priceArray.add(price);
+        }
+        flightDetails.put(FLIGHTS_PRICING_LIST, priceArray);
+        JSONArray seatArray = new JSONArray();
+        for (Map.Entry seat : flight.getSeating().entrySet()) {
+            seatArray.add(seat);
+        }
+        flightDetails.put(FLIGHTS_INDIVIDUALBOOKINGS_LIST, seatArray);
         return flightDetails;
     }
 
     /**
-     * Saves users to the list
+     * Saves users to the user JSON file
      */
     public static void saveUsers() {
         UserList userList = UserList.getInstance();
@@ -80,7 +92,7 @@ public class DataWriter extends DataConstants {
     public static JSONObject getUserJSON(RegisteredUser user) {
         JSONObject userDetails = new JSONObject();
         userDetails.put(USERS_ID, user.getUUID().toString());
-        userDetails.put(USERS_FIRST_NAME, user.getFirstname());
+        userDetails.put(USERS_FIRST_NAME, user.getFirstName());
         userDetails.put(USERS_LAST_NAME, user.getLastName());
         userDetails.put(USERS_EMAIL, user.getEmail());
         userDetails.put(USERS_AGE, user.getAge());
@@ -96,14 +108,26 @@ public class DataWriter extends DataConstants {
             blackListedAirportsArray.add(bla);
         }
         userDetails.put(USERS_BLACKLISTED_AIRPORTS, blackListedAirportsArray);
-        userDetails.put(USERS_TICKETS_LIST, user.getTickets());
-        userDetails.put(USERS_HOTEL_RESERVATIONS_LIST, user.getHotelReservations());
-        userDetails.put(USERS_FRIENDS_LIST, user.getFriends());
+        JSONArray ticketArray = new JSONArray();
+        for (Ticket tick : user.getTickets()) {
+            ticketArray.add(tick);
+        }
+        userDetails.put(USERS_TICKETS_LIST, ticketArray);
+        JSONArray reservationArray = new JSONArray();
+        for (HotelReservation reserv : user.getHotelReservations()) {
+            reservationArray.add(reserv);
+        }
+        userDetails.put(USERS_HOTEL_RESERVATIONS_LIST, reservationArray);
+        JSONArray friendArray = new JSONArray();
+        for (Friend friend : user.getFriends()) {
+            friendArray.add(friend);
+        }
+        userDetails.put(USERS_FRIENDS_LIST, friendArray);
         return userDetails;
     }
 
     /**
-     * Saves hotels to the list
+     * Saves hotels to the hotel JSON file
      */
     public static void saveHotels() {
         HotelList hotelList = HotelList.getInstance();
@@ -120,6 +144,11 @@ public class DataWriter extends DataConstants {
         }
     }
 
+    /**
+     * 
+     * @param hotel
+     * @return
+     */
     public static JSONObject getHotelJSON(Hotel hotel) {
         JSONObject hotelDetails = new JSONObject();
         hotelDetails.put(HOTELS_ID, hotel.getID().toString());
@@ -127,10 +156,26 @@ public class DataWriter extends DataConstants {
         hotelDetails.put(HOTELS_CITY, hotel.getCity());
         hotelDetails.put(HOTELS_CLOSEST_AIRPORT, hotel.getClosestAirport());
         hotelDetails.put(HOTELS_ADDRESS, hotel.getAddress());
-        hotelDetails.put(HOTELS_AMMENITIES_LIST, hotel.getAmenities());
-        hotelDetails.put(HOTELS_PRICING_LIST, hotel.getPricing());
-        // To-do: individual bookings (no getter)
-        hotelDetails.put(HOTELS_REVIEWS_LIST, hotel.getReviews());
+        JSONArray amenitiesArray = new JSONArray();
+        for (String amen : hotel.getAmenities()) {
+            amenitiesArray.add(amen);
+        }
+        hotelDetails.put(HOTELS_AMMENITIES_LIST, amenitiesArray);
+        JSONArray priceArray = new JSONArray();
+        for (Map.Entry price : hotel.getPricing().entrySet()) {
+            priceArray.add(price);
+        }
+        hotelDetails.put(HOTELS_PRICING_LIST, priceArray);
+        JSONArray roomArray = new JSONArray();
+        for (Map.Entry room : hotel.getRooms().entrySet()) {
+            roomArray.add(room);
+        }
+        hotelDetails.put(HOTELS_INDIVIDUALBOOKINGS_LIST, roomArray);
+        JSONArray reviewArray = new JSONArray();
+        for (Review rev : hotel.getReviews()) {
+            reviewArray.add(rev);
+        }
+        hotelDetails.put(HOTELS_REVIEWS_LIST, reviewArray);
         return hotelDetails;
     }
 
