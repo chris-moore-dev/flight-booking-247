@@ -41,7 +41,7 @@ public abstract class DataConstants {
     protected static final String HOTELS_FILE_NAME = "flight-booking/json/hotels.json";
     protected static final String HOTELS_ID = "hotelID";
     protected static final String HOTELS_COMPANY = "company";
-    protected static final String HOTELS_CLOSEST_AIRPORT = "closestAirport";
+    protected static final String HOTELS_CLOSEST_AIRPORT = "closestAirportCode";
     protected static final String HOTELS_ADDRESS = "address";
     protected static final String HOTELS_AMMENITIES_LIST = "ammenities";
     protected static final String HOTELS_PRICING_LIST = "pricing";
@@ -59,12 +59,12 @@ public abstract class DataConstants {
     protected static final String RESERVATIONS_LAST_NAME = "lastName";
     protected static final String RESERVATIONS_CHECK_IN_DATE = "checkInDate";
     protected static final String RESERVATIONS_CHECK_OUT_DATE = "checkOutDate";
-    protected static final String RESERVATIONS_NUM_GUESTS = " numGuests";
+    protected static final String RESERVATIONS_NUM_GUESTS = "numGuests";
 
     // Reviews
     protected static final String REVIEWS_FILE_NAME = "flight-booking/json/reviews.json";
     protected static final String REVIEWS_ID = "reviewID";
-    protected static final String REVIEWS_USER_ID = "userID";
+    protected static final String REVIEWS_USER = "user";
     protected static final String REVIEWS_COMMENT = "comment";
     protected static final String REVIEWS_RATING = "rating";
 

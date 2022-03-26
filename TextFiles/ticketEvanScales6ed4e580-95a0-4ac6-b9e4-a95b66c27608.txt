@@ -1,0 +1,10 @@
+
+----- CLT -> BOS 2022-08-08 -----
+
+Boarding Group: 1A
+Gate: 36
+Boarding Time: 5:30 AM
+Seat: A1
+Name: Evan Scales
+Number of Checked Bags: 0
+

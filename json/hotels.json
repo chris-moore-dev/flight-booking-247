@@ -1,3 +1,22 @@
 [
-    
+    {
+        "hotelID" : "f1d55ce9-5328-4897-9cb4-ce123fd804f2",
+        "company" : "Motel 6",
+        "city" : "Charlotte",
+        "closestAirportCode" : "CLT",
+        "address" : "123 Fake st, Charlotte, NC, 29708, USA",
+        "ammenities" : [
+           "Pool",
+           "WiFi"
+        ],
+        "pricing" : [
+            "Standard:45",
+            "Upgraded:60"
+        ],
+        "individualBookings" : [ 
+        ],
+        "reviews" : [
+            "6475d567-72f1-4eed-9e3a-8bbb71270125"  
+        ]
+    }
 ]

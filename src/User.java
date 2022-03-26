@@ -104,7 +104,16 @@ public class User {
    * @param closestAirport
    * @return
    */
-  public ArrayList<Hotel> getHotels(String closestAirport) {
+  public ArrayList<Hotel> getHotelsByAirport(String closestAirport) {
+
+  }
+
+  /**
+   * 
+   * @param city
+   * @return
+   */
+  public ArrayList<Hotel> getHotelsByCity(String city) {
 
   }
 
@@ -132,7 +141,7 @@ public class User {
    * @param hotels
    */
   public void filterHotelsByAmmenities(ArrayList<String> ammenities, ArrayList<Hotel> hotels) {
-
+    
   }
 
   /**

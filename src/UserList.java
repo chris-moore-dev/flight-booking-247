@@ -47,7 +47,7 @@ public class UserList {
      * @param id The ID to be compared
      * @return The user that corresponds with the ID
      */
-    public static RegisteredUser getUser(UUID id) {
+    public RegisteredUser getUser(UUID id) {
         for (RegisteredUser user : userList.users) {
             if (user.getUUID().equals(id)) {
                 return user;

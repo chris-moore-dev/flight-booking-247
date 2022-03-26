@@ -6,7 +6,7 @@ import java.util.*;
 public class Review {
   private int rating;
   private String comment;
-  private RegisteredUser user;
+  private String user;
   private UUID id;
 
 /**
@@ -16,7 +16,7 @@ public class Review {
  * @param user
  * @param id
  */
-  Review(int rating, String comment, RegisteredUser user, UUID id) {
+  Review(int rating, String comment, String user, UUID id) {
     setRating(rating);
     setComment(comment);
     setUser(user);
@@ -29,7 +29,7 @@ public class Review {
    * @param comment
    * @param user
    */
-  Review(int rating, String comment, RegisteredUser user) {
+  Review(int rating, String comment, String user) {
     setRating(rating);
     setComment(comment);
     setUser(user);
@@ -38,7 +38,7 @@ public class Review {
   // Member functions
   public String toString() {
     String ret;
-    ret = "\nUser: " + user.getFirstName() + " " + user.getLastName() +
+    ret = "\nUser: " + user + " "  +
           "\nRating: " + rating + "\n" + comment;
     return ret;
   }
@@ -65,7 +65,7 @@ public class Review {
    * 
    * @return
    */
-  public RegisteredUser getUser() {
+  public String getUser() {
     return this.user;
   }
 
@@ -99,7 +99,7 @@ public class Review {
    * 
    * @param user
    */
-  public void setUser(RegisteredUser user) {
+  public void setUser(String user) {
     this.user = user;
   }
 

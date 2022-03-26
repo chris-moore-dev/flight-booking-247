@@ -33,6 +33,7 @@ public class Hotel extends ObjectToBeBooked {
     super(company, pricing);
     setAddress(address);
     setReviews(reviews);
+    setClosestAirport(closestAirport);
     setAmenities(amenities);
     setCity(city);
     setRooms(rooms);
@@ -56,6 +57,7 @@ public class Hotel extends ObjectToBeBooked {
     super(company, pricing, id);
     setAddress(address);
     setReviews(reviews);
+    setClosestAirport(closestAirport);
     setAmenities(amenities);
     setCity(city);
     setRooms(rooms);
@@ -94,6 +96,22 @@ public class Hotel extends ObjectToBeBooked {
    */
   public void unBook(String roomNum) {
 
+  }
+
+  /**
+   * 
+   * @param review
+   */
+  public void addReview(Review review) {
+    reviews.add(review);
+  }
+
+  /**
+   * 
+   * @param review
+   */
+  public void removeReview(Review review) {
+    reviews.remove(review)
   }
 
   // GETTERS
@@ -189,10 +207,10 @@ public class Hotel extends ObjectToBeBooked {
   }
 
   public void setRooms(HashMap<String, Room> rooms) {
-    if (rooms != null) 
-      this.rooms = rooms;
-    else
+    if (rooms.isEmpty() || rooms == null)
       this.rooms = makeRooms();
+    else
+    this.rooms = rooms;
   }
 
 

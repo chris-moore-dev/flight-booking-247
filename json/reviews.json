@@ -1,3 +1,8 @@
 [
-    
+    {
+        "reviewID" : "6475d567-72f1-4eed-9e3a-8bbb71270125",
+        "user" : "Evan Scales",
+        "comment" : "Really nice hotel!",
+        "rating" : 4
+    }
 ]

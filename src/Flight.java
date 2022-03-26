@@ -21,23 +21,22 @@ public class Flight extends ObjectToBeBooked {
   private String departingGate;
   private String destGate;
 
-  // WHEN USING THE FIRST CONSTRUTOR MAKE IT SO SEATS ARE AUTIMATICLLY GENERATED
-
 
   /**
-   * 
-   * @param date
-   * @param departingAirport
-   * @param destAirport
-   * @param takeOffTime
-   * @param landingTime
-   * @param totalFlightTime
-   * @param layover
-   * @param company
-   * @param pricing
-   * @param seats
-   * @param departingGate
-   * @param destGate
+   * Constructor to use when first making a flight
+   * Use for normal flights
+   * @param date The date of the flight
+   * @param departingAirport The departing airport
+   * @param destAirport The dest airport
+   * @param takeOffTime The take off time
+   * @param landingTime The landing time
+   * @param totalFlightTime The total flight time
+   * @param layover If the flight has a layover, always false
+   * @param company The company
+   * @param pricing The pricing hashmap
+   * @param seats The seats hashmap
+   * @param departingGate The departing gatew
+   * @param destGate The arriving gate
    */
   Flight(LocalDate date, String departingAirport, String destAirport,
   String takeOffTime, String landingTime, String totalFlightTime,
@@ -57,20 +56,21 @@ public class Flight extends ObjectToBeBooked {
   }
 
   /**
-   * 
-   * @param date
-   * @param departingAirport
-   * @param destAirport
-   * @param takeOffTime
-   * @param landingTime
-   * @param totalFlightTime
-   * @param layover
-   * @param company
-   * @param pricing
-   * @param seats
-   * @param id
-   * @param departingGate
-   * @param destGate
+   * Constructor to use when loading flights from database
+   * Use for normal Flights
+   * @param date The date oif the flight
+   * @param departingAirport The departing airport
+   * @param destAirport The dest airport
+   * @param takeOffTime The take off time
+   * @param landingTime The landing time
+   * @param totalFlightTime The total time
+   * @param layover If the flight has a layover, always false
+   * @param company The company
+   * @param pricing The pricing hashmap
+   * @param seats The seats hashmap
+   * @param id The id
+   * @param departingGate The departing gate
+   * @param destGate The arriving gate
    */
   Flight(LocalDate date, String departingAirport, String destAirport,
   String takeOffTime, String landingTime, String totalFlightTime,
@@ -107,6 +107,18 @@ public class Flight extends ObjectToBeBooked {
   String landingTime, String totalFlightTime, Boolean layover, ArrayList<Flight> flights,
   int numStops, double discountPercent, String company) {
     super(company, null);
+    HashMap<String, Integer> pricing = discountLayoverPrice(flights, discountPercent);
+    setPricingMap(pricing);
+    setDate(date);
+    setDepartingAirport(departingAirport);
+    setDestAirport(destAirport);
+    setTakeOffTime(takeOffTime);
+    setLandingTime(landingTime);
+    setTotalFlightTime(totalFlightTime);
+    setIsLayover(layover);
+    setFlights(flights);
+    setNumStops(numStops);
+    setDiscountPercent(discountPercent);
   }
 
   /**
@@ -128,9 +140,52 @@ public class Flight extends ObjectToBeBooked {
   String landingTime, String totalFlightTime, Boolean layover, ArrayList<Flight> flights,
   int numStops, double discountPercent, UUID id, String company) {
     super(company, null, id);
+    HashMap<String, Integer> pricing = discountLayoverPrice(flights, discountPercent);
+    setPricingMap(pricing);
+    setDate(date);
+    setDepartingAirport(departingAirport);
+    setDestAirport(destAirport);
+    setTakeOffTime(takeOffTime);
+    setLandingTime(landingTime);
+    setTotalFlightTime(totalFlightTime);
+    setIsLayover(layover);
+    setFlights(flights);
+    setNumStops(numStops);
+    setDiscountPercent(discountPercent);
   }
 
   // Member functions
+
+  /**
+   * Sets the new pricing hashmap for flights with layovers
+   * To find the pricing of a flight with layover add up each corresponding cabin price
+   * for each connecting flight. Then discount that by 20% to get the new pricing map
+   * @param flights The connecitng flights
+   * @param discountPercent The discount number (0.8)
+   * @return The new pricing map
+   */
+  private HashMap<String, Integer> discountLayoverPrice(ArrayList<Flight> flights, double discountPercent) {
+    HashMap<String, Integer> ret = new HashMap<>();
+
+    for (Flight flight : flights) {
+      HashMap<String, Integer> pricingMap = flight.getPricing();
+      for (String key : pricingMap.keySet()) {
+        int value = pricingMap.get(key);
+        if (ret.containsKey(key)) {
+          ret.put(key, ret.get(key) + value);
+        } else {
+          ret.put(key, value);
+        }
+      }
+    }
+
+    for (String key : ret.keySet()) {
+      int value = (int) Math.round(ret.get(key) * discountPercent);
+      ret.put(key, value);
+    }
+
+    return ret;
+  }
 
   /**
    * 
