@@ -49,8 +49,10 @@ public class DataWriter extends DataConstants {
         flightDetails.put(FLIGHTS_DEPARTING_GATE, flight.getDepartingGate());
         flightDetails.put(FLIGHTS_DEST_GATE, flight.getDestGate());
         JSONArray flightsArray = new JSONArray();
-        for (Flight flt : flight.getFlights()) {
-            flightsArray.add(flt.getID().toString());
+        if (flight.getIsLayover()) {
+            for (Flight flt : flight.getFlights()) {
+                flightsArray.add(flt.getID().toString());
+            }
         }
         flightDetails.put(FLIGHTS_FLIGHT_LIST, flightsArray);
         flightDetails.put(FLIGHTS_NUM_STOPS, flight.getNumStops());
@@ -61,9 +63,14 @@ public class DataWriter extends DataConstants {
         }
         flightDetails.put(FLIGHTS_PRICING_LIST, priceArray);
         JSONArray seatArray = new JSONArray();
-        for (Map.Entry<String, Seating> seat : flight.getSeating().entrySet()) {
-            seatArray.add(seat.getValue().getID().toString());
+        if (!flight.getIsLayover()) {
+            for (Seating seat : flight.getSeating().values()) {
+                seatArray.add(seat.getID().toString());
+            }
         }
+        // for (Map.Entry<String, Seating> seat : flight.getSeating().entrySet()) {
+        //     seatArray.add(seat.getValue().getID().toString());
+        // }
         flightDetails.put(FLIGHTS_INDIVIDUALBOOKINGS_LIST, seatArray);
         return flightDetails;
     }

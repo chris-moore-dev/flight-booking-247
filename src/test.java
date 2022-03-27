@@ -43,9 +43,20 @@ public class test {
 
 
         // testUserList(users.get(0));
-        // testFlightList(flights.get(3));
-        testHotelList(hotels.get(0));
+        // testFlightList(flights.get(0));
+        // testHotelList(hotels.get(0));
 
+        /**
+         * Testing save users
+         * @TEST
+         */
+        RegisteredUser test = new RegisteredUser("TEST", "TEST", "TEST",
+        0, "TEST", "TEST", "TEST", "TEST", false, false,
+        false, null, null, null, null);
+        users.add(test);
+        DataWriter.saveUsers();
+        DataWriter.saveFriends();
+        DataWriter.saveFlights();
 
         System.out.println(UUID.randomUUID());
     }
@@ -67,6 +78,8 @@ public class test {
 
         System.out.println(user.getAdmin());
 
+        // user.addBlackListedAirport("CLT");
+
         // Loading user with blackListed airports
         ArrayList<String> blackListedAirports = user.getBlackListedAirports();
         for (String blackListedAirport : blackListedAirports) {
@@ -80,25 +93,25 @@ public class test {
         }
 
         // Loding with reservations
-        ArrayList<HotelReservation> reservations = user.getHotelReservations();
-        HotelReservation res = reservations.get(0);
-        HashMap<String, Room> rooms = res.getHotel().getRooms();
-        Room room = rooms.get("U1");
-        res.setRoom(room);
-        System.out.println(res);
-        system.printHotelReservationToFile(res);
+        // ArrayList<HotelReservation> reservations = user.getHotelReservations();
+        // HotelReservation res = reservations.get(0);
+        // HashMap<String, Room> rooms = res.getHotel().getRooms();
+        // Room room = rooms.get("U1");
+        // res.setRoom(room);
+        // System.out.println(res);
+        // system.printHotelReservationToFile(res);
 
-        // Loading with tickets
-        ArrayList<Ticket> tickets = user.getTickets();
-        Ticket ticket = tickets.get(0);
-        // System.out.println(ticket.getFlight().getCompany());
-        HashMap<String, Seating> seats = ticket.getFlight().getSeating();
-        Seating seat = seats.get("A1");
-        ticket.setSeat(seat);
+        // // Loading with tickets
+        // ArrayList<Ticket> tickets = user.getTickets();
+        // Ticket ticket = tickets.get(0);
+        // // System.out.println(ticket.getFlight().getCompany());
+        // HashMap<String, Seating> seats = ticket.getFlight().getSeating();
+        // Seating seat = seats.get("A1");
+        // ticket.setSeat(seat);
 
-        system.printTicketToFile(ticket);
+        // system.printTicketToFile(ticket);
 
-        System.out.println(ticket);
+        // System.out.println(ticket);
     }
 
     /**
@@ -127,10 +140,13 @@ public class test {
         System.out.println(flight.getPrice("Main Cabin"));
         System.out.println(flight.getPrice("Economy"));
 
-        // HashMap<String, Seating> seats = flight.getSeating();
+        HashMap<String, Seating> seats = flight.getSeating();
+        for (Seating seat : seats.values()) {
+            System.out.println(seat.getID());
+        }
 
 
-        // System.out.println(seats.get("D1").getIsMedicalSeat());
+        System.out.println(seats.get("D1").getIsMedicalSeat());
 
         System.out.println(flight.getDate());
 
@@ -154,23 +170,24 @@ public class test {
      */
     public static void testHotelList(Hotel hotel) {
         System.out.println("-----TESTING HOTEL-----");
-        System.out.println(hotel.getID());
-        System.out.println(hotel.getCompany());
-        System.out.println(hotel.getCity());
-        System.out.println(hotel.getClosestAirport());
-        System.out.println(hotel.getAddress());
+        System.out.println(hotel);
+        // System.out.println(hotel.getID());
+        // System.out.println(hotel.getCompany());
+        // System.out.println(hotel.getCity());
+        // System.out.println(hotel.getClosestAirport());
+        // System.out.println(hotel.getAddress());
 
-        for (String s : hotel.getAmenities()) {
-            System.out.println(s);
-        }
+        // for (String s : hotel.getAmenities()) {
+        //     System.out.println(s);
+        // }
 
-        HashMap<String, Room> rooms = hotel.getRooms();
-        System.out.println(rooms.get("U1").getNumber());
+        // HashMap<String, Room> rooms = hotel.getRooms();
+        // System.out.println(rooms.get("U1").getNumber());
 
-        ArrayList<Review> reviews = hotel.getReviews();
-        Review review = reviews.get(0);
-        // if (review == null) System.out.println("fuck");
-        System.out.println(review);
+        // ArrayList<Review> reviews = hotel.getReviews();
+        // Review review = reviews.get(0);
+        // // if (review == null) System.out.println("fuck");
+        // System.out.println(review);
     }
 
     
