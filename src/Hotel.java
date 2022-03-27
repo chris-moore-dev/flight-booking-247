@@ -1,6 +1,7 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 
@@ -66,15 +67,13 @@ public class Hotel extends ObjectToBeBooked {
   // Member Functions
 
   /**
-   * Prints the Choose Room Type menu
-   * @return
+   * Use to print when choosing room type.
+   * Will print the room type and its price
+   * @param roomType The room type
+   * @return String holding all 
    */
-  public String printRooms() {
-    String ret = "";
-    int price1 = getPrice("S");
-    int price2 = getPrice("U");
-    ret = "- - - - - Choose Room Type - - - - - \n1.\nStandard          Price per Night: $" +
-          price1 + "\n\n2.\nUpgraded          Price per Night: $" + price2;
+  public String printRoomPrice(String roomType) {
+    String ret = roomType + "\t" + "Price per night: $" + getPrice(roomType);
     return ret;
   }
 
@@ -86,11 +85,16 @@ public class Hotel extends ObjectToBeBooked {
   public String toString() {
     String ret = "\n";
     String amenityList = "";
-    int averageprice = (getPrice("S") + getPrice("U"))/2;
+    Integer averagePrice = 0;
+    for (Map.Entry<String, Integer> entry : pricing.entrySet()) {
+      averagePrice += entry.getValue();
+    }
+    averagePrice = averagePrice/pricing.size();
+
     for (String amenity : amenities) {
       amenityList += amenity+", ";
     }
-    ret = company + "Average Price per Night: $" + averageprice + "\nAddress: " + address + "\nAmenities: " + amenityList;
+    ret = company + "Average Price per Night: $" + averagePrice + "\nAddress: " + address + "\nAmenities: " + amenityList;
     return ret;
   }
 
