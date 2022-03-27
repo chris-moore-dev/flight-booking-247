@@ -43,8 +43,14 @@ public class test {
 
 
         // testUserList(users.get(0));
-        testFlightList(flights.get(0));
+        // testFlightList(flights.get(0));
         // testHotelList(hotels.get(0));
+
+        RegisteredUser user = users.get(0);
+        Flight flight = flights.get(0);
+        Hotel hotel = hotels.get(0);
+
+        testRegisteredUserMethods(user, flight, hotel);
 
         /**
          * Testing save users
@@ -93,25 +99,66 @@ public class test {
         }
 
         // Loding with reservations
-        // ArrayList<HotelReservation> reservations = user.getHotelReservations();
-        // HotelReservation res = reservations.get(0);
-        // HashMap<String, Room> rooms = res.getHotel().getRooms();
-        // Room room = rooms.get("U1");
-        // res.setRoom(room);
-        // System.out.println(res);
-        // system.printHotelReservationToFile(res);
+        ArrayList<HotelReservation> reservations = user.getHotelReservations();
+        HotelReservation res = reservations.get(0);
+        HashMap<String, Room> rooms = res.getHotel().getRooms();
+        Room room = rooms.get("U1");
+        res.setRoom(room);
+        System.out.println(res);
+        system.printHotelReservationToFile(res);
 
-        // // Loading with tickets
-        // ArrayList<Ticket> tickets = user.getTickets();
-        // Ticket ticket = tickets.get(0);
-        // // System.out.println(ticket.getFlight().getCompany());
-        // HashMap<String, Seating> seats = ticket.getFlight().getSeating();
+        // Loading with tickets
+        ArrayList<Ticket> tickets = user.getTickets();
+        Ticket ticket = tickets.get(0);
+        // System.out.println(ticket.getFlight().getCompany());
+        Map<String, Seating> seats = ticket.getFlight().getSeating();
+        Seating seat = seats.get("A1");
+        ticket.setSeat(seat);
+
+        system.printTicketToFile(ticket);
+
+        System.out.println(ticket);
+    }
+
+    /**
+     * Book flight test: PASS
+     * Book Hotel test:
+     * @param user The user being tested
+     * @param flight Flight to test with
+     * @param hotel Hotel to test with
+     * @Test
+     */
+    public static void testRegisteredUserMethods(RegisteredUser user, Flight flight, Hotel hotel) {
+        FlightSystem system = new FlightSystem();
+        // ArrayList<Flight> flights = new ArrayList<>();
+        // ArrayList<Seating> seating = new ArrayList<>();
+        // ArrayList<Friend> ticketHolders = new ArrayList<>();
+
+        // flights.add(flight);
+
+        // Map<String, Seating> seats = flight.getSeating();
         // Seating seat = seats.get("A1");
-        // ticket.setSeat(seat);
+        // seating.add(seat);
 
-        // system.printTicketToFile(ticket);
+        // ticketHolders.add(user.getFriends().get(0));
+        // System.out.println(seat.getBooked());
 
-        // System.out.println(ticket);
+        // user.bookFlights(flights, seating, ticketHolders);
+
+        // System.out.println(seat.getBooked());
+
+        // ArrayList<Ticket> tickets = user.getTickets();
+        // system.printTicketToFile(tickets.get(1));
+        HashMap<String, Room> rooms = hotel.getRooms();
+        Room room = rooms.get("U1");
+        int numGuests = 1;
+        String cid;
+        String cod;
+        LocalDate checkInDate;
+        LocalDate checkOutDate;
+
+        user.bookHotel(hotel, room, numGuests, checkInDate, checkOutDate);
+        
     }
 
     /**
@@ -125,15 +172,19 @@ public class test {
     public static void testFlightList(Flight flight) {
         System.out.println("-----TESTING FLIGHT-----");
         System.out.println(flight);
-        Map<String, Seating> seats = flight.getSeating();
+        System.out.println(flight.printSeats());
+        flight.book("D30");
+        System.out.println(flight.printSeats());
+        // Map<String, Seating> seats = flight.getSeating();
 
 
-        for (String seatNum : seats.keySet()) {
-            System.out.println(seatNum);
-        }
+        // for (String seatNum : seats.keySet()) {
+        //     System.out.println(seatNum);
+        // }
 
 
         // System.out.println(flight.printSeats());
+
         // HashMap<String, Seating> seats = flight.getSeating();
         // System.out.println(seats.get("A11").getIsMedicalSeat());
         // System.out.println(flight.getID());
