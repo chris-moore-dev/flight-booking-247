@@ -49,6 +49,29 @@ public class Room extends IndividualBooking {
     setBookedDays(bookedDays);
     setNumBeds(numBeds);
   }
+  
+  /**
+   * toString for Room, makes a string representation of the room object
+   * @return String representation of room object
+   */
+  public String toString() {
+    String ret;
+    String status;
+    String smoking;
+    if (getBooked() == true) {
+      status = "Booked";
+    } else {
+      status = "Open";
+    }
+    if (smokingAllowed == true) {
+      smoking = "Smoking is allowed.";
+    } else {
+      smoking = "Smoking is not allowed.";
+    }
+    ret = "\nRoom " + getNumber() + "\nStatus: " + status + "\nType: " + getType() + "\nBeds: " + numBeds + "\n" + smoking +
+          "\nPrice: " + getPrice();
+    return ret;
+  }
 
   /**
    * Adds the booked days to the booked days list

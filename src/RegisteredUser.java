@@ -74,7 +74,7 @@ public class RegisteredUser extends User {
          * booking tickets easier by being able to fill in passenger info using the 
          * users friend list, which the user is a part of
          */
-        friends.add(new Friend(firstName, lastName, age, medicalCondition, gender, email, address));
+        this.friends.add(new Friend(firstName, lastName, age, medicalCondition, gender, email, address));
     }
 
     /**

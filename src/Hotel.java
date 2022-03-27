@@ -1,6 +1,7 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 
@@ -17,7 +18,7 @@ public class Hotel extends ObjectToBeBooked {
   private HashMap<String, Room> rooms;
 
   /**
-   * 
+   * Constructor
    * @param address
    * @param reviews
    * @param amenities
@@ -40,7 +41,7 @@ public class Hotel extends ObjectToBeBooked {
   }
 
   /**
-   * 
+   * Constructor
    * @param address
    * @param reviews
    * @param amenities
@@ -66,40 +67,59 @@ public class Hotel extends ObjectToBeBooked {
   // Member Functions
 
   /**
-   * 
-   * @return
+   * Use to print when choosing room type.
+   * Will print the room type and its price
+   * @param roomType The room type
+   * @return String holding all 
    */
-  public String printRooms() {
-
+  public String printRoomPrice(String roomType) {
+    String ret = roomType + "\t" + "Price per night: $" + getPrice(roomType);
+    return ret;
   }
 
   /**
-   * 
+   * Converts Hotel object into printable string
    * @return
    */
   @Override
   public String toString() {
+    String ret = "\n";
+    String amenityList = "";
+    Integer averagePrice = 0;
+    for (Map.Entry<String, Integer> entry : pricing.entrySet()) {
+      averagePrice += entry.getValue();
+    }
+    averagePrice = averagePrice/pricing.size();
 
+    for (String amenity : amenities) {
+      amenityList += amenity+", ";
+    }
+    ret = company + "Average Price per Night: $" + averagePrice + "\nAddress: " + address + "\nAmenities: " + amenityList;
+    return ret;
   }
 
   /**
-   * 
+   * Sets booked room to booked
    * @param roomNum
    */
   public void book(String roomNum) {
-
+    Room room = rooms.get(roomNum);
+    room.setBooked(true);
+    rooms.put(roomNum, room);
   }
 
   /**
-   * 
+   * Sets unbooked room to unbooked
    * @param roomNum
    */
   public void unBook(String roomNum) {
-
+    Room room = rooms.get(roomNum);
+    room.setBooked(false);
+    rooms.put(roomNum, room);
   }
 
   /**
-   * 
+   * Adds a review to Hotel
    * @param review
    */
   public void addReview(Review review) {
@@ -107,58 +127,58 @@ public class Hotel extends ObjectToBeBooked {
   }
 
   /**
-   * 
+   * Remvoes a review from the Hotel
    * @param review
    */
   public void removeReview(Review review) {
-    reviews.remove(review)
+    reviews.remove(review);
   }
 
   // GETTERS
 
   /**
-   * 
-   * @return
+   * Gets the address
+   * @return address
    */
   public String getAddress() {
     return this.address;
   }
 
   /**
-   *
-   * @return
+   * gets the list of reviews
+   * @return list of reviews
    */
   public ArrayList<Review> getReviews() {
     return this.reviews;
   }
 
   /**
-   * 
-   * @return
+   * gets the list of amenities
+   * @return list of amenities
    */
   public ArrayList<String> getAmenities() {
     return this.amenities;
   }
 
   /**
-   * 
-   * @return
+   * gets the closest airport
+   * @return closest airport
    */
   public String getClosestAirport() {
     return this.closestAirport;
   }
 
   /**
-   * 
-   * @return
+   * gets the city
+   * @return city
    */
   public String getCity() {
     return this.city;
   }
 
   /**
-   * 
-   * @return
+   * gets the list of rooms
+   * @return list of rooms
    */
   public HashMap<String, Room> getRooms() {
     return this.rooms;
@@ -167,45 +187,49 @@ public class Hotel extends ObjectToBeBooked {
   // SETTERS
 
   /**
-   * 
-   * @param address
+   * sets the address
+   * @param address address
    */
   public void setAddress(String address) {
     this.address = address;
   }
 
   /**
-   * 
-   * @param reviews
+   * sets the reviews to a list of reviews
+   * @param reviews a list of reviews
    */
   public void setReviews(ArrayList<Review> reviews) {
     this.reviews = reviews;
   }
 
   /**
-   * 
-   * @param amenities
+   * sets the amenities to a list of amenities
+   * @param amenities a list of amenities
    */
   public void setAmenities(ArrayList<String> amenities) {
     this.amenities = amenities;
   }
 
   /**
-   * 
-   * @param airport
+   * sets the closest airport to the airport passed
+   * @param airport airport
    */
   public void setClosestAirport(String airport) {
     this.closestAirport = airport;
   }
 
   /**
-   * 
-   * @param city
+   * sets the city to the city passed
+   * @param city city
    */
   public void setCity(String city) {
     this.city = city;
   }
 
+  /**
+   * Sets rooms to a list of rooms passed
+   * @param rooms list of rooms
+   */
   public void setRooms(HashMap<String, Room> rooms) {
     if (rooms.isEmpty() || rooms == null)
       this.rooms = makeRooms();

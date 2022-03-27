@@ -388,7 +388,10 @@ public class Flight extends ObjectToBeBooked {
    * @param flights
    */
   public void setFlights(ArrayList<Flight> flights) {
-    this.flights = flights;
+    if (flights != null)
+      this.flights = flights;
+    else
+      this.flights = new ArrayList<>();
   }
 
   /**
