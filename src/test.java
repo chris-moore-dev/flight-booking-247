@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.stream.Collectors;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -46,17 +47,36 @@ public class test {
         // testFlightList(flights.get(0));
         // testHotelList(hotels.get(0));
 
+        RegisteredUser user = users.get(0);
+        Flight flight = flights.get(0);
+        Hotel hotel = hotels.get(0);
+
+        String date1 = "03/07/2022";
+        String date2 = "03/09/2022";
+
+        // /**
+        //  * How to get number of nights to book for given 2 dates as strings
+        //  */
+        LocalDate tDate = LocalDate.parse(date1, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+        LocalDate tDate2 = LocalDate.parse(date2, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+        // List<LocalDate> listOfDates = tDate.datesUntil(tDate2)
+		// .collect(Collectors.toList());
+        // System.out.println(listOfDates.size());
+
+
+        // testRegisteredUserMethods(user, flight, hotel);
+
         /**
          * Testing save users
          * @TEST
          */
-        RegisteredUser test = new RegisteredUser("TEST", "TEST", "TEST",
-        0, "TEST", "TEST", "TEST", "TEST", false, false,
-        false, null, null, null, null);
-        users.add(test);
-        DataWriter.saveUsers();
-        DataWriter.saveFriends();
-        DataWriter.saveFlights();
+        // RegisteredUser test = new RegisteredUser("TEST", "TEST", "TEST",
+        // 0, "TEST", "TEST", "TEST", "TEST", false, false,
+        // false, null, null, null, null);
+        // users.add(test);
+        // DataWriter.saveUsers();
+        // DataWriter.saveFriends();
+        // DataWriter.saveFlights();
 
         System.out.println(UUID.randomUUID());
     }
@@ -93,25 +113,66 @@ public class test {
         }
 
         // Loding with reservations
-        // ArrayList<HotelReservation> reservations = user.getHotelReservations();
-        // HotelReservation res = reservations.get(0);
-        // HashMap<String, Room> rooms = res.getHotel().getRooms();
-        // Room room = rooms.get("U1");
-        // res.setRoom(room);
-        // System.out.println(res);
-        // system.printHotelReservationToFile(res);
+        ArrayList<HotelReservation> reservations = user.getHotelReservations();
+        HotelReservation res = reservations.get(0);
+        HashMap<String, Room> rooms = res.getHotel().getRooms();
+        Room room = rooms.get("U1");
+        res.setRoom(room);
+        System.out.println(res);
+        system.printHotelReservationToFile(res);
 
-        // // Loading with tickets
-        // ArrayList<Ticket> tickets = user.getTickets();
-        // Ticket ticket = tickets.get(0);
-        // // System.out.println(ticket.getFlight().getCompany());
-        // HashMap<String, Seating> seats = ticket.getFlight().getSeating();
+        // Loading with tickets
+        ArrayList<Ticket> tickets = user.getTickets();
+        Ticket ticket = tickets.get(0);
+        // System.out.println(ticket.getFlight().getCompany());
+        Map<String, Seating> seats = ticket.getFlight().getSeating();
+        Seating seat = seats.get("A1");
+        ticket.setSeat(seat);
+
+        system.printTicketToFile(ticket);
+
+        System.out.println(ticket);
+    }
+
+    /**
+     * Book flight test: PASS
+     * Book Hotel test:
+     * @param user The user being tested
+     * @param flight Flight to test with
+     * @param hotel Hotel to test with
+     * @Test
+     */
+    public static void testRegisteredUserMethods(RegisteredUser user, Flight flight, Hotel hotel) {
+        FlightSystem system = new FlightSystem();
+        // ArrayList<Flight> flights = new ArrayList<>();
+        // ArrayList<Seating> seating = new ArrayList<>();
+        // ArrayList<Friend> ticketHolders = new ArrayList<>();
+
+        // flights.add(flight);
+
+        // Map<String, Seating> seats = flight.getSeating();
         // Seating seat = seats.get("A1");
-        // ticket.setSeat(seat);
+        // seating.add(seat);
 
-        // system.printTicketToFile(ticket);
+        // ticketHolders.add(user.getFriends().get(0));
+        // System.out.println(seat.getBooked());
 
-        // System.out.println(ticket);
+        // user.bookFlights(flights, seating, ticketHolders);
+
+        // System.out.println(seat.getBooked());
+
+        // ArrayList<Ticket> tickets = user.getTickets();
+        // system.printTicketToFile(tickets.get(1));
+        HashMap<String, Room> rooms = hotel.getRooms();
+        Room room = rooms.get("U1");
+        int numGuests = 1;
+        String cid;
+        String cod;
+        LocalDate checkInDate;
+        LocalDate checkOutDate;
+
+        user.bookHotel(hotel, room, numGuests, checkInDate, checkOutDate);
+        
     }
 
     /**
@@ -124,38 +185,54 @@ public class test {
      */
     public static void testFlightList(Flight flight) {
         System.out.println("-----TESTING FLIGHT-----");
-        System.out.println(flight.getID());
-        System.out.println(flight.getCompany());
-        System.out.println(flight.getDate());
-        System.out.println(flight.getDepartingAirport());
-        System.out.println(flight.getDestAirport());
-        System.out.println(flight.getTakeOffTime());
-        System.out.println(flight.getLandingTime());
-        System.out.println(flight.getTotalFlightTime());
-        System.out.println(flight.getIsLayover());
-        System.out.println(flight.getDepartingGate());
+        System.out.println(flight);
+        System.out.println(flight.printSeats());
+        flight.book("D30");
+        System.out.println(flight.printSeats());
+        // Map<String, Seating> seats = flight.getSeating();
+
+
+        // for (String seatNum : seats.keySet()) {
+        //     System.out.println(seatNum);
+        // }
+
+
+        // System.out.println(flight.printSeats());
+
+        // HashMap<String, Seating> seats = flight.getSeating();
+        // System.out.println(seats.get("A11").getIsMedicalSeat());
+        // System.out.println(flight.getID());
+        // System.out.println(flight.getCompany());
+        // System.out.println(flight.getDate());
+        // System.out.println(flight.getDepartingAirport());
+        // System.out.println(flight.getDestAirport());
+        // System.out.println(flight.getTakeOffTime());
+        // System.out.println(flight.getLandingTime());
+        // System.out.println(flight.getTotalFlightTime());
+        // System.out.println(flight.getIsLayover());
+        // System.out.println(flight.getDepartingGate());
         
 
-        System.out.println(flight.getPrice("First"));
-        System.out.println(flight.getPrice("Main Cabin"));
-        System.out.println(flight.getPrice("Economy"));
+        // System.out.println(flight.getPrice("First"));
+        // System.out.println(flight.getPrice("Main Cabin"));
+        // System.out.println(flight.getPrice("Economy"));
 
-        HashMap<String, Seating> seats = flight.getSeating();
-        for (Seating seat : seats.values()) {
-            System.out.println(seat.getID());
-        }
+        // HashMap<String, Seating> seats = flight.getSeating();
+        // for (Seating seat : seats.values()) {
+        //     System.out.println(seat.getID());
+        // }
 
 
-        System.out.println(seats.get("D1").getIsMedicalSeat());
+        // System.out.println(seats.get("D1").getIsMedicalSeat());
 
-        System.out.println(flight.getDate());
+        // System.out.println(flight.getDate());
 
-        if (flight.getIsLayover()) {
-            for (Flight flight2 : flight.getFlights()) {
-                System.out.println("TESTING LAYOVER FLIGHTS");
-                testFlightList(flight2);
-            }
-        }
+        // if (flight.getIsLayover()) {
+        //     for (Flight flight2 : flight.getFlights()) {
+        //         System.out.println("TESTING LAYOVER FLIGHTS");
+        //         testFlightList(flight2);
+        //     }
+        // }
 
         // testFlightList(FlightList.getFlight(flight.getID()));
     }
