@@ -7,7 +7,7 @@ import java.util.UUID;
 
 /**
  * Hotel class
- * @author Chris Moore
+ * @author Chris Moore, Lyn Cork
  */
 public class Hotel extends ObjectToBeBooked {
   private String address;

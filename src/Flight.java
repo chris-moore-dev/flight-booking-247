@@ -1,8 +1,9 @@
 /**
  * Flight
- * @author Chris Moore, Evan Scales
+ * @author Chris Moore, Evan Scales, Lyn Cork
  */
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -90,7 +91,7 @@ public class Flight extends ObjectToBeBooked {
   }
 
   /**
-   * 
+   * Constructor
    * @param date
    * @param departingAirport
    * @param destAirport
@@ -122,7 +123,7 @@ public class Flight extends ObjectToBeBooked {
   }
 
   /**
-   * 
+   * Constructor
    * @param date
    * @param departingAirport
    * @param destAirport
@@ -188,138 +189,244 @@ public class Flight extends ObjectToBeBooked {
   }
 
   /**
-   * 
-   * @param seatNum
+   * Sets the seat coresponding to the passed seat number to booked
+   * @param seatNum the seat number
    */
   public void book(String seatNum) {
-
+    Seating seat = seats.get(seatNum);
+    seat.setBooked(true);
+    seats.put(seatNum, seat);
   }
 
   /**
-   * 
-   * @param seatNum
+   * Sets the seat corresponding to the peassed seat number to unbooked
+   * @param seatNum the seat number
    */
   public void unBook(String seatNum) {
-
+    Seating seat = seats.get(seatNum);
+    seat.setBooked(true);
+    seats.put(seatNum, seat);
   }
 
   /**
-   * 
+   * Creates a String that is a map of available, unavailable, and medical seating
+   * @return String representation of seats
    */
   public String printSeats() {
-
+    String ret = "";
+    ret =  "            First              |               Main Cabin             |       Economy";
+    ret += "\n 1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30";
+    ret += "\nA";
+    int i = 0;
+    for (Map.Entry<String, Seating> entry : seats.entrySet()) {
+      i++;
+      Seating seat = entry.getValue();
+      boolean booked = seat.getBooked();
+      boolean medical = seat.getIsMedicalSeat();
+      if (i <= 30) {
+        if (booked == true) {
+          ret += "X  ";
+        }
+        else if (booked == false && medical == false) {
+          ret += "O  ";
+        }
+        else if (medical == true) {
+          ret += "M  ";
+        }
+      }
+      else if (i == 31) {
+        ret += "\nB";
+        if (booked == true) {
+          ret += "X  ";
+        }
+        else if (booked == false && medical == false) {
+          ret += "O  ";
+        }
+        else if (medical == true) {
+          ret += "M  ";
+        }
+      }
+      else if (i > 31 && i <= 60) {
+        if (booked == true) {
+          ret += "X  ";
+        }
+        else if (booked == false && medical == false) {
+          ret += "O  ";
+        }
+        else if (medical == true) {
+          ret += "M  ";
+        }
+      }
+      else if (i == 61) {
+        ret += "\nC";
+        if (booked == true) {
+          ret += "X  ";
+        }
+        else if (booked == false && medical == false) {
+          ret += "O  ";
+        }
+        else if (medical == true) {
+          ret += "M  ";
+        }
+      }
+      else if (i > 61 && i <= 90) {
+        if (booked == true) {
+          ret += "X  ";
+        }
+        else if (booked == false && medical == false) {
+          ret += "O  ";
+        }
+        else if (medical == true) {
+          ret += "M  ";
+        }
+      }
+      else if (i == 91) {
+        ret += "\nD";
+        if (booked == true) {
+          ret += "X  ";
+        }
+        else if (booked == false && medical == false) {
+          ret += "O  ";
+        }
+        else if (medical == true) {
+          ret += "M  ";
+        }
+      }
+      else if (i > 91 && i <= 120) {
+        if (booked == true) {
+          ret += "X  ";
+        }
+        else if (booked == false && medical == false) {
+          ret += "O  ";
+        }
+        else if (medical == true) {
+          ret += "M  ";
+        }
+      }
+      else if (i > 120) {
+        break;
+      }
+    }
+    return ret;
   }
 
   /**
-   * 
+   * creates a string representation of the flight
+   * @return String representation of flight
    */
   @Override
   public String toString() {
-    return "Example";
+    String ret = "";
+    ret = departingAirport + "     ->     " + destAirport;
+    ret += "\n" + takeOffTime + "\t" + landingTime + "\t" + totalFlightTime + "\t" + numStops + "Economy: " + 
+            getPrice("Economy") + "\tMain Cabin: " + getPrice("Main Cabin")
+            + "\tFirst: " + getPrice("First");
+    ret += "\n" + company;
+    return ret;
   }
 
 
   // GETTERS
 
   /**
-   * 
-   * @return
+   * gets date
+   * @return data
    */
   public LocalDate getDate() {
     return this.date;
   }
 
   /**
-   * 
-   * @return
+   * get departing airport
+   * @return departing airport 
    */
   public String getDepartingAirport() {
     return this.departingAirport;
   }
 
   /**
-   * 
-   * @return
+   * get destination airport
+   * @return destination airport
    */
   public String getDestAirport() {
     return this.destAirport;
   }
 
   /**
-   *
-   * @return
+   * gets takeoff time
+   * @return takeoff time
    */
   public String getTakeOffTime() {
     return this.takeOffTime;
   }
 
   /**
-   * 
-   * @return
+   * gets landing time
+   * @return landing time
    */
   public String getLandingTime() {
     return this.landingTime;
   }
 
   /**
-   * 
-   * @return
+   * gets total flight time
+   * @return total flight time
    */
   public String getTotalFlightTime() {
     return this.totalFlightTime;
   }
 
   /**
-   * 
-   * @return
+   * gets if flight has layover
+   * @return true or false
    */
   public boolean getIsLayover() {
     return this.layover;
   }
 
   /**
-   * 
-   * @return
+   * gets arraylist of flights
+   * @return arraylist of flights
    */
   public ArrayList<Flight> getFlights() {
     return this.flights;
   }
 
   /**
-   * 
-   * @return
+   * gets the number of stops made
+   * @return number of stops
    */
   public int getNumStops() {
     return this.numStops;
   }
 
   /**
-   * 
-   * @return
+   * gets the discount percentage 
+   * @return discount percentage
    */
   public double getDiscountPercent() {
     return this.discountPercent;
   }
 
   /**
-   * 
-   * @return
+   * gets the hashmap of seats
+   * @return the hashmap of seats
    */
   public HashMap<String, Seating> getSeating() {
     return this.seats;
   }
 
   /**
-   * 
-   * @return
+   * gets the departing gate
+   * @return the departing gate
    */
   public String getDepartingGate() {
     return this.departingGate;
   }
 
   /**
-   * 
-   * @return
+   * gets the destination gate
+   * @return the destination gate
    */
   public String getDestGate() {
     return this.destGate;
@@ -328,64 +435,64 @@ public class Flight extends ObjectToBeBooked {
   // SETTERS
 
   /**
-   * 
-   * @param date
+   * sets the date
+   * @param date date
    */
   public void setDate(LocalDate date) {
       this.date = date;
   }
 
   /**
-   * 
-   * @param departingAirport
+   * sets the departing airport
+   * @param departingAirport departing airport
    */
   public void setDepartingAirport(String departingAirport) {
     this.departingAirport = departingAirport;
   }
 
   /**
-   * 
-   * @param destAirport
+   * sets the destination airport
+   * @param destAirport destination airport
    */
   public void setDestAirport(String destAirport) {
     this.destAirport = destAirport;
   }
 
   /**
-   * 
-   * @param takeOffTime
+   * sets the takeoff time
+   * @param takeOffTime takeoff time
    */
   public void setTakeOffTime(String takeOffTime) {
     this.takeOffTime = takeOffTime;
   }
 
   /**
-   * 
-   * @param landingTime
+   * sets the landing time
+   * @param landingTime landing time
    */
   public void setLandingTime(String landingTime) {
     this.landingTime = landingTime;
   }
 
   /**
-   * 
-   * @param totalFlightTime
+   * sets the total flight time
+   * @param totalFlightTime total flight time
    */
   public void setTotalFlightTime(String totalFlightTime) {
     this.totalFlightTime = totalFlightTime;
   }
 
   /**
-   * 
-   * @param layover
+   *sets if flight has layover 
+   * @param layover true/false
    */
   public void setIsLayover(boolean layover) {
     this.layover = layover;
   }
 
   /**
-   * 
-   * @param flights
+   * sets arraylist of flights
+   * @param flights arraylist of flights
    */
   public void setFlights(ArrayList<Flight> flights) {
     if (flights != null)
@@ -395,24 +502,24 @@ public class Flight extends ObjectToBeBooked {
   }
 
   /**
-   * 
-   * @param numStops
+   * sets the number of stops made
+   * @param numStops number of stops
    */
   public void setNumStops(int numStops) {
     this.numStops = numStops;
   }
 
   /**
-   * 
-   * @param discountPercent
+   * sets the discount percent
+   * @param discountPercent discount percent
    */
   public void setDiscountPercent(double discountPercent) {
     this.discountPercent = discountPercent;
   }
 
   /**
-   * 
-   * @param seats
+   * sets the hashmap of seats
+   * @param seats the hashmap of seats
    */
   public void setSeats(HashMap<String, Seating> seats) {
     if (seats == null)
@@ -424,21 +531,24 @@ public class Flight extends ObjectToBeBooked {
   }
 
   /**
-   * 
-   * @param departingGate
+   * sets the departing gate
+   * @param departingGate departing gate
    */
   public void setDapartingGate(String departingGate) {
     this.departingGate = departingGate;
   }
 
   /**
-   * 
-   * @param destGate
+   * sets the destination gate
+   * @param destGate destination gate
    */
   public void setDestGate(String destGate) {
     this.destGate = destGate;
   }
-
+  /**
+   * makes a hashmap of seats for the plane
+   * @return the hashmap of plane seats
+   */
   private HashMap<String, Seating> makeSeats() {
     HashMap<String, Seating> ret = new HashMap<>();
 
