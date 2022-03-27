@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.stream.Collectors;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -50,7 +51,20 @@ public class test {
         Flight flight = flights.get(0);
         Hotel hotel = hotels.get(0);
 
-        testRegisteredUserMethods(user, flight, hotel);
+        String date1 = "03/07/2022";
+        String date2 = "03/09/2022";
+
+        // /**
+        //  * How to get number of nights to book for given 2 dates as strings
+        //  */
+        LocalDate tDate = LocalDate.parse(date1, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+        LocalDate tDate2 = LocalDate.parse(date2, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+        // List<LocalDate> listOfDates = tDate.datesUntil(tDate2)
+		// .collect(Collectors.toList());
+        // System.out.println(listOfDates.size());
+
+
+        // testRegisteredUserMethods(user, flight, hotel);
 
         /**
          * Testing save users

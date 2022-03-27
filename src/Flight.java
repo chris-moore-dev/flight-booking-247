@@ -196,7 +196,6 @@ public class Flight extends ObjectToBeBooked {
   public void book(String seatNum) {
     Seating seat = seats.get(seatNum);
     seat.setBooked(true);
-    seats.put(seatNum, seat);
   }
 
   /**
@@ -205,8 +204,7 @@ public class Flight extends ObjectToBeBooked {
    */
   public void unBook(String seatNum) {
     Seating seat = seats.get(seatNum);
-    seat.setBooked(true);
-    seats.put(seatNum, seat);
+    seat.setBooked(false);
   }
 
   /**

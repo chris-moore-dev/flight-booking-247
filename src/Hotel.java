@@ -101,21 +101,21 @@ public class Hotel extends ObjectToBeBooked {
   /**
    * Sets booked room to booked
    * @param roomNum
+   * @param dates The dates to book
    */
-  public void book(String roomNum) {
+  public void book(String roomNum, ArrayList<LocalDate> dates) {
     Room room = rooms.get(roomNum);
-    room.setBooked(true);
-    rooms.put(roomNum, room);
+    room.book(dates);
   }
 
   /**
    * Sets unbooked room to unbooked
    * @param roomNum
+   * @param dates The dates to unbook
    */
-  public void unBook(String roomNum) {
+  public void unBook(String roomNum, ArrayList<LocalDate> dates) {
     Room room = rooms.get(roomNum);
-    room.setBooked(false);
-    rooms.put(roomNum, room);
+    room.unBook(dates);
   }
 
   /**
