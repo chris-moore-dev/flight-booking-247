@@ -3,6 +3,7 @@
  * @author Chris Moore, Evan Scales, Lyn Cork
  */
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.UUID;
 import java.time.LocalDate;
@@ -18,7 +19,7 @@ public class Flight extends ObjectToBeBooked {
   private ArrayList<Flight> flights;
   private int numStops;
   private double discountPercent;
-  private HashMap<String, Seating> seats;
+  private Map<String, Seating> seats;
   private String departingGate;
   private String destGate;
 
@@ -412,7 +413,7 @@ public class Flight extends ObjectToBeBooked {
    * gets the hashmap of seats
    * @return the hashmap of seats
    */
-  public HashMap<String, Seating> getSeating() {
+  public Map<String, Seating> getSeating() {
     return this.seats;
   }
 
@@ -521,7 +522,7 @@ public class Flight extends ObjectToBeBooked {
    * sets the hashmap of seats
    * @param seats the hashmap of seats
    */
-  public void setSeats(HashMap<String, Seating> seats) {
+  public void setSeats(Map<String, Seating> seats) {
     if (seats == null)
       this.seats = null;
     else if(seats.isEmpty())
@@ -549,8 +550,8 @@ public class Flight extends ObjectToBeBooked {
    * makes a hashmap of seats for the plane
    * @return the hashmap of plane seats
    */
-  private HashMap<String, Seating> makeSeats() {
-    HashMap<String, Seating> ret = new HashMap<>();
+  private Map<String, Seating> makeSeats() {
+    Map<String, Seating> ret = new LinkedHashMap<>();
 
     /**
      * Make 10 rows of First class seating

@@ -43,20 +43,20 @@ public class test {
 
 
         // testUserList(users.get(0));
-        // testFlightList(flights.get(0));
+        testFlightList(flights.get(0));
         // testHotelList(hotels.get(0));
 
         /**
          * Testing save users
          * @TEST
          */
-        RegisteredUser test = new RegisteredUser("TEST", "TEST", "TEST",
-        0, "TEST", "TEST", "TEST", "TEST", false, false,
-        false, null, null, null, null);
-        users.add(test);
-        DataWriter.saveUsers();
-        DataWriter.saveFriends();
-        DataWriter.saveFlights();
+        // RegisteredUser test = new RegisteredUser("TEST", "TEST", "TEST",
+        // 0, "TEST", "TEST", "TEST", "TEST", false, false,
+        // false, null, null, null, null);
+        // users.add(test);
+        // DataWriter.saveUsers();
+        // DataWriter.saveFriends();
+        // DataWriter.saveFlights();
 
         System.out.println(UUID.randomUUID());
     }
@@ -124,38 +124,50 @@ public class test {
      */
     public static void testFlightList(Flight flight) {
         System.out.println("-----TESTING FLIGHT-----");
-        System.out.println(flight.getID());
-        System.out.println(flight.getCompany());
-        System.out.println(flight.getDate());
-        System.out.println(flight.getDepartingAirport());
-        System.out.println(flight.getDestAirport());
-        System.out.println(flight.getTakeOffTime());
-        System.out.println(flight.getLandingTime());
-        System.out.println(flight.getTotalFlightTime());
-        System.out.println(flight.getIsLayover());
-        System.out.println(flight.getDepartingGate());
+        System.out.println(flight);
+        Map<String, Seating> seats = flight.getSeating();
+
+
+        for (String seatNum : seats.keySet()) {
+            System.out.println(seatNum);
+        }
+
+
+        // System.out.println(flight.printSeats());
+        // HashMap<String, Seating> seats = flight.getSeating();
+        // System.out.println(seats.get("A11").getIsMedicalSeat());
+        // System.out.println(flight.getID());
+        // System.out.println(flight.getCompany());
+        // System.out.println(flight.getDate());
+        // System.out.println(flight.getDepartingAirport());
+        // System.out.println(flight.getDestAirport());
+        // System.out.println(flight.getTakeOffTime());
+        // System.out.println(flight.getLandingTime());
+        // System.out.println(flight.getTotalFlightTime());
+        // System.out.println(flight.getIsLayover());
+        // System.out.println(flight.getDepartingGate());
         
 
-        System.out.println(flight.getPrice("First"));
-        System.out.println(flight.getPrice("Main Cabin"));
-        System.out.println(flight.getPrice("Economy"));
+        // System.out.println(flight.getPrice("First"));
+        // System.out.println(flight.getPrice("Main Cabin"));
+        // System.out.println(flight.getPrice("Economy"));
 
-        HashMap<String, Seating> seats = flight.getSeating();
-        for (Seating seat : seats.values()) {
-            System.out.println(seat.getID());
-        }
+        // HashMap<String, Seating> seats = flight.getSeating();
+        // for (Seating seat : seats.values()) {
+        //     System.out.println(seat.getID());
+        // }
 
 
-        System.out.println(seats.get("D1").getIsMedicalSeat());
+        // System.out.println(seats.get("D1").getIsMedicalSeat());
 
-        System.out.println(flight.getDate());
+        // System.out.println(flight.getDate());
 
-        if (flight.getIsLayover()) {
-            for (Flight flight2 : flight.getFlights()) {
-                System.out.println("TESTING LAYOVER FLIGHTS");
-                testFlightList(flight2);
-            }
-        }
+        // if (flight.getIsLayover()) {
+        //     for (Flight flight2 : flight.getFlights()) {
+        //         System.out.println("TESTING LAYOVER FLIGHTS");
+        //         testFlightList(flight2);
+        //     }
+        // }
 
         // testFlightList(FlightList.getFlight(flight.getID()));
     }
