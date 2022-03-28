@@ -5,7 +5,9 @@
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
+import java.util.Map.Entry;
 import java.time.LocalDate;
 import java.util.ArrayList;
 public class Flight extends ObjectToBeBooked {
@@ -212,12 +214,18 @@ public class Flight extends ObjectToBeBooked {
    * @return String representation of seats
    */
   public String printSeats() {
+    Set<Entry<String, Seating>> temp;
     String ret = "";
     ret =  "            First             |               Main Cabin             |       Economy";
     ret += "\n 1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30";
     ret += "\nA ";
     int i = 0;
-    for (Map.Entry<String, Seating> entry : seats.entrySet()) {
+    if (getIsLayover() == false) {
+      temp = seats.entrySet();
+    } else {
+      temp = flights.get(0).getSeating().entrySet();
+    }
+    for (Map.Entry<String, Seating> entry : temp) {
       i++;
       Seating seat = entry.getValue();
       boolean booked = seat.getBooked();
@@ -330,9 +338,10 @@ public class Flight extends ObjectToBeBooked {
     ret += "$" + getPrice("Economy") + "         $" + getPrice("Main Cabin")
         + "       $" + getPrice("First");
     if (getIsLayover() == false) {
-    ret += getAvailableSeats() + " Seats Available";
+    ret += "\n" + getAvailableSeats() + " Seats Available";
     }
     if (numStops > 0 && getIsLayover() == true) {
+      ret += "\n" + flights.get(0).getAvailableSeats() + " Seats Available";
       for (int j = 0; j < numStops; j++) {
         int nextAvailableSeats = 0;
         Flight nextFlight = flights.get(j);
