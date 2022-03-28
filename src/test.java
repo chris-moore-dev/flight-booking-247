@@ -21,7 +21,6 @@ public class test {
         ArrayList<Flight> flights = flightList.getFlights();
         ArrayList<Hotel> hotels = hotelList.getHotels();
         ArrayList<RegisteredUser> users = userList.getUsers();
-        System.out.println("@&!@&#");
 
         // RegisteredUser user = users.get(0);
         // Flight flight = flights.get(0);
@@ -48,17 +47,27 @@ public class test {
         // testHotelList(hotels.get(0));
 
         RegisteredUser user = users.get(0);
-        Flight flight = flights.get(0);
         Hotel hotel = hotels.get(0);
 
-        String date1 = "03/07/2022";
-        String date2 = "03/09/2022";
+        /**
+         * Use index 0 if testing with a normal flight
+         * Use index 3 if testing a flight with a layover
+         */
+        Flight flight = flights.get(3);
 
-        // /**
-        //  * How to get number of nights to book for given 2 dates as strings
-        //  */
-        LocalDate tDate = LocalDate.parse(date1, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-        LocalDate tDate2 = LocalDate.parse(date2, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+
+        // testUserList(user);
+        testFlightList(flight);
+        // testHotelList(hotel);
+
+        // String date1 = "03/07/2022";
+        // String date2 = "03/09/2022";
+
+        // // /**
+        // //  * How to get number of nights to book for given 2 dates as strings
+        // //  */
+        // LocalDate tDate = LocalDate.parse(date1, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+        // LocalDate tDate2 = LocalDate.parse(date2, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
         // List<LocalDate> listOfDates = tDate.datesUntil(tDate2)
 		// .collect(Collectors.toList());
         // System.out.println(listOfDates.size());
@@ -95,6 +104,7 @@ public class test {
         FlightSystem system = new FlightSystem();
         // Loading users by itself
         System.out.println(user.getFirstName());
+        System.err.println(user.getEmail());
 
         System.out.println(user.getAdmin());
 
@@ -186,9 +196,11 @@ public class test {
     public static void testFlightList(Flight flight) {
         System.out.println("-----TESTING FLIGHT-----");
         System.out.println(flight);
-        System.out.println(flight.printSeats());
-        flight.book("D30");
-        System.out.println(flight.printSeats());
+        if (!flight.getIsLayover())
+            System.out.println(flight.printSeats());
+        // System.out.println(flight.printSeats());
+        // flight.book("D30");
+        // System.out.println(flight.printSeats());
         // Map<String, Seating> seats = flight.getSeating();
 
 
