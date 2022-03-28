@@ -64,8 +64,10 @@ public class DataWriter extends DataConstants {
         }
         flightDetails.put(FLIGHTS_PRICING_LIST, priceArray);
         JSONArray seatArray = new JSONArray();
-        for (Map.Entry<String, Seating> seat : flight.getSeating().entrySet()) {
-            seatArray.add(seat.getValue().getID().toString());
+        if (!flight.getIsLayover()) {
+            for (Map.Entry<String, Seating> seat : flight.getSeating().entrySet()) {
+                seatArray.add(seat.getValue().getID().toString());
+            }
         }
         flightDetails.put(FLIGHTS_INDIVIDUALBOOKINGS_LIST, seatArray);
         return flightDetails;
