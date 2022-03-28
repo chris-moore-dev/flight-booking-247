@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class FlightSystemUI {
   private Scanner scanner = new Scanner(System.in);
   private FlightSystem system;
-  private static RegisteredUser currentUser;
+  private RegisteredUser currentUser;
 
 /**
  * Displays logged-out user menu by default.
@@ -34,7 +34,9 @@ public class FlightSystemUI {
     int select = scanner.nextInt();
     switch(select) {
       case 1: system.searchForFlights();
+      break;
       case 2: system.searchForHotels();
+      break;
       case 3: system.createAccount();
               while(loop) {
                 currentUser = system.login();
@@ -51,6 +53,7 @@ public class FlightSystemUI {
                   System.out.println("Login failed, please try again!");
                 }
               }
+              break;
       case 4: while(loop) {
                 currentUser = system.login();
                 if (currentUser != null) {
@@ -66,7 +69,9 @@ public class FlightSystemUI {
                   System.out.println("Login failed, please try again!");
                 }
               }
+              break;
       default: System.out.println("Invalid input, please try again!");
+      break;
     }
   }
 
@@ -81,11 +86,16 @@ public class FlightSystemUI {
     "1. Search Flights\n2. Search Hotels\n3. Manage Account\n4. Logout\n" +
     "What would you like to do?: ");
     switch(select) {
-      case 1: system.searchForFlights();
-      case 2: system.searchForHotels();
-      case 3: system.manageAccount();
+      case 1: system.searchForFlights(currentUser);
+      break;
+      case 2: system.searchForHotels(currentUser);
+      break;
+      case 3: system.manageAccount(currentUser);
+      break;
       case 4: system.logout();
+      break;
       default: System.out.println("Invalid input, please try again!");
+      break;
     }
   }
 
@@ -99,20 +109,31 @@ public class FlightSystemUI {
     "You are logged in as an administrator.\n" +
     "************ Main Menu ************\n" +
     "1. Search Flights\n2. Search Hotels\n3. Manage Account\n4. Add Flight\n"  +
-    "5. Add Hotel\n6.Edit Hotel\n7.Edit Flight\n8.Remove Flight\n" +
+    "5. Edit Flight\n6.Remove Flight\n7.Add Hotel\n8.Edit Hotel\n" +
     "9. Remove Hotel\n0. Logout\nWhat would you like to do?: ");
     switch(select) {
-      case 1: system.searchForFlights();
-      case 2: system.searchForHotels();
-      case 3: system.manageAccount();
-      //case 4: system.addFlight();
-      //case 5: system.addHotel();
-      //case 6: system.editHotel();
-      //case 7: system.editFlight();
-      //case 8: system.removeFlight();
-      //case 9: system.removeHotel();
+      case 1: system.searchForFlights(currentUser);
+      break;
+      case 2: system.searchForHotels(currentUser);
+      break;
+      case 3: system.manageAccount(currentUser);
+      break;
+      case 4: system.addFlight();
+      break;
+      case 5: system.editFlight();
+      break;
+      case 6: system.removeFlight();
+      break;
+      case 7: system.addHotel();
+      break;
+      case 8: system.editHotel();
+      break;
+      case 9: system.removeHotel();
+      break;
       case 0: system.logout();
+      break;
       default: System.out.println("Invalid input, please try again!");
+      break;
     }
   }
 }
