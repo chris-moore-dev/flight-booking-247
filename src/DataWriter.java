@@ -395,6 +395,7 @@ public class DataWriter extends DataConstants {
         ArrayList<Flight> flights = flightList.getFlights();
         JSONArray jsonSeatList = new JSONArray();
         for (int i = 0; i < flights.size(); i++) {
+            if (flights.get(i).getIsLayover()) continue;
             for (Map.Entry<String, Seating> seat : flights.get(i).getSeating().entrySet()) {
                 jsonSeatList.add(getSeatJSON(seat));
             }

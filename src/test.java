@@ -79,13 +79,14 @@ public class test {
          * Testing save users
          * @TEST
          */
-        // RegisteredUser test = new RegisteredUser("TEST", "TEST", "TEST",
-        // 0, "TEST", "TEST", "TEST", "TEST", false, false,
-        // false, null, null, null, null);
-        // users.add(test);
-        // DataWriter.saveUsers();
-        // DataWriter.saveFriends();
-        // DataWriter.saveFlights();
+        RegisteredUser test = new RegisteredUser("TEST", "TEST", "TEST",
+        0, "TEST", "TEST", "TEST", "TEST", false, false,
+        false, null, null, null, null);
+        users.add(test);
+        DataWriter.saveUsers();
+        DataWriter.saveFriends();
+        DataWriter.saveFlights();
+        DataWriter.saveSeatings();
 
         System.out.println(UUID.randomUUID());
     }
