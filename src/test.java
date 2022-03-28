@@ -181,7 +181,7 @@ public class test {
         LocalDate checkInDate;
         LocalDate checkOutDate;
 
-        user.bookHotel(hotel, room, numGuests, checkInDate, checkOutDate);
+        //user.bookHotel(hotel, room, numGuests, checkInDate, checkOutDate);
         
     }
 
