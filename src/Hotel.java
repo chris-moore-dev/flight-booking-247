@@ -86,15 +86,21 @@ public class Hotel extends ObjectToBeBooked {
     String ret = "\n";
     String amenityList = "";
     Integer averagePrice = 0;
+    int total = 0;
+    int averageRating = 0;
     for (Map.Entry<String, Integer> entry : pricing.entrySet()) {
       averagePrice += entry.getValue();
     }
     averagePrice = averagePrice/pricing.size();
-
+    for(int i = 0; i < reviews.size(); i++) {
+      Review temp = reviews.get(i);
+      total += temp.getRating();
+    }
+    averageRating = total/reviews.size();
     for (String amenity : amenities) {
       amenityList += amenity+", ";
     }
-    ret = company + "Average Price per Night: $" + averagePrice + "\nAddress: " + address + "\nAmenities: " + amenityList;
+    ret = company + "Average Price per Night: $" + averagePrice + "\nRating: " + averageRating + "\nAmenities: " + amenityList;
     return ret;
   }
 
