@@ -1,6 +1,7 @@
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import org.json.simple.JSONArray;
@@ -39,7 +40,7 @@ public class DataWriter extends DataConstants {
         JSONObject flightDetails = new JSONObject();
         flightDetails.put(FLIGHTS_ID, flight.getID().toString());
         flightDetails.put(FLIGHTS_COMPANY, flight.getCompany());
-        flightDetails.put(FLIGHTS_DATE, flight.getDate().toString());
+        flightDetails.put(FLIGHTS_DATE, flight.getDate().format(DateTimeFormatter.ofPattern("MM/dd/yyyy")));
         flightDetails.put(FLIGHTS_DEPARTING_AIRPORT, flight.getDepartingAirport());
         flightDetails.put(FLIGHTS_DEST_AIRPORT, flight.getDestAirport());
         flightDetails.put(FLIGHTS_TAKE_OFF_TIME, flight.getTakeOffTime());
@@ -48,13 +49,13 @@ public class DataWriter extends DataConstants {
         flightDetails.put(FLIGHTS_LAYOVER, flight.getIsLayover());
         flightDetails.put(FLIGHTS_DEPARTING_GATE, flight.getDepartingGate());
         flightDetails.put(FLIGHTS_DEST_GATE, flight.getDestGate());
-        JSONArray flightsArray = new JSONArray();
-        if (flight.getIsLayover()) {
+        if (flight.getFlights() != null) {
+            JSONArray flightsArray = new JSONArray();
             for (Flight flt : flight.getFlights()) {
                 flightsArray.add(flt.getID().toString());
             }
+            flightDetails.put(FLIGHTS_FLIGHT_LIST, flightsArray);
         }
-        flightDetails.put(FLIGHTS_FLIGHT_LIST, flightsArray);
         flightDetails.put(FLIGHTS_NUM_STOPS, flight.getNumStops());
         flightDetails.put("discountPercent", flight.getDiscountPercent());
         JSONArray priceArray = new JSONArray();
@@ -63,14 +64,9 @@ public class DataWriter extends DataConstants {
         }
         flightDetails.put(FLIGHTS_PRICING_LIST, priceArray);
         JSONArray seatArray = new JSONArray();
-        if (!flight.getIsLayover()) {
-            for (Seating seat : flight.getSeating().values()) {
-                seatArray.add(seat.getID().toString());
-            }
+        for (Map.Entry<String, Seating> seat : flight.getSeating().entrySet()) {
+            seatArray.add(seat.getValue().getID().toString());
         }
-        // for (Map.Entry<String, Seating> seat : flight.getSeating().entrySet()) {
-        //     seatArray.add(seat.getValue().getID().toString());
-        // }
         flightDetails.put(FLIGHTS_INDIVIDUALBOOKINGS_LIST, seatArray);
         return flightDetails;
     }
@@ -307,8 +303,8 @@ public class DataWriter extends DataConstants {
         reservationDetails.put(RESERVATIONS_PRICE, reservation.getPrice());
         reservationDetails.put(RESERVATIONS_FIRST_NAME, reservation.getReservationHolderFirstName());
         reservationDetails.put(RESERVATIONS_LAST_NAME, reservation.getReservationHolderLastName());
-        reservationDetails.put(RESERVATIONS_CHECK_IN_DATE, reservation.getCheckInDate().toString());
-        reservationDetails.put(RESERVATIONS_CHECK_OUT_DATE, reservation.getChecOutDate().toString());
+        reservationDetails.put(RESERVATIONS_CHECK_IN_DATE, reservation.getCheckInDate().format(DateTimeFormatter.ofPattern("MM/dd/yyyy")));
+        reservationDetails.put(RESERVATIONS_CHECK_OUT_DATE, reservation.getChecOutDate().format(DateTimeFormatter.ofPattern("MM/dd/yyyy")));
         reservationDetails.put(RESERVATIONS_NUM_GUESTS, reservation.getNumGuests());
         return reservationDetails;
     }
@@ -383,7 +379,7 @@ public class DataWriter extends DataConstants {
         roomDetails.put(ROOMS_NUM_BEDS, room.getValue().getNumBeds());
         JSONArray bookedArray = new JSONArray();
         for (LocalDate date : room.getValue().getBookedDays()) {
-            bookedArray.add(date.toString());
+            bookedArray.add(date.format(DateTimeFormatter.ofPattern("MM/dd/yyyy")));
         }
         roomDetails.put(ROOMS_BOOKED_DAYS_LIST, bookedArray);
         return roomDetails;
