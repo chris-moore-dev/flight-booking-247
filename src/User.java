@@ -14,14 +14,26 @@ public class User {
   }
 
   /**
-   * 
-   * @param departingAirport
-   * @param destAirport
-   * @param departDate
+   * Takes a departing airport, a destination, and the date of departure. Returns an arraylist of flights that meet these parameters.
+   * @param departingAirport the airport where the plane leaves from
+   * @param destAirport the destination
+   * @param departDate the day on which the flight is leaving
    * @return
    */
   public ArrayList<Flight> getFlights(String departingAirport, String destAirport, LocalDate departDate) {
-    
+    FlightList flightList = FlightList.getInstance();
+    ArrayList<Flight> flights = flightList.getFlights();
+    ArrayList<Flight> ret = new ArrayList<Flight>();
+    for (int i = 0; i < flights.size(); i++) {
+      Flight flight = flights.get(i);
+      String depart = flight.getDepartingAirport();
+      String dest = flight.getDestAirport();
+      LocalDate date = flight.getDate();
+      if (depart == departingAirport && dest == destAirport && date == departDate) {
+        ret.add(flight);
+      }
+    }
+    return ret;
   }
 
 
@@ -34,11 +46,23 @@ public class User {
   }
 
   /**
-   * 
-   * @param flights
+   * Sorts passed flight array list from least to greatest number of layovers
+   * @param flights arraylist of flights
    */
   public void filterFlightsByNumberOfLayovers(ArrayList<Flight> flights) {
-
+    int n = flights.size();
+    for(int i = 0; i < n-1; i++) {
+      for(int j = 0; j < n-i-1; j++) {
+        Flight flightOne = flights.get(j);
+        Flight flightTwo = flights.get(j+1);
+        int stopsOne = flightOne.getNumStops();
+        int stopsTwo = flightTwo.getNumStops();
+        if (stopsOne > stopsTwo) {
+          flights.add(j, flightTwo);
+          flights.add(j+1, flightOne);
+        }
+      }
+    }
   }
 
   /**
@@ -105,7 +129,7 @@ public class User {
    * @return
    */
   public ArrayList<Hotel> getHotelsByAirport(String closestAirport) {
-
+    
   }
 
   /**
