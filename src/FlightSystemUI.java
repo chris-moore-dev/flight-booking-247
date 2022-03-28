@@ -11,26 +11,11 @@ public class FlightSystemUI {
   private Scanner scanner = new Scanner(System.in);
   private FlightSystem system;
   private static RegisteredUser currentUser;
-  private static FlightSystemUI currentInstance;
 
 /**
-* Driver for testing purposes.
-* Sets admin priveleges and executes run();
-*/
-public static void main(String[] args) {
-  currentUser.setAdmin(false);
-  currentInstance.run();
-}
-
-/**
- * Displays either User or Admin menu, based on
- * the currentUser's admin priveleges.
+ * Displays logged-out user menu by default.
  */
   public void run() {
-    if(currentUser.getAdmin()) {
-      displayMenuAdmin();
-    }
-    else
     {
       displayMenuUser();
     }
@@ -44,7 +29,7 @@ public static void main(String[] args) {
     "You are not logged in.\n" +
     "************ Main Menu ************\n" +
     "1. Search Flights\n2. Search Hotels\n3. Create Account\n4. Login\n" +
-    "What would you like to do?:\n");
+    "What would you like to do?:");
     boolean loop = true;
     int select = scanner.nextInt();
     switch(select) {
@@ -55,7 +40,12 @@ public static void main(String[] args) {
                 currentUser = system.login();
                 if (currentUser != null) {
                   loop = false;
-                  displayMenuRegisteredUser();
+                  if(currentUser.getAdmin()) {
+                    displayMenuAdmin();
+                  }
+                  else {
+                    displayMenuRegisteredUser();
+                  }
                 }
                 else {
                   System.out.println("Login failed, please try again!");
@@ -65,7 +55,12 @@ public static void main(String[] args) {
                 currentUser = system.login();
                 if (currentUser != null) {
                   loop = false;
-                  displayMenuRegisteredUser();
+                  if(currentUser.getAdmin()) {
+                    displayMenuAdmin();
+                  }
+                  else {
+                    displayMenuRegisteredUser();
+                  }
                 }
                 else {
                   System.out.println("Login failed, please try again!");
@@ -84,7 +79,7 @@ public static void main(String[] args) {
     "You are logged in as a regular user.\n" +
     "************ Main Menu ************\n" +
     "1. Search Flights\n2. Search Hotels\n3. Manage Account\n4. Logout\n" +
-    "What would you like to do?:\n");
+    "What would you like to do?: ");
     switch(select) {
       case 1: system.searchForFlights();
       case 2: system.searchForHotels();
@@ -95,7 +90,7 @@ public static void main(String[] args) {
   }
 
 /**
- * Display menu for administrators
+ * Display menu for administrators, once they have logged in.
  */
   private void displayMenuAdmin() {
     
@@ -105,7 +100,7 @@ public static void main(String[] args) {
     "************ Main Menu ************\n" +
     "1. Search Flights\n2. Search Hotels\n3. Manage Account\n4. Add Flight\n"  +
     "5. Add Hotel\n6.Edit Hotel\n7.Edit Flight\n8.Remove Flight\n" +
-    "9. Remove Hotel\n0. Logout\nWhat would you like to do?:\n");
+    "9. Remove Hotel\n0. Logout\nWhat would you like to do?: ");
     switch(select) {
       case 1: system.searchForFlights();
       case 2: system.searchForHotels();
