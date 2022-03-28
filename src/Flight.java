@@ -315,20 +315,6 @@ public class Flight extends ObjectToBeBooked {
    */
   @Override
   public String toString() {
-    int availableSeats = 0;
-    int i = 0;
-    for (Map.Entry<String, Seating> entry : seats.entrySet()) {
-      i++;
-      Seating seat = entry.getValue();
-      boolean booked = seat.getBooked(); 
-      if (i < 120) {
-        if (booked == false) {
-          availableSeats += 1;
-        }
-      } else {
-        break;
-      }
-    }
     String ret = "";
     ret = departingAirport + "     ->     " + destAirport + "                        Economy   Main Cabin   First";
     ret += "\n" + takeOffTime + "     " + landingTime + "   " + totalFlightTime;
@@ -343,29 +329,38 @@ public class Flight extends ObjectToBeBooked {
 
     ret += "$" + getPrice("Economy") + "         $" + getPrice("Main Cabin")
         + "       $" + getPrice("First");
-    ret += availableSeats + " Seats Available";
-    if (numStops > 0) {
-      for (int j = 1; j < numStops; j++) {
+    if (getIsLayover() == false) {
+    ret += getAvailableSeats() + " Seats Available";
+    }
+    if (numStops > 0 && getIsLayover() == true) {
+      for (int j = 0; j < numStops; j++) {
         int nextAvailableSeats = 0;
         Flight nextFlight = flights.get(j);
         ret += "\n" + nextFlight.getDepartingAirport() + "     ->     " + nextFlight.getDestAirport();
-        for (Map.Entry<String, Seating> entry : seats.entrySet()) {
-          i++;
-          Seating nextSeat = entry.getValue();
-          boolean nextBooked = nextSeat.getBooked(); 
-          if (i < 120) {
-            if (nextBooked == false) {
-              nextAvailableSeats += 1;
-            }
-          } else {
-            break;
-          }
-        }
+        nextAvailableSeats = nextFlight.getAvailableSeats();
         ret += "\n" + nextAvailableSeats + " Seats Available";
       }
     }
     ret += "\n" + company;
     return ret;
+  }
+
+  public int getAvailableSeats() {
+    int i = 0;
+    int availableSeats = 0;
+    for (Map.Entry<String, Seating> entry : seats.entrySet()) {
+      i++;
+      Seating seat = entry.getValue();
+      boolean booked = seat.getBooked(); 
+      if (i < 120) {
+        if (booked == false) {
+          availableSeats += 1;
+        }
+      } else {
+        break;
+      }
+    }
+    return availableSeats;
   }
 
 
