@@ -213,7 +213,7 @@ public class Flight extends ObjectToBeBooked {
    */
   public String printSeats() {
     String ret = "";
-    ret =  "            First              |               Main Cabin             |       Economy";
+    ret =  "            First             |               Main Cabin             |       Economy";
     ret += "\n 1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30";
     ret += "\nA ";
     int i = 0;
@@ -315,11 +315,55 @@ public class Flight extends ObjectToBeBooked {
    */
   @Override
   public String toString() {
+    int availableSeats = 0;
+    int i = 0;
+    for (Map.Entry<String, Seating> entry : seats.entrySet()) {
+      i++;
+      Seating seat = entry.getValue();
+      boolean booked = seat.getBooked(); 
+      if (i < 120) {
+        if (booked == false) {
+          availableSeats += 1;
+        }
+      } else {
+        break;
+      }
+    }
     String ret = "";
-    ret = departingAirport + "     ->     " + destAirport;
-    ret += "\n" + takeOffTime + "\t" + landingTime + "\t" + totalFlightTime + "\t" + numStops + "Economy: " + 
-            getPrice("Economy") + "\tMain Cabin: " + getPrice("Main Cabin")
-            + "\tFirst: " + getPrice("First");
+    ret = departingAirport + "     ->     " + destAirport + "                        Economy   Main Cabin   First";
+    ret += "\n" + takeOffTime + "     " + landingTime + "   " + totalFlightTime;
+    if (numStops <= 0) {
+      ret += "   Nonstop   ";
+    }
+    else if (numStops == 1) {
+      ret += "   " + numStops + " stop    ";
+    } else {
+      ret += "   " + numStops + " stops   ";
+    }
+
+    ret += "$" + getPrice("Economy") + "         $" + getPrice("Main Cabin")
+        + "       $" + getPrice("First");
+    ret += availableSeats + " Seats Available";
+    if (numStops > 0) {
+      for (int j = 1; j < numStops; j++) {
+        int nextAvailableSeats = 0;
+        Flight nextFlight = flights.get(j);
+        ret += "\n" + nextFlight.getDepartingAirport() + "     ->     " + nextFlight.getDestAirport();
+        for (Map.Entry<String, Seating> entry : seats.entrySet()) {
+          i++;
+          Seating nextSeat = entry.getValue();
+          boolean nextBooked = nextSeat.getBooked(); 
+          if (i < 120) {
+            if (nextBooked == false) {
+              nextAvailableSeats += 1;
+            }
+          } else {
+            break;
+          }
+        }
+        ret += "\n" + nextAvailableSeats + " Seats Available";
+      }
+    }
     ret += "\n" + company;
     return ret;
   }
