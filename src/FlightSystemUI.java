@@ -5,7 +5,7 @@ import java.util.Scanner;
  * This class doesn't include much UI functionality in and of itself,
  * but sets up the baseline menu instance which then refers to FlightSystem
  * and included objects to perform UI tasks from user input.
- * @author Chris Moore
+ * @author Chris Moore, Lyn Cork
  */
 public class FlightSystemUI {
   private Scanner scanner = new Scanner(System.in);
@@ -40,22 +40,36 @@ public static void main(String[] args) {
  * Initial display for unregistered (or logged-out) users.
  */
   private void displayMenuUser() {
-    int select = scanner.nextInt();
     System.out.println("Welcome to our Flight and Hotel Booker!\n" + 
     "You are not logged in.\n" +
     "************ Main Menu ************\n" +
     "1. Search Flights\n2. Search Hotels\n3. Create Account\n4. Login\n" +
     "What would you like to do?:\n");
+    boolean loop = true;
+    int select = scanner.nextInt();
     switch(select) {
       case 1: system.searchForFlights();
       case 2: system.searchForHotels();
       case 3: system.createAccount();
-              if (system.createAccount()) {
-                displayMenuRegisteredUser();
+              while(loop) {
+                currentUser = system.login();
+                if (currentUser != null) {
+                  loop = false;
+                  displayMenuRegisteredUser();
+                }
+                else {
+                  System.out.println("Login failed, please try again!");
+                }
               }
-      case 4: system.login();
-              if (system.login()) {
-                displayMenuRegisteredUser();
+      case 4: while(loop) {
+                currentUser = system.login();
+                if (currentUser != null) {
+                  loop = false;
+                  displayMenuRegisteredUser();
+                }
+                else {
+                  System.out.println("Login failed, please try again!");
+                }
               }
       default: System.out.println("Invalid input, please try again!");
     }
@@ -74,7 +88,7 @@ public static void main(String[] args) {
     switch(select) {
       case 1: system.searchForFlights();
       case 2: system.searchForHotels();
-      case 3: system.viewAccount();
+      case 3: system.manageAccount();
       case 4: system.logout();
       default: System.out.println("Invalid input, please try again!");
     }
@@ -84,6 +98,7 @@ public static void main(String[] args) {
  * Display menu for administrators
  */
   private void displayMenuAdmin() {
+    
     int select = scanner.nextInt();
     System.out.println("Welcome to our Flight and Hotel Booker!\n"+
     "You are logged in as an administrator.\n" +
@@ -94,13 +109,13 @@ public static void main(String[] args) {
     switch(select) {
       case 1: system.searchForFlights();
       case 2: system.searchForHotels();
-      case 3: system.viewAccount();
-      case 4: system.addFlight();
-      case 5: system.addHotel();
-      case 6: system.editHotel();
-      case 7: system.editFlight();
-      case 8: system.removeFlight();
-      case 9: system.removeHotel();
+      case 3: system.manageAccount();
+      //case 4: system.addFlight();
+      //case 5: system.addHotel();
+      //case 6: system.editHotel();
+      //case 7: system.editFlight();
+      //case 8: system.removeFlight();
+      //case 9: system.removeHotel();
       case 0: system.logout();
       default: System.out.println("Invalid input, please try again!");
     }
