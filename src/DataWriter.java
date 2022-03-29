@@ -286,8 +286,8 @@ public class DataWriter extends DataConstants {
         ticketDetails.put(TICKETS_FLIGHT_ID, ticket.getFlight().getID().toString());
         ticketDetails.put(TICKETS_SEAT_ID, ticket.getSeat().getID().toString());
         ticketDetails.put(TICKETS_PRICE, ticket.getPrice());
-        ticketDetails.put(TICKETS_FIRST_NAME, user.getFirstName());
-        ticketDetails.put(TICKETS_LAST_NAME, user.getLastName());
+        ticketDetails.put(TICKETS_FIRST_NAME, ticket.getReservationHolderFirstName());
+        ticketDetails.put(TICKETS_LAST_NAME, ticket.getReservationHolderLastName());
         ticketDetails.put(TICKETS_BOARDING_GROUP, ticket.getBoardingGroup());
         ticketDetails.put(TICKETS_BOARDTING_TME, ticket.getBoardingTime());
         ticketDetails.put(TICKETS_CHECKED_BAGS, ticket.getNumOfCheckedBags());

@@ -1,1 +1,1 @@
-[]
+[{"firstName":"Tyler","lastName":"Durden","checkedBags":0,"boardingGroup":"1A","price":600,"flightID":"15f1f1e1-364a-4640-96a6-2b3ab9717246","seatID":"75901d52-8906-4bfa-934f-bcc7244e12d6","gate":"36","boardingTime":"7:35","ticketID":"f92448d8-9e26-4346-a469-413c550a6a7d"},{"firstName":"Jack","lastName":"Harlow","checkedBags":0,"boardingGroup":"1A","price":600,"flightID":"15f1f1e1-364a-4640-96a6-2b3ab9717246","seatID":"3d6ab780-062f-4e63-a02a-4d8d3cd3bbfe","gate":"36","boardingTime":"7:35","ticketID":"eabc723a-fb64-4205-9c08-3c5dd3684140"}]

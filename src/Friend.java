@@ -68,10 +68,10 @@ public class Friend {
    */
   @Override
   public String toString() {
-    String ret = "\n";
+    String ret = "";
 
     ret += firstName + " " + lastName + "\n";
-    ret += email + "\n\n";
+    ret += email + "\n";
 
     return ret;
   }

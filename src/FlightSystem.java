@@ -6,6 +6,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * FlightSystem
@@ -19,7 +21,43 @@ public class FlightSystem {
   private UserList userList;
   private HotelList hotelList;
   private FlightList flightList;
-  DateTimeFormatter format = DateTimeFormatter.ofPattern("MM-dd-yyyy");
+  private DateTimeFormatter format = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+  private User freeUser;
+  private RegisteredUser registeredUser;
+
+  /**
+   * Get the free user
+   * @return The free user
+   */
+  public User getFreeUser() {
+    return freeUser;
+  }
+
+  /**
+   * Get the registered user
+   * @return The registered user
+   */
+  public RegisteredUser getRegisteredUser() {
+    return registeredUser;
+  }
+
+  /**
+   * Set the free user
+   * @param user The user
+   */
+  public void setFreeUser(User user) {
+    this.freeUser = user;
+  }
+
+  /**
+   * Set the registered user
+   * @param user The registered user
+   */
+  public void setRegisteredUser(RegisteredUser user) {
+    this.registeredUser = user;
+  }
+
+
   
 /**
  * Default constructor for FlightSystem
@@ -28,6 +66,8 @@ public class FlightSystem {
     userList = UserList.getInstance();
     hotelList = HotelList.getInstance();
     flightList = FlightList.getInstance();
+    freeUser = new User();
+    registeredUser = null;
   }
 
 /* 
@@ -41,11 +81,35 @@ public class FlightSystem {
  * @return RegisteredUser object, or null if login fails
  */
   public RegisteredUser login() {
-    System.out.println("----- Log In -----\n"+
+    System.out.print("\n----- Log In -----\n"+
     "Enter email: ");
     String email = scanner.nextLine();
-    System.out.println("Enter password: ");
+    System.out.print("Enter password: ");
     String password = scanner.nextLine();
+
+    String sDate = "08/15/2022";
+    LocalDate date = LocalDate.parse(sDate, format);
+    String departingAirport = "BOS";
+    String destAirport = "CLT";
+    String takeOffTime = "9:00 AM";
+    String landingTime = "11:00 AM";
+    String totalFlightTime = "2h 5m";
+    boolean layover = false;
+    String company = "American Airlines";
+    HashMap<String, Integer> pricing = new HashMap<>();
+    pricing.put("First", 600);
+    pricing.put("Main Cabin", 550);
+    pricing.put("Economy", 500);
+    String departingGate = "17";
+    String destGate = "420";
+    Map<String, Seating> seats = new HashMap<>();
+
+
+    Flight toAdd = new Flight(date, departingAirport, destAirport, takeOffTime,
+    landingTime, totalFlightTime, layover, company, pricing, seats, departingGate, destGate);
+    ArrayList<Flight> flights = flightList.getFlights();
+    flights.add(toAdd);
+
     if(userList.getUser(email, password) != null) {
       RegisteredUser user = userList.getUser(email, password);
       return user;
@@ -79,22 +143,28 @@ public class FlightSystem {
     ArrayList<HotelReservation> hotelReservations = new ArrayList<>();
     ArrayList<Friend> friends = new ArrayList<>();
     // NAME + AGE
-    System.out.println("----- Enter the Following Information -----\n\n" +
+    System.out.print("----- Enter the Following Information -----\n\n" +
     "----- Your Name -----\n"+
     "First name: ");
     firstName = scanner.nextLine();
-    System.out.println("Last name: ");
+    System.out.print("Last name: ");
     lastName = scanner.nextLine();
-    System.out.println("Age: ");
-    age = scanner.nextInt();
+    System.out.print("Age: ");
+    String sAge = scanner.nextLine();
+    age = Integer.parseInt(sAge);
+
+
     // GENDER
-    System.out.println("----- Your Gender -----\n"+
+    System.out.print("\n----- Your Gender -----\n"+
     "1. Male\n"+
     "2. Female\n"+
     "3. Unspecified\n"+
     "4. Undisclosed\n\n"+
     "Select your gender: ");
     int genderSelect = scanner.nextInt();
+    scanner.nextLine();
+
+
     switch(genderSelect) {
       case 1: gender = "Male";
       break;
@@ -108,31 +178,31 @@ public class FlightSystem {
       break;
     }
     // ADDRESS
-    System.out.println("----- Your Address -----");
-    System.out.println("Country:");
+    System.out.println("\n----- Your Address -----");
+    System.out.print("Country: ");
     String country = scanner.nextLine();
-    System.out.println("Street: ");
+    System.out.print("Street: ");
     String street = scanner.nextLine();
-    System.out.println("City: ");
+    System.out.print("City: ");
     String city = scanner.nextLine();
-    System.out.println("State: ");
+    System.out.print("State: ");
     String state = scanner.nextLine();
-    System.out.println("Postal Code: ");
+    System.out.print("Postal Code: ");
     String postal = scanner.nextLine();
     address = street + ", " + city + ", " + state + ", " + country + ", " + postal;
     // EMAIL
-    System.out.println("----- Your Email -----\n"+
+    System.out.print("\n----- Your Email -----\n"+
     "Email: ");
     email = scanner.nextLine();
     // PASSWORD
-    System.out.println("----- Create Your Password -----");
+    System.out.println("\n----- Create Your Password -----");
     boolean noMatch = true;
     while(noMatch) {
       String password1 = "default";
       String password2 = "default";
-      System.out.println("Password: ");
+      System.out.print("Password: ");
       password1 = scanner.nextLine();
-      System.out.println("Confirm Password: ");
+      System.out.print("Confirm Password: ");
       password2 = scanner.nextLine();
       if(password1.equals(password2)) {
         noMatch = false;
@@ -147,8 +217,9 @@ public class FlightSystem {
     RegisteredUser saveThis = new RegisteredUser(firstName, lastName, email, age, address, password, gender, 
     preferredAirport, frequentFlyer, admin, medicalCondition, blackListedAirports, 
     tickets, hotelReservations, friends);
-    //Write saveThis to Users.json 
-    System.out.println("Account succesfully created. You can now log in.");
+    ArrayList<RegisteredUser> users = userList.getUsers();
+    users.add(saveThis);
+    System.out.println("Account succesfully created. You can now log in.\n");
   }
 
 
@@ -398,63 +469,372 @@ public class FlightSystem {
     System.exit(0);
   }
 
-/**
- * Allows the user to search for flights by certain parameters
- * Prompts non-registered users to create an account before booking a flight
- */
-  public void searchForFlights(RegisteredUser user) {
-    System.out.println("----- Enter the Following Information -----\n" +
-    "----- Flight Type -----\n" +
+  /**
+   * Prints a basic iteray to the screen
+   * @param flight The flight about to be booked
+   * @param price The price of the flight
+   * @param cabin The cabin the suer chose
+   */
+  private void printTrip(Flight flight, int price, String cabin) {
+    String stops = "";
+    if (!(flight.getIsLayover())) {
+      stops = "Nonstop";
+    } else {
+      int size = flight.getFlights().size();
+      if (size == 1)
+        stops += "1 Stop";
+      else
+        stops += size + " Stops";
+    }
+
+    System.out.println(flight.getDepartingAirport() + "     ->     " + flight.getDestAirport());
+    System.out.println(flight.getTakeOffTime() + "     " + flight.getLandingTime() + "\t" +
+    flight.getTotalFlightTime() + "     " + stops + "     Cabin: " + cabin +
+    "     Price: $" + price + "\n");
+  }
+
+  /**
+   * Here is where the user will be displayed the avaialbe flights.
+   * They will then choose one of the flights
+   * @param departingAirport The departing airport
+   * @param destAirport The dest airport
+   * @param departDate The depart Date
+   * @param user User to call methods
+   * @return The flight the user chose
+   */
+  private Flight flightSearchHelper(String departingAirport, String destAirport, LocalDate departDate, User user) {
+    Flight ret;
+    System.out.println("\n----- Searching Flights -----\n\n----- Choose Flights -----\n");
+    ArrayList<Flight> chooseFrom = user.getFlights(departingAirport, destAirport, departDate);
+    System.out.println(departingAirport + " -> " + destAirport);
+    System.out.println(departDate);
+
+    for (int i = 0; i < chooseFrom.size(); i++) {
+      Flight flight = chooseFrom.get(i);
+      System.out.println("\n" + (i+1) + ".");
+      System.out.println(flight);
+    }
+
+    System.out.print("Which flight would you like to choose?: ");
+    int chooseFlight = scanner.nextInt();
+    scanner.nextLine();
+
+    Flight chosenFlight = chooseFrom.get(chooseFlight-1);
+
+    ret = chosenFlight;
+    return ret;
+  }
+
+
+  /**
+   * Search for flights
+   */
+  public void evanSearchForFlights() {
+    ArrayList<Seating> seatsToBook = new ArrayList<>();
+    ArrayList<Flight> flightsToBook = new ArrayList<>();
+    ArrayList<Friend> ticketHolders = new ArrayList<>();
+    User user = new User();
+    String departingAirport;
+    String destAirport;
+    LocalDate departDate;
+    LocalDate returnDate;
+    int numPassengers;
+    int flightsPerPassenger = 0;
+
+    System.out.print("\n----- Enter the Following Information -----\n" +
+    "\n----- Flight Type -----\n" +
     "1. One way\n"+
     "2. Round trip\n\n"+
     "Select your flight type: ");
+
     int flightType = scanner.nextInt();
-    switch(flightType) {
-      case 1: 
-      System.out.println("----- Number of Passengers -----\nEnter number of passengers:");
-      int numPassengers = scanner.nextInt();
+    scanner.nextLine();
 
-      System.out.println("----- Departing Airport -----\nWhere would you like to fly out of?");
-      String departingAirport = scanner.nextLine();
+    System.out.print("\n----- Number of Passengers -----\n\nEnter number of passengers: ");
+    numPassengers = scanner.nextInt();
+    scanner.nextLine();
 
-      System.out.println("----- Destination Airport -----\nWhere would you like to fly to?");
-      String destAirport = scanner.nextLine();
+    System.out.println("\n----- Departing Airport -----");
+    if (registeredUser != null && !(registeredUser.getPreferredAirport().equals(""))) {
+      System.out.println("Would you like to fly out of " + registeredUser.getPreferredAirport()
+      + " (saved preference)?\n");
 
-      System.out.println("----- Departing Date -----\nWhen would you like to leave? (Enter date in format of MM/DD/YYYY)");
-      String departDateStr = scanner.nextLine();
-      LocalDate departDate = LocalDate.parse(departDateStr, format);
+      System.out.println("1. Yes");
+      System.out.println("2. No\n");
+      System.out.print("Select Option: ");
+      int choice = scanner.nextInt();
+      scanner.nextLine();
 
-      System.out.println("----- Return Date -----\nWhen would you like to return? (Enter date in format of MM/DD/YYYY)");
-      String returnDateStr = scanner.nextLine();
-      LocalDate returnDate = LocalDate.parse(returnDateStr, format);
-  
-      System.out.println("----- Searching Flights -----");
-      user.getFlights(departingAirport, destAirport, departDate);
-      System.out.println("----- Choose Flights -----");
-  
-      System.out.println("Which flight would you like to choose?: ");
-      int flightChoice = scanner.nextInt();
-  
-      System.out.println("Which cabin would you like to fly? :");
-      int cabinChoice = scanner.nextInt();
+      switch (choice) {
+        case 1:
+          departingAirport = registeredUser.getPreferredAirport();
+          break;
+        case 2:
+          departingAirport = getDepartingAirport();
+          break;
+        default:
+          departingAirport = getDepartingAirport();
+          break;
+      }
+    } else {
+      departingAirport = getDepartingAirport();
+    }
 
-      // SECOND FLIGHT (ROUND-TRIP)
-      System.out.println("Which flight would you like to choose?: ");
-      int flightChoiceTwo = scanner.nextInt();
-  
-      System.out.println("Which cabin would you like to fly? :");
-      int cabinChoiceTwo = scanner.nextInt();
+    System.out.print("\n----- Destination Airport -----\n\nWhere would you like to fly to? (Enter 3 letter airport code): ");
+    destAirport = scanner.nextLine();
 
-      System.out.println("----- Your Trip ----- ");
+    System.out.print("\n----- Departing Date -----\n\nWhen would you like to leave? (Enter date in format of MM/DD/YYYY): ");
+    String departDateStr = scanner.nextLine();
+    departDate = LocalDate.parse(departDateStr, format);
 
-      System.out.println("Thank you for using our flight search to view potential flights.\n"+
-      "If you'd like to book a flight, please log in.");
-      break;
+    switch (flightType) {
+      case 1:
+        Flight chosenFlight = flightSearchHelper(departingAirport, destAirport, departDate, user);
+        
+        System.out.print("\nWhich cabin would you like to fly?: ");
+        String cabin = scanner.nextLine();
+        int price = chosenFlight.getPrice(cabin) * numPassengers;
 
+        System.out.println("\n----- Your Trip -----\n");
+        printTrip(chosenFlight, price, cabin);
+        System.out.println("Total Price: $" + price + "\n");
+
+        for (int i = 0; i < numPassengers; i++) {
+          if (!(chosenFlight.getIsLayover())) {
+            flightsToBook.add(chosenFlight);
+          } else {
+            for (Flight flight : chosenFlight.getFlights()) {
+              flightsToBook.add(flight);
+            }
+          }
+        }
+
+        break;
       case 2:
+        System.out.print("\n----- Return Date -----\n\nWhen would you like to return? (Enter date in format of MM/DD/YYYY): ");
+        String returnDateStr = scanner.nextLine();
+        returnDate = LocalDate.parse(returnDateStr, format);
+
+        Flight flightThere = flightSearchHelper(departingAirport, destAirport, departDate, user);
+        System.out.print("\nWhich cabin would you like to fly?: ");
+        String cabin1 = scanner.nextLine();
+        int price1 = flightThere.getPrice(cabin1);
+
+        Flight flightBack = flightSearchHelper(destAirport, departingAirport, returnDate, user);
+        System.out.print("\nWhich cabin would you like to fly?: ");
+        String cabin2 = scanner.nextLine();
+        int price2 = flightThere.getPrice(cabin2);
+
+        for (int i = 0; i < numPassengers; i++) {
+          if (!(flightThere.getIsLayover())) {
+            flightsToBook.add(flightThere);
+          } else {
+            for (Flight flight : flightThere.getFlights()) {
+              flightsToBook.add(flight);
+            }
+          }
+        }
+        
+        for (int i = 0; i < numPassengers; i++) {
+          if (!(flightBack.getIsLayover())) {
+            flightsToBook.add(flightBack);
+          } else {
+            for (Flight flight : flightBack.getFlights()) {
+              flightsToBook.add(flight);
+            }
+          }
+        }
       
+
+        System.out.println("\n----- Your Trip -----\n");
+        printTrip(flightThere, price1, cabin1);
+        printTrip(flightBack, price2, cabin2);
+        int totalPrice = (price1 + price2) * numPassengers;
+        System.out.println("Total Price: $" + totalPrice + "\n");
+        break;
+      default:
+        break;
+    }
+
+    if (registeredUser == null) {
+      System.out.println("Please log in to book flights\n");
+      return;
+    }
+
+    System.out.println("\n-----Passenger Details-----");
+
+    System.out.println("\nChoose one of the following people, or input custom passenger details\n");
+
+    ticketHolders = getTicketHolders(numPassengers, flightsToBook.size());
+
+    for (int i = 0; i < flightsToBook.size(); i++) {
+      Flight flightToBook = flightsToBook.get(i);
+      Friend ticketHolder = ticketHolders.get(i);
+
+      System.out.println("----- Seat for " + ticketHolder.getFirstName() + " -----\n");
+      System.out.println("Choose seat for " + flightToBook.getDepartingAirport() +
+      " -> " + flightToBook.getDestAirport());
+      System.out.println("X = Unavailable Seat");
+      System.out.println("O = Open Seat");
+      System.out.println("M = Medical Seat");
+
+      System.out.println(flightToBook.printSeats());
+
+      Map<String, Seating> seats = flightToBook.getSeating();
+
+      Boolean validSeat = false;
+
+      while(!validSeat) {
+        System.out.print("Select your seat number: ");
+        String seatNum = scanner.nextLine();
+        Seating seat = seats.get(seatNum);
+        if (seat.getBooked()) {
+          System.out.println("Seat is taken, please try again!");
+        } else {
+          seatsToBook.add(seat);
+          seat.setBooked(true);
+          validSeat = true;
+        }
+      }
+
+    }
+
+    registeredUser.bookFlights(flightsToBook, seatsToBook, ticketHolders);
+    System.out.println("---- Flight Booking -----");
+    // TELL USER THEIR TICKETS HAVE BEEN ADDED TO THEIR ACCOUNT
+    // ASK USER IF THEY WANNA BOOK A HOTEL AS WELL
+
+
+  }
+
+  /**
+   * Makes an array list of friends
+   * Each index coresponds to the flight they will want to book in flights to book
+   * @param numPassengers The number of passengers
+   * @param size Size of flights to be booked. Used to determine how many flights each passenger will have
+   * @return The array list holding all the ticket holders
+   */
+  private ArrayList<Friend> getTicketHolders(int numPassengers, int size) {
+    ArrayList<Friend> ret = new ArrayList<>();
+    ArrayList<Friend> preRet = new ArrayList<>();
+    int flightsPerPassenger = size / numPassengers;
+
+    ArrayList<Friend> chooseFromFriends = new ArrayList<>();
+
+    for (Friend friend : registeredUser.getFriends()) {
+      chooseFromFriends.add(friend);
+    }
+
+    for (int i = 0; i < numPassengers; i++) {
+      for (int j = 0; j < chooseFromFriends.size(); j++) {
+        System.out.println((j+1) + ".");
+        System.out.println(chooseFromFriends.get(j));
+
+      }
+
+      int lastElement = chooseFromFriends.size() + 1;
+      System.out.println(lastElement + ".");
+      System.out.println("Input custom passenger details");
+
+      System.out.print("\nEnter choice: ");
+
+      int choice = scanner.nextInt();
+      scanner.nextLine();
+
+      System.out.println("\n");
+
+      if (choice == lastElement) {
+        Friend toAdd = makeFriend();
+        preRet.add(toAdd);
+      } else {
+        preRet.add(chooseFromFriends.get(choice-1));
+        chooseFromFriends.remove(choice-1);
+      }
+    }
+
+    for (int i = 0; i < preRet.size(); i++) {
+      for (int j = 0; j < flightsPerPassenger; j++) {
+        ret.add(preRet.get(i));
+      }
+    }
+    return ret;
+  }
+
+  /**
+   * When a user enters a new passenger details make them a friend of the user
+   * @return Friend a friend of the user
+   */
+  private Friend makeFriend() {
+    String firstName;
+    String lastName;
+    int age;
+    String gender;
+    String email;
+    String address;
+
+    // NAME + AGE
+    System.out.print("----- Enter the Following Information -----\n\n" +
+    "----- Your Name -----\n"+
+    "First name: ");
+    firstName = scanner.nextLine();
+    System.out.print("Last name: ");
+    lastName = scanner.nextLine();
+    System.out.print("Age: ");
+    String sAge = scanner.nextLine();
+    age = Integer.parseInt(sAge);
+
+    // GENDER
+    System.out.print("\n----- Your Gender -----\n"+
+    "1. Male\n"+
+    "2. Female\n"+
+    "3. Unspecified\n"+
+    "4. Undisclosed\n\n"+
+    "Select your gender: ");
+    int genderSelect = scanner.nextInt();
+    scanner.nextLine();
+    switch(genderSelect) {
+      case 1: gender = "Male";
+      break;
+      case 2: gender = "Female";
+      break;
+      case 3: gender = "Unspecified";
+      break;
+      case 4: gender = "Undisclosed";
+      break;
+      default: gender = "Undisclosed";
       break;
     }
+    // ADDRESS
+    System.out.println("\n----- Your Address -----");
+    System.out.print("Country: ");
+    String country = scanner.nextLine();
+    System.out.print("Street: ");
+    String street = scanner.nextLine();
+    System.out.print("City: ");
+    String city = scanner.nextLine();
+    System.out.print("State: ");
+    String state = scanner.nextLine();
+    System.out.print("Postal Code: ");
+    String postal = scanner.nextLine();
+    address = street + ", " + city + ", " + state + ", " + country + ", " + postal;
+    // EMAIL
+    System.out.print("\n----- Passenger Email -----\n"+
+    "Email: ");
+    email = scanner.nextLine();
+    Friend ret = new Friend(firstName, lastName, age, false, gender, email, address);
+    registeredUser.addFriend(ret);
+    return ret;
+  }
+
+  /**
+   * Helper method to get the departing airport from user
+   * @return The departing airport
+   */
+  private String getDepartingAirport() {
+    String ret = "";
+    System.out.print("\nWhere yould you like to fly out of? (Enter 3 letter airport code): ");
+    ret = scanner.nextLine();
+    return ret;
   }
 
 /**
