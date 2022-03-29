@@ -45,7 +45,7 @@ public class Flight extends ObjectToBeBooked {
   Flight(LocalDate date, String departingAirport, String destAirport,
   String takeOffTime, String landingTime, String totalFlightTime,
   boolean layover, String company, HashMap<String, Integer> pricing,
-  HashMap<String, Seating> seats, String departingGate, String destGate) {
+  Map<String, Seating> seats, String departingGate, String destGate) {
     super(company, pricing);
     setIsLayover(layover);
     setDate(date);
@@ -79,7 +79,7 @@ public class Flight extends ObjectToBeBooked {
   Flight(LocalDate date, String departingAirport, String destAirport,
   String takeOffTime, String landingTime, String totalFlightTime,
   boolean layover, String company, HashMap<String, Integer> pricing,
-  HashMap<String, Seating> seats, UUID id, String departingGate, String destGate) {
+  Map<String, Seating> seats, UUID id, String departingGate, String destGate) {
     super(company, pricing, id);
     setIsLayover(layover);
     setDate(date);

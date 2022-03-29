@@ -1,5 +1,6 @@
 import java.io.FileWriter;
 import java.io.IOException;
+import java.security.KeyStore.Entry;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -65,9 +66,16 @@ public class DataWriter extends DataConstants {
         flightDetails.put(FLIGHTS_PRICING_LIST, priceArray);
         JSONArray seatArray = new JSONArray();
         if (!flight.getIsLayover()) {
-            for (Map.Entry<String, Seating> seat : flight.getSeating().entrySet()) {
-                seatArray.add(seat.getValue().getID().toString());
+            Map<String, Seating> seats = new LinkedHashMap<>();
+            seats = flight.getSeating();
+
+            for (Seating seat : seats.values()) {
+                seatArray.add(seat.getID().toString());
             }
+
+            // for (Map.Entry<String, Seating> seat : flight.getSeating().entrySet()) {
+            //     seatArray.add(seat.getValue().getID().toString());
+            // }
         }
         flightDetails.put(FLIGHTS_INDIVIDUALBOOKINGS_LIST, seatArray);
         return flightDetails;
@@ -396,9 +404,22 @@ public class DataWriter extends DataConstants {
         JSONArray jsonSeatList = new JSONArray();
         for (int i = 0; i < flights.size(); i++) {
             if (flights.get(i).getIsLayover()) continue;
-            for (Map.Entry<String, Seating> seat : flights.get(i).getSeating().entrySet()) {
+            Map<String, Seating> seats = new LinkedHashMap<>();
+            seats = flights.get(i).getSeating();
+            
+            // for (Map.Entry<String, Seating> entry : seats) {
+            //     Seating set = entry.getValue();
+            //     jsonSeatList.add(getSeatJSON(seat));
+            // }
+
+            for (Seating seat : seats.values()) {
                 jsonSeatList.add(getSeatJSON(seat));
             }
+
+            // for (Map.Entry<String, Seating> seat : flights.get(i).getSeating().entrySet()) {
+            //     System.out.println();
+            //     jsonSeatList.add(getSeatJSON(seat));
+            // }
         }
         try (FileWriter file = new FileWriter(SEATINGS_FILE_NAME)) {
             file.write(jsonSeatList.toJSONString());
@@ -413,14 +434,14 @@ public class DataWriter extends DataConstants {
      * @param seat The seat passed in
      * @return The seat's information, stored in a JSON object
      */
-    public static JSONObject getSeatJSON(Map.Entry<String, Seating> seat) {
+    public static JSONObject getSeatJSON(Seating seat) {
         JSONObject seatDetails = new JSONObject();
-        seatDetails.put(SEATINGS_ID, seat.getValue().getID().toString());
-        seatDetails.put(SEATINGS_SEAT_NUMBER, seat.getValue().getNumber());
-        seatDetails.put(SEATINGS_BOOKED, seat.getValue().getBooked());
-        seatDetails.put(SEATINGS_MEDICAL_SEAT, seat.getValue().getIsMedicalSeat());
-        seatDetails.put(SEATINGS_PRICE, seat.getValue().getPrice());
-        seatDetails.put(SEATINGS_CABIN, seat.getValue().getType());
+        seatDetails.put(SEATINGS_ID, seat.getID().toString());
+        seatDetails.put(SEATINGS_SEAT_NUMBER, seat.getNumber());
+        seatDetails.put(SEATINGS_BOOKED, seat.getBooked());
+        seatDetails.put(SEATINGS_MEDICAL_SEAT, seat.getIsMedicalSeat());
+        seatDetails.put(SEATINGS_PRICE, seat.getPrice());
+        seatDetails.put(SEATINGS_CABIN, seat.getType());
         return seatDetails;
     }
 

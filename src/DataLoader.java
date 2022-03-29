@@ -116,7 +116,7 @@ public class DataLoader extends DataConstants {
                 // Get all the UUIDS of the seats
                 // Search the seatings list for those seats
                 // Add those seats to seats
-                HashMap<String, Seating> seats = new HashMap<>();
+                Map<String, Seating> seats = new LinkedHashMap<>();
                 JSONArray seatsArray = (JSONArray) flightJSON.get(FLIGHTS_INDIVIDUALBOOKINGS_LIST);
                 if (seatsArray != null) {
                     for (int j = 0; j < seatsArray.size(); j++) {

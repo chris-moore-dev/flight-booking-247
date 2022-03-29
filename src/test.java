@@ -56,8 +56,8 @@ public class test {
         Flight flight = flights.get(0);
 
 
-        testUserList(user);
-        // testFlightList(flight);
+        // testUserList(user);
+        testFlightList(flight);
         // testHotelList(hotel);
 
         // String date1 = "03/07/2022";
@@ -73,7 +73,7 @@ public class test {
         // System.out.println(listOfDates.size());
 
 
-        testRegisteredUserMethods(user, flight, hotel);
+        // testRegisteredUserMethods(user, flight, hotel);
 
         /**
          * Testing save users
@@ -176,19 +176,19 @@ public class test {
 
 
 
-        String date1 = "03/07/2022";
-        String date2 = "03/09/2022";
-        LocalDate checkInDate = LocalDate.parse(date1, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-        LocalDate checkOutDate = LocalDate.parse(date2, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-        HashMap<String, Room> rooms = hotel.getRooms();
-        Room room = rooms.get("U1");
-        int numGuests = 1;
+        // String date1 = "03/07/2022";
+        // String date2 = "03/09/2022";
+        // LocalDate checkInDate = LocalDate.parse(date1, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+        // LocalDate checkOutDate = LocalDate.parse(date2, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+        // HashMap<String, Room> rooms = hotel.getRooms();
+        // Room room = rooms.get("U1");
+        // int numGuests = 1;
 
 
         // user.bookHotel(hotel, room, numGuests, checkInDate, checkOutDate);
-        HotelReservation res = user.getHotelReservations().get(0);
-        user.unBookHotel(res);
-        System.out.println(res);
+        // HotelReservation res = user.getHotelReservations().get(0);
+        // // user.unBookHotel(res);
+        // System.out.println(res);
         
     }
 
