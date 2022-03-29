@@ -33,14 +33,40 @@ public class FlightSystemUI {
       if (freeUser != null) {
         myDisplayMenuUser();
       } else if (registeredUser != null && !(registeredUser.getAdmin())) {
-        System.out.println("succ");
+        myDisplayMenuRegisteredUser();
       } else {
-        System.out.println("succ");
+        
       }
 
-      System.out.println("succ");
       DataWriter.saveDatabase();
     }
+  }
+
+  public void myDisplayMenuRegisteredUser() {
+    System.out.println("Welcome to our Flight and Hotel Booker!\n" +
+    "Hello, " + registeredUser.getFirstName() + " " + registeredUser.getLastName() + ". You are logged in as a regular user.\n\n" +
+    "************ Main Menu ************\n" +
+    "1. Search Flights\n2. Search Hotels\n3. Manage Account\n4. Logout\n5. Exit\n\n" +
+    "What would you like to do?: ");
+
+    String sOption = scanner.nextLine();
+    int option = Integer.parseInt(sOption);
+
+    switch (option) {
+      case 1:
+        break;
+      case 2:
+        break;
+      case 3:
+        break;
+      case 4:
+        freeUser = new User();
+        registeredUser = null;
+        break;
+      case 5:
+        System.exit(0);
+    }
+
   }
 
   public void myDisplayMenuUser() {
@@ -66,7 +92,7 @@ public class FlightSystemUI {
         RegisteredUser changeTo = system.login();
         if (changeTo != null) {
           registeredUser = changeTo;
-          freeUser = null
+          freeUser = null;
         }
         break;
       case 5:
