@@ -111,11 +111,35 @@ public class User {
   }
 
   /**
-   * 
-   * @param flights
+   * Takes an ArrayList of Flights and sorts it from latest landing time to earliest
+   * @param flights the passed ArrayList of flights
    */
   public void filterFlightsByArrivalTimeLateEarly(ArrayList<Flight> flights) {
-
+    int n = flights.size();
+    for(int i = 0; i < n-1; i++) {
+      for(int j = 0; j < n-i-1; j++) {
+        Flight flightOne = flights.get(j);
+        Flight flightTwo = flights.get(j+1);
+        String timeStrOne = flightOne.getLandingTime();
+        String timeStrTwo = flightTwo.getLandingTime();
+        if (timeStrOne.contains("PM") && timeStrOne.contains("AM")) {
+          continue;
+        }
+        else if (timeStrOne.contains("AM") && timeStrTwo.contains("PM")) {
+          flights.set(j, flightTwo);
+          flights.set(j+1, flightOne);
+        } else {
+          timeStrOne = timeStrOne.replaceAll("[^0-9]", "");
+          timeStrTwo = timeStrTwo.replaceAll("[^0-9]", "");
+          int timeOne = Integer.parseInt(timeStrOne);
+          int timeTwo = Integer.parseInt(timeStrTwo);
+          if (timeOne < timeTwo) {
+            flights.set(j, flightTwo);
+            flights.set(j+1, flightOne);
+          }
+        }
+      }
+    }
   }
 
   /**
@@ -151,11 +175,35 @@ public class User {
   }
 
   /**
-   * 
-   * @param flights
+   * Takes an ArrayList of flights and sorts it from latest departure time to earliest
+   * @param flights the passed ArrayList of flights
    */
   public void filterFlightsByDepartingTimeLateEarly(ArrayList<Flight> flights) {
-
+    int n = flights.size();
+    for(int i = 0; i < n-1; i++) {
+      for(int j = 0; j < n-i-1; j++) {
+        Flight flightOne = flights.get(j);
+        Flight flightTwo = flights.get(j+1);
+        String timeStrOne = flightOne.getTakeOffTime();
+        String timeStrTwo = flightTwo.getTakeOffTime();
+        if (timeStrOne.contains("PM") && timeStrOne.contains("AM")) {
+          continue;
+        }
+        else if (timeStrOne.contains("AM") && timeStrTwo.contains("PM")) {
+          flights.set(j, flightTwo);
+          flights.set(j+1, flightOne);
+        } else {
+          timeStrOne = timeStrOne.replaceAll("[^0-9]", "");
+          timeStrTwo = timeStrTwo.replaceAll("[^0-9]", "");
+          int timeOne = Integer.parseInt(timeStrOne);
+          int timeTwo = Integer.parseInt(timeStrTwo);
+          if (timeOne < timeTwo) {
+            flights.set(j, flightTwo);
+            flights.set(j+1, flightOne);
+          }
+        }
+      }
+    }
   }
 
   /**
