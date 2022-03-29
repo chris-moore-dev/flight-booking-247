@@ -35,14 +35,53 @@ public class FlightSystemUI {
       } else if (registeredUser != null && !(registeredUser.getAdmin())) {
         myDisplayMenuRegisteredUser();
       } else {
-        
+        myDisplayMenuAdmin();
       }
 
       DataWriter.saveDatabase();
     }
   }
 
-  public void myDisplayMenuRegisteredUser() {
+  private void myDisplayMenuAdmin() {
+    System.out.println("Welcome to our Flight and Hotel Booker!\n"+
+    "Hello, " + registeredUser.getFirstName() + " " + registeredUser.getLastName() + ". You are logged in as an administrator.\n\n" +
+    "************ Main Menu ************\n" +
+    "1. Search Flights\n2. Search Hotels\n3. Manage Account\n4. Add Flight\n"  +
+    "5. Edit Flight\n6. Remove Flight\n7. Add Hotel\n8. Edit Hotel\n" +
+    "9. Remove Hotel\n0. Logout\n\nWhat would you like to do?: ");
+
+    String sOption = scanner.nextLine();
+    int option = Integer.parseInt(sOption);
+
+    switch (option) {
+      case 1:
+        
+        break;
+      case 2:
+        break;
+      case 3:
+        break;
+      case 4:
+        break;
+      case 5:
+        break;
+      case 6:
+        break;
+      case 7:
+        break;
+      case 8:
+        break;
+      case 9:
+        break;
+      case 0:
+        break;
+      default:
+        System.out.println("Invalid input, please try again!\n");
+        break;
+    }
+  }
+
+  private void myDisplayMenuRegisteredUser() {
     System.out.println("Welcome to our Flight and Hotel Booker!\n" +
     "Hello, " + registeredUser.getFirstName() + " " + registeredUser.getLastName() + ". You are logged in as a regular user.\n\n" +
     "************ Main Menu ************\n" +
@@ -65,11 +104,14 @@ public class FlightSystemUI {
         break;
       case 5:
         System.exit(0);
+      default: 
+        System.out.println("Invalid input, please try again!\n");
+        break;
     }
 
   }
 
-  public void myDisplayMenuUser() {
+  private void myDisplayMenuUser() {
     System.out.print("Welcome to our Flight and Hotel Booker!\n" + 
     "You are not logged in.\n\n" +
     "************ Main Menu ************\n" +
@@ -97,6 +139,9 @@ public class FlightSystemUI {
         break;
       case 5:
         System.exit(0);
+      default: 
+        System.out.println("Invalid input, please try again!\n");
+        break;
     }
   }
 
