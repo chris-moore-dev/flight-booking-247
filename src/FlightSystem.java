@@ -56,8 +56,6 @@ public class FlightSystem {
   public void setRegisteredUser(RegisteredUser user) {
     this.registeredUser = user;
   }
-
-
   
 /**
  * Default constructor for FlightSystem
@@ -240,7 +238,7 @@ public class FlightSystem {
       "1. View Plane Tickets\n2. View Hotel Reservations\n3. View Preferences\n" +
       "4. View Linked People Options\n5. Return to Menu\n\n" +"What would you like to do?: ");
       int mainSelect = scanner.nextInt();
-      boolean endLoop = false;
+      scanner.nextLine();
       switch(mainSelect) {
         case 1: viewTickets(user);
           break;
@@ -271,35 +269,43 @@ public class FlightSystem {
     while(true) {
       System.out.println("----- Plane Tickets -----");
       ArrayList<Ticket> tickets = user.getTickets();
-      for(int i = 0; i < tickets.size(); i++) {
-        System.out.println(i+1 + ". " + tickets.get(i));
-      }
-      System.out.println("Which ticket would you like to view? (Enter 0 to return to menu):");
-      int view = scanner.nextInt();
-      if(view == 0) {
-        manageAccount(user);
+      if(tickets.size() == 0) {
+        System.out.println("You don't have any tickets yet. You can book some through 'Search Flights' in the main menu.\n");
+        break;
       }
       else {
-        tickets.get(view-1).toString();
+        for(int i = 0; i < tickets.size(); i++) {
+          System.out.println(i+1 + ". " + tickets.get(i));
+        }
+        System.out.println("Which ticket would you like to view? (Enter 0 to return to menu):");
+        int view = scanner.nextInt();
+      scanner.nextLine();
+        if(view == 0) {
+          manageAccount(user);
+        }
+        else {
+          tickets.get(view-1).toString();
+        }
+        System.out.println("1. Cancel ticket and request refund\n2. Add checked baggage\n" + 
+        "3. Return to menu\nWhat would you like to do?:");
+        int select = scanner.nextInt();
+        scanner.nextLine();
+        switch(select) {
+          case 1: tickets.remove(view-1);
+          System.out.println("Your ticket has been cancelled. A refund will be issued to your account.");
+          manageAccount(user);
+          break;
+          case 2: System.out.println("----- Enter the Following Information -----\n Weight of bag (lbs):");
+          double weight = scanner.nextDouble();
+          // Is there anywhere to store a bags' weight??
+          tickets.get(view-1).setNumOfCheckedBags(tickets.get(view-1).getNumOfCheckedBags() + 1);
+          System.out.println("Success. You have been charged $30");
+          case 3: manageAccount(user);
+          break;
+          default: break;
+        }
+        continue;
       }
-      System.out.println("1. Cancel ticket and request refund\n2. Add checked baggage\n" + 
-      "3. Return to menu\nWhat would you like to do?:");
-      int select = scanner.nextInt();
-      switch(select) {
-        case 1: tickets.remove(view-1);
-        System.out.println("Your ticket has been cancelled. A refund will be issued to your account.");
-        manageAccount(user);
-        break;
-        case 2: System.out.println("----- Enter the Following Information -----\n Weight of bag (lbs):");
-        double weight = scanner.nextDouble();
-        // Is there anywhere to store a bags' weight??
-        tickets.get(view-1).setNumOfCheckedBags(tickets.get(view-1).getNumOfCheckedBags() + 1);
-        System.out.println("Success. You have been charged $30");
-        case 3: manageAccount(user);
-        break;
-        default: break;
-      }
-      continue;
     }
   }
 
@@ -311,30 +317,36 @@ public class FlightSystem {
     while(true){
       System.out.println("----- Hotel Reservations -----");
       ArrayList<HotelReservation> reservations = user.getHotelReservations();
-      for(int i = 0; i < reservations.size(); i++) {
-        System.out.println(i+1 + ". " + reservations.get(i));
-      }
-      System.out.println("Which reservation would you like to view? (Enter 0 to return to menu):");
-      int view = scanner.nextInt();
-      if(view == 0) {
-        manageAccount(user);
+      if(reservations.size() == 0) {
+        System.out.println("You don't have any hotel reservations yet. You can book some through 'Search Hotels' in the main menu.\n");
+        break;
       }
       else {
-        reservations.get(view-1).toString();
+        for(int i = 0; i < reservations.size(); i++) {
+          System.out.println(i+1 + ". " + reservations.get(i));
+        }
+        System.out.println("Which reservation would you like to view? (Enter 0 to return to menu):");
+        int view = scanner.nextInt();
+        if(view == 0) {
+          manageAccount(user);
+        }
+        else {
+          reservations.get(view-1).toString();
+        }
+        System.out.println("1. Cancel reservation and request refund\n2. Return to menu:\n" +
+        "What would you like to do?:");
+        int select = scanner.nextInt();
+        switch(select) {
+          case 1: reservations.remove(view-1);
+          System.out.println("Your reservation has been cancelled. A refund will be issued to your account.");
+          manageAccount(user);
+          break;
+          case 2: manageAccount(user);
+          break;
+          default: break;
+        }
+        continue;
       }
-      System.out.println("1. Cancel reservation and request refund\n2. Return to menu:\n" +
-      "What would you like to do?:");
-      int select = scanner.nextInt();
-      switch(select) {
-        case 1: reservations.remove(view-1);
-        System.out.println("Your reservation has been cancelled. A refund will be issued to your account.");
-        manageAccount(user);
-        break;
-        case 2: manageAccount(user);
-        break;
-        default: break;
-      }
-      continue;
     }
   }
   
@@ -529,7 +541,7 @@ public class FlightSystem {
   /**
    * Search for flights
    */
-  public void evanSearchForFlights() {
+  public void searchForFlights() {
     ArrayList<Seating> seatsToBook = new ArrayList<>();
     ArrayList<Flight> flightsToBook = new ArrayList<>();
     ArrayList<Friend> ticketHolders = new ArrayList<>();
