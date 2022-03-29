@@ -341,8 +341,7 @@ public class Flight extends ObjectToBeBooked {
     ret += "\n" + getAvailableSeats() + " Seats Available";
     }
     if (numStops > 0 && getIsLayover() == true) {
-      ret += "\n" + flights.get(0).getAvailableSeats() + " Seats Available";
-      for (int j = 0; j < numStops; j++) {
+      for (int j = 0; j < flights.size(); j++) {
         int nextAvailableSeats = 0;
         Flight nextFlight = flights.get(j);
         ret += "\n" + nextFlight.getDepartingAirport() + "     ->     " + nextFlight.getDestAirport();
