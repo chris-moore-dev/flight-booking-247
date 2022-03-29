@@ -122,6 +122,7 @@ public class DataLoader extends DataConstants {
                     for (int j = 0; j < seatsArray.size(); j++) {
                         UUID seatID = UUID.fromString((String) seatsArray.get(j));
                         Seating seat = seatingList.get(seatID);
+                        // System.out.println(id + " " + seat.getBooked());
                         String seatNum = seat.getNumber();
                         seats.put(seatNum, seat);
                     }
@@ -497,8 +498,8 @@ public class DataLoader extends DataConstants {
                 String type = (String) seatingJSON.get(SEATINGS_CABIN);
                 String number = (String) seatingJSON.get(SEATINGS_SEAT_NUMBER);
 
-                // System.out.println(number + " "+ booked);
-                System.out.println(booked);
+                // // System.out.println(number + " "+ booked);
+                // System.out.println(booked);
 
                 Seating seat = new Seating(medicalSeat, id, booked, price, type, number);
                 seatingList.put(id, seat);

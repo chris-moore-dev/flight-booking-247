@@ -192,8 +192,9 @@ public class RegisteredUser extends User {
         String roomNumber = room.getNumber();
         ArrayList<LocalDate> dates = getConsecutiveDates(checkInDate, checkOutDate);
         hotel.book(roomNumber, dates);
+        int price = room.getPrice() * dates.size();
         addHotelReservation(new HotelReservation(hotel, this.firstName,
-        this.lastName, room, room.getPrice(), checkInDate, checkOutDate,
+        this.lastName, room, price, checkInDate, checkOutDate,
         numGuests));
         // TODO Make these changes reflect in the database
     }

@@ -146,7 +146,9 @@ public class test {
 
     /**
      * Book flight test: PASS
-     * Book Hotel test:
+     * UnBook flight test: PASS
+     * Book Hotel test: PASS
+     * UnBook Hotel test: PASS
      * @param user The user being tested
      * @param flight Flight to test with
      * @param hotel Hotel to test with
@@ -158,30 +160,35 @@ public class test {
         ArrayList<Seating> seating = new ArrayList<>();
         ArrayList<Friend> ticketHolders = new ArrayList<>();
 
-        flights.add(flight);
+        // flights.add(flight);
 
-        Map<String, Seating> seats = flight.getSeating();
-        Seating seat = seats.get("A1");
-        seating.add(seat);
+        // Map<String, Seating> seats = flight.getSeating();
+        // Seating seat = seats.get("A1");
+        // seating.add(seat);
 
-        ticketHolders.add(user.getFriends().get(0));
-        System.out.println(seat.getBooked());
+        // ticketHolders.add(user.getFriends().get(0));
+        // System.out.println(seat.getBooked());
 
-        // user.bookFlights(flights, seating, ticketHolders);
+        // // user.unBookFlight(user.getTickets().get(0));
 
-        System.out.println(seat.getBooked());
+        // System.out.println(seat.getBooked());
 
-        // ArrayList<Ticket> tickets = user.getTickets();
-        // system.printTicketToFile(tickets.get(1));
-        // HashMap<String, Room> rooms = hotel.getRooms();
-        // Room room = rooms.get("U1");
-        // int numGuests = 1;
-        // String cid;
-        // String cod;
-        // LocalDate checkInDate;
-        // LocalDate checkOutDate;
 
-        //user.bookHotel(hotel, room, numGuests, checkInDate, checkOutDate);
+
+
+        String date1 = "03/07/2022";
+        String date2 = "03/09/2022";
+        LocalDate checkInDate = LocalDate.parse(date1, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+        LocalDate checkOutDate = LocalDate.parse(date2, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+        HashMap<String, Room> rooms = hotel.getRooms();
+        Room room = rooms.get("U1");
+        int numGuests = 1;
+
+
+        // user.bookHotel(hotel, room, numGuests, checkInDate, checkOutDate);
+        HotelReservation res = user.getHotelReservations().get(0);
+        user.unBookHotel(res);
+        System.out.println(res);
         
     }
 
