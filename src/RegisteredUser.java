@@ -140,7 +140,7 @@ public class RegisteredUser extends User {
             Friend friend = ticketHolders.get(i);
             String seatNumber = seating.get(i).getNumber();
 
-            System.out.println(seatNumber);
+            // System.out.println(seatNumber);
 
             flight.book(seatNumber);
             addTicket(makeTicket(flight, friend, seat));
@@ -171,7 +171,7 @@ public class RegisteredUser extends User {
         int numOfCheckedBags = 0;
         String fName = friend.getFirstName();
         String lName = friend.getLastName();
-        System.out.println(fName);
+        // System.out.println(fName);
         String name = fName + " " + lName;
         int price = seat.getPrice();
         Ticket ticket = new Ticket(boardingGroup, boardingTime, gate,
