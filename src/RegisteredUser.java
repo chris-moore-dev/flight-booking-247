@@ -170,6 +170,7 @@ public class RegisteredUser extends User {
         int numOfCheckedBags = 0;
         String fName = friend.getFirstName();
         String lName = friend.getLastName();
+        System.out.println(fName);
         String name = fName + " " + lName;
         int price = seat.getPrice();
         Ticket ticket = new Ticket(boardingGroup, boardingTime, gate,

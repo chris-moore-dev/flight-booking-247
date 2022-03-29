@@ -53,7 +53,7 @@ public class test {
          * Use index 0 if testing with a normal flight
          * Use index 3 if testing a flight with a layover
          */
-        Flight flight = flights.get(3);
+        Flight flight = flights.get(0);
 
 
         // testUserList(user);

@@ -349,7 +349,7 @@ public class Flight extends ObjectToBeBooked {
         ret += "\n" + nextAvailableSeats + " Seats Available";
       }
     }
-    ret += "\n" + company;
+    ret += "\n" + company + "\n";
     return ret;
   }
 

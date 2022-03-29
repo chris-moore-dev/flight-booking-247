@@ -30,7 +30,7 @@ public class User {
       String depart = flight.getDepartingAirport();
       String dest = flight.getDestAirport();
       LocalDate date = flight.getDate();
-      if (depart == departingAirport && dest == destAirport && date == departDate) {
+      if (depart.equalsIgnoreCase(departingAirport) && dest.equalsIgnoreCase(destAirport) && date.equals(departDate)) {
         ret.add(flight);
       }
     }
