@@ -2,6 +2,7 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -85,27 +86,34 @@ public class FlightSystem {
     System.out.print("Enter password: ");
     String password = scanner.nextLine();
 
-    // String sDate = "08/15/2022";
+    // String sDate = "04/01/2022";
     // LocalDate date = LocalDate.parse(sDate, format);
-    // String departingAirport = "BOS";
-    // String destAirport = "CLT";
-    // String takeOffTime = "9:00 AM";
-    // String landingTime = "11:00 AM";
-    // String totalFlightTime = "2h 5m";
-    // boolean layover = false;
+    // String departingAirport = "CAE";
+    // String destAirport = "SEA";
+    // String takeOffTime = "6:00 AM";
+    // String landingTime = "11:09 PM";
+    // String totalFlightTime = "20h 9m";
+    // boolean layover = true;
     // String company = "American Airlines";
     // HashMap<String, Integer> pricing = new HashMap<>();
-    // pricing.put("First", 600);
-    // pricing.put("Main Cabin", 550);
-    // pricing.put("Economy", 500);
+    // pricing.put("First", 1298);
+    // pricing.put("Main Cabin", 612);
+    // pricing.put("Economy", 550);
     // String departingGate = "17";
     // String destGate = "420";
     // Map<String, Seating> seats = new HashMap<>();
 
-
-    // Flight toAdd = new Flight(date, departingAirport, destAirport, takeOffTime,
-    // landingTime, totalFlightTime, layover, company, pricing, seats, departingGate, destGate);
     // ArrayList<Flight> flights = flightList.getFlights();
+
+    // ArrayList<Flight> addThis = new ArrayList<>();
+    // addThis.add(flights.get(4));
+    // addThis.add(flights.get(6));
+
+    // Flight toAdd = new Flight(date, departingAirport, destAirport, takeOffTime, landingTime, totalFlightTime, layover, addThis, 1, 0.8, company);
+
+
+    // // Flight toAdd = new Flight(date, departingAirport, destAirport, takeOffTime,
+    // // landingTime, totalFlightTime, layover, company, pricing, seats, departingGate, destGate);
     // flights.add(toAdd);
 
     if(userList.getUser(email, password) != null) {
@@ -719,10 +727,24 @@ public class FlightSystem {
     }
 
     registeredUser.bookFlights(flightsToBook, seatsToBook, ticketHolders, shouldDiscount);
-    System.out.println("---- Flight Booking -----");
-    // TELL USER THEIR TICKETS HAVE BEEN ADDED TO THEIR ACCOUNT
-    // ASK USER IF THEY WANNA BOOK A HOTEL AS WELL
+    System.out.println("\n---- Flight Booking -----");
+    System.out.println("\nYour tickets have been added to your account");
+    System.out.println("\nThank you for shopping with us!");
 
+    System.out.println("\nWould you also like to book a hotel?\n");
+    System.out.println("1. Yes");
+    System.out.println("2. No");
+
+    System.out.print("\nEnter your choice: ");
+
+    int hotelChoice = scanner.nextInt();
+    scanner.nextLine();
+
+    if (hotelChoice == 1) {
+      // CALL HOTEL SEARCH
+    } 
+
+    System.out.println("\nReturning to main menu\n");
 
   }
 
