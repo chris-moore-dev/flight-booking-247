@@ -2,8 +2,17 @@
  * FlightWithLayover
  * @author Evam Scales
  */
+import java.time.LocalDate;
 import java.util.*;
 public class FlightWithLayover extends Flight {
+
+    FlightWithLayover(LocalDate date, String departingAirport, String destAirport, String takeOffTime, String landingTime,
+      String totalFlightTime, Boolean layover, ArrayList<Flight> flights, int numStops, double discountPercent,
+      String company) {
+    super(date, departingAirport, destAirport, takeOffTime, landingTime, totalFlightTime, layover, flights, numStops,
+        discountPercent, company);
+    //TODO Auto-generated constructor stub
+  }
 
     private ArrayList<Flight> flights;
     private int numStops;
@@ -22,19 +31,17 @@ public class FlightWithLayover extends Flight {
      * @param numStop
      * @param discountPercent
      */
-    FlightWithLayover(Date date, String departingAirport, String destAirport,
-    String takeOffTime, String landingTime, String totalTime,
-    HashMap<String, Integer> pricing, ArrayList<Flight> flights,
-    int numStop, double discountPercent) {
+    // I'm making these functions comments because they are broken and stop the program from compiling >:(
+      
+    //FlightWithLayover(Date date, String departingAirport, String destAirport,
+    //String takeOffTime, String landingTime, String totalTime,
+    //HashMap<String, Integer> pricing, ArrayList<Flight> flights,
+    //int numStop, double discountPercent) {
         // Make a constrcutor in Flights just for flights with layovers
         // Do not include info for objecttobebooked for that constructor, besides pricing
-        // This type of object will never be stored i
-        
-    }
+        // This type of object will never be stored i}
 
-    FlightWithLayover(String gay) {
-        
-    }
+    //FlightWithLayover(String gay) {}
 
     // Member functions
 
