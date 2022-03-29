@@ -85,28 +85,28 @@ public class FlightSystem {
     System.out.print("Enter password: ");
     String password = scanner.nextLine();
 
-    String sDate = "08/15/2022";
-    LocalDate date = LocalDate.parse(sDate, format);
-    String departingAirport = "BOS";
-    String destAirport = "CLT";
-    String takeOffTime = "9:00 AM";
-    String landingTime = "11:00 AM";
-    String totalFlightTime = "2h 5m";
-    boolean layover = false;
-    String company = "American Airlines";
-    HashMap<String, Integer> pricing = new HashMap<>();
-    pricing.put("First", 600);
-    pricing.put("Main Cabin", 550);
-    pricing.put("Economy", 500);
-    String departingGate = "17";
-    String destGate = "420";
-    Map<String, Seating> seats = new HashMap<>();
+    // String sDate = "08/15/2022";
+    // LocalDate date = LocalDate.parse(sDate, format);
+    // String departingAirport = "BOS";
+    // String destAirport = "CLT";
+    // String takeOffTime = "9:00 AM";
+    // String landingTime = "11:00 AM";
+    // String totalFlightTime = "2h 5m";
+    // boolean layover = false;
+    // String company = "American Airlines";
+    // HashMap<String, Integer> pricing = new HashMap<>();
+    // pricing.put("First", 600);
+    // pricing.put("Main Cabin", 550);
+    // pricing.put("Economy", 500);
+    // String departingGate = "17";
+    // String destGate = "420";
+    // Map<String, Seating> seats = new HashMap<>();
 
 
-    Flight toAdd = new Flight(date, departingAirport, destAirport, takeOffTime,
-    landingTime, totalFlightTime, layover, company, pricing, seats, departingGate, destGate);
-    ArrayList<Flight> flights = flightList.getFlights();
-    flights.add(toAdd);
+    // Flight toAdd = new Flight(date, departingAirport, destAirport, takeOffTime,
+    // landingTime, totalFlightTime, layover, company, pricing, seats, departingGate, destGate);
+    // ArrayList<Flight> flights = flightList.getFlights();
+    // flights.add(toAdd);
 
     if(userList.getUser(email, password) != null) {
       RegisteredUser user = userList.getUser(email, password);
