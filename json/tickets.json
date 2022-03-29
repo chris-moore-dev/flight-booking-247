@@ -1,14 +1,1 @@
-[
-    {
-        "ticketID" : "6ed4e580-95a0-4ac6-b9e4-a95b66c27608",
-        "flightID" : "15f1f1e1-364a-4640-96a6-2b3ab9717246",
-        "seatID" : "",
-        "price" : 600,
-        "firstName" : "Evan",
-        "lastName" : "Scales",
-        "boardingGroup" : "1A",
-        "boardingTime" : "5:30 AM",
-        "checkedBags" : 0,
-        "gate" : "36"
-    }
-]
+[]

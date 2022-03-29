@@ -4,6 +4,7 @@
  */
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 public class RegisteredUser extends User {
     private UUID userID;
     private String firstName;
@@ -139,6 +140,8 @@ public class RegisteredUser extends User {
             Friend friend = ticketHolders.get(i);
             String seatNumber = seating.get(i).getNumber();
 
+            System.out.println(seatNumber);
+
             flight.book(seatNumber);
             addTicket(makeTicket(flight, friend, seat));
 
@@ -187,9 +190,11 @@ public class RegisteredUser extends User {
     public void bookHotel(Hotel hotel, Room room, int numGuests,
     LocalDate checkInDate, LocalDate checkOutDate) {
         String roomNumber = room.getNumber();
-        hotel.book(roomNumber);
+        ArrayList<LocalDate> dates = getConsecutiveDates(checkInDate, checkOutDate);
+        hotel.book(roomNumber, dates);
+        int price = room.getPrice() * dates.size();
         addHotelReservation(new HotelReservation(hotel, this.firstName,
-        this.lastName, room, room.getPrice(), checkInDate, checkOutDate,
+        this.lastName, room, price, checkInDate, checkOutDate,
         numGuests));
         // TODO Make these changes reflect in the database
     }
@@ -202,9 +207,35 @@ public class RegisteredUser extends User {
     public void unBookHotel(HotelReservation reservation) {
         Hotel hotel = reservation.getHotel();
         String roomNumber = reservation.getRoom().getNumber();
-        hotel.unBook(roomNumber);
+        LocalDate date1 = reservation.getCheckInDate();
+        LocalDate date2 = reservation.getChecOutDate();
+        ArrayList<LocalDate> dates = getConsecutiveDates(date1, date2);
+        hotel.unBook(roomNumber, dates);
         removeHotelReservation(reservation);
         // TODO Make changes reflect in database
+    }
+
+    /**
+     * Given 2 dates, find all the dates between those days
+     * @param date1
+     * @param date2
+     * @return
+     */
+    private ArrayList<LocalDate> getConsecutiveDates(LocalDate date1,
+    LocalDate date2) {
+        List<LocalDate> listOfDates = date1.datesUntil(date2)
+		.collect(Collectors.toList());
+
+        LocalDate[] pre = new LocalDate[listOfDates.size()];
+        pre = listOfDates.toArray(pre);
+
+        ArrayList<LocalDate> ret = new ArrayList<>();
+
+        for (LocalDate addDate : pre) {
+            ret.add(addDate);
+        }
+
+        return ret;
     }
 
     /**

@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 /**
  * User class
- * @author Chris Moore
+ * @author Chris Moore, Lyn Cork
  */
 public class User {
   /**
@@ -14,31 +14,67 @@ public class User {
   }
 
   /**
-   * 
-   * @param departingAirport
-   * @param destAirport
-   * @param departDate
+   * Takes a departing airport, a destination, and the date of departure. Returns an arraylist of flights that meet these parameters.
+   * @param departingAirport the airport where the plane leaves from
+   * @param destAirport the destination
+   * @param departDate the day on which the flight is leaving
    * @return
    */
   public ArrayList<Flight> getFlights(String departingAirport, String destAirport, LocalDate departDate) {
-    
+    FlightList flightList = FlightList.getInstance();
+    ArrayList<Flight> flights = flightList.getFlights();
+    ArrayList<Flight> ret = new ArrayList<Flight>();
+    for (int i = 0; i < flights.size(); i++) {
+      Flight flight = flights.get(i);
+      String depart = flight.getDepartingAirport();
+      String dest = flight.getDestAirport();
+      LocalDate date = flight.getDate();
+      if (depart == departingAirport && dest == destAirport && date == departDate) {
+        ret.add(flight);
+      }
+    }
+    return ret;
   }
 
 
   /**
-   * 
-   * @param flights
+   * Arranges passed flight list from least to greatest price
+   * @param flights flight list
    */
   public void filterFlightsByPrice(ArrayList<Flight> flights) {
-
+    int n = flights.size();
+    for(int i = 0; i < n-1; i++) {
+      for(int j = 0; j < n-i-1; j++) {
+        Flight flightOne = flights.get(j);
+        Flight flightTwo = flights.get(j+1);
+        int priceOne = flightOne.getPrice("Economy");
+        int priceTwo = flightTwo.getPrice("Economy");
+        if (priceOne > priceTwo) {
+          flights.add(j, flightTwo);
+          flights.add(j+1, flightOne);
+        }
+      }
+    }
   }
 
   /**
-   * 
-   * @param flights
+   * Sorts passed flight array list from least to greatest number of layovers
+   * @param flights arraylist of flights
    */
   public void filterFlightsByNumberOfLayovers(ArrayList<Flight> flights) {
-
+    int n = flights.size();
+    for(int i = 0; i < n-1; i++) {
+      for(int j = 0; j < n-i-1; j++) {
+        Flight flightOne = flights.get(j);
+        Flight flightTwo = flights.get(j+1);
+        int stopsOne = flightOne.getNumStops();
+        int stopsTwo = flightTwo.getNumStops();
+        if (stopsOne > stopsTwo) {
+          flights.add(j, flightTwo);
+          flights.add(j+1, flightOne);
+        }
+      }
+    }
   }
 
   /**
@@ -82,21 +118,53 @@ public class User {
   }
 
   /**
-   * 
-   * @param airline
-   * @param flights
+   * Filters flight list to only flights by passed airline
+   * @param airline desired airline
+   * @param flights flight list
    */
   public void filterFlightsByAirline(String airline, ArrayList<Flight> flights) {
-
+    ArrayList<Flight> temp = new ArrayList<Flight>();
+    for (int i = 0; i < flights.size(); i++) {
+      Flight flight = flights.get(i);
+      String company = flight.getCompany();
+      if (company == airline) {
+        temp.add(flight);
+      }
+    }
+    flights = temp;
   }
 
 
   /**
-   * 
-   * @param hotels
+   * Arranges hotel list from least to greatest average rating
+   * @param hotels hotel list
    */
   public void filterHotelsByRating(ArrayList<Hotel> hotels) {
-
+    int n = hotels.size();
+    int totalOne = 0;
+    int totalTwo = 0;
+    for(int i = 0; i < n-1; i++) {
+      for(int j = 0; j < n-i-1; j++) {
+        Hotel hotelOne = hotels.get(j);
+        Hotel hotelTwo = hotels.get(j+1);
+        ArrayList<Review> reviewsOne = hotelOne.getReviews();
+        for(i = 0; i < reviewsOne.size(); i++) {
+          Review temp = reviewsOne.get(i);
+          totalOne += temp.getRating() ;
+        }
+        int averageOne = totalOne/reviewsOne.size();
+        ArrayList<Review> reviewsTwo = hotelTwo.getReviews();
+        for(i = 0; i < reviewsTwo.size(); i++) {
+          Review temp = reviewsTwo.get(i);
+          totalTwo += temp.getRating() ;
+        }
+        int averageTwo = totalTwo/reviewsTwo.size();
+        if (averageOne > averageTwo) {
+          hotels.add(j, hotelTwo);
+          hotels.add(j+1, hotelOne);
+        }
+      }
+    }
   }
 
   /**
@@ -105,7 +173,7 @@ public class User {
    * @return
    */
   public ArrayList<Hotel> getHotelsByAirport(String closestAirport) {
-
+    
   }
 
   /**

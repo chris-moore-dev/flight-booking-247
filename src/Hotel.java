@@ -7,7 +7,7 @@ import java.util.UUID;
 
 /**
  * Hotel class
- * @author Chris Moore
+ * @author Chris Moore, Lyn Cork
  */
 public class Hotel extends ObjectToBeBooked {
   private String address;
@@ -86,36 +86,42 @@ public class Hotel extends ObjectToBeBooked {
     String ret = "\n";
     String amenityList = "";
     Integer averagePrice = 0;
+    int total = 0;
+    int averageRating = 0;
     for (Map.Entry<String, Integer> entry : pricing.entrySet()) {
       averagePrice += entry.getValue();
     }
     averagePrice = averagePrice/pricing.size();
-
+    for(int i = 0; i < reviews.size(); i++) {
+      Review temp = reviews.get(i);
+      total += temp.getRating();
+    }
+    averageRating = total/reviews.size();
     for (String amenity : amenities) {
       amenityList += amenity+", ";
     }
-    ret = company + "Average Price per Night: $" + averagePrice + "\nAddress: " + address + "\nAmenities: " + amenityList;
+    ret = company + "Average Price per Night: $" + averagePrice + "\nRating: " + averageRating + "\nAmenities: " + amenityList;
     return ret;
   }
 
   /**
    * Sets booked room to booked
    * @param roomNum
+   * @param dates The dates to book
    */
-  public void book(String roomNum) {
+  public void book(String roomNum, ArrayList<LocalDate> dates) {
     Room room = rooms.get(roomNum);
-    room.setBooked(true);
-    rooms.put(roomNum, room);
+    room.book(dates);
   }
 
   /**
    * Sets unbooked room to unbooked
    * @param roomNum
+   * @param dates The dates to unbook
    */
-  public void unBook(String roomNum) {
+  public void unBook(String roomNum, ArrayList<LocalDate> dates) {
     Room room = rooms.get(roomNum);
-    room.setBooked(false);
-    rooms.put(roomNum, room);
+    room.unBook(dates);
   }
 
   /**
