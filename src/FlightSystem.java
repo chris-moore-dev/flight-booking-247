@@ -552,6 +552,7 @@ public class FlightSystem {
     LocalDate returnDate;
     int numPassengers;
     int flightsPerPassenger = 0;
+    ArrayList<Boolean> shouldDiscount = new ArrayList<>();
 
     System.out.print("\n----- Enter the Following Information -----\n" +
     "\n----- Flight Type -----\n" +
@@ -609,13 +610,15 @@ public class FlightSystem {
 
         System.out.println("\n----- Your Trip -----\n");
         printTrip(chosenFlight, price, cabin);
-        System.out.println("Total Price: $" + price + "\n");
+        System.out.println("Total Estimated Price: $" + price + "\n");
 
         for (int i = 0; i < numPassengers; i++) {
           if (!(chosenFlight.getIsLayover())) {
+            shouldDiscount.add(false);
             flightsToBook.add(chosenFlight);
           } else {
             for (Flight flight : chosenFlight.getFlights()) {
+              shouldDiscount.add(true);
               flightsToBook.add(flight);
             }
           }
@@ -639,9 +642,11 @@ public class FlightSystem {
 
         for (int i = 0; i < numPassengers; i++) {
           if (!(flightThere.getIsLayover())) {
+            shouldDiscount.add(false);
             flightsToBook.add(flightThere);
           } else {
             for (Flight flight : flightThere.getFlights()) {
+              shouldDiscount.add(true);
               flightsToBook.add(flight);
             }
           }
@@ -649,9 +654,11 @@ public class FlightSystem {
         
         for (int i = 0; i < numPassengers; i++) {
           if (!(flightBack.getIsLayover())) {
+            shouldDiscount.add(false);
             flightsToBook.add(flightBack);
           } else {
             for (Flight flight : flightBack.getFlights()) {
+              shouldDiscount.add(true);
               flightsToBook.add(flight);
             }
           }
@@ -662,7 +669,7 @@ public class FlightSystem {
         printTrip(flightThere, price1, cabin1);
         printTrip(flightBack, price2, cabin2);
         int totalPrice = (price1 + price2) * numPassengers;
-        System.out.println("Total Price: $" + totalPrice + "\n");
+        System.out.println("Total Estimated Price: $" + totalPrice + "\n");
         break;
       default:
         break;
@@ -711,7 +718,7 @@ public class FlightSystem {
 
     }
 
-    registeredUser.bookFlights(flightsToBook, seatsToBook, ticketHolders);
+    registeredUser.bookFlights(flightsToBook, seatsToBook, ticketHolders, shouldDiscount);
     System.out.println("---- Flight Booking -----");
     // TELL USER THEIR TICKETS HAVE BEEN ADDED TO THEIR ACCOUNT
     // ASK USER IF THEY WANNA BOOK A HOTEL AS WELL

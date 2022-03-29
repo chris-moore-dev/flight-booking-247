@@ -132,18 +132,19 @@ public class RegisteredUser extends User {
      * @param ticketHolders The ticket holders
      */
     public void bookFlights(ArrayList<Flight> flights, ArrayList<Seating> seating,
-    ArrayList<Friend> ticketHolders) {
+    ArrayList<Friend> ticketHolders, ArrayList<Boolean> shouldDiscount) {
         int arraySize = flights.size();
         for (int i = 0; i < arraySize; i++) {
             Flight flight = flights.get(i);
             Seating seat = seating.get(i);
             Friend friend = ticketHolders.get(i);
             String seatNumber = seating.get(i).getNumber();
+            Boolean discount = shouldDiscount.get(i);
 
             // System.out.println(seatNumber);
 
             flight.book(seatNumber);
-            addTicket(makeTicket(flight, friend, seat));
+            addTicket(makeTicket(flight, friend, seat, discount));
 
             // TODO Make these changes reflect in the database
         }
@@ -156,7 +157,7 @@ public class RegisteredUser extends User {
      * @param seat The seat
      * @return The ticket to be added to the users account
      */
-    private Ticket makeTicket(Flight flight, Friend friend, Seating seat) {
+    private Ticket makeTicket(Flight flight, Friend friend, Seating seat, boolean discount) {
         String boardingGroup;
         if (friend.getMedicalCondition() || seat.getType().equalsIgnoreCase("First")) {
             boardingGroup = "1A";
@@ -174,6 +175,9 @@ public class RegisteredUser extends User {
         // System.out.println(fName);
         String name = fName + " " + lName;
         int price = seat.getPrice();
+        if (discount)
+            price = (int) Math.round(price * .8);
+
         Ticket ticket = new Ticket(boardingGroup, boardingTime, gate,
         name, numOfCheckedBags, flight, seat, fName, lName, price);
         return ticket;
