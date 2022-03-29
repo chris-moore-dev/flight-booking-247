@@ -164,8 +164,9 @@ public class RegisteredUser extends User {
             boardingGroup = "6";
         }
         String[] splitArray = flight.getTakeOffTime().split(":");
-        String boardingTime = "7:35";
-        // Do Make getting boarding time work
+        int sub = Integer.parseInt(splitArray[0]);
+        sub--;
+        String boardingTime = sub + ":" + splitArray[1];
         String gate = flight.getDepartingGate();
         int numOfCheckedBags = 0;
         String fName = friend.getFirstName();

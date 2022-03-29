@@ -95,11 +95,12 @@ public class FlightSystemUI {
 
     switch (option) {
       case 1:
-        system.evanSearchForFlights();
+        system.searchForFlights();
         break;
       case 2:
         break;
       case 3:
+
         break;
       case 4:
         system.setFreeUser(new User());
@@ -128,7 +129,7 @@ public class FlightSystemUI {
 
     switch (option) {
       case 1:
-        system.evanSearchForFlights();
+        system.searchForFlights();
         break;
       case 2:
         break;
