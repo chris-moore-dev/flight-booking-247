@@ -17,8 +17,9 @@ import java.util.ArrayList;
 public class FlightSystem {
   private Scanner scanner = new Scanner(System.in);
   private UserList userList = UserList.getInstance();
-  private HotelList hotelList;
-  private FlightList flightList;
+  private HotelList hotelList = HotelList.getInstance();
+  private FlightList flightList = FlightList.getInstance();
+  private User userFn = new User();
   DateTimeFormatter format = DateTimeFormatter.ofPattern("MM-dd-yyyy");
   
 /**
@@ -26,7 +27,7 @@ public class FlightSystem {
  */
   public FlightSystem() {
     
-  }
+}
 
 /* 
 ===================
@@ -146,7 +147,7 @@ public class FlightSystem {
     preferredAirport, frequentFlyer, admin, medicalCondition, blackListedAirports, 
     tickets, hotelReservations, friends);
     //Write saveThis to Users.json 
-    System.out.println("Account succesfully created. You can now log in.");
+    System.out.println("Account succesfully created. You may now log in.");
   }
 
 
@@ -167,7 +168,7 @@ public class FlightSystem {
       "1. View Plane Tickets\n2. View Hotel Reservations\n3. View Preferences\n" +
       "4. View Linked People Options\n5. Return to Menu\n\n" +"What would you like to do?: ");
       int mainSelect = scanner.nextInt();
-      boolean endLoop = false;
+      scanner.nextLine();
       switch(mainSelect) {
         case 1: viewTickets(user);
           break;
@@ -198,35 +199,43 @@ public class FlightSystem {
     while(true) {
       System.out.println("----- Plane Tickets -----");
       ArrayList<Ticket> tickets = user.getTickets();
-      for(int i = 0; i < tickets.size(); i++) {
-        System.out.println(i+1 + ". " + tickets.get(i));
-      }
-      System.out.println("Which ticket would you like to view? (Enter 0 to return to menu):");
-      int view = scanner.nextInt();
-      if(view == 0) {
-        manageAccount(user);
+      if(tickets.size() == 0) {
+        System.out.println("You don't have any tickets yet. You can book some through 'Search Flights' in the main menu.\n");
+        break;
       }
       else {
-        tickets.get(view-1).toString();
+        for(int i = 0; i < tickets.size(); i++) {
+          System.out.println(i+1 + ". " + tickets.get(i));
+        }
+        System.out.println("Which ticket would you like to view? (Enter 0 to return to menu):");
+        int view = scanner.nextInt();
+      scanner.nextLine();
+        if(view == 0) {
+          manageAccount(user);
+        }
+        else {
+          tickets.get(view-1).toString();
+        }
+        System.out.println("1. Cancel ticket and request refund\n2. Add checked baggage\n" + 
+        "3. Return to menu\nWhat would you like to do?:");
+        int select = scanner.nextInt();
+        scanner.nextLine();
+        switch(select) {
+          case 1: tickets.remove(view-1);
+          System.out.println("Your ticket has been cancelled. A refund will be issued to your account.");
+          manageAccount(user);
+          break;
+          case 2: System.out.println("----- Enter the Following Information -----\n Weight of bag (lbs):");
+          double weight = scanner.nextDouble();
+          // Is there anywhere to store a bags' weight??
+          tickets.get(view-1).setNumOfCheckedBags(tickets.get(view-1).getNumOfCheckedBags() + 1);
+          System.out.println("Success. You have been charged $30");
+          case 3: manageAccount(user);
+          break;
+          default: break;
+        }
+        continue;
       }
-      System.out.println("1. Cancel ticket and request refund\n2. Add checked baggage\n" + 
-      "3. Return to menu\nWhat would you like to do?:");
-      int select = scanner.nextInt();
-      switch(select) {
-        case 1: tickets.remove(view-1);
-        System.out.println("Your ticket has been cancelled. A refund will be issued to your account.");
-        manageAccount(user);
-        break;
-        case 2: System.out.println("----- Enter the Following Information -----\n Weight of bag (lbs):");
-        double weight = scanner.nextDouble();
-        // Is there anywhere to store a bags' weight??
-        tickets.get(view-1).setNumOfCheckedBags(tickets.get(view-1).getNumOfCheckedBags() + 1);
-        System.out.println("Success. You have been charged $30");
-        case 3: manageAccount(user);
-        break;
-        default: break;
-      }
-      continue;
     }
   }
 
@@ -238,30 +247,36 @@ public class FlightSystem {
     while(true){
       System.out.println("----- Hotel Reservations -----");
       ArrayList<HotelReservation> reservations = user.getHotelReservations();
-      for(int i = 0; i < reservations.size(); i++) {
-        System.out.println(i+1 + ". " + reservations.get(i));
-      }
-      System.out.println("Which reservation would you like to view? (Enter 0 to return to menu):");
-      int view = scanner.nextInt();
-      if(view == 0) {
-        manageAccount(user);
+      if(reservations.size() == 0) {
+        System.out.println("You don't have any hotel reservations yet. You can book some through 'Search Hotels' in the main menu.\n");
+        break;
       }
       else {
-        reservations.get(view-1).toString();
+        for(int i = 0; i < reservations.size(); i++) {
+          System.out.println(i+1 + ". " + reservations.get(i));
+        }
+        System.out.println("Which reservation would you like to view? (Enter 0 to return to menu):");
+        int view = scanner.nextInt();
+        if(view == 0) {
+          manageAccount(user);
+        }
+        else {
+          reservations.get(view-1).toString();
+        }
+        System.out.println("1. Cancel reservation and request refund\n2. Return to menu:\n" +
+        "What would you like to do?:");
+        int select = scanner.nextInt();
+        switch(select) {
+          case 1: reservations.remove(view-1);
+          System.out.println("Your reservation has been cancelled. A refund will be issued to your account.");
+          manageAccount(user);
+          break;
+          case 2: manageAccount(user);
+          break;
+          default: break;
+        }
+        continue;
       }
-      System.out.println("1. Cancel reservation and request refund\n2. Return to menu:\n" +
-      "What would you like to do?:");
-      int select = scanner.nextInt();
-      switch(select) {
-        case 1: reservations.remove(view-1);
-        System.out.println("Your reservation has been cancelled. A refund will be issued to your account.");
-        manageAccount(user);
-        break;
-        case 2: manageAccount(user);
-        break;
-        default: break;
-      }
-      continue;
     }
   }
   
@@ -406,53 +421,58 @@ public class FlightSystem {
     "1. One way\n"+
     "2. Round trip\n\n"+
     "Select your flight type: ");
-    int flightType = scanner.nextInt();
-    switch(flightType) {
-      case 1: 
-      System.out.println("----- Number of Passengers -----\nEnter number of passengers:");
-      int numPassengers = scanner.nextInt();
-
-      System.out.println("----- Departing Airport -----\nWhere would you like to fly out of?");
-      String departingAirport = scanner.nextLine();
-
-      System.out.println("----- Destination Airport -----\nWhere would you like to fly to?");
-      String destAirport = scanner.nextLine();
-
-      System.out.println("----- Departing Date -----\nWhen would you like to leave? (Enter date in format of MM/DD/YYYY)");
-      String departDateStr = scanner.nextLine();
-      LocalDate departDate = LocalDate.parse(departDateStr, format);
-
+    int roundTrip = scanner.nextInt();
+    scanner.nextLine();
+    System.out.println("----- Number of Passengers -----\nEnter number of passengers:");
+    int numPassengers = scanner.nextInt();
+    scanner.nextLine();
+    System.out.println("----- Departing Airport -----\nWhere would you like to fly out of?");
+    String departingAirport = scanner.nextLine();
+    System.out.println("----- Destination Airport -----\nWhere would you like to fly to?");
+    String destAirport = scanner.nextLine();
+    System.out.println("----- Departing Date -----\nWhen would you like to leave? (Enter date in format of MM/DD/YYYY)");
+    String departDateStr = scanner.nextLine();
+    LocalDate departDate = LocalDate.parse(departDateStr, format);
+    LocalDate returnDate = LocalDate.now();
+    if(roundTrip == 2) {
       System.out.println("----- Return Date -----\nWhen would you like to return? (Enter date in format of MM/DD/YYYY)");
       String returnDateStr = scanner.nextLine();
-      LocalDate returnDate = LocalDate.parse(returnDateStr, format);
+      returnDate = LocalDate.parse(returnDateStr, format);
+    }
+    System.out.println("----- Searching Flights -----");
+    ArrayList<Flight> flights = userFn.getFlights(departingAirport, destAirport, departDate);
+    // Flights are filtered early/late by default... add an option to change filter?
+    userFn.filterFlightsByArrivalTimeEarlyLate(flights);
+    System.out.println("----- Choose Flights -----");
+    for(int i = 0; i < flights.size(); i++) {
+      System.out.println((i+1) + ". " + flights.get(i));
+    }
+    System.out.println("Which flight would you like to choose?: ");
+    int flightChoice = scanner.nextInt();
   
-      System.out.println("----- Searching Flights -----");
-      user.getFlights(departingAirport, destAirport, departDate);
-      System.out.println("----- Choose Flights -----");
-  
-      System.out.println("Which flight would you like to choose?: ");
-      int flightChoice = scanner.nextInt();
-  
-      System.out.println("Which cabin would you like to fly? :");
-      int cabinChoice = scanner.nextInt();
+    System.out.println("Which cabin would you like to fly?:");
+    int cabinChoice = scanner.nextInt();
 
-      // SECOND FLIGHT (ROUND-TRIP)
+    // SECOND FLIGHT (ROUND-TRIP)
+    if(roundTrip == 2) {
+      ArrayList<Flight> flightsTwo = userFn.getFlights(destAirport, departingAirport, returnDate);
+      for(int i = 0; i < flightsTwo.size(); i++) {
+        System.out.println((i+1) + ". " + flightsTwo.get(i));
+      }
       System.out.println("Which flight would you like to choose?: ");
       int flightChoiceTwo = scanner.nextInt();
   
       System.out.println("Which cabin would you like to fly? :");
       int cabinChoiceTwo = scanner.nextInt();
-
-      System.out.println("----- Your Trip ----- ");
-
-      System.out.println("Thank you for using our flight search to view potential flights.\n"+
-      "If you'd like to book a flight, please log in.");
-      break;
-
-      case 2:
-      
-      break;
     }
+
+    //TODO create ticket
+
+    System.out.println("----- Your Trip ----- ");
+
+    System.out.println("Thank you for using our flight search to view potential flights.\n"+
+    "If you'd like to book a flight, please log in.");
+
   }
 
 /**
