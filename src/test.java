@@ -53,11 +53,11 @@ public class test {
          * Use index 0 if testing with a normal flight
          * Use index 3 if testing a flight with a layover
          */
-        Flight flight = flights.get(3);
+        Flight flight = flights.get(0);
 
 
-        // testUserList(user);
-        testFlightList(flight);
+        testUserList(user);
+        // testFlightList(flight);
         // testHotelList(hotel);
 
         // String date1 = "03/07/2022";
@@ -73,20 +73,25 @@ public class test {
         // System.out.println(listOfDates.size());
 
 
-        // testRegisteredUserMethods(user, flight, hotel);
+        testRegisteredUserMethods(user, flight, hotel);
 
         /**
          * Testing save users
          * @TEST
          */
-        RegisteredUser test = new RegisteredUser("TEST", "TEST", "TEST",
-        0, "TEST", "TEST", "TEST", "TEST", false, false,
-        false, null, null, null, null);
-        users.add(test);
+        // RegisteredUser evan = new RegisteredUser("Evan", "Scales", "escales@email.sc.edu",
+        // 20, "112 Silo ct, Columbia, SC, 29702, USA", "password123", "Male", "CLT", false, true,
+        // false, null, null, null, null);
+        // users.add(evan);
         DataWriter.saveUsers();
         DataWriter.saveFriends();
         DataWriter.saveFlights();
         DataWriter.saveSeatings();
+        DataWriter.saveHotels();
+        DataWriter.saveReviews();
+        DataWriter.saveRooms();
+        DataWriter.saveTickets();
+        DataWriter.saveReservations();
 
         System.out.println(UUID.randomUUID());
     }
@@ -123,26 +128,20 @@ public class test {
             System.out.println(friend);
         }
 
-        // Loding with reservations
-        ArrayList<HotelReservation> reservations = user.getHotelReservations();
-        HotelReservation res = reservations.get(0);
-        HashMap<String, Room> rooms = res.getHotel().getRooms();
-        Room room = rooms.get("U1");
-        res.setRoom(room);
-        System.out.println(res);
-        system.printHotelReservationToFile(res);
+        // // Loding with reservations
+        // ArrayList<HotelReservation> reservations = user.getHotelReservations();
+        // HotelReservation res = reservations.get(0);
+        // System.out.println(res.getRoom().getNumber());
+        // System.out.println(res);
+        // system.printHotelReservationToFile(res);
 
-        // Loading with tickets
-        ArrayList<Ticket> tickets = user.getTickets();
-        Ticket ticket = tickets.get(0);
-        // System.out.println(ticket.getFlight().getCompany());
-        Map<String, Seating> seats = ticket.getFlight().getSeating();
-        Seating seat = seats.get("A1");
-        ticket.setSeat(seat);
+        // // Loading with tickets
+        // ArrayList<Ticket> tickets = user.getTickets();
+        // Ticket ticket = tickets.get(0);
+        // System.out.println(ticket.getPrice());
+        // system.printTicketToFile(ticket);
 
-        system.printTicketToFile(ticket);
-
-        System.out.println(ticket);
+        // System.out.println(ticket);
     }
 
     /**
@@ -155,32 +154,32 @@ public class test {
      */
     public static void testRegisteredUserMethods(RegisteredUser user, Flight flight, Hotel hotel) {
         FlightSystem system = new FlightSystem();
-        // ArrayList<Flight> flights = new ArrayList<>();
-        // ArrayList<Seating> seating = new ArrayList<>();
-        // ArrayList<Friend> ticketHolders = new ArrayList<>();
+        ArrayList<Flight> flights = new ArrayList<>();
+        ArrayList<Seating> seating = new ArrayList<>();
+        ArrayList<Friend> ticketHolders = new ArrayList<>();
 
-        // flights.add(flight);
+        flights.add(flight);
 
-        // Map<String, Seating> seats = flight.getSeating();
-        // Seating seat = seats.get("A1");
-        // seating.add(seat);
+        Map<String, Seating> seats = flight.getSeating();
+        Seating seat = seats.get("A1");
+        seating.add(seat);
 
-        // ticketHolders.add(user.getFriends().get(0));
-        // System.out.println(seat.getBooked());
+        ticketHolders.add(user.getFriends().get(0));
+        System.out.println(seat.getBooked());
 
         // user.bookFlights(flights, seating, ticketHolders);
 
-        // System.out.println(seat.getBooked());
+        System.out.println(seat.getBooked());
 
         // ArrayList<Ticket> tickets = user.getTickets();
         // system.printTicketToFile(tickets.get(1));
-        HashMap<String, Room> rooms = hotel.getRooms();
-        Room room = rooms.get("U1");
-        int numGuests = 1;
-        String cid;
-        String cod;
-        LocalDate checkInDate;
-        LocalDate checkOutDate;
+        // HashMap<String, Room> rooms = hotel.getRooms();
+        // Room room = rooms.get("U1");
+        // int numGuests = 1;
+        // String cid;
+        // String cod;
+        // LocalDate checkInDate;
+        // LocalDate checkOutDate;
 
         //user.bookHotel(hotel, room, numGuests, checkInDate, checkOutDate);
         

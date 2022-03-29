@@ -140,6 +140,8 @@ public class RegisteredUser extends User {
             Friend friend = ticketHolders.get(i);
             String seatNumber = seating.get(i).getNumber();
 
+            System.out.println(seatNumber);
+
             flight.book(seatNumber);
             addTicket(makeTicket(flight, friend, seat));
 

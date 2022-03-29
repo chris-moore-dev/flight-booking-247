@@ -367,8 +367,8 @@ public class DataLoader extends DataConstants {
                 Hotel hotel = list.getHotel(hotelID);
                 String firstName = (String) reservationJSON.get(RESERVATIONS_FIRST_NAME);
                 String lastName = (String) reservationJSON.get(RESERVATIONS_LAST_NAME);
-                // UUID roomID = UUID.fromString((String)reservationJSON.get(RESERVATIONS_ROOM_ID));
-                // Room room = roomList.get(roomID);
+                UUID roomID = UUID.fromString((String)reservationJSON.get(RESERVATIONS_ROOM_ID));
+                Room room = roomList.get(roomID);
                 int price = ((Long) reservationJSON.get(RESERVATIONS_PRICE)).intValue();
                 LocalDate checkInDate = LocalDate.parse((String)reservationJSON.get(RESERVATIONS_CHECK_IN_DATE), DateTimeFormatter.ofPattern("MM/dd/yyyy"));
                 LocalDate checkOutDate = LocalDate.parse((String)reservationJSON.get(RESERVATIONS_CHECK_OUT_DATE), DateTimeFormatter.ofPattern("MM/dd/yyyy"));
@@ -378,7 +378,7 @@ public class DataLoader extends DataConstants {
 
 
                 HotelReservation reservation = new HotelReservation(hotel,
-                firstName, lastName, null, price, checkInDate, checkOutDate,
+                firstName, lastName, room, price, checkInDate, checkOutDate,
                 numGuests, id);
 
                 hotelReservationsList.put(id, reservation);
@@ -497,6 +497,9 @@ public class DataLoader extends DataConstants {
                 String type = (String) seatingJSON.get(SEATINGS_CABIN);
                 String number = (String) seatingJSON.get(SEATINGS_SEAT_NUMBER);
 
+                // System.out.println(number + " "+ booked);
+                System.out.println(booked);
+
                 Seating seat = new Seating(medicalSeat, id, booked, price, type, number);
                 seatingList.put(id, seat);
 
@@ -504,9 +507,6 @@ public class DataLoader extends DataConstants {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-
         return seatingList;
     }
 
@@ -534,8 +534,8 @@ public class DataLoader extends DataConstants {
                 UUID flightID = UUID.fromString((String) ticketJSON.get(TICKETS_FLIGHT_ID));
                 FlightList list = FlightList.getInstance();
                 Flight flight = list.getFlight(flightID);
-                // UUID seatID = UUID.fromString((String) ticketJSON.get(TICKETS_SEAT_ID));
-                // Seating seat = seatingList.get(seatID);
+                UUID seatID = UUID.fromString((String) ticketJSON.get(TICKETS_SEAT_ID));
+                Seating seat = seatingList.get(seatID);
                 String firstName = (String) ticketJSON.get(TICKETS_FIRST_NAME);
                 String lastName = (String) ticketJSON.get(TICKETS_LAST_NAME);
                 int price = ((Long) ticketJSON.get(TICKETS_PRICE)).intValue();
@@ -544,7 +544,7 @@ public class DataLoader extends DataConstants {
 
 
                 Ticket ticket = new Ticket(boardingGroup, boardingTime, gate,
-                name, numOfCheckedBags, flight, null, firstName, lastName,
+                name, numOfCheckedBags, flight, seat, firstName, lastName,
                 price, id);
 
                 ticketList.put(id, ticket);
