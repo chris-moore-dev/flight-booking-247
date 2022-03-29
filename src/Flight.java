@@ -353,14 +353,14 @@ public class Flight extends ObjectToBeBooked {
     return ret;
   }
 
-  public int getAvailableSeats() {
+  private int getAvailableSeats() {
     int i = 0;
     int availableSeats = 0;
     for (Map.Entry<String, Seating> entry : seats.entrySet()) {
       i++;
       Seating seat = entry.getValue();
       boolean booked = seat.getBooked(); 
-      if (i < 120) {
+      if (i <= 120) {
         if (booked == false) {
           availableSeats += 1;
         }
