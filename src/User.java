@@ -51,8 +51,8 @@ public class User {
         int priceOne = flightOne.getPrice("Economy");
         int priceTwo = flightTwo.getPrice("Economy");
         if (priceOne > priceTwo) {
-          flights.add(j, flightTwo);
-          flights.add(j+1, flightOne);
+          flights.set(j, flightTwo);
+          flights.set(j+1, flightOne);
         }
       }
     }
@@ -71,8 +71,8 @@ public class User {
         int stopsOne = flightOne.getNumStops();
         int stopsTwo = flightTwo.getNumStops();
         if (stopsOne > stopsTwo) {
-          flights.add(j, flightTwo);
-          flights.add(j+1, flightOne);
+          flights.set(j, flightTwo);
+          flights.set(j+1, flightOne);
         }
       }
     }
@@ -94,16 +94,16 @@ public class User {
           continue;
         }
         else if (timeStrOne.contains("PM") && timeStrTwo.contains("AM")) {
-          flights.add(j, flightTwo);
-          flights.add(j+1, flightOne);
+          flights.set(j, flightTwo);
+          flights.set(j+1, flightOne);
         } else {
           timeStrOne = timeStrOne.replaceAll("[^0-9]", "");
           timeStrTwo = timeStrTwo.replaceAll("[^0-9]", "");
           int timeOne = Integer.parseInt(timeStrOne);
           int timeTwo = Integer.parseInt(timeStrTwo);
           if (timeOne > timeTwo) {
-            flights.add(j, flightTwo);
-            flights.add(j+1, flightOne);
+            flights.set(j, flightTwo);
+            flights.set(j+1, flightOne);
           }
         }
       }
@@ -134,16 +134,16 @@ public class User {
           continue;
         }
         else if (timeStrOne.contains("PM") && timeStrTwo.contains("AM")) {
-          flights.add(j, flightTwo);
-          flights.add(j+1, flightOne);
+          flights.set(j, flightTwo);
+          flights.set(j+1, flightOne);
         } else {
           timeStrOne = timeStrOne.replaceAll("[^0-9]", "");
           timeStrTwo = timeStrTwo.replaceAll("[^0-9]", "");
           int timeOne = Integer.parseInt(timeStrOne);
           int timeTwo = Integer.parseInt(timeStrTwo);
           if (timeOne > timeTwo) {
-            flights.add(j, flightTwo);
-            flights.add(j+1, flightOne);
+            flights.set(j, flightTwo);
+            flights.set(j+1, flightOne);
           }
         }
       }
@@ -175,8 +175,8 @@ public class User {
         int timeOne = Integer.parseInt(timeStrOne);
         int timeTwo = Integer.parseInt(timeStrTwo);
         if (timeOne > timeTwo) {
-          flights.add(j, flightTwo);
-          flights.add(j+1, flightOne);
+          flights.set(j, flightTwo);
+          flights.set(j+1, flightOne);
         }
       }
     }
@@ -225,8 +225,8 @@ public class User {
         }
         int averageTwo = totalTwo/reviewsTwo.size();
         if (averageOne > averageTwo) {
-          hotels.add(j, hotelTwo);
-          hotels.add(j+1, hotelOne);
+          hotels.set(j, hotelTwo);
+          hotels.set(j+1, hotelOne);
         }
       }
     }
@@ -344,8 +344,8 @@ public class User {
           averageTwo += entry.getValue();
         }
         if (averageOne > averageTwo) {
-          hotels.add(j, hotelTwo);
-          hotels.add(j+1, hotelOne);
+          hotels.set(j, hotelTwo);
+          hotels.set(j+1, hotelOne);
         }
       }
     }
