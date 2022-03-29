@@ -240,7 +240,7 @@ public class User {
     for (int i = 0; i < flights.size(); i++) {
       Flight flight = flights.get(i);
       String company = flight.getCompany();
-      if (company == airline) {
+      if (company.equalsIgnoreCase(airline)) {
         temp.add(flight);
       }
     }
@@ -292,7 +292,7 @@ public class User {
     for (int i = 0; i < hotels.size(); i++) {
       Hotel hotel = hotels.get(i);
       String airport = hotel.getClosestAirport();
-      if (airport == closestAirport) {
+      if (airport.equalsIgnoreCase(closestAirport)) {
         ret.add(hotel);
       }
     }
@@ -311,7 +311,7 @@ public class User {
     for (int i = 0; i < hotels.size(); i++) {
       Hotel hotel = hotels.get(i);
       String searchCity = hotel.getCity();
-      if (searchCity == city) {
+      if (searchCity.equalsIgnoreCase(city)) {
         ret.add(hotel);
       }
     }
@@ -332,7 +332,7 @@ public class User {
       Hotel hotel = hotels.get(i);
       String airport = hotel.getClosestAirport();
       String searchName = hotel.getCompany();
-      if (airport == closestAirport && name == searchName) {
+      if (airport.equalsIgnoreCase(closestAirport) && name.equalsIgnoreCase(searchName)) {
         ret.add(hotel);
       }
     }
@@ -349,7 +349,7 @@ public class User {
     for (int i = 0; i < hotels.size(); i++) {
       Hotel hotel = hotels.get(i);
       String airport = hotel.getClosestAirport();
-      if (airport == closestAirport) {
+      if (airport.equalsIgnoreCase(closestAirport)) {
         temp.add(hotel);
       }
     }
