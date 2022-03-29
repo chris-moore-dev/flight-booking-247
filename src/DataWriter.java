@@ -13,6 +13,21 @@ import org.json.simple.JSONObject;
  * @author Mario Misencik
  */
 public class DataWriter extends DataConstants {
+
+    /**
+     * Saves all the objects to their json files
+     */
+    public static void saveDatabase() {
+        DataWriter.saveUsers();
+        DataWriter.saveFriends();
+        DataWriter.saveFlights();
+        DataWriter.saveSeatings();
+        DataWriter.saveHotels();
+        DataWriter.saveReviews();
+        DataWriter.saveRooms();
+        DataWriter.saveTickets();
+        DataWriter.saveReservations();
+    }
     
     /**
      * Saves flights to the flight JSON file

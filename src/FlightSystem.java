@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 public class FlightSystem {
   private Scanner scanner = new Scanner(System.in);
-  private UserList userList = UserList.getInstance();
+  private UserList userList;
   private HotelList hotelList;
   private FlightList flightList;
   DateTimeFormatter format = DateTimeFormatter.ofPattern("MM-dd-yyyy");
@@ -25,7 +25,9 @@ public class FlightSystem {
  * Default constructor for FlightSystem
  */
   public FlightSystem() {
-    
+    userList = UserList.getInstance();
+    hotelList = HotelList.getInstance();
+    flightList = FlightList.getInstance();
   }
 
 /* 

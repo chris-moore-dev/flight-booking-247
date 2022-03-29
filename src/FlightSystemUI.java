@@ -10,8 +10,73 @@ import java.util.ArrayList;
  */
 public class FlightSystemUI {
   private Scanner scanner = new Scanner(System.in);
-  private FlightSystem system = new FlightSystem();
-  private RegisteredUser currentUser = new RegisteredUser();
+  private FlightSystem system;
+  private RegisteredUser registeredUser;
+  private User freeUser;
+
+  public static void main(String[] args) {
+    FlightSystemUI systemInterface = new FlightSystemUI();
+    systemInterface.myRun();
+  }
+
+  FlightSystemUI() {
+    system = new FlightSystem();
+    freeUser = new User();
+    registeredUser = null;
+  }
+
+  public void myRun() {
+    boolean loop = true;
+
+    while(loop) {
+
+      if (freeUser != null) {
+        myDisplayMenuUser();
+      } else if (registeredUser != null && !(registeredUser.getAdmin())) {
+        System.out.println("succ");
+      } else {
+        System.out.println("succ");
+      }
+
+      System.out.println("succ");
+      DataWriter.saveDatabase();
+    }
+  }
+
+  public void myDisplayMenuUser() {
+    System.out.print("Welcome to our Flight and Hotel Booker!\n" + 
+    "You are not logged in.\n\n" +
+    "************ Main Menu ************\n" +
+    "1. Search Flights\n2. Search Hotels\n3. Create Account\n4. Login\n5. Exit\n\n" +
+    "What would you like to do?: ");
+    
+    String sOption = scanner.nextLine();
+    int option = Integer.parseInt(sOption);
+
+
+
+    switch (option) {
+      case 1:
+        break;
+      case 2:
+        break;
+      case 3:
+        break;
+      case 4:
+        RegisteredUser changeTo = system.login();
+        if (changeTo != null) {
+          registeredUser = changeTo;
+          freeUser = null
+        }
+        break;
+      case 5:
+        System.exit(0);
+    }
+  }
+
+  private int getOption() {
+
+  }
 
 /**
  * Displays logged-out user menu by default.
