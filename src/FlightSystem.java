@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.UUID;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
@@ -86,35 +87,6 @@ public class FlightSystem {
     System.out.print("Enter password: ");
     String password = scanner.nextLine();
 
-    // String sDate = "04/01/2022";
-    // LocalDate date = LocalDate.parse(sDate, format);
-    // String departingAirport = "CAE";
-    // String destAirport = "SEA";
-    // String takeOffTime = "6:00 AM";
-    // String landingTime = "11:09 PM";
-    // String totalFlightTime = "20h 9m";
-    // boolean layover = true;
-    // String company = "American Airlines";
-    // HashMap<String, Integer> pricing = new HashMap<>();
-    // pricing.put("First", 1298);
-    // pricing.put("Main Cabin", 612);
-    // pricing.put("Economy", 550);
-    // String departingGate = "17";
-    // String destGate = "420";
-    // Map<String, Seating> seats = new HashMap<>();
-
-    // ArrayList<Flight> flights = flightList.getFlights();
-
-    // ArrayList<Flight> addThis = new ArrayList<>();
-    // addThis.add(flights.get(4));
-    // addThis.add(flights.get(6));
-
-    // Flight toAdd = new Flight(date, departingAirport, destAirport, takeOffTime, landingTime, totalFlightTime, layover, addThis, 1, 0.8, company);
-
-
-    // // Flight toAdd = new Flight(date, departingAirport, destAirport, takeOffTime,
-    // // landingTime, totalFlightTime, layover, company, pricing, seats, departingGate, destGate);
-    // flights.add(toAdd);
 
     if(userList.getUser(email, password) != null) {
       RegisteredUser user = userList.getUser(email, password);
@@ -270,10 +242,11 @@ public class FlightSystem {
         System.out.println("You don't have any tickets yet. You can book some through 'Search Flights' in the main menu.\n");
       }
       else {
+        System.out.println("");
         for(int i = 0; i < tickets.size(); i++) {
           System.out.println(i+1 + ". " + tickets.get(i));
         }
-        System.out.println("Which ticket would you like to view? (Enter 0 to return to menu):");
+        System.out.print("Which ticket would you like to view? (Enter 0 to return to menu):");
         int view = scanner.nextInt();
       scanner.nextLine();
         if(view == 0) {
@@ -283,7 +256,7 @@ public class FlightSystem {
           System.out.println(tickets.get(view-1));
         }
         System.out.println("1. Cancel ticket and request refund\n2. Add checked baggage\n" + 
-        "3. Return to menu\nWhat would you like to do?:");
+        "3. Print Ticket\n4. Return to menu\n\nWhat would you like to do?:");
         int select = scanner.nextInt();
         scanner.nextLine();
         switch(select) {
@@ -297,6 +270,8 @@ public class FlightSystem {
           tickets.get(view-1).setNumOfCheckedBags(tickets.get(view-1).getNumOfCheckedBags() + 1);
           System.out.println("Success. You have been charged $30");
           case 3: 
+          printTicketToFile(tickets.get(view-1));
+          System.out.println("You're ticket has been printed, returning to menu\n");
           break;
           default: break;
         }
@@ -325,16 +300,19 @@ public class FlightSystem {
         else {
           System.out.println(reservations.get(view-1));
         }
-        System.out.println("1. Cancel reservation and request refund\n2. Return to menu:\n" +
-        "What would you like to do?:");
+        System.out.print("1. Cancel reservation and request refund\n2. Print Reservation\n" +
+        "3. Return to menu" + "\nWhat would you like to do?: ");
         int select = scanner.nextInt();
         switch(select) {
-          case 1: reservations.remove(view-1);
+          case 1: user.unBookHotel(reservations.get(view-1));
           System.out.println("Your reservation has been cancelled. A refund will be issued to your account.");
           
           break;
           case 2: 
+          printHotelReservationToFile(reservations.get(view-1));
           break;
+          case 3:
+            break;
           default: break;
         }
       }
@@ -482,7 +460,7 @@ public class FlightSystem {
     if (!(flight.getIsLayover())) {
       stops = "Nonstop";
     } else {
-      int size = flight.getFlights().size();
+      int size = flight.getFlights().size() - 1;
       if (size == 1)
         stops += "1 Stop";
       else
@@ -530,12 +508,12 @@ public class FlightSystem {
    */
   private Hotel hotelSearchHelper(String city, User user) {
     Hotel ret;
-    System.out.println("\n----- Searching Hotels in " + city + "-----\n\n----- Choose Hotel -----\n");
+    System.out.println("\n----- Searching Hotels in " + city + "-----\n\n----- Choose Hotel -----");
     ArrayList<Hotel> chooseFrom = user.getHotelsByCity(city);
     for (int i = 0; i < chooseFrom.size(); i++) {
       Hotel hotel = chooseFrom.get(i);
       System.out.println("\n" + (i+1) + ".");
-      System.out.println(hotel);
+      System.out.println(hotel + "\n");
     }
     System.out.print("Which hotel would you like to choose?: ");
     int chooseHotel = scanner.nextInt();
@@ -897,6 +875,10 @@ public class FlightSystem {
           }
           break;
         case 2:
+          if (registeredUser == null) {
+            System.out.println("Please log in to book a room");
+            return;
+          }
           System.out.println("----- Book Room ----- ");
           System.out.println("When would you like to check in?");
           String checkInDateStr = scanner.nextLine();
@@ -905,19 +887,30 @@ public class FlightSystem {
           String checkOutDateStr = scanner.nextLine();
           checkOutDate = LocalDate.parse(checkOutDateStr, format);
     
-        System.out.println("----- Choose Room Type ----- ");
-          for(int i = 0; i < chosenHotel.getRooms().size(); i++) {
-            String roomType = chosenHotel.getRooms().get(i).getType();
-            chosenHotel.printRoomPrice(roomType);
+          System.out.println("----- Choose Room Type ----- ");
+          int counter = 1;
+          ArrayList<String> roomTypes = new ArrayList<>();
+          for (String roomType : chosenHotel.getPricing().keySet()) {
+            System.out.println(counter);
+            System.out.println(chosenHotel.printRoomPrice(roomType));
+            roomTypes.add(roomType);
+            counter++;
           }
-          String chosenRoom = scanner.nextLine();
-          Room room = chosenHotel.getRooms().get(chosenRoom);
-          int price = chosenHotel.getPrice(chosenRoom);
+
+          int chosenRoomType = scanner.nextInt();
+          scanner.nextLine();
+
+          String scRoomType = roomTypes.get(chosenRoomType-1);
+
+          Room room = chosenHotel.getMatchingRoom(checkInDate, checkOutDate,
+          scRoomType);
+
+          int price = chosenHotel.getPrice(scRoomType);
         
           registeredUser.bookHotel(chosenHotel, room, numGuests, checkInDate, checkOutDate);
     
         System.out.println("----- Hotel Booking ----- ");
-          System.out.println("Total Price:" + price);
+          // System.out.println("Total Price:" + price);
           System.out.println("\nYour reservation has been added to your account\n\n");
           System.out.println("\nThank you for shopping with us!\n");
           break;
@@ -929,6 +922,73 @@ public class FlightSystem {
   ADMIN FUNCTIONS
 ===================
 */
+
+public void makeFlight() {
+  String sDate = "04/01/2022";
+  LocalDate date = LocalDate.parse(sDate, format);
+  String departingAirport = "CAE";
+  String destAirport = "SEA";
+  String takeOffTime = "5:17 AM";
+  String landingTime = "12:48 PM";
+  String totalFlightTime = "10h 31m";
+  boolean layover = true;
+  String company = "American Airlines";
+  HashMap<String, Integer> pricing = new HashMap<>();
+  // pricing.put("First", 200);
+  // pricing.put("Main Cabin", 150);
+  // pricing.put("Economy", 125);
+  String departingGate = "17";
+  String destGate = "420";
+  Map<String, Seating> seats = new HashMap<>();
+
+  FlightList list = FlightList.getInstance();
+  UUID id1 = UUID.fromString("32da5743-a37e-4203-ba06-2d5c2bce08c2");
+  Flight flight1 = list.getFlight(id1);
+  UUID id2 = UUID.fromString("daf33d9b-dab2-4e01-80f5-7952e544b22f");
+  Flight flight2 = list.getFlight(id2);
+  UUID id3 = UUID.fromString("3369a0e8-b61e-4747-9062-d1fd147ebd2b");
+  Flight flight3 = list.getFlight(id3);
+
+
+  ArrayList<Flight> addThis = new ArrayList<>();
+  addThis.add(flight1);
+  addThis.add(flight2);
+  addThis.add(flight3);
+
+  Flight toAdd = new Flight(date, departingAirport, destAirport, takeOffTime, landingTime, totalFlightTime, layover, addThis, 2, 0.8, company);
+
+
+  // Flight toAdd = new Flight(date, departingAirport, destAirport, takeOffTime,
+  // landingTime, totalFlightTime, layover, company, pricing, seats, departingGate, destGate);
+  list.getFlights().add(toAdd);
+}
+
+public void makeHotel() {
+  HotelList list = HotelList.getInstance();
+
+  String address = "293 Crazy St, Seattle, WA 98101";
+  ArrayList<Review> reviews = new ArrayList<>();
+  ArrayList<String> amenities = new ArrayList<>();
+  amenities.add("Cat Lounge");
+  amenities.add("WiFi");
+  amenities.add("Pool");
+  amenities.add("Office");
+  amenities.add("Free Breakfast");
+  String closestAirport = "SEA";
+  String city = "Seattle";
+  String company = "Cat House";
+  HashMap<String, Integer> pricing = new HashMap<>();
+  pricing.put("Standard", 150);
+  pricing.put("Upgraded", 200);
+
+  HashMap<String, Room> rooms = new HashMap<>();
+
+
+
+
+  Hotel toAdd = new Hotel(address, reviews, amenities, closestAirport, city, company, pricing, rooms);
+  list.getHotels().add(toAdd);
+}
 
 public void addFlight() {
   //TODO

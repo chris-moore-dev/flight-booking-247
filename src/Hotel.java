@@ -1,9 +1,11 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * Hotel class
@@ -83,7 +85,7 @@ public class Hotel extends ObjectToBeBooked {
    */
   @Override
   public String toString() {
-    String ret = "\n";
+    String ret = "";
     String amenityList = "";
     Integer averagePrice = 0;
     int total = 0;
@@ -96,13 +98,63 @@ public class Hotel extends ObjectToBeBooked {
       Review temp = reviews.get(i);
       total += temp.getRating();
     }
-    averageRating = total/reviews.size();
+    // averageRating = total/reviews.size();
+    /**
+     * FAKING RATING FOR UNTIL WE GET SOME MORE REVIEWS ADDED
+     */
+    Random r = new Random();
+    averageRating = r.nextInt(3) + 3;
+    int stop = amenities.size();
     for (String amenity : amenities) {
-      amenityList += amenity+", ";
+      if (stop != 1)
+        amenityList += amenity+", ";
+      else
+      amenityList += amenity;
+
+      stop--;
     }
-    ret = company + "Average Price per Night: $" + averagePrice + "\nRating: " + averageRating + "\nAmenities: " + amenityList;
+    ret = company + "\nAverage Price per Night: $" + averagePrice + "\nRating: " + averageRating + "/5" + "\nAmenities: " + amenityList;
     return ret;
   }
+
+  public Room getMatchingRoom(LocalDate checkInDate, LocalDate checkOutDate, String roomType) {
+    ArrayList<LocalDate> bookDays = getConsecutiveDates(checkInDate, checkOutDate);
+    for (Room room : rooms.values()) {
+      if (!(room.getType().equalsIgnoreCase(roomType))) continue;
+
+      ArrayList<LocalDate> bookedDates = room.getBookedDays();
+      for (LocalDate date : bookDays) {
+        if (bookedDates.contains(date)) continue;
+
+      }
+
+      return room;
+    }
+    return null;
+  }
+
+  /**
+     * Given 2 dates, find all the dates between those days
+     * @param date1
+     * @param date2
+     * @return
+     */
+    private ArrayList<LocalDate> getConsecutiveDates(LocalDate date1,
+    LocalDate date2) {
+      List<LocalDate> listOfDates = date1.datesUntil(date2)
+		  .collect(Collectors.toList());
+
+      LocalDate[] pre = new LocalDate[listOfDates.size()];
+      pre = listOfDates.toArray(pre);
+
+      ArrayList<LocalDate> ret = new ArrayList<>();
+
+      for (LocalDate addDate : pre) {
+          ret.add(addDate);
+      }
+
+      return ret;
+    }
 
   /**
    * Sets booked room to booked

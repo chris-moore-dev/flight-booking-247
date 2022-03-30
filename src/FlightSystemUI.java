@@ -26,6 +26,8 @@ public class FlightSystemUI {
     User freeUser;
     RegisteredUser registeredUser;
 
+    // system.makeHotel();
+
     while(loop) {
       freeUser = system.getFreeUser();
       registeredUser = system.getRegisteredUser();
@@ -96,7 +98,7 @@ public class FlightSystemUI {
         system.searchForFlights();
         break;
       case 2:
-        system.searchForFlights();
+        system.searchForHotels();
         break;
       case 3:
         system.manageAccount();

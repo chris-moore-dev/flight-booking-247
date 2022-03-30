@@ -1,0 +1,10 @@
+
+----- CAE -> SEA 2022-04-01 -----
+
+Boarding Group: 6
+Gate: 17
+Boarding Time: 5:10 PM
+Seat: A27
+Name: Tyler Durden
+Number of Checked Bags: 0
+
