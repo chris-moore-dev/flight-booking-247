@@ -277,7 +277,7 @@ public class FlightSystem {
         int view = scanner.nextInt();
       scanner.nextLine();
         if(view == 0) {
-          manageAccount();
+          return;
         }
         else {
           System.out.println(tickets.get(view-1));
@@ -320,10 +320,10 @@ public class FlightSystem {
         System.out.println("Which reservation would you like to view? (Enter 0 to return to menu):");
         int view = scanner.nextInt();
         if(view == 0) {
-          manageAccount();
+          return;
         }
         else {
-          reservations.get(view-1).toString();
+          System.out.println(reservations.get(view-1));
         }
         System.out.println("1. Cancel reservation and request refund\n2. Return to menu:\n" +
         "What would you like to do?:");
@@ -331,9 +331,9 @@ public class FlightSystem {
         switch(select) {
           case 1: reservations.remove(view-1);
           System.out.println("Your reservation has been cancelled. A refund will be issued to your account.");
-          manageAccount();
+          
           break;
-          case 2: manageAccount();
+          case 2: 
           break;
           default: break;
         }
