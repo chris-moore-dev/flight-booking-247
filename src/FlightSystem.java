@@ -284,23 +284,23 @@ public class FlightSystem {
           manageAccount();
         }
         else {
-          tickets.get(view-1).toString();
+          System.out.println(tickets.get(view-1));
         }
         System.out.println("1. Cancel ticket and request refund\n2. Add checked baggage\n" + 
         "3. Return to menu\nWhat would you like to do?:");
         int select = scanner.nextInt();
         scanner.nextLine();
         switch(select) {
-          case 1: tickets.remove(view-1);
+          case 1: user.unBookFlight(tickets.get(view-1));
           System.out.println("Your ticket has been cancelled. A refund will be issued to your account.");
-          manageAccount();
+          
           break;
           case 2: System.out.println("----- Enter the Following Information -----\n Weight of bag (lbs):");
           double weight = scanner.nextDouble();
           // Is there anywhere to store a bags' weight??
           tickets.get(view-1).setNumOfCheckedBags(tickets.get(view-1).getNumOfCheckedBags() + 1);
           System.out.println("Success. You have been charged $30");
-          case 3: manageAccount();
+          case 3: 
           break;
           default: break;
         }
