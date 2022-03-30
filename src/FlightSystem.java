@@ -228,8 +228,6 @@ public class FlightSystem {
     System.out.println("Account succesfully created. You can now log in.\n");
   }
 
-
-
 /**
  * Allows the user to view and edit
  * several aspects of their account, including
@@ -266,12 +264,10 @@ public class FlightSystem {
    * @param user Current RegisteredUser instance
    */
   public void viewTickets(RegisteredUser user) {
-    while(true) {
       System.out.println("----- Plane Tickets -----");
       ArrayList<Ticket> tickets = user.getTickets();
       if(tickets.size() == 0) {
         System.out.println("You don't have any tickets yet. You can book some through 'Search Flights' in the main menu.\n");
-        break;
       }
       else {
         for(int i = 0; i < tickets.size(); i++) {
@@ -304,22 +300,18 @@ public class FlightSystem {
           break;
           default: break;
         }
-        continue;
       }
     }
-  }
 
   /**
    * Sub-method of ManageAccount(), allows user to view hotel reservations
    * @param user Current RegisteredUser instance
    */
   public void viewReservations(RegisteredUser user) {
-    while(true){
       System.out.println("----- Hotel Reservations -----");
       ArrayList<HotelReservation> reservations = user.getHotelReservations();
       if(reservations.size() == 0) {
         System.out.println("You don't have any hotel reservations yet. You can book some through 'Search Hotels' in the main menu.\n");
-        break;
       }
       else {
         for(int i = 0; i < reservations.size(); i++) {
@@ -345,10 +337,8 @@ public class FlightSystem {
           break;
           default: break;
         }
-        continue;
       }
     }
-  }
   
   /**
    * Sub-method of ManageAccount(), allows user to change certain preferences
@@ -916,7 +906,10 @@ public class FlightSystem {
           checkOutDate = LocalDate.parse(checkOutDateStr, format);
     
         System.out.println("----- Choose Room Type ----- ");
-    
+          for(int i = 0; i < chosenHotel.getRooms().size(); i++) {
+            String roomType = chosenHotel.getRooms().get(i).getType();
+            chosenHotel.printRoomPrice(roomType);
+          }
           String chosenRoom = scanner.nextLine();
           Room room = chosenHotel.getRooms().get(chosenRoom);
           int price = chosenHotel.getPrice(chosenRoom);
@@ -930,7 +923,6 @@ public class FlightSystem {
           break;
       }
     }
-
 
 /* 
 ===================
