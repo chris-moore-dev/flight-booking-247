@@ -29,7 +29,6 @@ public class FlightSystemUI {
     while(loop) {
       freeUser = system.getFreeUser();
       registeredUser = system.getRegisteredUser();
-
       if (freeUser != null) {
         displayMenuUser();
       } else if (registeredUser != null && !(registeredUser.getAdmin())) {
@@ -37,7 +36,6 @@ public class FlightSystemUI {
       } else {
         displayMenuAdmin();
       }
-
       DataWriter.saveDatabase();
     }
   }
@@ -52,12 +50,12 @@ public class FlightSystemUI {
 
     String sOption = scanner.nextLine();
     int option = Integer.parseInt(sOption);
-
     switch (option) {
       case 1:
-        
+        system.searchForFlights();
         break;
       case 2:
+        system.searchForHotels();
         break;
       case 3:
         break;
@@ -98,9 +96,10 @@ public class FlightSystemUI {
         system.searchForFlights();
         break;
       case 2:
+        system.searchForFlights();
         break;
       case 3:
-
+        system.manageAccount();
         break;
       case 4:
         system.setFreeUser(new User());
@@ -112,7 +111,6 @@ public class FlightSystemUI {
         System.out.println("Invalid input, please try again!\n");
         break;
     }
-
   }
 
   private void displayMenuUser() {
@@ -125,13 +123,12 @@ public class FlightSystemUI {
     String sOption = scanner.nextLine();
     int option = Integer.parseInt(sOption);
 
-
-
     switch (option) {
       case 1:
         system.searchForFlights();
         break;
       case 2:
+        system.searchForHotels();
         break;
       case 3:
         system.createAccount();
@@ -150,11 +147,4 @@ public class FlightSystemUI {
         break;
     }
   }
-
-/**
- * Displays logged-out user menu by default.
- * MENU AVAILABLE FOR DEBUGGING PURPOSES ONLY
- */
-  
-  
 }
