@@ -1,0 +1,10 @@
+
+----- The Ritz-Carlton Hotel Reservation -----
+
+Total Price: $450
+Room Type: Upgraded
+Room Number: U5
+Check-In Date: 2022-04-01
+Check-Out Date: 2022-04-02
+Address: 99 Union St, Seattle, WA 98101
+

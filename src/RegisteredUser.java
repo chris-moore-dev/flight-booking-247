@@ -141,12 +141,8 @@ public class RegisteredUser extends User {
             String seatNumber = seating.get(i).getNumber();
             Boolean discount = shouldDiscount.get(i);
 
-            // System.out.println(seatNumber);
-
             flight.book(seatNumber);
             addTicket(makeTicket(flight, friend, seat, discount));
-
-            // TODO Make these changes reflect in the database
         }
     }
 
@@ -172,7 +168,6 @@ public class RegisteredUser extends User {
         int numOfCheckedBags = 0;
         String fName = friend.getFirstName();
         String lName = friend.getLastName();
-        // System.out.println(fName);
         String name = fName + " " + lName;
         int price = seat.getPrice();
         if (discount)
@@ -202,7 +197,6 @@ public class RegisteredUser extends User {
         addHotelReservation(new HotelReservation(hotel, this.firstName,
         this.lastName, room, price, checkInDate, checkOutDate,
         numGuests));
-        // TODO Make these changes reflect in the database
     }
 
     /**
@@ -218,14 +212,13 @@ public class RegisteredUser extends User {
         ArrayList<LocalDate> dates = getConsecutiveDates(date1, date2);
         hotel.unBook(roomNumber, dates);
         removeHotelReservation(reservation);
-        // TODO Make changes reflect in database
     }
 
     /**
      * Given 2 dates, find all the dates between those days
      * @param date1
      * @param date2
-     * @return
+     * @return An Array list containing all the days a hotel room would be booked for
      */
     private ArrayList<LocalDate> getConsecutiveDates(LocalDate date1,
     LocalDate date2) {

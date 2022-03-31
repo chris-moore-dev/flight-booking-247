@@ -1031,7 +1031,7 @@ public void removeHotel() {
 
     try {
       String name = ticket.getReservationHolderFirstName() + ticket.getReservationHolderLastName();
-      String fileName = "flight-booking/TextFiles/ticket" + name + ticket.getID() + ".txt";
+      String fileName = "TextFiles/ticket" + name + ticket.getID() + ".txt";
       File printTo = new File(fileName);
       if (printTo.createNewFile()) {
         FileWriter fileWriter = new FileWriter(printTo);
@@ -1056,7 +1056,7 @@ public void removeHotel() {
     // Mac do TextFiles/file.txt
     try {
       String name = reservation.getReservationHolderFirstName() + reservation.getReservationHolderLastName();
-      String fileName = "flight-booking/TextFiles/hotelReservation" + name + reservation.getID() + ".txt";
+      String fileName = "TextFiles/hotelReservation" + name + reservation.getID() + ".txt";
       File printTo = new File(fileName);
       if (printTo.createNewFile()) {
         FileWriter fileWriter = new FileWriter(printTo);
