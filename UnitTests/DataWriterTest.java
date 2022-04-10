@@ -177,4 +177,66 @@ class DataWriterTest {
         DataWriter.saveDatabase();
         assertEquals("", DataLoader.getUsers().get(0).getFriends().get(1).getFirstName());
     }
+
+    @Test
+    void testWritingTicket() {
+        RegisteredUser mike = new RegisteredUser("Michael","Myers","mmyers@gmail.com",65,"123 Killer St.","H@1l0w33n","Male","LAX",false,false,false,new ArrayList<String>(),new ArrayList<Ticket>(),new ArrayList<HotelReservation>(),new ArrayList<Friend>());
+        HashMap<String, Integer> pricing = new HashMap<String, Integer>();
+        pricing.put("First",500);
+        pricing.put("Main Cabin", 350);
+        pricing.put("Economy",200);
+        Flight mikeFlight = new Flight(LocalDate.of(2022,4,15),"LAX","ATL","8:00 AM","12:00 PM","4 hrs",false,"Delta Airlines",pricing,new HashMap<String,Seating>(),"A21","B46");
+        mike.addTicket(new Ticket("1A","7:30 AM","A21","Michael Myers",0,mikeFlight,mikeFlight.getSeating().get("A1"),"Michael","Myers",500));
+        users.add(mike);
+        DataWriter.saveDatabase();
+        assertEquals("Michael Myers", DataLoader.getUsers().get(0).getTickets().get(0).getName());
+    }
+
+    @Test
+    void testWritingReservation() {
+        RegisteredUser mike = new RegisteredUser("Michael","Myers","mmyers@gmail.com",65,"123 Killer St.","H@1l0w33n","Male","LAX",false,false,false,new ArrayList<String>(),new ArrayList<Ticket>(),new ArrayList<HotelReservation>(),new ArrayList<Friend>());
+        HashMap<String, Integer> pricing = new HashMap<String, Integer>();
+        pricing.put("Standard",350);
+        pricing.put("Upgraded", 500);
+        Hotel mikeHotel = new Hotel("21 Jump St.",new ArrayList<Review>(),new ArrayList<String>(),"ATL","Atlanta","Hyatt",pricing,new HashMap<String,Room>());
+        mike.addHotelReservation(new HotelReservation(mikeHotel,"Michael","Myers",mikeHotel.getRooms().get("U1"),500,LocalDate.of(2022,4,15),LocalDate.of(2022,4,20),1));
+        users.add(mike);
+        DataWriter.saveDatabase();
+        assertEquals("Michael", DataLoader.getUsers().get(0).getHotelReservations().get(0).getReservationHolderFirstName());
+    }
+
+    @Test
+    void testWritingReview() {
+        HashMap<String, Integer> pricing = new HashMap<String, Integer>();
+        pricing.put("Standard",350);
+        pricing.put("Upgraded", 500);
+        Hotel mikeHotel = new Hotel("21 Jump St.",new ArrayList<Review>(),new ArrayList<String>(),"ATL","Atlanta","Hyatt",pricing,new HashMap<String,Room>());
+        mikeHotel.addReview(new Review(5,"...","Michael Myers"));
+        hotels.add(mikeHotel);
+        DataWriter.saveDatabase();
+        assertEquals("Michael Myers", DataLoader.getHotels().get(0).getReviews().get(0).getUser());
+    }
+
+    @Test
+    void testWritingRoom() {
+        HashMap<String, Integer> pricing = new HashMap<String, Integer>();
+        pricing.put("Standard",350);
+        pricing.put("Upgraded", 500);
+        Hotel mikeHotel = new Hotel("21 Jump St.",new ArrayList<Review>(),new ArrayList<String>(),"ATL","Atlanta","Hyatt",pricing,new HashMap<String,Room>());
+        hotels.add(mikeHotel);
+        DataWriter.saveDatabase();
+        assertEquals("U1", DataLoader.getHotels().get(0).getRooms().get("U1").getNumber());
+    }
+
+    @Test
+    void testWritingSeat() {
+        HashMap<String, Integer> pricing = new HashMap<String, Integer>();
+        pricing.put("First",500);
+        pricing.put("Main Cabin", 350);
+        pricing.put("Economy",200);
+        Flight mikeFlight = new Flight(LocalDate.of(2022,4,15),"LAX","ATL","8:00 AM","12:00 PM","4 hrs",false,"Delta Airlines",pricing,new HashMap<String,Seating>(),"A21","B46");
+        flights.add(mikeFlight);
+        DataWriter.saveDatabase();
+        assertEquals("A1", DataLoader.getFlights().get(0).getSeating().get("A1").getNumber());
+    }
 }
