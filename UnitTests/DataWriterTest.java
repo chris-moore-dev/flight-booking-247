@@ -1,6 +1,7 @@
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import org.junit.jupiter.api.AfterEach;
@@ -14,6 +15,8 @@ class DataWriterTest {
     private ArrayList<RegisteredUser> users = userList.getUsers();
     private ArrayList<Flight> flights = flightList.getFlights();
     private ArrayList<Hotel> hotels = hotelList.getHotels();
+
+    private DateTimeFormatter format = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 
     @BeforeEach
     public void setup() {
@@ -66,13 +69,28 @@ class DataWriterTest {
 
     @Test
     void testWritingFlight() {
-        HashMap<String, Integer> pricing = new HashMap<String, Integer>();
-        pricing.put("First",500);
-        pricing.put("Main Cabin", 350);
-        pricing.put("Economy",200);
-        flights.add(new Flight(LocalDate.of(2022,4,15),"LAX","ATL","8:00 AM","12:00 PM","4 hrs",false,"Delta Airlines",pricing,new HashMap<String,Seating>(),"A21","B46"));
+        String sDate = "04/01/2022";
+        LocalDate date = LocalDate.parse(sDate, format);
+        String departingAirport = "CAE";
+        String destAirport = "SEA";
+        String takeOffTime = "5:17 AM";
+        String landingTime = "12:48 PM";
+        String totalFlightTime = "10h 31m";
+        boolean layover = true;
+        String company = "American Airlines";
+        HashMap<String, Integer> pricing = new HashMap<>();
+        pricing.put("First", 200);
+        pricing.put("Main Cabin", 150);
+        pricing.put("Economy", 125);
+        String departingGate = "17";
+        String destGate = "420";
+        Map<String, Seating> seats = new HashMap<>();
+
+        flights.add(new Flight(date, departingAirport, destAirport,
+        takeOffTime, landingTime, totalFlightTime, layover, company, pricing,
+        seats, departingGate, destGate));
         DataWriter.saveFlights();
-        assertEquals("LAX", DataLoader.getFlights().get(0).getDepartingAirport());
+        assertEquals("CAE", DataLoader.getFlights().get(0).getDepartingAirport());
     }
 
     @Test
