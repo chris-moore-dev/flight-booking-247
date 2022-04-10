@@ -1,19 +1,15 @@
 /**
  * This class calls the following unit tests:
- * FlightTest, HotelTest, RegisteredUserTest, TicketTest, and RoomTest
+ * HotelTest, RegisteredUserTest
  * @author Chris Moore
  */
 public class ChrisTest {
   public static void main(String[] args) {
-    FlightTest flightTest = new FlightTest();
-    flightTest.test();
+    System.out.println("-----Hotel test cases:-----");
     HotelTest hotelTest = new HotelTest();
     hotelTest.test();
+    System.out.println("-----RegisteredUser test cases:-----");
     RegisteredUserTest registeredUserTest = new RegisteredUserTest();
     registeredUserTest.test();
-    TicketTest ticketTest = new TicketTest();
-    ticketTest.test();
-    RoomTest roomTest = new RoomTest();
-    roomTest.test();
   }
 }
