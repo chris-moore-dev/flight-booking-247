@@ -1,7 +1,7 @@
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.*;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,17 +17,17 @@ class DataWriterTest {
 
     @BeforeEach
     public void setup() {
-        userList.getInstance().getUsers().clear();
-        flightList.getInstance().getFlights().clear();
-        hotelList.getInstance().getHotels().clear();
+        UserList.getInstance().getUsers().clear();
+        FlightList.getInstance().getFlights().clear();
+        HotelList.getInstance().getHotels().clear();
         DataWriter.saveDatabase();
     }
 
     @AfterEach
     public void tearDown() {
-        userList.getInstance().getUsers().clear();
-        flightList.getInstance().getFlights().clear();
-        hotelList.getInstance().getHotels().clear();
+        UserList.getInstance().getUsers().clear();
+        FlightList.getInstance().getFlights().clear();
+        HotelList.getInstance().getHotels().clear();
         DataWriter.saveDatabase();
     }
 
@@ -39,21 +39,21 @@ class DataWriterTest {
 
     @Test
     void testWritingUser() {
-        users.add(new RegisteredUser("Michael","Myers","mmyers@gmail.com",65,"123 Killer St.","H@1l0w33n","Male","LAX",false,false,false,null,null,null,null));
+        users.add(new RegisteredUser("Michael","Myers","mmyers@gmail.com",65,"123 Killer St.","H@1l0w33n","Male","LAX",false,false,false,new ArrayList<String>(),new ArrayList<Ticket>(),new ArrayList<HotelReservation>(),new ArrayList<Friend>()));
         DataWriter.saveUsers();
         assertEquals("Michael", DataLoader.getUsers().get(0).getFirstName());
     }
 
     @Test
     void testWritingNullUser() {
-        users.add(new RegisteredUser(null,null,null,0,null,null,null,null,false,false,false,null,null,null,null));
+        users.add(new RegisteredUser(null,null,null,0,null,null,null,null,false,false,false,new ArrayList<String>(),new ArrayList<Ticket>(),new ArrayList<HotelReservation>(),new ArrayList<Friend>()));
         DataWriter.saveUsers();
         assertEquals(null, DataLoader.getUsers().get(0).getFirstName());
     }
 
     @Test
     void testWritingEmptyUser() {
-        users.add(new RegisteredUser("","","",0,"","","","",false,false,false,null,null,null,null));
+        users.add(new RegisteredUser("","","",0,"","","","",false,false,false,new ArrayList<String>(),new ArrayList<Ticket>(),new ArrayList<HotelReservation>(),new ArrayList<Friend>()));
         DataWriter.saveUsers();
         assertEquals("", DataLoader.getUsers().get(0).getFirstName());
     }
@@ -66,21 +66,33 @@ class DataWriterTest {
 
     @Test
     void testWritingFlight() {
-        flights.add(new Flight(LocalDate.of(2022,4,15),"LAX","ATL","8:00 AM","12:00 PM","4 hrs",false,"Delta Airlines",null,null,"A21","B46"));
+        HashMap<String, Integer> pricing = new HashMap<String, Integer>();
+        pricing.put("First",500);
+        pricing.put("Main Cabin", 350);
+        pricing.put("Economy",200);
+        flights.add(new Flight(LocalDate.of(2022,4,15),"LAX","ATL","8:00 AM","12:00 PM","4 hrs",false,"Delta Airlines",pricing,new HashMap<String,Seating>(),"A21","B46"));
         DataWriter.saveFlights();
         assertEquals("LAX", DataLoader.getFlights().get(0).getDepartingAirport());
     }
 
     @Test
     void testWritingNullFlight() {
-        flights.add(new Flight(null,null,null,null,null,null,false,null,null,null,null,null));
+        HashMap<String, Integer> pricing = new HashMap<String, Integer>();
+        pricing.put("First",500);
+        pricing.put("Main Cabin", 350);
+        pricing.put("Economy",200);
+        flights.add(new Flight(LocalDate.of(2022,4,15),null,null,null,null,null,false,null,pricing,new HashMap<String,Seating>(),null,null));
         DataWriter.saveFlights();
-        assertEquals(null, DataLoader.getFlights().get(0).getDate());
+        assertEquals(null, DataLoader.getFlights().get(0).getDepartingAirport());
     }
 
     @Test
     void testWritingEmptyFlight() {
-        flights.add(new Flight(null,"","","","","",false,"",null,null,"",""));
+        HashMap<String, Integer> pricing = new HashMap<String, Integer>();
+        pricing.put("First",500);
+        pricing.put("Main Cabin", 350);
+        pricing.put("Economy",200);
+        flights.add(new Flight(LocalDate.of(2022,4,15),"","","","","",false,"",pricing,new HashMap<String,Seating>(),"",""));
         DataWriter.saveFlights();
         assertEquals("", DataLoader.getFlights().get(0).getDepartingAirport());
     }
@@ -93,28 +105,37 @@ class DataWriterTest {
 
     @Test
     void testWritingHotel() {
-        hotels.add(new Hotel("21 Jump St.",null,null,"ATL","Atlanta","Hyatt",null,null));
+        HashMap<String, Integer> pricing = new HashMap<String, Integer>();
+        pricing.put("Standard",350);
+        pricing.put("Upgraded", 500);
+        hotels.add(new Hotel("21 Jump St.",new ArrayList<Review>(),new ArrayList<String>(),"ATL","Atlanta","Hyatt",pricing,new HashMap<String,Room>()));
         DataWriter.saveHotels();
         assertEquals("21 Jump St.", DataLoader.getHotels().get(0).getAddress());
     }
 
     @Test
     void testWritingNullHotel() {
-        hotels.add(new Hotel(null,null,null,null,null,null,null,null));
+        HashMap<String, Integer> pricing = new HashMap<String, Integer>();
+        pricing.put("Standard",350);
+        pricing.put("Upgraded", 500);
+        hotels.add(new Hotel(null,new ArrayList<Review>(),new ArrayList<String>(),null,null,null,pricing,new HashMap<String,Room>()));
         DataWriter.saveHotels();
         assertEquals(null, DataLoader.getHotels().get(0).getAddress());
     }
 
     @Test
     void testWritingEmptyHotel() {
-        hotels.add(new Hotel("",null,null,"","","",null,null));
+        HashMap<String, Integer> pricing = new HashMap<String, Integer>();
+        pricing.put("Standard",350);
+        pricing.put("Upgraded", 500);
+        hotels.add(new Hotel("",new ArrayList<Review>(),new ArrayList<String>(),"","","",pricing,new HashMap<String,Room>()));
         DataWriter.saveHotels();
         assertEquals("", DataLoader.getHotels().get(0).getAddress());
     }
 
     @Test
     void testWritingFriend() {
-        RegisteredUser mike = new RegisteredUser("Michael","Myers","mmyers@gmail.com",65,"123 Killer St.","H@1l0w33n","Male","LAX",false,false,false,null,null,null,null);
+        RegisteredUser mike = new RegisteredUser("Michael","Myers","mmyers@gmail.com",65,"123 Killer St.","H@1l0w33n","Male","LAX",false,false,false,new ArrayList<String>(),new ArrayList<Ticket>(),new ArrayList<HotelReservation>(),new ArrayList<Friend>());
         mike.addFriend(new Friend("Freddy","Krueger",50,false,"Male","krueger@gmail.com","666 Elm St."));
         users.add(mike);
         DataWriter.saveDatabase();
@@ -123,7 +144,7 @@ class DataWriterTest {
 
     @Test
     void testWritingNullFriend() {
-        RegisteredUser mike = new RegisteredUser("Michael","Myers","mmyers@gmail.com",65,"123 Killer St.","H@1l0w33n","Male","LAX",false,false,false,null,null,null,null);
+        RegisteredUser mike = new RegisteredUser("Michael","Myers","mmyers@gmail.com",65,"123 Killer St.","H@1l0w33n","Male","LAX",false,false,false,new ArrayList<String>(),new ArrayList<Ticket>(),new ArrayList<HotelReservation>(),new ArrayList<Friend>());
         mike.addFriend(new Friend(null,null,0,false,null,null,null));
         users.add(mike);
         DataWriter.saveDatabase();
@@ -132,7 +153,7 @@ class DataWriterTest {
 
     @Test
     void testWritingEmptyFriend() {
-        RegisteredUser mike = new RegisteredUser("Michael","Myers","mmyers@gmail.com",65,"123 Killer St.","H@1l0w33n","Male","LAX",false,false,false,null,null,null,null);
+        RegisteredUser mike = new RegisteredUser("Michael","Myers","mmyers@gmail.com",65,"123 Killer St.","H@1l0w33n","Male","LAX",false,false,false,new ArrayList<String>(),new ArrayList<Ticket>(),new ArrayList<HotelReservation>(),new ArrayList<Friend>());
         mike.addFriend(new Friend("","",0,false,"","",""));
         users.add(mike);
         DataWriter.saveDatabase();
