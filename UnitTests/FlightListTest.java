@@ -3,6 +3,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.UUID;
 
 import org.junit.jupiter.api.*;
 
@@ -46,5 +47,10 @@ class FlightListTest {
     @Test
     void testGetFlightNullID() {
         assertNull(flightList.getFlight(null));
+    }
+
+    @Test
+    void testGetFlightWrongID() {
+        assertNull(flightList.getFlight(UUID.randomUUID()));
     }
 }

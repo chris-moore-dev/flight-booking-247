@@ -35,7 +35,7 @@ class DataWriterTest {
     }
 
     @Test
-    void TestWritingNoUser() {
+    void testWritingNoUsers() {
         users = DataLoader.getUsers();
         assertEquals(0, users.size());
     }
@@ -62,7 +62,7 @@ class DataWriterTest {
     }
 
     @Test
-    void testWritingNoFlight() {
+    void testWritingNoFlights() {
         flights = DataLoader.getFlights();
         assertEquals(0, flights.size());
     }
@@ -86,7 +86,7 @@ class DataWriterTest {
         pricing.put("Economy", 200);
         flights.add(new Flight(LocalDate.of(2022,4,15),null,null,null,null,null,false,null,pricing,new HashMap<String,Seating>(),null,null));
         DataWriter.saveDatabase();
-        assertEquals(null, DataLoader.getFlights().get(0).getDepartingAirport());
+        assertNull(DataLoader.getFlights().get(0).getDepartingAirport());
     }
 
     @Test
@@ -101,7 +101,7 @@ class DataWriterTest {
     }
 
     @Test
-    void testWritingNoHotel() {
+    void testWritingNoHotels() {
         hotels = DataLoader.getHotels();
         assertEquals(0, hotels.size());
     }
@@ -123,7 +123,7 @@ class DataWriterTest {
         pricing.put("Upgraded", 500);
         hotels.add(new Hotel(null,new ArrayList<Review>(),new ArrayList<String>(),null,null,null,pricing,new HashMap<String,Room>()));
         DataWriter.saveDatabase();
-        assertEquals(null, DataLoader.getHotels().get(0).getAddress());
+        assertNull(DataLoader.getHotels().get(0).getAddress());
     }
 
     @Test
@@ -159,7 +159,7 @@ class DataWriterTest {
         mike.addFriend(new Friend(null,null,0,false,null,null,null));
         users.add(mike);
         DataWriter.saveDatabase();
-        assertEquals(null, DataLoader.getUsers().get(0).getFriends().get(1).getFirstName());
+        assertNull(DataLoader.getUsers().get(0).getFriends().get(1).getFirstName());
     }
 
     @Test
