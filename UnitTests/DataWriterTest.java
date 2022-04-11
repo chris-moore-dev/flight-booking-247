@@ -137,6 +137,14 @@ class DataWriterTest {
     }
 
     @Test
+    void testWritingNoFriends() {
+        RegisteredUser mike = new RegisteredUser("Michael","Myers","mmyers@gmail.com",65,"123 Killer St.","H@1l0w33n","Male","LAX",false,false,false,new ArrayList<String>(),new ArrayList<Ticket>(),new ArrayList<HotelReservation>(),new ArrayList<Friend>());
+        users.add(mike);
+        DataWriter.saveDatabase();
+        assertEquals(1, DataLoader.getUsers().get(0).getFriends().size());
+    }
+
+    @Test
     void testWritingFriend() {
         RegisteredUser mike = new RegisteredUser("Michael","Myers","mmyers@gmail.com",65,"123 Killer St.","H@1l0w33n","Male","LAX",false,false,false,new ArrayList<String>(),new ArrayList<Ticket>(),new ArrayList<HotelReservation>(),new ArrayList<Friend>());
         mike.addFriend(new Friend("Freddy","Krueger",50,false,"Male","krueger@gmail.com","666 Elm St."));
@@ -164,6 +172,14 @@ class DataWriterTest {
     }
 
     @Test
+    void testWritingNoTickets() {
+        RegisteredUser mike = new RegisteredUser("Michael","Myers","mmyers@gmail.com",65,"123 Killer St.","H@1l0w33n","Male","LAX",false,false,false,new ArrayList<String>(),new ArrayList<Ticket>(),new ArrayList<HotelReservation>(),new ArrayList<Friend>());
+        users.add(mike);
+        DataWriter.saveDatabase();
+        assertEquals(0, DataLoader.getUsers().get(0).getTickets().size());
+    }
+
+    @Test
     void testWritingTicket() {
         RegisteredUser mike = new RegisteredUser("Michael","Myers","mmyers@gmail.com",65,"123 Killer St.","H@1l0w33n","Male","LAX",false,false,false,new ArrayList<String>(),new ArrayList<Ticket>(),new ArrayList<HotelReservation>(),new ArrayList<Friend>());
         HashMap<String, Integer> pricing = new HashMap<String, Integer>();
@@ -178,6 +194,14 @@ class DataWriterTest {
     }
 
     @Test
+    void testWritingNoReservations() {
+        RegisteredUser mike = new RegisteredUser("Michael","Myers","mmyers@gmail.com",65,"123 Killer St.","H@1l0w33n","Male","LAX",false,false,false,new ArrayList<String>(),new ArrayList<Ticket>(),new ArrayList<HotelReservation>(),new ArrayList<Friend>());
+        users.add(mike);
+        DataWriter.saveDatabase();
+        assertEquals(0, DataLoader.getUsers().get(0).getHotelReservations().size());
+    }
+
+    @Test
     void testWritingReservation() {
         RegisteredUser mike = new RegisteredUser("Michael","Myers","mmyers@gmail.com",65,"123 Killer St.","H@1l0w33n","Male","LAX",false,false,false,new ArrayList<String>(),new ArrayList<Ticket>(),new ArrayList<HotelReservation>(),new ArrayList<Friend>());
         HashMap<String, Integer> pricing = new HashMap<String, Integer>();
@@ -188,6 +212,17 @@ class DataWriterTest {
         users.add(mike);
         DataWriter.saveDatabase();
         assertEquals("Michael", DataLoader.getUsers().get(0).getHotelReservations().get(0).getReservationHolderFirstName());
+    }
+
+    @Test
+    void testWritingNoReviews() {
+        HashMap<String, Integer> pricing = new HashMap<String, Integer>();
+        pricing.put("Standard", 350);
+        pricing.put("Upgraded", 500);
+        Hotel mikeHotel = new Hotel("21 Jump St.",new ArrayList<Review>(),new ArrayList<String>(),"ATL","Atlanta","Hyatt",pricing,new HashMap<String,Room>());
+        hotels.add(mikeHotel);
+        DataWriter.saveDatabase();
+        assertEquals(0, DataLoader.getHotels().get(0).getReviews().size());
     }
 
     @Test
