@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Random;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -289,10 +290,14 @@ public class Hotel extends ObjectToBeBooked {
    * @param rooms list of rooms
    */
   public void setRooms(HashMap<String, Room> rooms) {
-    if (rooms.isEmpty() || rooms == null)
+    if (rooms == null)
       this.rooms = makeRooms();
-    else
-    this.rooms = rooms;
+    else {
+      if (rooms.isEmpty())
+        this.rooms = makeRooms();
+      else
+        this.rooms = rooms;
+    }
   }
 
 
