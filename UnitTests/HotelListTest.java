@@ -2,6 +2,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.UUID;
 
 import org.junit.jupiter.api.*;
 
@@ -41,5 +42,15 @@ class HotelListTest {
     @Test
     void testGetHotel() {
         assertEquals("1 Broadway Blvd.", hotelList.getHotel(hotels.get(0).getID()).getAddress());
+    }
+
+    @Test
+    void testGetHotelNullID() {
+        assertNull(hotelList.getHotel(null));
+    }
+
+    @Test
+    void testGetHotelWrongID() {
+        assertNull(hotelList.getHotel(UUID.randomUUID()));
     }
 }
