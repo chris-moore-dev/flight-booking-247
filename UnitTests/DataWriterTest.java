@@ -51,7 +51,7 @@ class DataWriterTest {
     void testWritingNullUser() {
         users.add(new RegisteredUser(null,null,null,0,null,null,null,null,false,false,false,new ArrayList<String>(),new ArrayList<Ticket>(),new ArrayList<HotelReservation>(),new ArrayList<Friend>()));
         DataWriter.saveUsers();
-        assertEquals(null, DataLoader.getUsers().get(0).getFirstName());
+        assertEquals("", DataLoader.getUsers().get(0).getFirstName());
     }
 
     @Test

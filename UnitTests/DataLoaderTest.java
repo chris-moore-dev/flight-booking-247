@@ -160,7 +160,7 @@ public class DataLoaderTest {
         HashMap<String, Room> rooms = new HashMap<>();
 
         hotels.add(new Hotel(address, reviews, amenities, closestAirport,
-        city, company, pricing, rooms));
+        city, company, pricing, null));
 
         DataWriter.saveDatabase();
 
