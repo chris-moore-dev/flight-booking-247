@@ -168,7 +168,7 @@ public class Flight extends ObjectToBeBooked {
    * @param discountPercent The discount number (0.8)
    * @return The new pricing map
    */
-  private HashMap<String, Integer> discountLayoverPrice(ArrayList<Flight> flights, double discountPercent) {
+  public HashMap<String, Integer> discountLayoverPrice(ArrayList<Flight> flights, double discountPercent) {
     HashMap<String, Integer> ret = new HashMap<>();
 
     for (Flight flight : flights) {
@@ -595,7 +595,7 @@ public class Flight extends ObjectToBeBooked {
    * makes a hashmap of seats for the plane
    * @return the hashmap of plane seats
    */
-  private Map<String, Seating> makeSeats() {
+  public Map<String, Seating> makeSeats() {
     Map<String, Seating> ret = new LinkedHashMap<>();
 
     /**

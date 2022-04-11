@@ -49,6 +49,8 @@ public class test {
         RegisteredUser user = users.get(0);
         Hotel hotel = hotels.get(0);
 
+        
+
         /**
          * Use index 0 if testing with a normal flight
          * Use index 3 if testing a flight with a layover
