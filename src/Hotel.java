@@ -139,7 +139,7 @@ public class Hotel extends ObjectToBeBooked {
      * @param date2
      * @return
      */
-    private ArrayList<LocalDate> getConsecutiveDates(LocalDate date1,
+    public ArrayList<LocalDate> getConsecutiveDates(LocalDate date1,
     LocalDate date2) {
       List<LocalDate> listOfDates = date1.datesUntil(date2)
 		  .collect(Collectors.toList());

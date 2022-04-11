@@ -153,7 +153,7 @@ public class RegisteredUser extends User {
      * @param seat The seat
      * @return The ticket to be added to the users account
      */
-    private Ticket makeTicket(Flight flight, Friend friend, Seating seat, boolean discount) {
+    public Ticket makeTicket(Flight flight, Friend friend, Seating seat, boolean discount) {
         String boardingGroup;
         if (friend.getMedicalCondition() || seat.getType().equalsIgnoreCase("First")) {
             boardingGroup = "1A";
@@ -220,7 +220,7 @@ public class RegisteredUser extends User {
      * @param date2
      * @return An Array list containing all the days a hotel room would be booked for
      */
-    private ArrayList<LocalDate> getConsecutiveDates(LocalDate date1,
+    public ArrayList<LocalDate> getConsecutiveDates(LocalDate date1,
     LocalDate date2) {
         List<LocalDate> listOfDates = date1.datesUntil(date2)
 		.collect(Collectors.toList());
