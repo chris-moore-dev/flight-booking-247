@@ -42,4 +42,9 @@ class FlightListTest {
     void testGetFlight() {
         assertEquals("JetBlue", flightList.getFlight(flights.get(0).getID()).getCompany());
     }
+
+    @Test
+    void testGetFlightNullID() {
+        assertNull(flightList.getFlight(null));
+    }
 }

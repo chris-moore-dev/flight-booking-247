@@ -42,4 +42,9 @@ class HotelListTest {
     void testGetHotel() {
         assertEquals("1 Broadway Blvd.", hotelList.getHotel(hotels.get(0).getID()).getAddress());
     }
+
+    @Test
+    void testGetHotelNullID() {
+        assertNull(hotelList.getHotel(null));
+    }
 }
