@@ -1,8 +1,10 @@
+
 /**
  * ObjectToBeBooked
  * @author Evan Scales
  */
 import java.util.*;
+
 public abstract class ObjectToBeBooked {
     protected UUID id;
     protected String company;
@@ -10,6 +12,7 @@ public abstract class ObjectToBeBooked {
 
     /**
      * Construtor to use when creating a new ObjectToBeBooked
+     * 
      * @param company The company
      * @param pricing The pricing
      */
@@ -21,12 +24,13 @@ public abstract class ObjectToBeBooked {
 
     /**
      * Constructor to use when loading object from database
-     * @param company The company
+     * 
+     * @param company    The company
      * @param pricingMap The pricing map
-     * @param id The id
+     * @param id         The id
      */
     ObjectToBeBooked(String company, HashMap<String, Integer> pricing,
-    UUID id) {
+            UUID id) {
         setID(id);
         setCompany(company);
         setPricingMap(pricing);
@@ -38,10 +42,13 @@ public abstract class ObjectToBeBooked {
      * Gets the pricing of the subsection
      * Price for room type or
      * Price for cabin type
+     * 
      * @param subsection The subsection, cabin or room type
      * @return The price of that subsection
      */
     public int getPrice(String subsection) {
+        // Make subsection first letter uppercase and rest lowercase
+        subsection = subsection.substring(0, 1).toUpperCase() + subsection.substring(1).toLowerCase();
         return pricing.get(subsection);
     }
 
@@ -55,6 +62,7 @@ public abstract class ObjectToBeBooked {
 
     /**
      * Get the ID
+     * 
      * @return The id
      */
     public UUID getID() {
@@ -62,7 +70,8 @@ public abstract class ObjectToBeBooked {
     }
 
     /**
-     * Get the company 
+     * Get the company
+     * 
      * @return The company
      */
     public String getCompany() {
@@ -71,6 +80,7 @@ public abstract class ObjectToBeBooked {
 
     /**
      * Get the pricing hashmap
+     * 
      * @return The pricing hashmap
      */
     public HashMap<String, Integer> getPricing() {
@@ -81,6 +91,7 @@ public abstract class ObjectToBeBooked {
 
     /**
      * Set the ID
+     * 
      * @param id The id
      */
     public void setID(UUID id) {
@@ -92,6 +103,7 @@ public abstract class ObjectToBeBooked {
 
     /**
      * Set the company
+     * 
      * @param company The company
      */
     public void setCompany(String company) {
@@ -103,6 +115,7 @@ public abstract class ObjectToBeBooked {
 
     /**
      * Set the pricing hashmap
+     * 
      * @param pricing The pricing hashmap
      */
     public void setPricingMap(HashMap<String, Integer> pricing) {

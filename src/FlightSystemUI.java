@@ -6,6 +6,7 @@ import java.util.ArrayList;
  * This class doesn't include much UI functionality in and of itself,
  * but sets up the baseline menu instance which then refers to FlightSystem
  * and included objects to perform UI tasks from user input.
+ * 
  * @author Chris Moore, Lyn Cork
  */
 public class FlightSystemUI {
@@ -28,7 +29,7 @@ public class FlightSystemUI {
 
     // system.makeHotel();
 
-    while(loop) {
+    while (loop) {
       freeUser = system.getFreeUser();
       registeredUser = system.getRegisteredUser();
       if (freeUser != null) {
@@ -43,12 +44,13 @@ public class FlightSystemUI {
   }
 
   private void displayMenuAdmin() {
-    System.out.print("Welcome to our Flight and Hotel Booker!\n"+
-    "\nHello, " + system.getRegisteredUser().getFirstName() + " " + system.getRegisteredUser().getLastName() + ". You are logged in as an administrator.\n\n" +
-    "************ Main Menu ************\n" +
-    "1. Search Flights\n2. Search Hotels\n3. Manage Account\n4. Add Flight\n"  +
-    "5. Edit Flight\n6. Remove Flight\n7. Add Hotel\n8. Edit Hotel\n" +
-    "9. Remove Hotel\n0. Logout\n\nWhat would you like to do?: ");
+    System.out.print("Welcome to our Flight and Hotel Booker!\n" +
+        "\nHello, " + system.getRegisteredUser().getFirstName() + " " + system.getRegisteredUser().getLastName()
+        + ". You are logged in as an administrator.\n\n" +
+        "************ Main Menu ************\n" +
+        "1. Search Flights\n2. Search Hotels\n3. Manage Account\n4. Add Flight\n" +
+        "5. Edit Flight\n6. Remove Flight\n7. Add Hotel\n8. Edit Hotel\n" +
+        "9. Remove Hotel\n0. Logout\n\nWhat would you like to do?: ");
 
     String sOption = scanner.nextLine();
     int option = Integer.parseInt(sOption);
@@ -85,10 +87,11 @@ public class FlightSystemUI {
 
   private void displayMenuRegisteredUser() {
     System.out.print("Welcome to our Flight and Hotel Booker!\n" +
-    "\nHello, " + system.getRegisteredUser().getFirstName() + " " + system.getRegisteredUser().getLastName() + ". You are logged in as a regular user.\n\n" +
-    "************ Main Menu ************\n" +
-    "1. Search Flights\n2. Search Hotels\n3. Manage Account\n4. Logout\n5. Exit\n\n" +
-    "What would you like to do?: ");
+        "\nHello, " + system.getRegisteredUser().getFirstName() + " " + system.getRegisteredUser().getLastName()
+        + ". You are logged in as a regular user.\n\n" +
+        "************ Main Menu ************\n" +
+        "1. Search Flights\n2. Search Hotels\n3. Manage Account\n4. Logout\n5. Exit\n\n" +
+        "What would you like to do?: ");
 
     String sOption = scanner.nextLine();
     int option = Integer.parseInt(sOption);
@@ -109,19 +112,19 @@ public class FlightSystemUI {
         break;
       case 5:
         System.exit(0);
-      default: 
+      default:
         System.out.println("Invalid input, please try again!\n");
         break;
     }
   }
 
   private void displayMenuUser() {
-    System.out.print("Welcome to our Flight and Hotel Booker!\n" + 
-    "\nYou are not logged in.\n\n" +
-    "************ Main Menu ************\n" +
-    "1. Search Flights\n2. Search Hotels\n3. Create Account\n4. Login\n5. Exit\n\n" +
-    "What would you like to do?: ");
-    
+    System.out.print("Welcome to our Flight and Hotel Booker!\n" +
+        "\nYou are not logged in.\n\n" +
+        "************ Main Menu ************\n" +
+        "1. Search Flights\n2. Search Hotels\n3. Create Account\n4. Login\n5. Exit\n\n" +
+        "What would you like to do?: ");
+
     String sOption = scanner.nextLine();
     int option = Integer.parseInt(sOption);
 
@@ -144,7 +147,7 @@ public class FlightSystemUI {
         break;
       case 5:
         System.exit(0);
-      default: 
+      default:
         System.out.println("Invalid input, please try again!\n");
         break;
     }
