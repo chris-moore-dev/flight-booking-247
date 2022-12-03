@@ -1,3 +1,5 @@
+## Project finished 4/10/2022 by Evan Scales, Chris Moore, Lyn Cork, and Mario Misencik
+
 # flight-booking
 
 [Design document](https://docs.google.com/document/d/1EuglNnuCvdQXpqLbNrBeitVl5EXK8vWjvv6uqaY_024/edit?usp=sharing)
